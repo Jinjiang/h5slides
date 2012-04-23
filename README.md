@@ -99,6 +99,8 @@
 
 皮肤是基于幻灯片布局和幻灯片内部元素的样式和尺寸的设计。每款皮肤应该拥有一个唯一的名称，在展示时，幻灯片的根结点会被赋予`[data-design="*"]`特性。比如`[data-design="blue-summer"]`。
 
+### 皮肤文件格式
+
 每一款皮肤都是由一个css文件作为起点，存放在`/css/theme/`目录下的和皮肤名称同名的css文件中。该css文件的内容应该是一系列主题特性、布局特性、内部元素特性及其样式的集合。比如：
 
     [data-design="blue-summer"] [data-layout="title"] [data-item="content"] {
@@ -137,11 +139,59 @@
 
 默认的主题样式可参考`/css/theme.css`
 
+### 使用定义好的皮肤
+
+打开`/data/themes.js`，加入一行数据，比如：`{"key": "blue-summer", "title": "蓝色夏天"}`，同时，在`/css/theme/`下新建一个该皮肤的同名目录，并放入`logo.png`作为皮肤展示时的缩略图。然后在编辑器左侧边栏的“主题”面板下会看到这个主题的缩略图。点击该缩略图，即可应用主题。
+
 ----
 
 ## 动画开发文档
 
-(待完成)
+### 播放器的dom结构
+
+幻灯片在播放时的根结点是`#player`，每张幻灯片是一个`section`结点。默认情况下幻灯片都是隐藏起来的(`display: none;`)，只有正在播放的那张幻灯片是显示出来的(`display: block;`)。
+
+### 动画的实现原理
+
+由于`display`的属性值在`none`和`block`之间切换是没有动画效果支持的，我们做了一点改进：把当前幻灯片、前一张幻灯片和后一张幻灯片，分别赋予特殊的className：`.current`、`.prev`、`.next`。他们三个的`display`属性值均为`block`，同时`.prev`和`.next`的`opacity`属性值为`0`，`.current`的`opacity`属性值为`1`。这样幻灯片的切换就会有渐变效果。基本的css样式如下：
+
+    #player section {
+        display: none;
+        transition: all 0.3s ease-out;
+    }
+    #player section.current {
+        display: block;
+        opacity: 1;
+    }
+    #player section.next,
+    #player section.prev {
+        display: block;
+        opacity: 0;
+    }
+
+### 动画文件格式
+
+我们可以在此基础上，通过css代码加入更酷炫的幻灯片切换动画。和皮肤开发相同的，我们需要为每种动画效果起一个名字。比如：`horizontal`。然后，我们可以在`/css/transition/`目录下创建一个同名的css文件。
+
+这个css文件中，我们为幻灯片中的`section`元素增加一个`data-transition`属性：`section[data-transition="transition_horizontal"]`(注意，属性值前需要加入`transition_`前缀)。然后将`.current`、`.prev`、`.next`下的不同样式写入即可。比如：
+
+    [data-transition="transition_horizontal"].next {
+        left: 450px;
+    }
+    [data-transition="transition_horizontal"].current {
+        left: 0;
+    }
+    [data-transition="transition_horizontal"].prev {
+        left: -450px;
+    }
+
+### 使用定义好的动画
+
+目前使用动画的方法是：打开`/js/app.js`，把其中的变量`defaultTransition`改为带`transition_`前缀的动画名即可。比如：
+
+    var defaultTransition = 'transition_horizontal';
+
+再使用播放器，就可以看到效果了。
 
 ----
 
@@ -159,4 +209,64 @@
 
 ## 数据格式说明文档
 
-(待完成)
+默认数据保存在`/data/default.js`中，变量名为`defaultData`。
+
+    var defaultData = {
+        "theme": "blank",
+        "slides": [
+            {
+                "layout": "title",
+                "content": {
+                    "title": "幻灯片标题",
+                    "content": "你的名字"
+                }
+            },
+            {
+                "layout": "normal",
+                "content": {
+                    "title": "正文标题",
+                    "content": "正文内容\n是可以多行显示的"
+                }
+            },
+            {
+                "layout": "subtitle",
+                "content": {
+                    "title": "THE END",
+                    "content": "谢谢大家"
+                }
+            }
+        ]
+    };
+
+### 字段解释
+
+#### `theme`
+
+默认主题名称
+
+#### `slides`
+
+以数组形式存放所有幻灯片的详细内容
+
+#### `slides[i].layout`
+
+某张幻灯片的布局类型，有效的值有：`title`、`subtitle`、`normal`、`double`、`double-subtitle`
+
+#### `slides[i].content[key]`
+
+某张幻灯片的所有内部元素的文字内容，有效的key值有：`title`、`subtitle`、`subtitle2`、`content`、`content2`
+
+#### `slides[i].position[key][cssName]`
+
+某张幻灯片的自定义元素尺寸和位置，有效的key值同上，有效的cssName值有：`left`、`top`、`width`、`height`。
+
+目前我们的编辑器暂不支持编辑尺寸和位置，使用时可以通过直接修改`defaultData`的值来应用这一规则。
+
+#### `slides[i].style[key][cssName]`
+
+某张幻灯片的自定义元素尺寸和位置，有效的key值在同上的基础上外加一个`slide`，表示该幻灯片整体的样式，有效的cssName值除了上一条提到的属性值外，还不支持：`right`、`bottom`；另外支持形如`-ppt-*`的属性值，以备扩展。
+
+目前已有的扩展只有一个，就是`-ppt-size`，用来控制文字大小，可选的`-ppt-size`属性值有：`small`、`normal`、`large`。
+
+目前我们的编辑器暂支持编辑`color`、`-ppt-size`和`slide`下的`background-image`这几个css属性。若想使用其它css属性，可以通过直接修改`defaultData`的值来应用这一规则。
+
