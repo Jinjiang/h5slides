@@ -14,8 +14,6 @@
 function Themes() {
     var root = $('#panel-themes');
     var list = $('#panel-themes-list');
-    var labelCurrentTheme = $('#panel-themes-current-name');
-    var btnChange = $('#panel-themes-btn-change');
 
     var current;
     var that = this;
@@ -48,18 +46,12 @@ function Themes() {
                 current = item;
             }
         });
-        labelCurrentTheme.text(current.attr('title'));
         that.notify('loadcss', 'theme_' + key);
     }
 
     list.delegate('li', 'click', function () {
         var key = $(this).attr('data-key');
         that.notify('theme', key);
-    });
-    btnChange.click(function () {
-        if (!root.hasClass('expanded')) {
-            root.addClass('expanded');
-        }
     });
 
     this.initData = initData;

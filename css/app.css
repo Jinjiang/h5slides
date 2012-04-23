@@ -437,8 +437,9 @@
     #dialog-for-color {
         text-align: center;
     }
-    #dialog-for-color #color-result {
+    #dialog-for-color-result {
         margin: 1em 2em;
+        height: 1em;
     }
     #dialog-for-image-preview {
         background-size: contain;
