@@ -1,3 +1,13 @@
+/**
+    @fileOverview
+    CSS加载器
+    @author Jinjiang<zhaojinjiang@yahoo.com.cn>
+ */
+
+
+
+
+    
 function CSS() {
     var that = this;
     var head = $('head');

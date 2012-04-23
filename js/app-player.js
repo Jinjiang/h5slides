@@ -1,3 +1,13 @@
+/**
+    @fileOverview
+    播放器入口
+    @author Jinjiang<zhaojinjiang@yahoo.com.cn>
+ */
+
+
+
+
+    
 function Player() {
     var player = $('#player-wrapper');
     var root = $('#player');
@@ -28,7 +38,6 @@ function Player() {
     function parse(presentation) {
         var slides = presentation.slides;
         var defaultLayout = 'normal';
-        var defaultTransition = 'transition_horizontal3d';
 
         that.notify('loadcss', defaultTransition);
 

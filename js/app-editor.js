@@ -1,13 +1,12 @@
 /**
     @fileOverview
-    editor script entrance
+    编辑器入口
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
 
 
 
-    
 function Editor() {
     var splash = new Splash();
     var wrapper = new Wrapper('editor');
@@ -67,9 +66,6 @@ function Editor() {
     if (!splash.check()) {
         return;
     }
-
-    window.data = new Data();
-    window.data.name = 'default';
 
 
     wrapper.bind(function (type, data) {});
