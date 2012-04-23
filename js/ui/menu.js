@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    menu class
+    头部菜单
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    主菜单的构造器
+    头部菜单的构造器
     @constructor
  */
 function Menu() {

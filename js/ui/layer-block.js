@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    block bar layer class
+    编辑器的浮动按钮层
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    幻灯片块状元素浮动工具栏的构造器
+    浮动按钮的构造器
     @constructor
  */
 function BlockLayer() {

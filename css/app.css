@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    幻灯片编辑器的基本样式
+    幻灯片编辑器和播放器的样式
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -547,7 +547,6 @@
     #player-helper > ul > li {
         margin: 0;
     }
-
 
 
 

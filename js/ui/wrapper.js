@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    wrapper class
+    幻灯片的界面框架
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -26,7 +26,7 @@ function Wrapper(mode) {
 
     var slide = $('#main');
     var sidebar = $('#sidebar');
-    var wrapper = $('body');
+    var wrapper = $(window);
 
     /**
         根据窗口的宽高计算出预览区域的大小、边距和缩放比例

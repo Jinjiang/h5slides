@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    aside theme list
+    主题面板
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    侧边栏中主题列表的构造器
+    主题面板的构造器
     @constructor
  */
 function Themes() {

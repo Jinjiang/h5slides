@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    color dialog layer class
+    调色板对话框
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    幻灯片颜色编辑对话框的构造器
+    调色板的构造器
     @constructor
  */
 function ColorDialog() {

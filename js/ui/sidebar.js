@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    aside class
+    侧边栏
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 

@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    image dialog layer class
+    插入图片对话框
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    幻灯片图片编辑对话框的构造器
+    插入图片对话框的构造器
     @constructor
  */
 function ImageDialog() {

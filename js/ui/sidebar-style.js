@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    block bar layer class
+    样式面板
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    幻灯片块状元素浮动工具栏的构造器
+    样式面板的构造器
     @constructor
  */
 function StylePanel() {

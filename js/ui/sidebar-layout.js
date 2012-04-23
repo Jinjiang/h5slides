@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    aside layout list
+    页面布局面板
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    侧边栏中布局列表的构造器
+    页面布局面板的构造器
     @constructor
  */
 function Layout() {

@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    input class
+    编辑器的输入框层
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    幻灯片文本编辑区域的构造器
+    输入框的构造器
     @constructor
  */
 function InputLayer() {
@@ -56,13 +56,6 @@ function InputLayer() {
     input.bind('input', function () {
         that.notify(currentTarget.attr('id'), $(this).val());
     }).bind('blur', function (event) {
-        // var target = lastMouseDownTarget;
-        // var layerRoot = $('#layer-container')[0];
-
-        // if ($.contains(layerRoot, target)) {
-        //     this.focus();
-        //     return;
-        // }
         that.notify('blur');
     });
 

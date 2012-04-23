@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    root class
+    主编辑区域
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    幻灯片展示区域的构造器
+    主编辑区域的构造器
     @constructor
  */
 function Slide(mode) {

@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    mask layer class
+    所有弹出层下面的遮罩层
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    幻灯片对话框遮罩层的构造器
+    遮罩层的构造器
     @constructor
  */
 function MaskLayer() {

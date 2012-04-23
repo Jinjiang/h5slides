@@ -1,6 +1,6 @@
 /**
     @fileOverview
-    aside pagination
+    页面切换面板
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -8,7 +8,7 @@
 
 
 /**
-    侧边栏控制页码的构造器
+    页面切换面板的构造器
     @constructor
  */
 function Paginations() {
@@ -102,12 +102,10 @@ function Paginations() {
 
     function showList() {
         isExpanded = true;
-        // root.addClass('expanded');
     }
 
     function hideList() {
         isExpanded = false;
-        // root.removeClass('expanded');
     }
 
     function setCurrentTitle(page) {

@@ -3,10 +3,10 @@
 <html>
 <head>
 
-<title>在线幻灯片编辑器</title>
 <meta charset="utf-8" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<title>在线幻灯片编辑器</title>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/app.css" />
 <link rel="stylesheet" href="css/theme.css" />
@@ -142,7 +142,8 @@
         <div id="dialog-for-color" class="dialog">
             <strong>请在此选择颜色</strong><br /><br />
             <img src="images/colormap.gif" usemap="#colormap" alt="colormap">
-            <map id="dialog-for-color-map" name="colormap"></map>
+            <map id="dialog-for-color-map" name="colormap">
+            </map>
             <div id="dialog-for-color-result"></div>
             <button id="dialog-for-color-btn-default">使用默认色</button>
         </div>
@@ -170,10 +171,10 @@
 
 </div>
 
+<script src="js/zepto.js"></script>
 <script src="data/default.js"></script>
 <script src="data/layout.js"></script>
 <script src="data/themes.js"></script>
-<script src="js/lib/zepto.js"></script>
 <script src="js/lib/base-mod.js"></script>
 <script src="js/lib/data.js"></script>
 <script src="js/lib/text-parser.js"></script>
