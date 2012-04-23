@@ -1,4 +1,4 @@
-var defaultData = {
+var defaultData2 = {
     "theme": "blank",
     "slides": [
         {
@@ -49,7 +49,7 @@ var defaultData = {
     ]
 };
 
-var defaultData2 = {
+var defaultData = {
     "theme": "blank",
     "slides": [
         {

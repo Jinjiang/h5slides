@@ -270,7 +270,7 @@ function Paginations() {
         that.notify('nav', 'add');
     });
     btnRemove.bind('click', function () {
-        if (confirm('Are you sure to remove this slide?')) {
+        if (confirm('你确定删除当前这张幻灯片吗？')) {
             that.notify('nav', 'remove');
         }
     });

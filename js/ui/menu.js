@@ -30,14 +30,14 @@ function Menu() {
         if (labelName.hasClass('customized')) {
             oldTitle = labelName.text();
         }
-        var title = prompt('Please Input a Presentation Title', oldTitle);
+        var title = prompt('请输入演示的标题', oldTitle);
         that.notify('title', title);
     });
     btnPlay.click(function () {
         that.notify('play');
     });
     btnRestart.click(function () {
-        if (confirm('Are you sure to delete the current data and restart a new Presentation?')) {
+        if (confirm('你确定丢掉当前所有数据重新开始制作新的幻灯演示吗？')) {
             that.notify('restart');
         }
     });
