@@ -27,6 +27,10 @@ function Slide(mode) {
     var currentData = {};
     var currentHover;
 
+    /**
+        设置幻灯片数据
+        @param {object} data
+     */
     function setData(data) {
         currentData = {
             title: {style: {}, position: {}},
@@ -64,21 +68,40 @@ function Slide(mode) {
         });
     }
 
+    /**
+        设置幻灯片数据其中的一项
+        @param {stirng} key
+        @param {object} data
+     */
     function setItem(key, data) {
         currentData[key] = data;
         renderItem(key);
     }
 
+    /**
+        设置幻灯片其中一项内容的文字
+        @param {string} key
+        @param {string} content
+     */
     function setContent(key, content) {
         currentData[key].content = content;
         renderItem(key);
     }
 
+    /**
+        设置幻灯片其中一项内容的样式
+        @param {string} key
+        @param {object} style
+     */
     function setStyle(key, style) {
         currentData[key].style[style.key] = style.value;
         renderItem(key);
     }
 
+    /**
+        渲染幻灯片其中某一项的效果
+        @param {string} key
+     */
     function renderItem(key) {
         key = key || 'slide';
         var item = itemMap[key];

@@ -1,3 +1,8 @@
+/** Module Prototype Factory */
+
+
+
+
 function reg(Mod) {
     Mod.prototype.notify = function (data, type) {
         if ($.isFunction(this.eventNotifier)) {
@@ -15,3 +20,6 @@ function reg(Mod) {
         this.eventNotifier = null;
     };
 }
+
+
+

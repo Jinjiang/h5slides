@@ -16,6 +16,12 @@ function Menu() {
     var btnPlay = $('#menu-btn-play');
     var btnRestart = $('#menu-btn-restart');
     var that = this;
+
+    /**
+        设置标题
+        @param {string} title
+        @param {boolean} isCustomized 标题是否是用户自定义的，否则是自动生成的
+     */
     function setTitle(title, isCustomized) {
         labelName.text(title || '无');
         if (isCustomized) {
@@ -25,6 +31,7 @@ function Menu() {
             labelName.removeClass('customized');
         }
     }
+
     labelName.click(function () {
         var oldTitle = '';
         if (labelName.hasClass('customized')) {
@@ -41,6 +48,7 @@ function Menu() {
             that.notify('restart');
         }
     });
+
     that.setTitle = setTitle;
 }
 

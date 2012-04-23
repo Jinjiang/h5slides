@@ -3,6 +3,9 @@
 
 
 
+/**
+    & < > -> &...;
+ */
 function txt2Html(txt) {
     txt = txt.replace(/\&/ig, '&amp;').
             replace(/\</ig, '&lt;').

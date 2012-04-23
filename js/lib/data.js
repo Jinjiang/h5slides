@@ -5,7 +5,6 @@
 
 function Data() {
     this.page = 1;
-    this.name = '';
     this.title = '';
     this.theme = '';
     this.slides = [];

@@ -7,7 +7,10 @@
 
 
 
-    
+/**
+    对当前的幻灯片数据进行播放，在播放过程中，可以控制翻页或结束播放
+    当播放至最后一页时，播放器会自动结束
+ */
 function Player() {
     var player = $('#player-wrapper');
     var root = $('#player');
@@ -34,7 +37,10 @@ function Player() {
     var compatibleMode = !window.HTMLVideoElement || window.innerWidth < 350;
     var eventBinding = false;
 
-
+    /**
+        将幻灯片数据由json转换成html并作为dom插入到#player
+        @param {object} presentation
+     */
     function parse(presentation) {
         var slides = presentation.slides;
         var defaultLayout = 'normal';
@@ -43,15 +49,18 @@ function Player() {
 
         root.empty();
 
+        // 插入每一张幻灯片
         $.each(slides, function (i, slide) {
             var section = $('<section></section>').appendTo(root);
 
+            // 设置布局信息和切换动画的信息
             var layout = slide.layout || defaultLayout;
             section.attr('data-layout', layout);
 
             var transition = slide.transition || defaultTransition;
             section.attr('data-transition', transition);
 
+            // 生成幻灯片基本结构
             var layoutHtml =
                     '<div class="header"></div>' +
                     '<div class="content"></div>';
@@ -60,6 +69,7 @@ function Player() {
             var header = section.find('.header');
             var content = section.find('.content');
 
+            // 生成不同元素的html代码
             var titleHtml = txt2Html(slide.content.title || '');
             var subtitleHtml = txt2Html(slide.content.subtitle || '');
             var subtitle2Html = txt2Html(slide.content.subtitle2 || '');
@@ -76,7 +86,7 @@ function Player() {
             contentHtml = '<div data-item="content">' + contentHtml + '</div>';
             content2Html = '<div data-item="content2">' + content2Html + '</div>';
 
-
+            // 根据不同的布局拼凑不同的html代码
             if (layout == 'double') {
                 contentHtml = contentHtml + content2Html;
             }
@@ -87,6 +97,7 @@ function Player() {
             header.html(titleHtml);
             content.html(contentHtml);
 
+            // 设置幻灯片各元素的自定义样式
             if (slide.style) {
                 $.each(slide.style, function (itemName, styles) {
                     var item;
@@ -108,6 +119,8 @@ function Player() {
                     });
                 });
             }
+
+            // 设置幻灯片各元素的自定义位置
             if (slide.position) {
                 $.each(slide.position, function (itemName, styles) {
                     var item;
@@ -125,13 +138,19 @@ function Player() {
 
         });
 
+        // 初始化变量
         sectionList = root.find('section');
         pageLength = sectionList.length;
     }
 
-
+    /**
+        开始播放幻灯片
+        @param {integer} initPageNum
+     */
     function play(initPageNum) {
         player.addClass('play');
+
+        // 初始化页数容错
         if (arguments.length > 0) {
             initPage = parseInt(initPageNum);
         }
@@ -142,10 +161,13 @@ function Player() {
         if (pageNum > pageLength) {
             pageNum = 1;
         }
+
+        // 找到当前幻灯片
         currentSection = $(sectionList[pageNum - 1]).addClass('current');
         prevSection = currentSection.prev().addClass('prev');
         nextSection = currentSection.next().addClass('next');
 
+        // 找到当前动画
         actionList = currentSection.find('[data-action]');
         actionLength = actionList.length;
         currentAction = nextAction = prevAction = $('<div></div>');
@@ -158,49 +180,53 @@ function Player() {
             actionNum = -1;
         }
 
-        if (location.hash.length > 1) {
-            nav(parseInt(location.hash.substr(1)) || 0);
-        }
-
+        // 绑定各种鼠标键盘触摸事件
         if (!eventBinding) {
             bind();
         }
     }
 
-
+    /**
+        切换幻灯片
+        @param {integer} newPageNum
+        @param {boolean} hasLastAction 翻页的方向(true为反向，即保留上一页的所有页面内动画结果)
+     */
     function nav(newPageNum, hasLastAction) {
         newPageNum = parseInt(newPageNum) || 0;
 
+        // 页码容错
+        if (newPageNum == pageNum) {
+            return;
+        }
         if (newPageNum < 1) {
             return;
         }
+
+        // 如果目标超过了最后一页，则表示没有更多幻灯片了，演示结束
         if (newPageNum > pageLength) {
             end();
             return;
         }
 
-        if (newPageNum == pageNum) {
-            return;
-        }
-
         pageNum = newPageNum || 0;
 
+        // 清除动画
         actionList.removeClass('shown current next prev');
 
+        // 清除页面
         currentSection.removeClass('current');
         prevSection.removeClass('prev');
         nextSection.removeClass('next');
 
+        // 设置新页面
         currentSection = $(sectionList[pageNum - 1]).addClass('current');
         prevSection = currentSection.prev().addClass('prev');
         nextSection = currentSection.next().addClass('next');
 
-        // location = '#' + pageNum;
-
+        // 设置新动画
         actionList = currentSection.find('[data-action]');
         actionLength = actionList.length;
         currentAction = nextAction = prevAction = $('<div></div>');
-
 
         if (actionLength > 0) {
             if (hasLastAction) {
@@ -228,9 +254,13 @@ function Player() {
         }
     }
 
-
+    /**
+        播放动画
+        @param {boolean} isBackward 动画的方向(true为反向)
+     */
     function action(isBackward) {
 
+        // 判断特殊情况：无动画、在最后一帧动画向后播放、在第一帧动画向前播放
         if (actionNum == -1) {
             if (isBackward) {
                 nav(pageNum - 1, true);
@@ -250,10 +280,12 @@ function Player() {
             return;
         }
 
+        // 清除动画
         currentAction.removeClass('current');
         nextAction.removeClass('next');
         prevAction.removeClass('prev');
 
+        // 设置新动画
         if (isBackward) {
             actionNum--;
         }
@@ -273,9 +305,15 @@ function Player() {
         }
     }
 
-
+    /**
+        绑定各种播放事件
+     */
     function bind() {
-        function bindKB() {
+
+        /**
+            绑定键盘事件
+         */
+        function bindKB(e) {
             $('html').bind('keydown', function (event) {
                 if (!playing) {
                     return;
@@ -339,9 +377,17 @@ function Player() {
                 }
             })
         }
+
+        /**
+            绑定鼠标事件
+         */
         function bindMouse() {
 
         }
+
+        /**
+            绑定触摸事件
+         */
         function bindTouch() {
             player.swipeLeft(function (e) {
                 action();
@@ -356,13 +402,17 @@ function Player() {
                 e.preventDefault();
             })
         }
+
         bindKB();
         bindTouch();
         bindMouse();
         eventBinding = true;
     }
 
-
+    /**
+        启动帮助信息功能
+        未来会以一个插件的形式存在
+     */
     function help() {
         var ul;
         var helperData;
@@ -396,7 +446,10 @@ function Player() {
         }
     }
 
-
+    /**
+        播放新的幻灯片
+        @param {object} presentation
+     */
     function init(presentation) {
         parse(presentation);
         play();
@@ -408,6 +461,9 @@ function Player() {
         document.body.className = 'playing';
     }
 
+    /**
+        结束幻灯演示
+     */
     function end() {
         sectionList = null;
         pageNum = null;

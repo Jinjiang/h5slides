@@ -32,6 +32,12 @@ function StylePanel() {
     var currentType;
     var that = this;
 
+    /**
+        初始化样式面板，根据项目类型选择要显示的样式设置项
+        @param {string} type
+        @param {object} data
+        @param {object} target
+     */
     function init(type, data, target) {
         var mode;
         data = data || {};
@@ -48,6 +54,10 @@ function StylePanel() {
         setSize(currentData['-ppt-size']);
     }
 
+    /**
+        修改项目的类型
+        @param {string} type
+     */
     function setType(type) {
         if (!type || !defaultModeMap[type]) {
             type = 'slide';
@@ -57,6 +67,10 @@ function StylePanel() {
         return type;        
     }
 
+    /**
+        修改字号大小
+        @param {string} size
+     */
     function setSize(size) {
         size = size || 'normal';
         currentData['-ppt-size'] = size;
@@ -71,6 +85,11 @@ function StylePanel() {
         return size;
     }
 
+    /**
+        设置样式
+        @param {string} key
+        @param {string} value
+     */
     function setValue(key, value) {
         currentData[key] = value;
         if (key == '-ppt-size') {

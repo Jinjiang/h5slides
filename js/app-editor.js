@@ -7,6 +7,9 @@
 
 
 
+/**
+    编辑器的所有逻辑控制
+ */
 function Editor() {
     var splash = new Splash();
     var wrapper = new Wrapper('editor');
@@ -24,6 +27,9 @@ function Editor() {
     var imageDialog = new ImageDialog();
     var that = this;
 
+    /**
+        初始化界面
+     */
     function init() {
         var cache = window.data.openDraft();
         if (cache) {
@@ -34,6 +40,10 @@ function Editor() {
         }
     }
 
+    /**
+        初始化数据
+        @param {object} data
+     */
     function initData(data) {
         window.data.theme = data.theme;
         window.data.slides = data.slides;
@@ -43,7 +53,10 @@ function Editor() {
         var currentPage = window.data.page;
         var slideData = window.data.get(currentPage);
 
+        // 初始化页面切换的面板
         paginations.initData(titles);
+
+        // 初始化主菜单的名称
         if (window.data.title) {
             menu.setTitle(window.data.title, true);
         }
@@ -51,15 +64,18 @@ function Editor() {
             menu.setTitle(titles[0]);
         }
 
+        // 初始化修改主题和布局的面板
         layout.setCurrent(slideData.layout);
         slide.setLayout(slideData.layout);
 
         themes.setCurrent(window.data.theme);
         slide.setTheme(window.data.theme);
 
+        // 初始化主编辑区域
         slide.setPage(currentPage);
         slide.setData(slideData);
 
+        // 隐藏预加载界面
         splash.hide();
     }
 
@@ -67,9 +83,7 @@ function Editor() {
         return;
     }
 
-
-    wrapper.bind(function (type, data) {});
-
+    // 菜单事件：重做、播放、修改标题
     menu.bind(function (type, data) {
         if (type == 'restart') {
             window.data.delDraft();
@@ -94,6 +108,7 @@ function Editor() {
         }
     });
 
+    // 翻页管理面板事件：翻页、添加页、删除页
     paginations.bind(function (type, data) {
         var page = window.data.page;
         var slideData;
@@ -132,8 +147,10 @@ function Editor() {
         console.log('page', type, data);
     });
 
-
+    // 加载布局面板数据
     layout.initData(layoutData);
+
+    // 布局面板事件：选择布局
     layout.bind(function (type, data) {
         var page = window.data.page;
 
@@ -147,7 +164,10 @@ function Editor() {
         console.log('layout', type, data);
     });
 
+    // 加载主题面板数据
     themes.initData(themesData);
+
+    // 主题面板事件：选择主题
     themes.bind(function (type, data) {
 
         if (type == 'theme') {
@@ -164,6 +184,7 @@ function Editor() {
         console.log('themes', type, data);
     });
 
+    // 主编辑区域事件：选择、修改幻灯片上的某个项目的内容或样式或位置
     slide.bind(function (type, data) {
         var page = window.data.page;
         var slideData = window.data.get(page);
@@ -194,6 +215,7 @@ function Editor() {
         console.log('slide', inputType, data);
     });
 
+    // 输入框弹出层事件：失焦、修改内容
     input.bind(function (type, data) {
         if (type == 'blur') {
             input.hide();
@@ -221,6 +243,7 @@ function Editor() {
         console.log('input', type, data);
     });
 
+    // 样式面板事件：修改文字颜色、修改字号等
     stylePanel.bind(function (type, data) {
         var page = window.data.page;
         var id = data.type;
@@ -253,6 +276,7 @@ function Editor() {
         }
     });
 
+    // 块级元素浮动层事件：修改样式
     blockBar.bind(function (type, data) {
         var page = window.data.page;
         var id = data.type;
@@ -285,12 +309,14 @@ function Editor() {
         }
     });
 
+    // 调色板浮动层样式：修改颜色
     colorDialog.bind(function (type, data) {
         maskLayer.hide();
         slide.setStyle(data.key, {key: 'color', value: data.value});
         window.data.setStyle(data.page, data.key, {key: 'color', value: data.value});
     });
 
+    // 插入图片浮动层样式：设置图片
     imageDialog.bind(function (type, data) {
         maskLayer.hide();
         if (!data) {
@@ -301,11 +327,6 @@ function Editor() {
     });
 
     that.init = init;
-    that.setColor = function (color) {
-        if (colorDialog) {
-            colorDialog.submit(color);
-        }
-    }
 }
 
 reg(Editor);

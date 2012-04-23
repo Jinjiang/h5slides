@@ -415,7 +415,7 @@
 /* Bar */
 
     #bar-for-slide {
-        top: 60px;
+        top: 80px;
         right: 20px;
         display: block !important;
         background: rgba(128, 128, 128, 0.5);
@@ -423,9 +423,6 @@
         padding: 5px;
         line-height: 1;
         border-radius: 3px;
-    }
-    body.touch #bar-for-slide {
-        display: none !important; /* mobile browser doesn't support filesystem apis */
     }
     #bar-for-slide img:hover {
         -webkit-box-shadow: 2px 2px 3px black;

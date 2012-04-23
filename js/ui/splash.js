@@ -12,6 +12,7 @@
     @constructor
  */
 function Splash() {
+
     function warnn(type) {
         if (type == 'unsupported') {
             $('#splash').html(

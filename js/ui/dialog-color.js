@@ -148,7 +148,6 @@ function ColorDialog() {
     var btn = $('#dialog-for-color-btn-default');
     var that = this;
 
-
     var currentPage;
     var currentKey;
 

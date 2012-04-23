@@ -7,11 +7,14 @@
 
 
 
-    
+/**
+    可以通过key加载和卸载css样式表
+ */
 function CSS() {
     var that = this;
     var head = $('head');
     var hrefMap = {};
+
     that.load = function (key, callback) {
         var href = 'css/' + key.replace(/_/ig, '/') + '.css';
         if (!hrefMap[href]) {
@@ -22,6 +25,7 @@ function CSS() {
             callback(key);
         }
     };
+
     that.unload = function (key, callback) {
         var href = 'css/' + key.replace(/_/ig, '/') + '.css';
         var link = hrefMap[href];

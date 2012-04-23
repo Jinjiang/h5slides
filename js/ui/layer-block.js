@@ -14,6 +14,7 @@
 function BlockLayer() {
     var that = this;
     var imageBtn = $('#bar-for-block-btn-image-dialog');
+
     imageBtn.click(function () {
         that.notify('dialog', {
             type: 'slide',

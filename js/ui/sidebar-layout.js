@@ -17,6 +17,10 @@ function Layout() {
     var current;
     var that = this;
 
+    /**
+        设置布局数据
+        @param {array} layoutArray
+     */
     function initData(layoutArray) {
         list.empty();
         $.each(layoutArray, function (index, layout) {

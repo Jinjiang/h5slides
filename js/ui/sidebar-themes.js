@@ -18,6 +18,10 @@ function Themes() {
     var current;
     var that = this;
 
+    /**
+        设置主题数据
+        @param {array} themeArray
+     */
     function initData(themeArray) {
         list.empty();
         $.each(themeArray, function (index, theme) {
