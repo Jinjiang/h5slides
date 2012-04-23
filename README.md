@@ -89,7 +89,7 @@
 
 #### 我们的联系方式
 
-我们的github页面：[https://github.com/Jinjiang/slides](https://github.com/Jinjiang/slides)  
+我们的github页面：[https://github.com/Jinjiang/h5slides](https://github.com/Jinjiang/h5slides)  
 我们的邮箱：[h5slides@gmail.com](mailto:h5slides@gmail.com)  
 我的个人微博：[@勾三股四](http://weibo.com/mx006)  
 
