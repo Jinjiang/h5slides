@@ -1,0 +1,19 @@
+#player section {
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+#player section.current {
+    z-index: 2;
+}
+#player section.next,
+#player section.prev {
+    display: block;
+    opacity: 0;
+}
+
+
+
+

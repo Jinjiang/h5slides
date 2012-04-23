@@ -1,0 +1,231 @@
+/**
+    @fileOverview
+    幻灯片的基本布局
+    @author Jinjiang<zhaojinjiang@yahoo.com.cn>
+ */
+
+
+
+
+/***** General *****/
+
+[data-item="title"],
+[data-item="subtitle"],
+[data-item="subtitle2"],
+[data-item="content"],
+[data-item="content2"] {
+    opacity: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.5;
+
+    -webkit-transform-origin: left top;
+    -moz-transform-origin: left top;
+    -o-transform-origin: left top;
+    -ms-transform-origin: left top;
+}
+
+[data-item="title"].large-font-size,
+[data-item="subtitle"].large-font-size,
+[data-item="subtitle2"].large-font-size,
+[data-item="content"].large-font-size,
+[data-item="content2"].large-font-size {
+    font-size: 20px;
+}
+[data-item="title"].small-font-size,
+[data-item="subtitle"].small-font-size,
+[data-item="subtitle2"].small-font-size,
+[data-item="content"].small-font-size,
+[data-item="content2"].small-font-size {
+    font-size: 14px;
+}
+
+[data-item="title"] {
+    font-size: 32px;
+    text-align: center;
+    height: 48px;
+    font-weight: bold;
+}
+[data-item="title"].large-font-size {
+    font-size: 36px;
+}
+[data-item="title"].small-font-size {
+    font-size: 24px;
+}
+
+[data-item="subtitle"] {
+    font-size: 20px;
+    top: 120px;
+    width: 240px;
+    left: -260px;
+    height: 30px;
+    font-weight: bold;
+}
+[data-item="subtitle2"] {
+    font-size: 20px;
+    top: 120px;
+    width: 240px;
+    left: 620px;
+    height: 30px;
+    font-weight: bold;
+}
+[data-item="subtitle"].large-font-size,
+[data-item="subtitle2"].large-font-size {
+    font-size: 24px;
+}
+[data-item="subtitle"].small-font-size,
+[data-item="subtitle2"].large-font-size {
+    font-size: 18px;
+}
+[data-item="content2"] {
+    top: 160px;
+    width: 240px;
+    left: 620px;
+}
+
+ p {
+    margin: 0;
+}
+
+
+
+
+/***** Big Title template *****/
+
+[data-layout="title"] [data-item="title"] {
+    display: block;
+    opacity: 1;
+    font-size: 48px;
+    width: 500px;
+    top: 160px;
+    left: 50px;
+    height: 72px;
+}
+[data-layout="title"] [data-item="title"].large-font-size {
+    font-size: 64px;
+}
+[data-layout="title"] [data-item="title"].small-font-size {
+    font-size: 32px;
+}
+[data-layout="title"] [data-item="content"] {
+    display: block;
+    opacity: 1;
+    text-align: center;
+    font-size: 24px;
+    width: 320px;
+    top: 250px;
+    left: 140px;
+}
+[data-layout="title"] [data-item="content"].large-font-size {
+    font-size: 28px;
+}
+[data-layout="title"] [data-item="content"].small-font-size {
+    font-size: 20px;
+}
+
+
+
+
+/***** Sub-Title template *****/
+
+[data-layout="subtitle"] [data-item="title"] {
+    display: block;
+    opacity: 1;
+    text-align: left;
+    width: 420px;
+    top: 200px;
+    left: 50px;
+}
+[data-layout="subtitle"] [data-item="content"] {
+    display: block;
+    opacity: 1;
+    font-size: 20px;
+    width: 320px;
+    top: 260px;
+    left: 80px;
+}
+[data-layout="subtitle"] [data-item="content"].large-font-size {
+    font-size: 24px;
+}
+[data-layout="subtitle"] [data-item="content"].small-font-size {
+    font-size: 16px;
+}
+
+
+
+
+/***** Normal template *****/
+
+[data-layout="normal"] [data-item="title"],
+[data-layout="double"] [data-item="title"],
+[data-layout="double-subtitle"] [data-item="title"] {
+    display: block;
+    opacity: 1;
+    width: 500px;
+    top: 50px;
+    left: 50px;
+}
+[data-layout="normal"] [data-item="content"] {
+    display: block;
+    opacity: 1;
+    width: 500px;
+    top: 120px;
+    left: 50px;
+    height: 280px;
+}
+
+
+[data-layout="double"] [data-item="content"] {
+    display: block;
+    opacity: 1;
+    width: 240px;
+    top: 120px;
+    left: 50px;
+    height: 280px;
+}
+[data-layout="double"] [data-item="content2"] {
+    display: block;
+    opacity: 1;
+    width: 240px;
+    top: 120px;
+    left: 310px;
+    height: 280px;
+}
+
+
+[data-layout="double-subtitle"] [data-item="subtitle"] {
+    display: block;
+    opacity: 1;
+    width: 240px;
+    top: 120px;
+    left: 50px;
+}
+[data-layout="double-subtitle"] [data-item="subtitle2"] {
+    display: block;
+    opacity: 1;
+    width: 240px;
+    top: 120px;
+    left: 310px;
+}
+[data-layout="double-subtitle"] [data-item="content"] {
+    display: block;
+    opacity: 1;
+    width: 240px;
+    top: 160px;
+    left: 50px;
+    height: 220px;
+}
+[data-layout="double-subtitle"] [data-item="content2"] {
+    display: block;
+    opacity: 1;
+    width: 240px;
+    top: 160px;
+    left: 310px;
+    height: 220px;
+}
+
+
+
+

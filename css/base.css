@@ -1,0 +1,159 @@
+body, table {font-family: "Hiragino Sans GB", Optima, "Lucida Grande", Consolas, "Courier New";}
+body, table {font-size: 20px; color: #333;}
+
+h1, h2, h3 {font-family: "Hiragino Sans GB", Optima, "Lucida Grande", "Microsoft JhengHei", "Microsoft YaHei";}
+h1, h2, h3, h4, strong {color: #000;}
+h1, h2, h3, h4, h5, h6, p {margin: 1em 0;}
+
+input, button, select, textarea, label {font-family: Monaco, Consolas, "Courier New";}
+input, button, select, textarea, label {font-size: 100%;}
+
+button, input[type="submit"], input[type="button"] {-webkit-appearance: push-button;}
+
+textarea, iframe, form {display: block; width: 100%; -moz-box-sizing: border-box; box-sizing: border-box;}
+
+code, pre {font-family: Monaco, Consolas, "Courier New";}
+code, pre, blockquote {background: #ccc;}
+
+pre {overflow: auto;}
+pre, blockquote {margin: 10px 0; padding: 0.25em 0.5em; border-radius: 3px;}
+
+a, mark, code {border-radius: 3px; padding: 2px 5px; margin: 0 -5px;}
+a {color: green; text-decoration: none;}
+a:hover {background: gray; color: white;}
+mark {background: yellow;}
+
+
+
+
+/* specified form elements */
+
+input:not([type]),
+input[type="text"],
+input[type="password"],
+textarea {
+    border: 2px #3E97D1 solid;
+    background: white;
+    -moz-box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+button, input[type="button"], input[type="submit"] {
+    background: #666;
+    background: #666 -ms-linear-gradient(-90deg, #999 0%, #666 100%);
+    background: #666 -moz-linear-gradient(-90deg, #999 0%, #666 100%);
+    background: #666 -webkit-gradient(linear, 0 0, 0 100%, from(#999), to(#666));
+    border: 1px #03426A solid;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 5px 2px #ccc;
+    box-shadow: 0 0 5px 2px #ccc;
+    color: white;
+}
+button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+    background: #0A67A3;
+    background: #0A67A3 -ms-linear-gradient(-90deg, #65A6D1 0%, #24587A 100%);
+    background: #0A67A3 -moz-linear-gradient(-90deg, #65A6D1 0%, #24587A 100%);
+    background: #0A67A3 -webkit-gradient(linear, 0 0, 0 100%, from(#65A6D1), to(#24587A));
+}
+button:active, input[type="button"]:active, input[type="submit"]:active {
+    background: #65A6D1;
+    background: #65A6D1 -ms-linear-gradient(-90deg, #24587A 0%, #65A6D1 100%);
+    background: #65A6D1 -moz-linear-gradient(-90deg, #24587A 0%, #65A6D1 100%);
+    background: #65A6D1 -webkit-gradient(linear, 0 0, 0 100%, from(#24587A), to(#65A6D1));
+}
+
+
+
+
+body {margin: 2em; background: #f0f0f0; line-height: 1.5;}
+
+
+h1 {border-bottom: 8px #666 solid; margin-bottom: 0.5em; padding-bottom: 0.5em;}
+h2 {margin: 0.75em 0; padding: 0.25em 0; background: #333; color: #fff; border-bottom-right-radius: 1em;}
+h2 strong {color: #fff;}
+h2 a {color: #ff0;}
+h2 a:hover {background: yellow; color: black;}
+
+
+dt {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+dd {
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+    padding: 0.5em 1em 0.5em 1em;
+    border-radius: 5px;
+}
+
+
+ul, ol {
+    margin: 1em 0;
+    padding: 0;
+    padding-left: 2em;
+}
+ul {
+    list-style-type: square;
+}
+li {
+    margin: 1em 0;
+    padding: 0;
+}
+
+
+table {
+    border-collapse: collapse;
+    border-color: #069;
+}
+td, th {
+    padding: 5px 10px;
+    border-color: #069;
+    cursor: default;
+}
+th {
+    background: #cec;
+}
+tr:nth-child(even) td {
+    background: #ccc;
+}
+tr:hover td {
+    background: #cfc;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+    border: 8px #ccc solid;
+    overflow: auto;
+    -webkit-box-sizing: border-box;
+}
+
+
+
+body:after {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+    content: "";
+    font-family: Monaco, Consolas, "Courier New";
+    font-size: 80%;
+}
+h2 {
+    margin-left: -20px;
+    padding-left: 20px;
+    position: relative;
+}
+h2:after {
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    height: 0px;
+    width: 0px;
+    background: transparent;
+    content: " ";
+    border-style: solid;
+    border-width: 5px 10px;
+    border-color: gray gray transparent transparent;
+}
+
+
