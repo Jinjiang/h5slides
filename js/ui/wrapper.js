@@ -78,20 +78,22 @@ function Wrapper(mode) {
         that.left = Math.floor(left);
         that.top = Math.floor(top);
         that.side = Math.floor(sidebarWidth);
+
+        slide.css('-webkit-transform', 'scale(' + that.scale + ')');
+        slide.css('-moz-transform', 'scale(' + that.scale + ')');
+        slide.css('-ms-transform', 'scale(' + that.scale + ')');
+        slide.css('-o-transform', 'scale(' + that.scale + ')');
+        slide.css('transform', 'scale(' + that.scale + ')');
+
         if (mode == 'editor') {
-            slide.css('-webkit-transform', 'scale(' + that.scale + ')'),
-            slide.css('marginTop', that.top + 'px');
             sidebar.css({
+                'margin-top': that.top + 'px',
                 'width': that.side + 'px',
                 'height': wrapperHeight + VERTICAL_MARGIN + 'px'
             });
         }
         else if (mode == 'player') {
             slide.css({
-                '-webkit-transform': 'scale(' + that.scale + ')',
-                '-moz-transform': 'scale(' + that.scale + ')',
-                '-ms-transform': 'scale(' + that.scale + ')',
-                '-o-transform': 'scale(' + that.scale + ')',
                 'left': that.left + 'px',
                 'top': that.top + 'px'
             });

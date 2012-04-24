@@ -41,7 +41,7 @@ function Splash() {
     };
     this.check = function () {
         if (navigator.userAgent.search('WebKit') == -1) {
-            return false;
+            // return false;
         }
         if (document.createTouch) {
             document.body.className = 'touch';

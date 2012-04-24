@@ -125,7 +125,8 @@ iframe {
     height: 300px;
     border: 8px #ccc solid;
     overflow: auto;
-    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 
