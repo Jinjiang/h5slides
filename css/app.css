@@ -12,6 +12,8 @@
     html, body {
         margin: 0;
         overflow: hidden;
+	background:#232729;
+        font-family:"Microsoft Yahei";
     }
     body:after {
         content: "html5 presentation editor";
@@ -47,7 +49,8 @@
         right: 0;
         top: 0;
         bottom: 0;
-        background: rgba(0, 192, 255, 0.9);
+        background: rgba(0,0,0,0.5);
+        color:#e3e3e3;
         font-size: 48px;
         font-weight: bold;
         text-align: center;
@@ -59,26 +62,28 @@
 
     #menu {
         position: absolute;
-        height: 2em;
-        padding: 0.5em 1em;
+        height: 67px;
         left: 0;
         right: 0;
         top: 0;
-        background: #eee;
+        background:#232729 url(../images/logo.png) no-repeat 20px center;
+        border-bottom:1px solid #101010;
         color: black;
         font-weight: bold;
         z-index: 100;
-        -moz-box-shadow: 0 2px 2px black;
-        box-shadow: 0 2px 2px black;
+        -moz-box-shadow: 0 2px 7px rgba(0,0,0, 0.2);
+        box-shadow: 0 2px 7px rgba(0,0,0, 0.2);
     }
 
     #sidebar {
         position: absolute;
-        min-width: 240px;
+        min-width: 228px;
         left: 0;
-        top: 3em;
+        top: 68px;
         bottom: 0;
-        background: silver;
+        background: #2a2e30;
+        border-right:1px solid #111314;
+        box-shadow:1px 0 1px #2e3234;
         z-index: 50;
         overflow-x: hidden;
         overflow-y: auto;
@@ -90,9 +95,8 @@
         height: 450px;
         overflow: hidden;
         right: 20px;
-        top: 3em;
+        top: 68px;
         bottom: 0;
-        background: rgba(0, 192, 192, 0.5);
         z-index: 1;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -137,55 +141,103 @@
         -o-box-flex: 1;
         box-flex: 1;
         line-height: 2;
+	position:absolute;
+    left:0;
+    top:68px;
+    font-size:16px;
+    line-height:50px;
+    color:#848484;
+    padding:0 0 0 20px;
     }
 
     #menu-title {
-        color: gray;
+        color: #999999;
         cursor: pointer;
         border: 1px gray dotted;
-        border-radius: 5px;
-        padding: 5px;
+        border-radius: 2px;
+        padding: 3px 5px;
     }
 
     #menu-title.customized {
-        color: black;
+        color: #999999;
     }
 
     #menu-title:hover {
-        background: gray;
+
         color: white;
+	border-color:#ffffff;
     }
 
     #menu-ctrl {
+	width:100%;
         text-align: right;
     }
 
+#menu-ctrl button {
+    float:right;
+    border:none;
+    background:url(../images/btn_line.png) no-repeat left 0;
+    height:67px;
+    width:68px;
+    padding:0 0 0 1px;
+    margin:0;
+    -webkit-box-shadow:none;
+    box-shadow: none;
+    border-radius:0;
+}
+#menu-ctrl button span {
+    display:block;
+    width:100%;
+    height:100%;
+    background:url(../images/btn_bg.png) no-repeat 8px center;
+}
+#menu-ctrl button span:hover {
+    background-color:#111111;
+}
+#menu-ctrl button.ctrl-play span {
+    background-position:-55px center;
+}
+#menu-ctrl button.ctrl-publish span {
+    background-position:-115px center;
+}
+#menu-ctrl button.ctrl-restart span {
+    background-position:-178px center;
+}
 
 
 
 /***** Editor Sidebar *****/
 
     #sidebar .panel {
-        margin: 5px;
-        border: 1px black solid;
-        border-radius: 5px;
-        background: white;
-        -moz-box-shadow: 1px 1px 2px black;
-        box-shadow: 1px 1px 2px black;
-        padding: 5px;
+    	border-top:1px solid #373a3c;
+
     }
     #sidebar .panel h3 {
         margin: 0;
-        padding: 0.25em 5px;
-        border-radius: 3px;
+        padding:0 0 0 12px;
         cursor: pointer;
-        background: rgba(192, 192, 192, 0.5);
+        color:#e3e3e3;
+        line-height:42px;
+        font-size:16px;
+        font-weight:normal;
+        font-family:"Microsoft Yahei";
+        border-bottom:1px solid #202325;
+        background: url(../images/unexpand.png) no-repeat right center;
     }
     #sidebar .panel h3:hover {
-        background: rgba(128, 128, 0, 0.5);
+        background-color: #232729;
     }
     #sidebar .panel > .content {
-        padding: 0 5px 5px;
+        padding: 8px 12px;
+        border-top:1px solid #373a3c;
+        border-bottom:1px solid #202325;
+        display:none;
+        color:#e3e3e3;
+        font-size:16px;
+    }
+    #sidebar .panel > .content .ps {
+        font-size:12px;
+        color:#848484;
     }
     #sidebar .extra {
         display: none;
@@ -194,7 +246,17 @@
         display: block;
     }
     #sidebar .panel p {
-        margin: 0.25em 0;
+        margin: 10px 0;
+    }
+    #sidebar .panel.expanded h3 {
+        background: url(../images/expand.png) no-repeat right center;
+    }
+    
+    #sidebar .panel.expanded > .content {
+        display:block;
+    }
+    #panel-themes {
+        display: none;
     }
 
 
@@ -209,16 +271,16 @@
     }
     #panel-style-btn-list img {
         vertical-align: middle;
+        border: 1px solid #000000;
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        opacity:0.7;
+        -webkit-transition:all 0.218s;
     }
     #panel-style-btn-list img:hover {
-        -moz-box-shadow: 2px 2px 3px black;
-        box-shadow: 2px 2px 3px black;
+        opacity:1;
     }
     #panel-style-btn-list img.checked {
-        outline: 2px blue solid;
-        outline-offset: -2px;
-        -moz-box-shadow: 2px 2px 3px blue;
-        box-shadow: 2px 2px 3px blue;
+        opacity:1;
     }
 
     #panel-style-btn-list.title p[data-key="color"],
@@ -238,26 +300,51 @@
 
 
 /* Paginations */
-
+    #panel-paginations .actions {
+        position:relative;
+        height:36px;
+    }
+    #panel-paginations .actions .controls {
+        position:absolute;
+        right:0;
+        top:0;
+    }
+    #panel-paginations button {
+        padding:3px 5px;
+        font-size:12px;
+        line-height:20px;
+        background:#232729;
+        border-radius:2px;
+        border:none;
+        color:#e3e3e3;
+        cursor: pointer;
+        -webkit-transition:all 0.218s;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+    }
+    #panel-paginations button:hover {
+        background:#000000;
+        color:#ffffff;
+    }
     #panel-paginations ol {
-        margin-top: 0.25em;
-        margin-bottom: 0.25em;
+        margin:0 -16px;
+        padding:0;
     }
     #panel-paginations ol li {
-        margin: 0.25em 0;
-        border: 0;
-        padding: 0.25em 0.5em;
+        margin: 0;
+        padding: 8px 24px;
         cursor: pointer;
-        border-radius: 3px;
+        line-height:24px;
+        list-style: decimal inside;
     }
     #panel-paginations ol li:hover {
-        background: rgba(0, 0, 192, 0.2);
+        background: #232729;
     }
     #panel-paginations ol li.current {
-        background: rgba(0, 0, 128, 0.6);
+        background: #000000;
     }
     #panel-paginations ol li.current .title {
-        color: white;
+        color: #e3e3e3;
     }
 
 
@@ -272,39 +359,37 @@
     }
     #panel-layout li,
     #panel-themes li {
-        margin: 0 0 5px 5px;
+        margin: 0 0 13px 13px;
         padding: 0;
-        width: 80px;
-        height: 80px;
+        width: 58px;
+        height: 58px;
         float: left;
         overflow: hidden;
         background: white none no-repeat 0 0;
+        background-size:cover;
         -webkit-background-origin: border-box;
         -moz-background-origin: border-box;
         -ms-background-origin: border-box;
         -o-background-origin: border-box;
         background-origin: border-box;
-        border: 1px #666 solid;
-        box-shadow: 0 0 3px #666;
+        border: 1px solid #000000;
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         border-radius: 3px;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
         text-overflow: ellipsis;
         white-space: nowrap;
+	opacity:0.7;
+        -webkit-transition:all 0.218s;
     }
     #panel-layout li:hover,
     #panel-themes li:hover {
-        background-color: rgba(192, 192, 255, 0.2);
-        -moz-box-shadow: 1px 1px 3px blue;
-        box-shadow: 1px 1px 3px blue;
+        opacity:1;
     }
     #panel-layout li.current,
     #panel-themes li.current {
-        background-color: #666;
-        color: white;
-        border-width: 2px;
-        -moz-box-shadow: 1px 1px 1px black;
-        box-shadow: 1px 1px 1px black;
+        opacity:1;
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 
     #panel-layout li[data-key="title"] {
@@ -322,10 +407,16 @@
     #panel-layout li[data-key="double-subtitle"] {
         background-image: url(../images/layout-double-subtitle.png);
     }
+    #panel-layout li[data-key="picture"] {
+        background-image: url(../images/layout-picture.png);
+    }
+    body.touch #panel-layout li[data-key="picture"] {
+        display: none;
+    }
 
     #panel-themes li img {
-        width: 80px;
-        height: 80px;
+        width: 58px;
+        height: 58px;
     }
 
 
@@ -362,7 +453,7 @@
         border: 1px gray dashed;
         margin: 0;
         padding: 0;
-        border-radius: 5px;
+        border-radius: 2px;
     }
     #main #slide-title:hover,
     #main #slide-subtitle:hover,
@@ -375,6 +466,7 @@
     #main #slide-content.hover,
     #main #slide-content2.hover {
         background: rgba(0,0,0,0.1);
+	 border-radius: 3px;
     }
     #main.adjusting #slide-title,
     #main.adjusting #slide-subtitle,
@@ -411,15 +503,17 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(128, 128, 128, 0.5);
+        background: rgba(255,255,255,0.1);
     }
     #layer-container > .dialog {
         z-index: 90;
         background: white;
         border: 3px black solid;
-        border-radius: 10px;
+        border-radius: 3px;
         padding: 1em 2em;
+        margin-left:-150px;
         top: 80px;
+        box-shadow:0 0 10px rgba(255,255,255,0.4);
     }
 
 
@@ -439,25 +533,24 @@
         border-radius: 5px;
         overflow: auto;
         resize: none;
+        padding:6px 3px;
     }
 
 
 /* Bar */
 
     #bar-for-slide {
-        top: 80px;
+        top: 75px;
         right: 20px;
         display: block !important;
-        background: rgba(128, 128, 128, 0.5);
-        -moz-box-shadow: 2px 2px 3px black;
-        box-shadow: 2px 2px 3px black;
-        padding: 5px;
+        background: #000000;
+        -webkit-box-shadow: 0 0 7px rgba(0,0,0, 0.5);
+        padding: 2px;
         line-height: 1;
         border-radius: 3px;
     }
     #bar-for-slide img:hover {
-        -moz-box-shadow: 2px 2px 3px black;
-        box-shadow: 2px 2px 3px black;
+        -webkit-box-shadow: 0 0 7px rgba(255,255,255, 0.5)
     }
 
 

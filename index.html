@@ -24,28 +24,28 @@
 
     <div id="menu">
 
-        <div id="menu-info">
-            演示名称：<span id="menu-title">untitled</span>
-        </div>
 
         <div id="menu-ctrl">
-            <button id="menu-btn-play">播放</button>
-            <button id="menu-btn-restart">重做</button>
+            <button id="menu-btn-restart" class="ctrl-restart"><span></span></button>
+            <button id="menu-btn-play" class="ctrl-play"><span></span></button>
+            <button id="menu-btn-save" class="ctrl-save"><span></span></button>
         </div>
 
     </div>
 
     <div id="sidebar">
 
-        <div id="panel-style" class="panel">
+        <div id="panel-style" class="panel expanded">
             <div class="header">
                 <h3>样式</h3>
             </div>
             <div class="content">
+                <p class="ps">选定元素后设置相关样式.</p>
                 <div id="panel-style-btn-list">
                     <p data-key="color">颜色
                     <img id="panel-style-btn-color-dialog" class="dialog" data-key="color" title="文字颜色" src="images/nav-color.png" />
-                    </p><p data-key="-ppt-size">大小
+                    </p>
+                    <p data-key="-ppt-size">大小
                     <img id="panel-style-btn-size-small" class="radio" data-key="-ppt-size" data-value="small" title="小字" src="images/nav-auto-adjust.png" />
                     <img id="panel-style-btn-size-normal" class="radio" data-key="-ppt-size" data-value="normal" title="大小适中" src="images/nav-auto-adjust.png" />
                     <img id="panel-style-btn-size-large" class="radio" data-key="-ppt-size" data-value="large" title="大字" src="images/nav-auto-adjust.png" />
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div id="panel-themes" class="panel">
+        <div id="panel-themes" class="panel expanded">
             <div class="header">
                 <h3>主题</h3>
             </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div id="panel-layout" class="panel">
+        <div id="panel-layout" class="panel expanded">
             <div class="header">
                 <h3>布局</h3>
             </div>
@@ -79,21 +79,21 @@
             </div>
         </div>
 
-        <div id="panel-paginations" class="panel">
+        <div id="panel-paginations" class="panel expanded">
             <div class="header">
                 <h3>浏览</h3>
             </div>
             <div class="content">
-                <p>
-                    <button id="panel-paginations-btn-previous">前一页</button>
-                    <span id="panel-paginations-current-page"></span> /
-                    <span id="panel-paginations-total-page"></span>
-                    <button id="panel-paginations-btn-next">后一页</button>
-                </p>
-                <p>
+                <div class="actions">
                     <button id="panel-paginations-btn-add">添加页</button>
                     <button id="panel-paginations-btn-remove">删除页</button>
-                </p>
+                    <div class="controls">
+                        <button id="panel-paginations-btn-previous">前一页</button>
+                        <span id="panel-paginations-current-page"></span> /
+                        <span id="panel-paginations-total-page"></span>
+                        <button id="panel-paginations-btn-next">后一页</button>
+                    </div>
+                </div>
                 <ol id="panel-paginations-list">
                     <!-- template
                     <li>Title 1</li>
@@ -103,7 +103,9 @@
         </div>
 
     </div>
-
+    <div id="menu-info">
+        演示名称：<span id="menu-title">untitled</span>
+    </div>
     <div id="main" data-design="blank">
 
         <div id="slide" data-layout="normal" data-page="1">
