@@ -1,5 +1,5 @@
-body, table {font-family: "Hiragino Sans GB", Optima, "Lucida Grande", Consolas, "Courier New";}
-body, table {font-size: 20px; color: #333;}
+body, table {font-family:Helvetica, Verdana, Geneva, Arial, sans-serif;}
+body, table {font-size: 20px; color: #999999;}
 
 h1, h2, h3 {font-family: "Hiragino Sans GB", Optima, "Lucida Grande", "Microsoft JhengHei", "Microsoft YaHei";}
 h1, h2, h3, h4, strong {color: #000;}
@@ -44,7 +44,7 @@ button, input[type="button"], input[type="submit"] {
     background: #666 -moz-linear-gradient(-90deg, #999 0%, #666 100%);
     background: #666 -webkit-gradient(linear, 0 0, 0 100%, from(#999), to(#666));
     border: 1px #03426A solid;
-    border-radius: 3px;
+    border-radius: 2px;
     -webkit-box-shadow: 0 0 5px 2px #ccc;
     box-shadow: 0 0 5px 2px #ccc;
     color: white;

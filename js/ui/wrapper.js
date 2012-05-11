@@ -16,7 +16,7 @@ function Wrapper(mode) {
     var SLIDE_ORIGIN_WIDTH = 600;
     var SLIDE_ORIGIN_HEIGHT = 450;
     var SLIDE_PROPORTION = 0.75;
-    var MENU_HEIGHT = 60;
+    var MENU_HEIGHT = 68;
     var MIN_SIDEBAR_WIDTH = (mode == 'editor') ? 260 : 0;
     var HORIZONTAL_MARGIN = (mode == 'editor') ? 40 : 0;
     var VERTICAL_MARGIN = (mode == 'editor') ? 80 : 0;
@@ -26,6 +26,7 @@ function Wrapper(mode) {
 
     var slide = $('#main');
     var sidebar = $('#sidebar');
+    var title = $('#menu-info');
     var wrapper = $(window);
 
     /**
@@ -72,7 +73,7 @@ function Wrapper(mode) {
             top = (wrapperHeight - slideHeight) / 2;
         }
 
-        top = MENU_HEIGHT / 2 + top;
+        top = MENU_HEIGHT / 2 + top + 20;
 
         that.scale = scale;
         that.left = Math.floor(left);
@@ -86,10 +87,13 @@ function Wrapper(mode) {
         slide.css('transform', 'scale(' + that.scale + ')');
 
         if (mode == 'editor') {
+            slide.css('marginTop', that.top + 'px');
             sidebar.css({
-                'margin-top': that.top + 'px',
                 'width': that.side + 'px',
                 'height': wrapperHeight + VERTICAL_MARGIN + 'px'
+            });
+            title.css({
+                'left': that.side + 'px'
             });
         }
         else if (mode == 'player') {
