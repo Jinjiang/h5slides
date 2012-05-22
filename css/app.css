@@ -12,14 +12,14 @@
     html, body {
         margin: 0;
         overflow: hidden;
-	background:#232729;
-        font-family:"Microsoft Yahei";
+        background: #232729;
+        font-family: "Microsoft Yahei";
     }
     body:after {
         content: "html5 presentation editor";
     }
 
-    /* Let's get this party started */
+    /* Scrollbar */
     ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
@@ -27,13 +27,13 @@
      
     /* Track */
     ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); 
+        box-shadow: inset 0 0 3px rgba(0,0,0,0.3); 
         border-radius: 4px;
     }
      
     /* Handle */
     ::-webkit-scrollbar-thumb {
-        -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.5); 
+        box-shadow: inset 0 0 3px rgba(0,0,0,0.5); 
         border-radius: 4px;
         background: rgba(0,128,128,0.25);
     }
@@ -50,7 +50,7 @@
         top: 0;
         bottom: 0;
         background: rgba(0,0,0,0.5);
-        color:#e3e3e3;
+        color: #e3e3e3;
         font-size: 48px;
         font-weight: bold;
         text-align: center;
@@ -58,6 +58,10 @@
         z-index: 110;
         overflow: hidden;
         -webkit-transition: bottom 1s, top 1s;
+        -moz-transition: bottom 1s, top 1s;
+        -ms-transition: bottom 1s, top 1s;
+        -o-transition: bottom 1s, top 1s;
+        transition: bottom 1s, top 1s;
     }
 
     #menu {
@@ -66,12 +70,11 @@
         left: 0;
         right: 0;
         top: 0;
-        background:#232729 url(../images/logo.png) no-repeat 20px center;
-        border-bottom:1px solid #101010;
+        background: #232729 url(../images/logo.png) no-repeat 20px center;
+        border-bottom: 1px solid #101010;
         color: black;
         font-weight: bold;
         z-index: 100;
-        -moz-box-shadow: 0 2px 7px rgba(0,0,0, 0.2);
         box-shadow: 0 2px 7px rgba(0,0,0, 0.2);
     }
 
@@ -82,8 +85,8 @@
         top: 68px;
         bottom: 0;
         background: #2a2e30;
-        border-right:1px solid #111314;
-        box-shadow:1px 0 1px #2e3234;
+        border-right: 1px solid #111314;
+        box-shadow: 1px 0 1px #2e3234;
         z-index: 50;
         overflow-x: hidden;
         overflow-y: auto;
@@ -103,6 +106,7 @@
         -webkit-transform-origin: right top;
         -moz-transform-origin: right top;
         -ms-transform-origin: right top;
+        -o-transform-origin: right top;
         transform-origin: right top;
     }
 
@@ -110,10 +114,10 @@
     #sidebar,
     #main {
         -webkit-transition-name: width, height, margin, padding, top, left, right, bottom, -webkit-transform;
-        -moz-transition-name: width, height, margin, padding, top, left, right, bottom, -webkit-transform;
-        -ms-transition-name: width, height, margin, padding, top, left, right, bottom, -webkit-transform;
-        -o-transition-name: width, height, margin, padding, top, left, right, bottom, -webkit-transform;
-        transition-name: width, height, margin, padding, top, left, right, bottom, -webkit-transform;
+        -moz-transition-name: width, height, margin, padding, top, left, right, bottom, -moz-transform;
+        -ms-transition-name: width, height, margin, padding, top, left, right, bottom, -ms-transform;
+        -o-transition-name: width, height, margin, padding, top, left, right, bottom, -o-transform;
+        transition-name: width, height, margin, padding, top, left, right, bottom, transform;
         -webkit-transition-duration: 0.5s;
         -moz-transition-duration: 0.5s;
         -ms-transition-duration: 0.5s;
@@ -141,13 +145,13 @@
         -o-box-flex: 1;
         box-flex: 1;
         line-height: 2;
-	position:absolute;
-    left:0;
-    top:68px;
-    font-size:16px;
-    line-height:50px;
-    color:#848484;
-    padding:0 0 0 20px;
+        position: absolute;
+        left: 0;
+        top: 68px;
+        font-size: 16px;
+        line-height: 50px;
+        color: #848484;
+        padding: 0 0 0 20px;
     }
 
     #menu-title {
@@ -165,63 +169,61 @@
     #menu-title:hover {
 
         color: white;
-	border-color:#ffffff;
+        border-color: #ffffff;
     }
 
     #menu-ctrl {
-	width:100%;
+        width: 100%;
         text-align: right;
     }
 
-#menu-ctrl button {
-    float:right;
-    border:none;
-    background:url(../images/btn_line.png) no-repeat left 0;
-    height:67px;
-    width:68px;
-    padding:0 0 0 1px;
-    margin:0;
-    -webkit-box-shadow:none;
-    box-shadow: none;
-    border-radius:0;
-}
-#menu-ctrl button span {
-    display:block;
-    width:100%;
-    height:100%;
-    background:url(../images/btn_bg.png) no-repeat 8px center;
-}
-#menu-ctrl button span:hover {
-    background-color:#111111;
-}
-#menu-ctrl button.ctrl-play span {
-    background-position:-55px center;
-}
-#menu-ctrl button.ctrl-publish span {
-    background-position:-115px center;
-}
-#menu-ctrl button.ctrl-restart span {
-    background-position:-178px center;
-}
+    #menu-ctrl a {
+        float: right;
+        border: none;
+        background: url(../images/btn_line.png) no-repeat left 0;
+        height: 67px;
+        width: 68px;
+        padding: 0 0 0 1px;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    #menu-ctrl a span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: url(../images/btn_bg.png) no-repeat 8px center;
+    }
+    #menu-ctrl a span:hover {
+        background-color: #111111;
+    }
+    #menu-ctrl a.ctrl-play span {
+        background-position: -55px center;
+    }
+    #menu-ctrl a.ctrl-publish span {
+        background-position: -115px center;
+    }
+    #menu-ctrl a.ctrl-restart span {
+        background-position: -178px center;
+    }
 
 
 
 /***** Editor Sidebar *****/
 
     #sidebar .panel {
-    	border-top:1px solid #373a3c;
-
+        border-top: 1px solid #373a3c;
     }
     #sidebar .panel h3 {
         margin: 0;
-        padding:0 0 0 12px;
+        padding: 0 0 0 12px;
         cursor: pointer;
-        color:#e3e3e3;
-        line-height:42px;
-        font-size:16px;
-        font-weight:normal;
-        font-family:"Microsoft Yahei";
-        border-bottom:1px solid #202325;
+        color: #e3e3e3;
+        line-height: 42px;
+        font-size: 16px;
+        font-weight: normal;
+        font-family: "Microsoft Yahei";
+        border-bottom: 1px solid #202325;
         background: url(../images/unexpand.png) no-repeat right center;
     }
     #sidebar .panel h3:hover {
@@ -229,15 +231,15 @@
     }
     #sidebar .panel > .content {
         padding: 8px 12px;
-        border-top:1px solid #373a3c;
-        border-bottom:1px solid #202325;
-        display:none;
-        color:#e3e3e3;
-        font-size:16px;
+        border-top: 1px solid #373a3c;
+        border-bottom: 1px solid #202325;
+        display: none;
+        color: #e3e3e3;
+        font-size: 16px;
     }
     #sidebar .panel > .content .ps {
-        font-size:12px;
-        color:#848484;
+        font-size: 12px;
+        color: #848484;
     }
     #sidebar .extra {
         display: none;
@@ -253,7 +255,7 @@
     }
     
     #sidebar .panel.expanded > .content {
-        display:block;
+        display: block;
     }
     #panel-themes {
         display: none;
@@ -273,14 +275,18 @@
         vertical-align: middle;
         border: 1px solid #000000;
         box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        opacity:0.7;
-        -webkit-transition:all 0.218s;
+        opacity: 0.7;
+        -webkit-transition: all 0.218s;
+        -moz-transition: all 0.218s;
+        -ms-transition: all 0.218s;
+        -o-transition: all 0.218s;
+        transition: all 0.218s;
     }
     #panel-style-btn-list img:hover {
-        opacity:1;
+        opacity: 1;
     }
     #panel-style-btn-list img.checked {
-        opacity:1;
+        opacity: 1;
     }
 
     #panel-style-btn-list.title p[data-key="color"],
@@ -300,41 +306,45 @@
 
 
 /* Paginations */
+
     #panel-paginations .actions {
-        position:relative;
-        height:36px;
+        position: relative;
+        height: 36px;
     }
     #panel-paginations .actions .controls {
-        position:absolute;
-        right:0;
-        top:0;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
     #panel-paginations button {
-        padding:3px 5px;
-        font-size:12px;
-        line-height:20px;
-        background:#232729;
-        border-radius:2px;
-        border:none;
-        color:#e3e3e3;
+        padding: 3px 5px;
+        font-size: 12px;
+        line-height: 20px;
+        background: #232729;
+        border-radius: 2px;
+        border: none;
+        color: #e3e3e3;
         cursor: pointer;
-        -webkit-transition:all 0.218s;
-	-webkit-box-shadow:none;
-	box-shadow:none;
+        -webkit-transition: all 0.218s;
+        -moz-transition: all 0.218s;
+        -ms-transition: all 0.218s;
+        -o-transition: all 0.218s;
+        transition: all 0.218s;
+        box-shadow: none;
     }
     #panel-paginations button:hover {
-        background:#000000;
-        color:#ffffff;
+        background: #000000;
+        color: #ffffff;
     }
     #panel-paginations ol {
-        margin:0 -16px;
-        padding:0;
+        margin: 0 -16px;
+        padding: 0;
     }
     #panel-paginations ol li {
         margin: 0;
         padding: 8px 24px;
         cursor: pointer;
-        line-height:24px;
+        line-height: 24px;
         list-style: decimal inside;
     }
     #panel-paginations ol li:hover {
@@ -361,12 +371,12 @@
     #panel-themes li {
         margin: 0 0 13px 13px;
         padding: 0;
-        width: 58px;
-        height: 58px;
+        width: 80px;
+        height: 80px;
         float: left;
         overflow: hidden;
         background: white none no-repeat 0 0;
-        background-size:cover;
+        background-size: cover;
         -webkit-background-origin: border-box;
         -moz-background-origin: border-box;
         -ms-background-origin: border-box;
@@ -379,16 +389,20 @@
         box-sizing: border-box;
         text-overflow: ellipsis;
         white-space: nowrap;
-	opacity:0.7;
-        -webkit-transition:all 0.218s;
+        opacity: 0.7;
+        -webkit-transition: all 0.218s;
+        -moz-transition: all 0.218s;
+        -ms-transition: all 0.218s;
+        -o-transition: all 0.218s;
+        transition: all 0.218s;
     }
     #panel-layout li:hover,
     #panel-themes li:hover {
-        opacity:1;
+        opacity: 1;
     }
     #panel-layout li.current,
     #panel-themes li.current {
-        opacity:1;
+        opacity: 1;
         box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 
@@ -415,8 +429,8 @@
     }
 
     #panel-themes li img {
-        width: 58px;
-        height: 58px;
+        width: 80px;
+        height: 80px;
     }
 
 
@@ -466,7 +480,7 @@
     #main #slide-content.hover,
     #main #slide-content2.hover {
         background: rgba(0,0,0,0.1);
-	 border-radius: 3px;
+        border-radius: 3px;
     }
     #main.adjusting #slide-title,
     #main.adjusting #slide-subtitle,
@@ -474,7 +488,15 @@
     #main.adjusting #slide-content,
     #main.adjusting #slide-content2 {
         -webkit-transition: width, height, font-size, padding, left, top, opacity;
+        -moz-transition: width, height, font-size, padding, left, top, opacity;
+        -ms-transition: width, height, font-size, padding, left, top, opacity;
+        -o-transition: width, height, font-size, padding, left, top, opacity;
+        transition: width, height, font-size, padding, left, top, opacity;
         -webkit-transition-duration: 0.5s;
+        -moz-transition-duration: 0.5s;
+        -ms-transition-duration: 0.5s;
+        -o-transition-duration: 0.5s;
+        transition-duration: 0.5s;
     }
 
 
@@ -511,9 +533,9 @@
         border: 3px black solid;
         border-radius: 3px;
         padding: 1em 2em;
-        margin-left:-150px;
+        margin-left: -150px;
         top: 80px;
-        box-shadow:0 0 10px rgba(255,255,255,0.4);
+        box-shadow: 0 0 10px rgba(255,255,255,0.4);
     }
 
 
@@ -533,7 +555,7 @@
         border-radius: 5px;
         overflow: auto;
         resize: none;
-        padding:6px 3px;
+        padding: 6px 3px;
     }
 
 
@@ -544,13 +566,13 @@
         right: 20px;
         display: block !important;
         background: #000000;
-        -webkit-box-shadow: 0 0 7px rgba(0,0,0, 0.5);
+        box-shadow: 0 0 7px rgba(0,0,0, 0.5);
         padding: 2px;
         line-height: 1;
         border-radius: 3px;
     }
     #bar-for-slide img:hover {
-        -webkit-box-shadow: 0 0 7px rgba(255,255,255, 0.5)
+        box-shadow: 0 0 7px rgba(255,255,255, 0.5)
     }
 
 
@@ -631,12 +653,16 @@
         width: 600px;
         height: 450px;
         margin: auto;
+        color: black;
         -webkit-perspective: 300px;
         -moz-perspective: 300px;
         -ms-perspective: 300px;
         -o-perspective: 300px;
         perspective: 300px;
+        -webkit-transform-origin: center center;
+        -moz-transform-origin: center 0; /* 存在兼容性问题 */
     }
+
 
 /* Player Section */
 
@@ -650,7 +676,6 @@
         background: white none no-repeat;
         background-size: cover;
         background-position: center center;
-        -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
@@ -666,9 +691,9 @@
         bottom: 15px;
         left: 20px;
         z-index: 20;
+        color: #333;
         font-size: 14px;
         font-family: "Optima", Consolas;
-        color: #333;
         content: "H → Help(帮助)";
     }
     #player-helper {

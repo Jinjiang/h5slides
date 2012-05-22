@@ -38,6 +38,26 @@ function Player() {
     var eventBinding = false;
 
     /**
+        调整画面尺寸
+     */
+    function resize() {
+        var playerSize = {
+            width: player.width(),
+            height: player.height()
+        };
+        var slideSize = {
+            width: 600,
+            height: 450
+        };
+        var scale = Math.min(playerSize.width / slideSize.width, playerSize.height / slideSize.height);
+        root.css('-webkit-transform', 'scale(' + scale + ')').
+            css('-moz-transform', 'scale(' + scale + ')').
+            css('-ms-transform', 'scale(' + scale + ')').
+            css('-o-transform', 'scale(' + scale + ')').
+            css('-webkit-transform', 'scale(' + scale + ')');
+    }
+
+    /**
         将幻灯片数据由json转换成html并作为dom插入到#player
         @param {object} presentation
      */
@@ -459,6 +479,8 @@ function Player() {
         }
         playing = true;
         document.body.className = 'playing';
+        resize();
+        $(window).bind('resize', resize);
     }
 
     /**
@@ -483,6 +505,7 @@ function Player() {
         playing = false;
         player.removeClass('play touch');
         $('body').removeClass('playing');
+        $(window).unbind('resize', resize);
     }
 
     this.play = init;

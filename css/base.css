@@ -1,4 +1,4 @@
-body, table {font-family:Helvetica, Verdana, Geneva, Arial, sans-serif;}
+body, table {font-family: Helvetica, Verdana, Geneva, Arial, sans-serif;}
 body, table {font-size: 20px; color: #999999;}
 
 h1, h2, h3 {font-family: "Hiragino Sans GB", Optima, "Lucida Grande", "Microsoft JhengHei", "Microsoft YaHei";}
@@ -34,7 +34,6 @@ input[type="password"],
 textarea {
     border: 2px #3E97D1 solid;
     background: white;
-    -moz-box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
     box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
 }
@@ -45,7 +44,6 @@ button, input[type="button"], input[type="submit"] {
     background: #666 -webkit-gradient(linear, 0 0, 0 100%, from(#999), to(#666));
     border: 1px #03426A solid;
     border-radius: 2px;
-    -webkit-box-shadow: 0 0 5px 2px #ccc;
     box-shadow: 0 0 5px 2px #ccc;
     color: white;
 }
