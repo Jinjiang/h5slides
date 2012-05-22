@@ -1,7 +1,9 @@
+
 undo/revert system
 widget system (photo/chart)
 plugin system (navigator/brush)
-action system
 resource system (photo)
 sortable page list
+
+action system
 WYSIWYG rich text editor (find a open source)
