@@ -1,0 +1,14 @@
+#player section[data-transition="transition_horizontal3d"].next {
+    -webkit-transform: translate3d(75%, 0, 0) rotateY(60deg) translate3d(75%, 0, 0);
+    -moz-transform: translate3d(75%, 0, 0) rotateY(60deg) translate3d(75%, 0, 0);
+    -ms-transform: translate3d(75%, 0, 0) rotateY(60deg) translate3d(75%, 0, 0);
+    transform: translate3d(75%, 0, 0) rotateY(60deg) translate3d(75%, 0, 0);
+}
+#player section[data-transition="transition_horizontal3d"].prev {
+    -webkit-transform: translate3d(-75%, 0, 0) rotateY(-60deg) translate3d(-75%, 0, 0);
+    -moz-transform: translate3d(-75%, 0, 0) rotateY(-60deg) translate3d(-75%, 0, 0);
+    -ms-transform: translate3d(-75%, 0, 0) rotateY(-60deg) translate3d(-75%, 0, 0);
+    transform: translate3d(-75%, 0, 0) rotateY(-60deg) translate3d(-75%, 0, 0);
+}
+
+
