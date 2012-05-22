@@ -13,8 +13,8 @@
     @constructor
  */
 function Wrapper(mode) {
-    var SLIDE_ORIGIN_WIDTH = 600;
-    var SLIDE_ORIGIN_HEIGHT = 450;
+    var SLIDE_ORIGIN_WIDTH = 1000;
+    var SLIDE_ORIGIN_HEIGHT = 750;
     var SLIDE_PROPORTION = 0.75;
     var MENU_HEIGHT = 68;
     var MIN_SIDEBAR_WIDTH = (mode == 'editor') ? 260 : 0;

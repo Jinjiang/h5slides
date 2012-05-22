@@ -94,8 +94,8 @@
 
     #main {
         position: absolute;
-        width: 600px;
-        height: 450px;
+        width: 1000px;
+        height: 750px;
         overflow: hidden;
         right: 20px;
         top: 68px;
@@ -445,8 +445,8 @@
     }
 
     #preview, #slide {
-        width: 600px;
-        height: 450px;
+        width: 1000px;
+        height: 750px;
     }
 
 
@@ -563,7 +563,7 @@
     #bar-for-slide {
         top: 75px;
         right: 20px;
-        display: block !important;
+        display: none !important; /* hide temporarily */
         background: #000000;
         box-shadow: 0 0 7px rgba(0,0,0, 0.5);
         padding: 2px;
@@ -648,8 +648,8 @@
 
     #player {
         position: relative;
-        width: 600px;
-        height: 450px;
+        width: 1000px;
+        height: 750px;
         margin: auto;
         -webkit-perspective: 300px;
         -moz-perspective: 300px;

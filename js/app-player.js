@@ -46,8 +46,8 @@ function Player() {
             height: player.height()
         };
         var slideSize = {
-            width: 600,
-            height: 450
+            width: 1000,
+            height: 750
         };
         var scale = Math.min(playerSize.width / slideSize.width, playerSize.height / slideSize.height);
         root.css('-webkit-transform', 'scale(' + scale + ')').
@@ -92,11 +92,11 @@ function Player() {
             var content = section.find('.content');
 
             // 生成不同元素的html代码
-            var titleHtml = txt2Html(slide.content.title || '');
-            var subtitleHtml = txt2Html(slide.content.subtitle || '');
-            var subtitle2Html = txt2Html(slide.content.subtitle2 || '');
-            var contentHtml = txt2Html(slide.content.content || '');
-            var content2Html = txt2Html(slide.content.content2 || '');
+            var titleHtml = TextParser.txt2Html(slide.content.title || '');
+            var subtitleHtml = TextParser.txt2Html(slide.content.subtitle || '');
+            var subtitle2Html = TextParser.txt2Html(slide.content.subtitle2 || '');
+            var contentHtml = TextParser.txt2Html(slide.content.content || '');
+            var content2Html = TextParser.txt2Html(slide.content.content2 || '');
 
             if (slide.content.slide) {
                 section.css('background-image', 'url(' + slide.content.slide + ')');
