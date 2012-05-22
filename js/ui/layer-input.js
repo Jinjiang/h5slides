@@ -35,16 +35,17 @@ function InputLayer() {
         }
 
         input.css({
-            left: target.css('left'),
-            top: target.css('top'),
-            width: target.css('width'),
-            height: target.css('height'),
-            fontSize: target.css('fontSize'),
-            fontFamily: target.css('fontFamily'),
-            padding: target.css('padding'),
-            margin: target.css('margin'),
-            textAlign: target.css('textAlign'),
-            fontWeight: target.css('fontWeight')
+            'left': target.css('left'),
+            'top': target.css('top'),
+            'width': target.css('width'),
+            'height': target.css('height'),
+            'font-size': target.css('font-size'),
+            'line-height': target.css('line-height'),
+            'font-family': target.css('font-family'),
+            'padding': target.css('padding'),
+            'margin': target.css('margin'),
+            'text-align': target.css('text-align'),
+            'font-weight': target.css('font-weight')
         });
     }
 

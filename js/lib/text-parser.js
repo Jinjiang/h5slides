@@ -3,16 +3,19 @@
 
 
 
+var TextParser = {};
+
+
 /**
     & < > -> &...;
  */
-function txt2Html(txt) {
+TextParser.txt2Html = function (txt) {
     txt = txt.replace(/\&/ig, '&amp;').
             replace(/\</ig, '&lt;').
             replace(/\>/ig, '&gt;').
             replace(/ /ig, '&nbsp;').
             replace(/\t/ig, '&nbsp;&nbsp;&nbsp;&nbsp;');
-    txt = txt2Link(txt);
+    txt = TextParser.txt2Link(txt);
     return txt;
 }
 
@@ -20,10 +23,10 @@ function txt2Html(txt) {
     \n -> <br />
     \n\n -> <p>
  */
-function txt2P(txt) {
+TextParser.txt2P = function (txt) {
     var list = txt.split('\n');
     $.each(list, function (index, line) {
-        list[index] = txt2Html(line);
+        list[index] = TextParser.txt2Html(line);
     });
     return list.join('<br />');
 }
@@ -31,10 +34,10 @@ function txt2P(txt) {
 /**
     ul > li > ul > li ...
  */
-function txt2Ul(txt) {
+TextParser.txt2Ul = function (txt) {
     var list = txt.split('\n');
     $.each(list, function (index, line) {
-        list[index] = txt2Html(line);
+        list[index] = TextParser.txt2Html(line);
     });
     return '<ul><li>' + list.join('</li><li>') + '</li></ul>';
 }
@@ -42,10 +45,10 @@ function txt2Ul(txt) {
 /**
     ol > li > ol > li ...
  */
-function txt2Ol(txt) {
+TextParser.txt2Ol = function (txt) {
     var list = txt.split('\n');
     $.each(list, function (index, line) {
-        list[index] = txt2Html(line);
+        list[index] = TextParser.txt2Html(line);
     });
     return '<ol><li>' + list.join('</li><li>') + '</li></ol>';
 }
@@ -53,10 +56,10 @@ function txt2Ol(txt) {
 /**
     <pre>
  */
-function txt2Code(txt) {
+TextParser.txt2Code = function (txt) {
     var list = txt.split('\n');
     $.each(list, function (index, line) {
-        list[index] = txt2Html(line);
+        list[index] = TextParser.txt2Html(line);
     });
     return '<pre>' + list.join('<br />') + '</pre>';
 }
@@ -64,7 +67,7 @@ function txt2Code(txt) {
 /**
     convert http/https/email address to link
  */
-function txt2Link(txt) {
+TextParser.txt2Link = function (txt) {
     return txt.replace(/([a-z]+:\/\/[^\s]*)/ig, '<a href="$1" target="_blank">$1</a>');
 }
 

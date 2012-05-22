@@ -112,11 +112,11 @@ function Slide(mode) {
         var position = data.position;
 
         item[0].style.cssText = '';
-        item.data('-ppt-size', '');
+        item.data('css-size', '');
 
         $.each(style, function (key, value) {
             if (key.match(/^-ppt-/)) {
-                item.data(key, value);
+                item.data(key.replace('-ppt-', 'css-'), value);
             }
             else {
                 item.css(key, value);
@@ -128,25 +128,23 @@ function Slide(mode) {
         });
 
         if (key != 'slide') {
-            renderFunc.text(item, content || INPUT_PLACEHOLDER);
+            renderText(item, content || INPUT_PLACEHOLDER);
         }
     }
 
-    var renderFunc = {
-        text: function (item, content) {
-            var size = item.data('-ppt-size') || '';
-            var html = '';
+    /**
+        渲染幻灯片其中某一项的文字内容
+        @param {object} item
+        @param {string} content
+     */
+    function renderText(item, content) {
+        var size = item.data('css-size') || '';
 
-            html = txt2P(content);
-            item.html(html);
+        item.html(TextParser.txt2P(content));
+        item.removeClass('small-font-size large-font-size');
 
-            if (size == 'auto-scroll' || size == 'auto-adjust') {
-                size = '';
-            }
-            item.removeClass('small-font-size large-font-size');
-            if (size && size != 'normal') {
-                item.addClass(size + '-font-size');
-            }
+        if (size && size != 'normal') {
+            item.addClass(size + '-font-size');
         }
     }
 
@@ -213,7 +211,7 @@ function Slide(mode) {
             newHover.addClass('hover');
         }
         currentHover = newHover;
-    }
+    };
 }
 
 

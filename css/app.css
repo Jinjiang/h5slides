@@ -535,7 +535,12 @@
 
 /* Input Layer */
 
-    #main #layer-for-input {
+    #layer-for-input,
+    #layer-for-input-textarea {
+        box-sizing: content-box;
+    }
+
+    #layer-for-input {
         top: 0;
         left: 0;
     }

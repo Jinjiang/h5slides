@@ -83,7 +83,7 @@ function Editor() {
         return;
     }
 
-    // 菜单事件：重做、播放、修改标题
+    // 菜单事件：重做(restart)、播放(play)、修改标题(title)
     menu.bind(function (type, data) {
         if (type == 'restart') {
             window.data.delDraft();
@@ -108,7 +108,7 @@ function Editor() {
         }
     });
 
-    // 翻页管理面板事件：翻页、添加页、删除页
+    // 翻页管理面板事件：翻页(go/next/previous)、添加页(add)、删除页(remove)
     paginations.bind(function (type, data) {
         var page = window.data.page;
         var slideData;
@@ -150,7 +150,7 @@ function Editor() {
     // 加载布局面板数据
     layout.initData(layoutData);
 
-    // 布局面板事件：选择布局
+    // 布局面板事件：选择布局(layout)
     layout.bind(function (type, data) {
         var page = window.data.page;
 
@@ -167,7 +167,7 @@ function Editor() {
     // 加载主题面板数据
     themes.initData(themesData);
 
-    // 主题面板事件：选择主题
+    // 主题面板事件：选择主题(theme)
     themes.bind(function (type, data) {
 
         if (type == 'theme') {
@@ -184,7 +184,7 @@ function Editor() {
         console.log('themes', type, data);
     });
 
-    // 主编辑区域事件：选择、修改幻灯片上的某个项目的内容或样式或位置
+    // 主编辑区域事件：开始编辑(focus)、选中(hover)幻灯片上的某个项目的内容或样式或位置
     slide.bind(function (type, data) {
         var page = window.data.page;
         var slideData = window.data.get(page);
@@ -203,19 +203,20 @@ function Editor() {
             }
             slide.hover(data);
             stylePanel.init(data, styleData, target);
-            return;
         }
 
-        inputType = 'textarea';
-        input.init(value, target);
+        if (type == 'focus') {
+            inputType = 'textarea';
+            input.init(value, target);
 
-        stylePanel.init(data, styleData, target);
+            stylePanel.init(data, styleData, target);
+        }
 
         return;
         console.log('slide', inputType, data);
     });
 
-    // 输入框弹出层事件：失焦、修改内容
+    // 输入框弹出层事件：失焦(blur)、修改内容(title/content/...)
     input.bind(function (type, data) {
         if (type == 'blur') {
             input.hide();
@@ -243,7 +244,7 @@ function Editor() {
         console.log('input', type, data);
     });
 
-    // 样式面板事件：修改文字颜色、修改字号等
+    // 样式面板事件：修改样式(style)、弹出样式对话框(dialog)
     stylePanel.bind(function (type, data) {
         var page = window.data.page;
         var id = data.type;
@@ -257,7 +258,7 @@ function Editor() {
             slide.setStyle(id, style);
             window.data.setStyle(page, id, style);
         }
-        else {
+        if (type == 'dialog') {
             var slideData = window.data.get(page);
             if (data.key == 'color') {
                 if (slideData.style && slideData.style[id]) {
@@ -276,7 +277,7 @@ function Editor() {
         }
     });
 
-    // 块级元素浮动层事件：修改样式
+    // 块级元素浮动层事件：修改样式(style)、弹出样式对话框(dialog)
     blockBar.bind(function (type, data) {
         var page = window.data.page;
         var id = data.type;
@@ -290,7 +291,7 @@ function Editor() {
             slide.setStyle(id, style);
             window.data.setStyle(page, id, style);
         }
-        else {
+        if (type == 'dialog') {
             var slideData = window.data.get(page);
             if (data.key == 'color') {
                 if (slideData.style && slideData.style[id]) {
@@ -309,14 +310,14 @@ function Editor() {
         }
     });
 
-    // 调色板浮动层样式：修改颜色
+    // 调色板浮动层样式：修改颜色(color)
     colorDialog.bind(function (type, data) {
         maskLayer.hide();
         slide.setStyle(data.key, {key: 'color', value: data.value});
         window.data.setStyle(data.page, data.key, {key: 'color', value: data.value});
     });
 
-    // 插入图片浮动层样式：设置图片
+    // 插入图片浮动层样式：设置图片(image)
     imageDialog.bind(function (type, data) {
         maskLayer.hide();
         if (!data) {
