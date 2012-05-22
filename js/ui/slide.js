@@ -14,6 +14,7 @@
 function Slide(mode) {
     var INPUT_PLACEHOLDER = (mode == 'editor') ? '双击输入文本' : '';
     var root = $('#main');
+    var preview = $('#preview');
     var slide = $('#slide');
     var itemMap = {
         title: $('#slide-title'),
@@ -153,7 +154,7 @@ function Slide(mode) {
         设置主题
      */
     function setTheme(design) {
-        root.attr('data-design', design);
+        preview.attr('data-design', design);
     }
 
     /**
@@ -161,9 +162,9 @@ function Slide(mode) {
      */
     function setLayout(layout, isAdjusting) {
         if (isAdjusting) {
-            root.addClass('adjusting');
+            preview.addClass('adjusting');
             setTimeout(function () {
-                root.removeClass('adjusting');
+                preview.removeClass('adjusting');
             }, 500);
         }
         slide.attr('data-layout', layout);

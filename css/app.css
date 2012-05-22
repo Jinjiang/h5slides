@@ -257,9 +257,6 @@
     #sidebar .panel.expanded > .content {
         display: block;
     }
-    #panel-themes {
-        display: none;
-    }
 
 
 /* Style */
@@ -447,12 +444,9 @@
         box-shadow: 2px 2px 2px solid;
     }
 
-    #slide {
+    #preview, #slide {
         width: 600px;
         height: 450px;
-        background: white none no-repeat;
-        background-size: cover;
-        background-position: center center;
     }
 
 
@@ -469,24 +463,24 @@
         padding: 0;
         border-radius: 2px;
     }
-    #main #slide-title:hover,
-    #main #slide-subtitle:hover,
-    #main #slide-subtitle2:hover,
-    #main #slide-content:hover,
-    #main #slide-content2:hover,
-    #main #slide-title.hover,
-    #main #slide-subtitle.hover,
-    #main #slide-subtitle2.hover,
-    #main #slide-content.hover,
-    #main #slide-content2.hover {
+    #preview #slide-title:hover,
+    #preview #slide-subtitle:hover,
+    #preview #slide-subtitle2:hover,
+    #preview #slide-content:hover,
+    #preview #slide-content2:hover,
+    #preview #slide-title.hover,
+    #preview #slide-subtitle.hover,
+    #preview #slide-subtitle2.hover,
+    #preview #slide-content.hover,
+    #preview #slide-content2.hover {
         background: rgba(0,0,0,0.1);
         border-radius: 3px;
     }
-    #main.adjusting #slide-title,
-    #main.adjusting #slide-subtitle,
-    #main.adjusting #slide-subtitle2,
-    #main.adjusting #slide-content,
-    #main.adjusting #slide-content2 {
+    #preview.adjusting #slide-title,
+    #preview.adjusting #slide-subtitle,
+    #preview.adjusting #slide-subtitle2,
+    #preview.adjusting #slide-content,
+    #preview.adjusting #slide-content2 {
         -webkit-transition: width, height, font-size, padding, left, top, opacity;
         -moz-transition: width, height, font-size, padding, left, top, opacity;
         -ms-transition: width, height, font-size, padding, left, top, opacity;
@@ -614,7 +608,6 @@
         bottom: 0;
         right: 0;
         z-index: 100;
-        background: white;
 
         display: -webkit-box;
         display: -moz-box;
@@ -653,7 +646,6 @@
         width: 600px;
         height: 450px;
         margin: auto;
-        color: black;
         -webkit-perspective: 300px;
         -moz-perspective: 300px;
         -ms-perspective: 300px;
@@ -673,9 +665,6 @@
         height: 100%;
         top: 0;
         left: 0;
-        background: white none no-repeat;
-        background-size: cover;
-        background-position: center center;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
     }

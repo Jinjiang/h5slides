@@ -64,10 +64,12 @@ function Player() {
     function parse(presentation) {
         var slides = presentation.slides;
         var defaultLayout = 'normal';
+        var theme = presentation.theme;
 
         that.notify('loadcss', defaultTransition);
 
-        root.empty();
+        root.empty().attr('data-design', theme);
+        player.attr('data-background-design', theme);
 
         // 插入每一张幻灯片
         $.each(slides, function (i, slide) {
@@ -186,6 +188,7 @@ function Player() {
         currentSection = $(sectionList[pageNum - 1]).addClass('current');
         prevSection = currentSection.prev().addClass('prev');
         nextSection = currentSection.next().addClass('next');
+        player.attr('data-background-layout', currentSection.attr('data-layout'));
 
         // 找到当前动画
         actionList = currentSection.find('[data-action]');
@@ -242,6 +245,7 @@ function Player() {
         currentSection = $(sectionList[pageNum - 1]).addClass('current');
         prevSection = currentSection.prev().addClass('prev');
         nextSection = currentSection.next().addClass('next');
+        player.attr('data-background-layout', currentSection.attr('data-layout'));
 
         // 设置新动画
         actionList = currentSection.find('[data-action]');
