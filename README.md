@@ -139,6 +139,15 @@
 
 默认的主题样式可参考`/css/theme.css`
 
+另外，我们针对显示区域不是默认比例(4:3)的情况，提供了简单的屏幕背景的样式匹配方式，其依赖于`[data-design]`更上层的元素，所以css选择器处于更上层，命名有两个`[data-background-design]`和`[data-background-layout]`，分别匹配默认情况下的大背景样式和当前幻灯片处于某种布局时的大背景样式。代码示例如下(强烈建议只对其`background(-*)`属性进行修改)：
+
+    [data-background-design="summer"] {
+        background: white;
+    }
+    [data-background-layout="subtitle"] {
+        background: blue;
+    }
+
 ### 使用定义好的皮肤
 
 打开`/data/themes.js`，加入一行数据，比如：`{"key": "blue-summer", "title": "蓝色夏天"}`，同时，在`/css/theme/`下新建一个该皮肤的同名目录，并放入`logo.png`作为皮肤展示时的缩略图。然后在编辑器左侧边栏的“主题”面板下会看到这个主题的缩略图。点击该缩略图，即可应用主题。
