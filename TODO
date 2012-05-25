@@ -1,8 +1,8 @@
 
-undo/revert system
 widget system (photo/chart)
-plugin system (navigator/brush)
 resource system (photo)
+undo/revert system
+plugin system (navigator/brush)
 sortable page list
 
 action system
