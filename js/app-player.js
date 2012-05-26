@@ -64,15 +64,16 @@ function Player() {
     function parse(presentation) {
         var slides = presentation.slides;
         var defaultLayout = 'normal';
-        var theme = presentation.theme;
+        var design = presentation.design;
 
         that.notify('loadcss', defaultTransition);
 
-        root.empty().attr('data-design', theme);
-        player.attr('data-background-design', theme);
+        root.empty().attr('data-design', design);
+        player.attr('data-background-design', design);
 
         // 插入每一张幻灯片
         $.each(slides, function (i, slide) {
+            var items = slide.items;
             var section = $('<section></section>').appendTo(root);
 
             // 设置布局信息和切换动画的信息
@@ -92,15 +93,11 @@ function Player() {
             var content = section.find('.content');
 
             // 生成不同元素的html代码
-            var titleHtml = TextParser.txt2Html(slide.content.title || '');
-            var subtitleHtml = TextParser.txt2Html(slide.content.subtitle || '');
-            var subtitle2Html = TextParser.txt2Html(slide.content.subtitle2 || '');
-            var contentHtml = TextParser.txt2Html(slide.content.content || '');
-            var content2Html = TextParser.txt2Html(slide.content.content2 || '');
-
-            if (slide.content.slide) {
-                section.css('background-image', 'url(' + slide.content.slide + ')');
-            }
+            var titleHtml = TextParser.txt2Html(items.title.value || '');
+            var subtitleHtml = TextParser.txt2Html(items.subtitle.value || '');
+            var subtitle2Html = TextParser.txt2Html(items.subtitle2.value || '');
+            var contentHtml = TextParser.txt2Html(items.content.value || '');
+            var content2Html = TextParser.txt2Html(items.content2.value || '');
 
             titleHtml = '<div data-item="title">' + titleHtml + '</div>';
             subtitleHtml = '<div data-item="subtitle">' + subtitleHtml + '</div>';
@@ -119,17 +116,18 @@ function Player() {
             header.html(titleHtml);
             content.html(contentHtml);
 
-            // 设置幻灯片各元素的自定义样式
-            if (slide.style) {
-                $.each(slide.style, function (itemName, styles) {
-                    var item;
-                    if (itemName == 'slide') {
-                        item = section;
-                    }
-                    else {
-                        item = section.find('[data-item="' + itemName + '"]');
-                    }
-                    $.each(styles, function (key, value) {
+            // 设置幻灯片各元素的自定义样式和位置
+            $.each(items, function (name, itemData) {
+                var item;
+                if (name == 'slide') {
+                    item = section;
+                }
+                else {
+                    item = section.find('[data-item="' + name + '"]');
+                }
+
+                if (itemData.style) {
+                    $.each(itemData.style, function (key, value) {
                         if (key == '-ppt-size') {
                             if (value && value != 'normal') {
                                 item.addClass(value + '-font-size');
@@ -139,25 +137,14 @@ function Player() {
                             item.css(key, value);
                         }
                     });
-                });
-            }
+                }
 
-            // 设置幻灯片各元素的自定义位置
-            if (slide.position) {
-                $.each(slide.position, function (itemName, styles) {
-                    var item;
-                    if (itemName == 'slide') {
-                        item = section;
-                    }
-                    else {
-                        item = section.find('[data-item="' + itemName + '"]');
-                    }
-                    $.each(styles, function (key, value) {
+                if (itemData.position) {
+                    $.each(itemData.position, function (key, value) {
                         item.css(key, value);
                     });
-                });
-            }
-
+                }
+            });
         });
 
         // 初始化变量
