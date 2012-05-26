@@ -33,83 +33,54 @@ function Slide(mode) {
         @param {object} data
      */
     function setData(data) {
-        currentData = {
-            title: {style: {}, position: {}},
-            subtitle: {style: {}, position: {}},
-            subtitle2: {style: {}, position: {}},
-            content: {style: {}, position: {}},
-            content2: {style: {}, position: {}},
-            slide: {style: {}, position: {}}
-        };
-
-        $.each(data.content, function (key, value) {
-            currentData[key].content = value;
-        });
-        if (data.style) {
-            $.each(data.style, function (key, value) {
-                if (!currentData[key]) {
-                    return;
-                }
-                currentData[key].style = value;
-            });
-        }
-        if (data.position) {
-            $.each(data.position, function (key, value) {
-                if (!currentData[key]) {
-                    return;
-                }
-                currentData[key].position = value;
-            });
-        }
-
+        currentData = data;
         setLayout(data.layout);
-
-        $.each(itemMap, function (key, item) {
-            renderItem(key);
+        $.each(itemMap, function (name, element) {
+            renderItem(name);
         });
-    }
-
-    /**
-        设置幻灯片数据其中的一项
-        @param {stirng} key
-        @param {object} data
-     */
-    function setItem(key, data) {
-        currentData[key] = data;
-        renderItem(key);
     }
 
     /**
         设置幻灯片其中一项内容的文字
-        @param {string} key
-        @param {string} content
+        @param {string} name
+        @param {string} value
      */
-    function setContent(key, content) {
-        currentData[key].content = content;
-        renderItem(key);
+    function setValue(name, value) {
+        currentData.items[name].value = value;
+        renderItem(name);
     }
 
     /**
         设置幻灯片其中一项内容的样式
+        @param {string} name
         @param {string} key
-        @param {object} style
+        @param {string} value
      */
-    function setStyle(key, style) {
-        currentData[key].style[style.key] = style.value;
-        renderItem(key);
+    function setStyle(name, key, value) {
+        currentData.items[name].style[key] = value;
+        renderItem(name);
     }
 
     /**
         渲染幻灯片其中某一项的效果
-        @param {string} key
+        @param {string} name
      */
-    function renderItem(key) {
-        key = key || 'slide';
-        var item = itemMap[key];
-        var data = currentData[key];
-        var content = data.content;
-        var style = data.style;
-        var position = data.position;
+    function renderItem(name) {
+        name = name || 'slide';
+        var item = itemMap[name];
+        var itemData = currentData.items[name];
+        if (!itemData) {
+            itemData = {
+                value: '',
+                type: 'text',
+                style: {},
+                position: {}
+            };
+            currentData.items[name] = itemData;
+        }
+        var value = itemData.value;
+        var style = itemData.style;
+        var position = itemData.position;
 
         item[0].style.cssText = '';
         item.data('css-size', '');
@@ -127,20 +98,20 @@ function Slide(mode) {
             item.css(key, value);
         });
 
-        if (key != 'slide') {
-            renderText(item, content || INPUT_PLACEHOLDER);
+        if (name != 'slide') {
+            renderText(item, value || INPUT_PLACEHOLDER);
         }
     }
 
     /**
         渲染幻灯片其中某一项的文字内容
         @param {object} item
-        @param {string} content
+        @param {string} value
      */
-    function renderText(item, content) {
+    function renderText(item, value) {
         var size = item.data('css-size') || '';
 
-        item.html(TextParser.txt2P(content));
+        item.html(TextParser.txt2P(value));
         item.removeClass('small-font-size large-font-size');
 
         if (size && size != 'normal') {
@@ -175,35 +146,34 @@ function Slide(mode) {
         slide.attr('data-page', page);
     }
 
-    slide.click(function (e) {
+    slide.click(function () {
         that.notify('hover', '');
     })
-    $.each(itemMap, function (key, item) {
+    $.each(itemMap, function (name, item) {
         if (item == slide) {
             return;
         }
         item.dblclick(function () {
-            that.notify('focus', key);
+            that.notify('focus', name);
         }).doubleTap(function () {
-            that.notify('focus', key);
+            that.notify('focus', name);
         }).click(function (e) {
-            that.notify('hover', key);
+            that.notify('hover', name);
             e.stopPropagation();
         });
     });
 
     this.setData = setData;
 
-    this.setItem = setItem;
-    this.setContent = setContent;
+    this.setValue = setValue;
     this.setStyle = setStyle;
 
     this.setTheme = setTheme;
     this.setLayout = setLayout;
     this.setPage = setPage;
 
-    this.hover = function (e) {
-        var newHover = itemMap[e];
+    this.hover = function (name) {
+        var newHover = itemMap[name];
         if (currentHover) {
             currentHover.removeClass('hover');
         }

@@ -267,14 +267,20 @@ function DataHS1() {
     var draftName = 'ppt:draft';
 
     src.openDraft = function () {
+        var data = this.getLocal(draftName);
 
-        return this.getLocal(draftName);
+        if (data.format > this.format) {
+            return defaultData;
+        }
+
+        return data;
     };
 
     src.saveDraft = function () {
         var data = {
             theme: this.theme,
-            slides: this.slides
+            slides: this.slides,
+            format: 'hs_1_0'
         };
         this.setLocal(draftName, data);
     };

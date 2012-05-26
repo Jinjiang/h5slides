@@ -1,4 +1,4 @@
-/** Data HS1 Interface */
+/** Data HS2 Interface */
 
 
 
@@ -240,8 +240,18 @@ function DataHS2() {
     src.openDraft = function () {
         var data = this.getLocal(draftName);
 
-        if (!data.format || data.format < 'hs_2_0') {
+        if (!data) {
+            return null;
+        }
+
+        if (!data.format) {
             this.fromHS1(data);
+        }
+        else if (data.format < this.format) {
+            this.fromHS1(data);
+        }
+        else if (data.format > this.format) {
+            return defaultData;
         }
 
         return data;
@@ -254,7 +264,7 @@ function DataHS2() {
             slides: this.slides,
             format: 'hs_2_0'
         };
-        // this.setLocal(draftName, data);
+        this.setLocal(draftName, data);
     };
 
     src.delDraft = function () {

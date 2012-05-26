@@ -1,6 +1,7 @@
 /**
     @fileOverview
     插入图片对话框
+    // TODO for widget system
     @author Jinjiang<zhaojinjiang@yahoo.com.cn>
  */
 
@@ -22,19 +23,20 @@ function ImageDialog() {
 
     var that = this;
     var currentPage;
+    var currentName;
     var currentKey;
 
     function doPreview(value) {
         if (value) {
-            preview.css('background-image', 'url(' + value + ')');
+            preview.css(currentKey, 'url(' + value + ')');
         }
         else {
-            preview.css('background-image', 'none');
+            preview.css(currentKey, 'none');
         }
     }
 
-    this.show = function (page, key, value) {
-        if (!window.File || !window.FileReader || !window.data.fileSystem) {
+    this.show = function (page, name, key, value) {
+        if (true) { // TODO
             title.text('对不起，您的浏览器暂不支持添加图片或背景图片 :-(');
             preview.hide();
             input.hide();
@@ -44,6 +46,7 @@ function ImageDialog() {
         }
         else {
             currentPage = page;
+            currentName = name;
             currentKey = key;
             doPreview(value);
             input.val('');
@@ -57,19 +60,31 @@ function ImageDialog() {
         var file = input[0].files[0];
         var currentValue;
         if (file) {
-            window.data.setPicture(file, function (url) {
-                that.hide();
-                that.notify('image', {
-                    page: currentPage,
-                    key: currentKey,
-                    value: 'url(' + url + ')'
-                });
+            // window.data.setPicture(file, function (url) {
+            //     that.hide();
+            //     that.notify('image', {
+            //         page: currentPage,
+            //         name: currentName,
+            //         key: currentKey,
+            //         value: 'url(' + url + ')'
+            //     });
+            // });
+
+            // TODO
+
+            that.hide();
+            that.notify('image', {
+                page: currentPage,
+                name: currentName,
+                key: currentKey,
+                value: null
             });
         }
         else {
             that.hide();
             that.notify('image', {
                 page: currentPage,
+                name: currentName,
                 key: currentKey,
                 value: null
             });
@@ -77,10 +92,10 @@ function ImageDialog() {
     };
 
     input.bind('change', function (event) {
-        var file = this.files[0];
-        window.data.readFileData(file, function (result) {
-            doPreview(result);
-        });
+        // var file = this.files[0];
+        // window.data.readFileData(file, function (result) {
+        //     doPreview(result);
+        // });
     });
     btnOk.bind('click', function (event) {
         that.submit();

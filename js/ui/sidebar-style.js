@@ -27,7 +27,7 @@ function StylePanel() {
         content2: 'text'
     };
 
-    var currentData = {};
+    var currentStyle = {};
     var currentBlock;
     var currentType;
     var that = this;
@@ -35,23 +35,21 @@ function StylePanel() {
     /**
         初始化样式面板，根据项目类型选择要显示的样式设置项
         @param {string} type
-        @param {object} data
+        @param {object} style
         @param {object} target
      */
-    function init(type, data, target) {
+    function init(type, style, target) {
         var mode;
-        data = data || {};
-        data = data.style || {};
 
         if (target == currentBlock) {
             return;
         }
 
         currentBlock = target;
-        currentData = data;
+        currentStyle = style;
 
         setType(type);
-        setSize(currentData['-ppt-size']);
+        setSize(currentStyle['-ppt-size']);
     }
 
     /**
@@ -73,9 +71,9 @@ function StylePanel() {
      */
     function setSize(size) {
         size = size || 'normal';
-        currentData['-ppt-size'] = size;
+        currentStyle['-ppt-size'] = size;
         $.each(sizeBtnMap, function (size, btn) {
-            if (size == currentData['-ppt-size']) {
+            if (size == currentStyle['-ppt-size']) {
                 btn.addClass('checked');
             }
             else {
@@ -91,7 +89,7 @@ function StylePanel() {
         @param {string} value
      */
     function setValue(key, value) {
-        currentData[key] = value;
+        currentStyle[key] = value;
         if (key == '-ppt-size') {
             setSize(value);
         }

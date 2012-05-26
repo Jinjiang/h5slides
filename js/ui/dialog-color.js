@@ -149,27 +149,32 @@ function ColorDialog() {
     var that = this;
 
     var currentPage;
+    var currentName;
     var currentKey;
 
     function submit(color) {
         that.hide();
         that.notify('color', {
             page: currentPage,
+            name: currentName,
             key: currentKey,
             value: color
         });
     }
 
     $.each(COLOR_SET, function (color, croods) {
-        var area = $('<area shape="poly"></area>').attr('coords', croods).attr('alt', color);
-        area.appendTo(map);
-        area.click(function (e) {
-            result.css('background', color);
-            result.data('color', color);
-            submit(color);
-        }).bind('mouseover', function (e) {
-            result.css('background', color);
-        });
+        var area = $('<area shape="poly"></area>').
+                attr('coords', croods).
+                attr('alt', color).
+                appendTo(map).
+                click(function (e) {
+                    result.css('background', color);
+                    result.data('color', color);
+                    submit(color);
+                }).
+                bind('mouseover', function (e) {
+                    result.css('background', color);
+                });
     });
     map.bind('mouseout', function (e) {
         result.css('background', result.data('color'));
@@ -178,8 +183,9 @@ function ColorDialog() {
         submit('');
     });
 
-    that.show = function (page, key, value) {
+    that.show = function (page, name, key, value) {
         currentPage = page;
+        currentName = name,
         currentKey = key;
         result.css('background', value || '#000000');
         root.show().css('left', ($('body').width() - root.width()) / 2 + 'px');

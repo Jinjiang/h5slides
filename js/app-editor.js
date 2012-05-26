@@ -45,7 +45,7 @@ function Editor() {
         @param {object} data
      */
     function initData(data) {
-        window.data.theme = data.theme;
+        window.data.design = data.design;
         window.data.slides = data.slides;
         window.data.saveDraft();
 
@@ -68,8 +68,8 @@ function Editor() {
         layout.setCurrent(slideData.layout);
         slide.setLayout(slideData.layout);
 
-        themes.setCurrent(window.data.theme);
-        slide.setTheme(window.data.theme);
+        themes.setCurrent(window.data.design);
+        slide.setTheme(window.data.design);
 
         // 初始化主编辑区域
         slide.setPage(currentPage);
@@ -90,7 +90,7 @@ function Editor() {
             window.data.page = 1;
             window.data.name = '';
             window.data.title = '';
-            window.data.theme = '';
+            window.data.design = '';
             window.data.slides = [];
             initData(JSON.parse(JSON.stringify(defaultData)));
         }
@@ -170,9 +170,9 @@ function Editor() {
     // 主题面板事件：选择主题(theme)
     themes.bind(function (type, data) {
 
-        if (type == 'theme') {
+        if (type == 'design') {
             slide.setTheme(data);
-            window.data.theme = data;
+            window.data.design = data;
             themes.setCurrent(data);
         }
 
@@ -188,32 +188,35 @@ function Editor() {
     slide.bind(function (type, data) {
         var page = window.data.page;
         var slideData = window.data.get(page);
-        var value = slideData.content[data];
-        var target = $('#slide-' + data);
-        var inputType;
-        var styleData = {};
-
-        if (slideData.style) {
-            styleData.style = slideData.style[data];
+        var item = slideData.items[data];
+        if (!item) {
+            item = {
+                value: '',
+                type: 'text',
+                style: {},
+                position: {}
+            };
+            slideData.items[data] = item;
         }
+        var target = $('#slide-' + data);
+        var styleData = {};
 
         if (type == 'hover') {
             if (data == '') {
                 input.hide();
             }
             slide.hover(data);
-            stylePanel.init(data, styleData, target);
+            stylePanel.init(data, item.style, target);
         }
 
         if (type == 'focus') {
-            inputType = 'textarea';
-            input.init(value, target);
+            input.init(item.value, target);
 
-            stylePanel.init(data, styleData, target);
+            stylePanel.init(data, item.style, target);
         }
 
         return;
-        console.log('slide', inputType, data);
+        console.log('slide', type, data);
     });
 
     // 输入框弹出层事件：失焦(blur)、修改内容(title/content/...)
@@ -223,20 +226,20 @@ function Editor() {
             return;
         }
 
-        var key = type.replace('slide-', '');
+        var name = type.replace('slide-', '');
         var page = window.data.page;
 
-        window.data.setContent(page, key, data);
+        window.data.setValue(page, name, data);
 
-        if (key == 'title') {
+        if (name == 'title') {
             paginations.setTitle(page, data);
         }
 
-        slide.setContent(key, data);
+        slide.setValue(name, data);
 
         input.adjust();
 
-        if (page == 1 && key == 'title' && !window.data.title) {
+        if (page == 1 && name == 'title' && !window.data.title) {
             menu.setTitle(data);
         }
 
@@ -247,32 +250,36 @@ function Editor() {
     // 样式面板事件：修改样式(style)、弹出样式对话框(dialog)
     stylePanel.bind(function (type, data) {
         var page = window.data.page;
-        var id = data.type;
-        var style = {
-            key: data.key,
-            value: data.value
-        };
+        var name = data.type;
+        var key = data.key;
+        var value = data.value;
+        var style = {};
+
+        style[key] = value;
 
         if (type == 'style') {
-            stylePanel.setValue(style.key, style.value);
-            slide.setStyle(id, style);
-            window.data.setStyle(page, id, style);
+            stylePanel.setValue(key, value);
+            slide.setStyle(name, key, value);
+            window.data.setStyle(page, name, style);
         }
-        if (type == 'dialog') {
+        else if (type == 'dialog') {
             var slideData = window.data.get(page);
-            if (data.key == 'color') {
-                if (slideData.style && slideData.style[id]) {
-                    style.value = slideData.style[id].color;
-                }
-                maskLayer.show();
-                colorDialog.show(page, id, style.value);
+            var item = slideData.items[name];
+
+            if (item.style) {
+                value = item.style[key];
             }
-            else if (data.key == 'image') {
-                if (slideData.content && slideData.content.slide) {
-                    style.value = slideData.content.slide;
-                }
+            else {
+                value = null;
+            }
+
+            if (key == 'color') {
                 maskLayer.show();
-                imageDialog.show(page, 'slide', style.value);
+                colorDialog.show(page, name, key, value);
+            }
+            else if (key == 'background-image') {
+                maskLayer.show();
+                imageDialog.show(page, name, key, value);
             }
         }
     });
@@ -280,51 +287,71 @@ function Editor() {
     // 块级元素浮动层事件：修改样式(style)、弹出样式对话框(dialog)
     blockBar.bind(function (type, data) {
         var page = window.data.page;
-        var id = data.type;
-        var style = {
-            key: data.key,
-            value: data.value
-        };
+        var name = data.type;
+        var key = data.key;
+        var value = data.value;
+        var style = {};
+
+        style[key] = value;
 
         if (type == 'style') {
-            stylePanel.setValue(style.key, style.value);
-            slide.setStyle(id, style);
-            window.data.setStyle(page, id, style);
+            stylePanel.setValue(key, value);
+            slide.setStyle(name, key, value);
+            window.data.setStyle(page, name, style);
         }
-        if (type == 'dialog') {
+        else if (type == 'dialog') {
             var slideData = window.data.get(page);
-            if (data.key == 'color') {
-                if (slideData.style && slideData.style[id]) {
-                    style.value = slideData.style[id].color;
-                }
-                maskLayer.show();
-                colorDialog.show(page, id, style.value);
+            var item = slideData.items[name];
+
+            if (item.style) {
+                value = item.style[key];
             }
-            else if (data.key == 'image') {
-                if (slideData.content && slideData.content.slide) {
-                    style.value = slideData.content.slide;
-                }
+            else {
+                value = null;
+            }
+
+            if (key == 'color') {
                 maskLayer.show();
-                imageDialog.show(page, 'slide', style.value);
+                colorDialog.show(page, name, key, value);
+            }
+            else if (key == 'background-image') {
+                maskLayer.show();
+                imageDialog.show(page, name, key, value);
             }
         }
     });
 
     // 调色板浮动层样式：修改颜色(color)
     colorDialog.bind(function (type, data) {
+        var page = data.page;
+        var name = data.name;
+        var key = data.key;
+        var value = data.value;
+        var style = {};
+
+        style[key] = value;
+
         maskLayer.hide();
-        slide.setStyle(data.key, {key: 'color', value: data.value});
-        window.data.setStyle(data.page, data.key, {key: 'color', value: data.value});
+        slide.setStyle(name, key, value);
+        window.data.setStyle(page, name, style);
     });
 
     // 插入图片浮动层样式：设置图片(image)
     imageDialog.bind(function (type, data) {
+        var page = data.page;
+        var name = data.name;
+        var key = data.key;
+        var value = data.value;
+        var style = {};
+
+        style[key] = value;
+
         maskLayer.hide();
         if (!data) {
             return;
         }
-        slide.setStyle(data.key, {key: 'background-image', value: data.value});
-        window.data.setStyle(data.page, data.key, {key: 'background-image', value: data.value});
+        slide.setStyle(name, key, value);
+        window.data.setStyle(page, name, style);
     });
 
     that.init = init;
