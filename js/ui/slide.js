@@ -85,37 +85,27 @@ function Slide(mode) {
         item[0].style.cssText = '';
         item.data('css-size', '');
 
-        $.each(style, function (key, value) {
-            if (key.match(/^-ppt-/)) {
-                item.data(key.replace('-ppt-', 'css-'), value);
-            }
-            else {
-                item.css(key, value);
-            }
-        });
+        if (style) {
+            $.each(style, function (key, value) {
+                if (key.match(/^-ppt-/)) {
+                    item.data(key.replace('-ppt-', 'css-'), value);
+                }
+                else {
+                    item.css(key, value);
+                }
+            });
+        }
 
-        $.each(position, function (key, value) {
-            item.css(key, value);
-        });
+        if (position) {
+            $.each(position, function (key, value) {
+                item.css(key, value);
+            });
+        }
 
         if (name != 'slide') {
-            renderText(item, value || INPUT_PLACEHOLDER);
-        }
-    }
-
-    /**
-        渲染幻灯片其中某一项的文字内容
-        @param {object} item
-        @param {string} value
-     */
-    function renderText(item, value) {
-        var size = item.data('css-size') || '';
-
-        item.html(TextParser.txt2P(value));
-        item.removeClass('small-font-size large-font-size');
-
-        if (size && size != 'normal') {
-            item.addClass(size + '-font-size');
+            // widget.load(itemData.type, function () {
+                widget[itemData.type || 'text'].render(item, itemData);
+            // });
         }
     }
 

@@ -93,11 +93,11 @@ function Player() {
             var content = section.find('.content');
 
             // 生成不同元素的html代码
-            var titleHtml = TextParser.txt2Html(items.title.value || '');
-            var subtitleHtml = TextParser.txt2Html(items.subtitle.value || '');
-            var subtitle2Html = TextParser.txt2Html(items.subtitle2.value || '');
-            var contentHtml = TextParser.txt2Html(items.content.value || '');
-            var content2Html = TextParser.txt2Html(items.content2.value || '');
+            var titleHtml = TextParser.txt2Html(items.title ? items.title.value || '' : '');
+            var subtitleHtml = TextParser.txt2Html(items.subtitle ? items.subtitle.value || '' : '');
+            var subtitle2Html = TextParser.txt2Html(items.subtitle2 ? items.subtitle2.value || '' : '');
+            var contentHtml = TextParser.txt2Html(items.content ? items.content.value || '' : '');
+            var content2Html = TextParser.txt2Html(items.content2 ? items.content2.value || '' : '');
 
             titleHtml = '<div data-item="title">' + titleHtml + '</div>';
             subtitleHtml = '<div data-item="subtitle">' + subtitleHtml + '</div>';

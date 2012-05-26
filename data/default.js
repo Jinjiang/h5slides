@@ -1,5 +1,48 @@
 var defaultData = {
     "format": "hs_2_0",
+    "design": "blank",
+    "slides": [
+        {
+            "layout": "title",
+            "items": {
+                "title": {
+                    "value": "标题"
+                },
+                "content": {
+                    "value": "你的名字"
+                }
+            }
+        },
+        {
+            "layout": "normal",
+            "items": {
+                "title": {
+                    "value": "正文标题"
+                },
+                "content": {
+                    "value": "这里可以记录\n多行文本"
+                }
+            }
+        },
+        {
+            "layout": "subtitle",
+            "items": {
+                "title": {
+                    "value": "THE END"
+                },
+                "content": {
+                    "value": "谢谢"
+                }
+            }
+        }
+    ]
+
+};
+
+
+
+var defaultData2 = {
+    "format": "hs_2_0",
 
     "design": "blank",
     "transition": "horizontal",
@@ -49,7 +92,7 @@ var defaultData = {
                     "position": {
                         "left": "400px",
                         "top": "100px"
-                    },
+                    }
 
                 }
 
