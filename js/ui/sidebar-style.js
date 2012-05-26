@@ -46,7 +46,7 @@ function StylePanel() {
         }
 
         currentBlock = target;
-        currentStyle = style;
+        currentStyle = style || {};
 
         setType(type);
         setSize(currentStyle['-ppt-size']);

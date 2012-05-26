@@ -57,7 +57,15 @@ function Slide(mode) {
         @param {string} value
      */
     function setStyle(name, key, value) {
-        currentData.items[name].style[key] = value;
+        var item = currentData.items[name];
+        if (!item) {
+            item = {style: {}};
+            currentData.items[name] = item;
+        }
+        if (!item.style) {
+            item.style = {};
+        }
+        item.style[key] = value;
         renderItem(name);
     }
 
