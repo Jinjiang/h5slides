@@ -103,9 +103,28 @@ function Slide(mode) {
         }
 
         if (name != 'slide') {
-            // widget.load(itemData.type, function () {
+            if (!itemData.value) {
+                if (name.substr(0, 7) == 'content') {
+                    item.html('<button data-type="text">添加文字</button> ' +
+                        '<button data-type="img">添加图片</button>');
+                    item.find('[data-type="text"]').click(function (e) {
+                        itemData.type = 'text';
+                        that.notify('focus', name);
+                        e.stopPropagation();
+                    });
+                    item.find('[data-type="img"]').click(function (e) {
+                        itemData.type = 'img';
+                        that.notify('focus', name);
+                        e.stopPropagation();
+                    });
+                }
+                else {
+                    item.html('请输入文字');
+                }
+            }
+            else {
                 widget[itemData.type || 'text'].render(item, itemData);
-            // });
+            }
         }
     }
 
@@ -157,6 +176,7 @@ function Slide(mode) {
 
     this.setValue = setValue;
     this.setStyle = setStyle;
+    this.render = renderItem;
 
     this.setTheme = setTheme;
     this.setLayout = setLayout;

@@ -92,18 +92,11 @@ function Player() {
             var header = section.find('.header');
             var content = section.find('.content');
 
-            // 生成不同元素的html代码
-            var titleHtml = TextParser.txt2Html(items.title ? items.title.value || '' : '');
-            var subtitleHtml = TextParser.txt2Html(items.subtitle ? items.subtitle.value || '' : '');
-            var subtitle2Html = TextParser.txt2Html(items.subtitle2 ? items.subtitle2.value || '' : '');
-            var contentHtml = TextParser.txt2Html(items.content ? items.content.value || '' : '');
-            var content2Html = TextParser.txt2Html(items.content2 ? items.content2.value || '' : '');
-
-            titleHtml = '<div data-item="title">' + titleHtml + '</div>';
-            subtitleHtml = '<div data-item="subtitle">' + subtitleHtml + '</div>';
-            subtitle2Html = '<div data-item="subtitle2">' + subtitle2Html + '</div>';
-            contentHtml = '<div data-item="content">' + contentHtml + '</div>';
-            content2Html = '<div data-item="content2">' + content2Html + '</div>';
+            var titleHtml = '<div data-item="title"></div>';
+            var subtitleHtml = '<div data-item="subtitle"></div>';
+            var subtitle2Html = '<div data-item="subtitle2"></div>';
+            var contentHtml = '<div data-item="content"></div>';
+            var content2Html = '<div data-item="content2"></div>';
 
             // 根据不同的布局拼凑不同的html代码
             if (layout == 'double') {
@@ -115,6 +108,12 @@ function Player() {
 
             header.html(titleHtml);
             content.html(contentHtml);
+
+            widget.text.render(header.find('[data-item="title"]'), items.title);
+            widget.text.render(content.find('[data-item="subtitle"]'), items.subtitle);
+            widget.text.render(content.find('[data-item="subtitle2"]'), items.subtitle2);
+            widget[items.content.type || 'text'].render(content.find('[data-item="content"]'), items.content);
+            widget[(items.content2 ? items.content2.type : '') || 'text'].render(content.find('[data-item="content2"]'), items.content2);
 
             // 设置幻灯片各元素的自定义样式和位置
             $.each(items, function (name, itemData) {

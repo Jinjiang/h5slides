@@ -62,7 +62,7 @@ function InputLayer() {
 
     $('body').bind('mousedown', blurFileInput);
     
-    this.init = function (value, target) {
+    this.init = function (value, target, handler) {
         changeValue(value);
         changeBox(target);
         root.show();

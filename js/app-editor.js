@@ -124,7 +124,7 @@ function Editor() {
                 window.data.page = page - 1;
             }
             if (data == 'add') {
-                slideData = {layout: 'normal', content: {}};
+                slideData = {layout: 'normal', items: {}};
                 window.data.add(page, slideData);
                 paginations.add(page, '');
                 window.data.page = page + 1;
@@ -200,6 +200,7 @@ function Editor() {
         }
         var target = $('#slide-' + data);
         var styleData = {};
+        var widgetType = item.type;
 
         if (type == 'hover') {
             if (data == '') {
@@ -210,9 +211,17 @@ function Editor() {
         }
 
         if (type == 'focus') {
-            input.init(item.value, target);
-
-            stylePanel.init(data, item.style, target);
+            if (!widgetType || widgetType == 'text') {
+                input.init(item.value, target);
+                stylePanel.init(data, item.style, target);
+            }
+            else if (widgetType == 'img') {
+                slide.hover(data);
+                widget.img.edit(page, data, function () {
+                    var slideData = window.data.get(page);
+                    slide.render(data);
+                });
+            }
         }
 
         return;

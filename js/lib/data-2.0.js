@@ -150,11 +150,14 @@ function DataHS2() {
         slideData.items[name].value = value;
         this.saveDraft();
     };
-    item.setPosition = function (page, name, style) {
+    item.setPosition = function (page, name, position) {
         var index = page - 1;
         var slideData = this.slides[index];
 
-        $.each(style, function (key, value) {
+        if (!slideData.items[name].position) {
+            slideData.items[name].position = {};
+        }
+        $.each(position, function (key, value) {
             slideData.items[name].position.key = value;
         });
         this.saveDraft();
@@ -163,6 +166,9 @@ function DataHS2() {
         var index = page - 1;
         var slideData = this.slides[index];
 
+        if (!slideData.items[name].style) {
+            slideData.items[name].style = {};
+        }
         $.each(style, function (key, value) {
             slideData.items[name].style.key = value;
         });
@@ -180,6 +186,9 @@ function DataHS2() {
         var index = page - 1;
         var slideData = this.slides[index];
 
+        if (!slideData.items[name].config) {
+            slideData.items[name].config = {};
+        }
         $.each(config, function (key, value) {
             slideData.items[name].config[key] = value;
         });

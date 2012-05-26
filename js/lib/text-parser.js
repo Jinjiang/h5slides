@@ -10,6 +10,7 @@ var TextParser = {};
     & < > -> &...;
  */
 TextParser.txt2Html = function (txt) {
+    txt = txt.toString();
     txt = txt.replace(/\&/ig, '&amp;').
             replace(/\</ig, '&lt;').
             replace(/\>/ig, '&gt;').
@@ -24,6 +25,7 @@ TextParser.txt2Html = function (txt) {
     \n\n -> <p>
  */
 TextParser.txt2P = function (txt) {
+    txt = txt.toString();
     var list = txt.split('\n');
     $.each(list, function (index, line) {
         list[index] = TextParser.txt2Html(line);
@@ -35,6 +37,7 @@ TextParser.txt2P = function (txt) {
     ul > li > ul > li ...
  */
 TextParser.txt2Ul = function (txt) {
+    txt = txt.toString();
     var list = txt.split('\n');
     $.each(list, function (index, line) {
         list[index] = TextParser.txt2Html(line);
@@ -46,6 +49,7 @@ TextParser.txt2Ul = function (txt) {
     ol > li > ol > li ...
  */
 TextParser.txt2Ol = function (txt) {
+    txt = txt.toString();
     var list = txt.split('\n');
     $.each(list, function (index, line) {
         list[index] = TextParser.txt2Html(line);
@@ -57,6 +61,7 @@ TextParser.txt2Ol = function (txt) {
     <pre>
  */
 TextParser.txt2Code = function (txt) {
+    txt = txt.toString();
     var list = txt.split('\n');
     $.each(list, function (index, line) {
         list[index] = TextParser.txt2Html(line);
@@ -68,6 +73,7 @@ TextParser.txt2Code = function (txt) {
     convert http/https/email address to link
  */
 TextParser.txt2Link = function (txt) {
+    txt = txt.toString();
     return txt.replace(/([a-z]+:\/\/[^\s]*)/ig, '<a href="$1" target="_blank">$1</a>');
 }
 
