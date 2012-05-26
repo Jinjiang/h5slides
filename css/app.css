@@ -584,7 +584,8 @@
         margin: 1em 2em;
         height: 1em;
     }
-    #dialog-for-image-preview {
+    #dialog-for-image-preview,
+    #dialog-for-img-preview {
         background-size: contain;
         height: 200px;
         background-position: center center;

@@ -14,12 +14,24 @@ widget.img = {
         var itemData = slideData.items[name];
 
         var oldSrc = itemData.config ? itemData.config.src : '';
-        var newSrc = prompt('请输入图片的URL', oldSrc || '');
 
-        window.data.setValue(page, name, !!newSrc);
-        window.data.setType(page, name, 'img');
-        window.data.setConfig(page, name, {src: newSrc});
+        if (!this.dialog) {
+            this.dialog = new ImgDialog();
+        }
 
-        handler && handler();
+        var dialog = this.dialog;
+
+        dialog.show(oldSrc);
+        dialog.bind(function (type, data) {
+
+            var newSrc = data;
+            if (typeof data == 'string') {
+                window.data.setValue(page, name, !!newSrc);
+                window.data.setType(page, name, 'img');
+                window.data.setConfig(page, name, {src: newSrc});
+
+                handler && handler();
+            }
+        });
     }
 };
