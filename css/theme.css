@@ -9,6 +9,17 @@
 
 /***** General *****/
 
+[data-background-design] {
+    background-color: white;
+}
+
+[data-design] {
+    color: black;
+    background: white none no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
 [data-item] {
     opacity: 0;
     position: absolute;

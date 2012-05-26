@@ -6,13 +6,3 @@
  */
 
 
-[data-background-design="blank"] {
-    background-color: white;
-}
-
-[data-design="blank"] {
-    color: black;
-    background: white none no-repeat;
-    background-size: cover;
-    background-position: center center;
-}
