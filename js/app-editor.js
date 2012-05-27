@@ -30,7 +30,7 @@ function Editor() {
     /**
         初始化界面
      */
-    function init() {
+    function init(handler) {
         var cache = window.data.openDraft();
         if (cache) {
             initData(cache);
@@ -38,6 +38,7 @@ function Editor() {
         else {
             initData(JSON.parse(JSON.stringify(defaultData)));
         }
+        handler && handler();
     }
 
     /**

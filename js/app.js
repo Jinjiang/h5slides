@@ -29,7 +29,13 @@ player.bind(function (type, data) {
     }
 });
 
-editor.init();
+function checkPlay() {
+    if (location.hash == '#play') {
+        player.play(window.data);
+    }
+}
+
+editor.init(checkPlay);
 
 
 
