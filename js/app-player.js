@@ -174,7 +174,7 @@ function Player() {
         currentSection = $(sectionList[pageNum - 1]).addClass('current');
         prevSection = currentSection.prev().addClass('prev');
         nextSection = currentSection.next().addClass('next');
-        player.attr('data-background-layout', currentSection.attr('data-layout'));
+        player.attr('data-background-layout', player.attr('data-background-design') + '_' + currentSection.attr('data-layout'));
 
         // 找到当前动画
         actionList = currentSection.find('[data-action]');
@@ -231,7 +231,7 @@ function Player() {
         currentSection = $(sectionList[pageNum - 1]).addClass('current');
         prevSection = currentSection.prev().addClass('prev');
         nextSection = currentSection.next().addClass('next');
-        player.attr('data-background-layout', currentSection.attr('data-layout'));
+        player.attr('data-background-layout', player.attr('data-background-design') + '_' + currentSection.attr('data-layout'));
 
         // 设置新动画
         actionList = currentSection.find('[data-action]');

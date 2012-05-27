@@ -140,7 +140,10 @@ function Slide(mode) {
         设置主题
      */
     function setTheme(design) {
+        var layout = slide.attr('data-layout');
         preview.attr('data-design', design);
+        root.attr('data-background-design', design);
+        root.attr('data-background-layout', design + '_' + layout);
     }
 
     /**
@@ -154,6 +157,8 @@ function Slide(mode) {
             }, 500);
         }
         slide.attr('data-layout', layout);
+        var design = root.attr('data-background-design');
+        root.attr('data-background-layout', design + '_' + layout);
     }
 
     /**

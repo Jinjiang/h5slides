@@ -436,10 +436,8 @@
 /***** Editor Main *****/
 
     #main {
-        background: white none no-repeat;
         background-size: cover;
         background-position: center center;
-        color: black;
         outline: 3px black solid;
         box-shadow: 2px 2px 2px solid;
     }
@@ -459,9 +457,6 @@
     #slide-content2 {
         display: block;
         border: 1px gray dashed;
-        margin: 0;
-        padding: 0;
-        border-radius: 2px;
     }
     #preview #slide-title:hover,
     #preview #slide-subtitle:hover,
@@ -657,8 +652,11 @@
         -ms-perspective: 300px;
         -o-perspective: 300px;
         perspective: 300px;
-        -webkit-transform-origin: center center;
-        -moz-transform-origin: center 0; /* 存在兼容性问题 */
+        -webkit-transform-origin: center 0;
+        -moz-transform-origin: center 0;
+        -ms-transform-origin: center 0;
+        -o-transform-origin: center 0;
+        transform-origin: center 0;
     }
 
 

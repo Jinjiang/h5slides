@@ -171,9 +171,9 @@ function Editor() {
     // 主题面板事件：选择主题(theme)
     themes.bind(function (type, data) {
 
-        if (type == 'design') {
+        if (type == 'theme') {
             slide.setTheme(data);
-            window.data.design = data;
+            window.data.setDesign(data);
             themes.setCurrent(data);
         }
 

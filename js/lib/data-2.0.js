@@ -45,6 +45,20 @@ function DataHS2() {
 
 
 (function () {
+    var core = {};
+
+    core.setDesign = function (design) {
+        this.design = design;
+        this.saveDraft();
+    };
+
+    $.extend(DataHS2.prototype, core);
+})();
+
+
+
+
+(function () {
     var list = {};
 
     list.add = function (page, slideData) {
