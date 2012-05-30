@@ -21,7 +21,6 @@ function Editor() {
     var stylePanel = new StylePanel();
     var slide = new Slide('editor');
     var input = new InputLayer();
-    var blockBar = new BlockLayer();
     var maskLayer = new MaskLayer();
     var colorDialog = new ColorDialog();
     var imageDialog = new ImageDialog();
@@ -259,43 +258,6 @@ function Editor() {
 
     // 样式面板事件：修改样式(style)、弹出样式对话框(dialog)
     stylePanel.bind(function (type, data) {
-        var page = window.data.page;
-        var name = data.type;
-        var key = data.key;
-        var value = data.value;
-        var style = {};
-
-        style[key] = value;
-
-        if (type == 'style') {
-            stylePanel.setValue(key, value);
-            slide.setStyle(name, key, value);
-            window.data.setStyle(page, name, style);
-        }
-        else if (type == 'dialog') {
-            var slideData = window.data.get(page);
-            var item = slideData.items[name];
-
-            if (item.style) {
-                value = item.style[key];
-            }
-            else {
-                value = null;
-            }
-
-            if (key == 'color') {
-                maskLayer.show();
-                colorDialog.show(page, name, key, value);
-            }
-            else if (key == 'background-image') {
-                maskLayer.show();
-                imageDialog.show(page, name, key, value);
-            }
-        }
-    });
-
-    // 块级元素浮动层事件：修改样式(style)、弹出样式对话框(dialog)
-    blockBar.bind(function (type, data) {
         var page = window.data.page;
         var name = data.type;
         var key = data.key;
