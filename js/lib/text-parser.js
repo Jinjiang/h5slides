@@ -15,6 +15,7 @@ TextParser.txt2Html = function (txt) {
             replace(/\</ig, '&lt;').
             replace(/\>/ig, '&gt;').
             replace(/ /ig, '&nbsp;').
+            replace(/\n/ig, '<br />').
             replace(/\t/ig, '&nbsp;&nbsp;&nbsp;&nbsp;');
     txt = TextParser.txt2Link(txt);
     return txt;
