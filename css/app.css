@@ -154,7 +154,7 @@
         padding: 0 0 0 20px;
     }
 
-    #menu-title {
+    #main-title {
         color: #999999;
         cursor: pointer;
         border: 1px gray dotted;
@@ -162,11 +162,11 @@
         padding: 3px 5px;
     }
 
-    #menu-title.customized {
+    #main-title.empty {
         color: #999999;
     }
 
-    #menu-title:hover {
+    #main-title:hover {
 
         color: white;
         border-color: #ffffff;

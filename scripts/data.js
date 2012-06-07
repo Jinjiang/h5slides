@@ -5,6 +5,8 @@ define(['data/slide'], function (Slide) {
     var currentTitle = '';
     var slideList = [];
 
+    slideList.push(new Slide);
+
     data.getTitle = function () {
         return currentTitle;
     };
@@ -14,8 +16,8 @@ define(['data/slide'], function (Slide) {
         data.onchange && data.onchange();
     };
 
-    date.getTheme = function () {
-        return currentTheme;
+    data.getTheme = function () {
+        return currentTheme || 'blank';
     };
     data.setTheme = function (theme) {
         theme = theme || '';
@@ -28,6 +30,7 @@ define(['data/slide'], function (Slide) {
         var index = page - 1;
         slideList.splice(index + 1, 0, slide);
         data.onchange && data.onchange();
+        return slide;
     };
     data.del = function (page) {
         var index = page - 1;
@@ -66,6 +69,9 @@ define(['data/slide'], function (Slide) {
             var slide = new Slide(slideData);
             slideList.push(slide);
         });
+        if (slideList.length === 0) {
+            slideList.push(new Slide());
+        }
     };
     data.toJSON = function () {
         var jsonData = {

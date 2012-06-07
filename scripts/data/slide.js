@@ -5,7 +5,8 @@ define(['data/item'], function (Item) {
             content: true,
             content2: true,
             subtitle: true,
-            subtitle2: true
+            subtitle2: true,
+            slide: true
         };
 
         var items = {};
@@ -44,6 +45,11 @@ define(['data/item'], function (Item) {
                 }
             }
             return extraNameList;
+        };
+
+        this.getTitle = function () {
+            var titleItem = this.getItem('title');
+            return titleItem.getValue() || '';
         };
 
         this.fromJSON = function (jsonData) {

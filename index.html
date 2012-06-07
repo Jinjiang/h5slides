@@ -105,11 +105,11 @@
 
     </div>
     <div id="menu-info">
-        演示名称：<span id="menu-title">untitled</span>
+        演示名称：<span id="main-title">untitled</span>
     </div>
     <div id="main">
 
-        <div id="preview" data-design="blank">
+        <div id="preview" data-theme="blank">
             <div id="slide" data-layout="normal" data-page="1">
                 <div id="slide-title" data-item="title">
                     <!-- template: 标题 -->
@@ -129,47 +129,15 @@
             </div>
         </div>
 
-        <div id="layer-for-input" data-type="text" class="layer">
-            <textarea id="layer-for-input-textarea"></textarea>
-        </div>
-
     </div>
 
     <div id="layer-container">
 
-        <div id="layer-for-mask" class="mask">
-        </div>
-
-        <!--div id="bar-for-slide" class="bar">
-            <img id="bar-for-block-btn-image-dialog" class="dialog" data-key="image" title="幻灯片背景" src="images/nav-image.png" />
-        </div-->
-
-        <div id="dialog-for-color" class="dialog">
-            <strong>请在此选择颜色</strong><br /><br />
-            <img src="images/colormap.gif" usemap="#colormap" alt="colormap">
-            <map id="dialog-for-color-map" name="colormap">
-            </map>
-            <div id="dialog-for-color-result"></div>
-            <button id="dialog-for-color-btn-default">使用默认色</button>
-        </div>
-
-        <div id="dialog-for-image" class="dialog">
-            <p><strong id="dialog-for-image-title">请在此选择图片</strong></p>
-            <p><input type="file" id="dialog-for-image-input" /></p>
-            <div id="dialog-for-image-preview"></div>
-            <p><button id="dialog-for-image-btn-ok">确定更改</button>
-                <button id="dialog-for-image-btn-clear">清除图片</button>
-                <button id="dialog-for-image-btn-cancel">放弃修改</button></p>
-        </div>
-
-        <div id="dialog-for-img" class="dialog">
-            <p><strong id="dialog-for-img-title">请在此选择图片</strong></p>
-            <p><input id="dialog-for-img-input" /></p>
-            <div id="dialog-for-img-preview"></div>
-            <p><button id="dialog-for-img-btn-ok">确定更改</button>
-                <button id="dialog-for-img-btn-clear">清除图片</button>
-                <button id="dialog-for-img-btn-cancel">放弃修改</button></p>
-        </div>
+        <div id="item-layer" class="layer"></div>
+        <div id="adjust-layer" class="layer"></div>
+        <div id="type-layer" class="layer"></div>
+        <div id="mask-layer" class="layer"></div>
+        <div id="dialog-layer" class="layer"></div>
 
     </div>
 

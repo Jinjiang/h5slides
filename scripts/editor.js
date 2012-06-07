@@ -1,55 +1,63 @@
-define(['data',
+define(['lib/zepto', 'data',
     'editor/title', 'editor/theme',
     'editor/page', 'editor/layout',
     'editor/item', 'editor/preview',
     'editor/dialog', 'editor/layer',
-    'editor/type', 'editor/adjust'
+    'editor/type', 'editor/adjust',
+    'editor/resize'
 ], function (
-    data, titleMod, themeMod, pageMod, layoutMod, itemMod,
-    previewMod, dialogMod, layerMod, typeMod, adjustMod
+    $, data, titleMod, themeMod, pageMod, layoutMod, itemMod,
+    previewMod, dialogMod, layerMod, typeMod, adjustMod, resizeMod
 ) {
     var currentPage = 1;
     var currentName = '';
 
     function init() {
-        console.log('init editor');
+        $('#splash').css('top', '-100%').css('bottom', '100%');
     }
 
     function load() {
-        dialogMod.hide();
+        /*dialogMod.hide();
         layerMod.hide();
         typeMod.hide();
-        adjustMod.hide();
+        adjustMod.hide();*/
 
-        var currentSlide = data.getSlide(currentPage);
+        var currentSlide = data.get(currentPage);
 
-        titleMod.update();
-        themeMod.update();
-        pageMod.update(currentPage);
-        layoutMod.update(currentSlide.getLayout());
-        itemMod.update(currentPage, '');
+        titleMod.update(data.getTitle());
+        themeMod.update(data.getTheme());
+        layoutMod.update(currentPage, currentSlide.getLayout());
+        pageMod.build();
+        pageMod.updateCurrent(currentPage);
+        /*itemMod.update(currentPage, '');*/
         previewMod.updateTheme(data.getTheme());
-        previewMod.updateSlide(currentSlide);
+        previewMod.updateSlide(currentPage, currentSlide);
         previewMod.focus('');
+
+        console.log('load', currentPage, currentSlide);
     }
 
     themeMod.onthemechange = function (theme) {
         preview.updateTheme(theme);
-    };
-    pageMod.onpagechange = function (page) {
-        dialogMod.hide();
-        layerMod.hide();
-        typeMod.hide();
-        adjustMod.hide();
-
-        currentPage = page;
-        currentName = '';
-        var currentSlide = data.getSlide(currentPage);
-        previewMod.updateSlide(currentSlide);
-        previewMod.focus();
+        console.log('onthemechange', theme);
     };
     layoutMod.onlayoutchange = function (layout) {
         previewMod.updateLayout(layout);
+        console.log('onlayoutchange', layout);
+    };
+    pageMod.onpagechange = function (page) {
+        // dialogMod.hide();
+        // layerMod.hide();
+        // typeMod.hide();
+        // adjustMod.hide();
+
+        currentPage = page;
+        currentName = '';
+        var currentSlide = data.get(currentPage);
+        layoutMod.update(currentPage, currentSlide.getLayout());
+        previewMod.updateSlide(currentPage, currentSlide);
+        previewMod.focus();
+        console.log('onpagechange', currentPage, currentSlide);
     };
     itemMod.onpropchange = function (prop, value) {
         if (prop.match(/^-val-/)) {
@@ -70,24 +78,27 @@ define(['data',
 
     previewMod.onselect = function (name) {
         currentName = name;
-        typeMod.update(currentName);
-        typeMod.show(currentName);
+        // typeMod.update(currentName);
+        // typeMod.show(currentName);
+        console.log('onselect', name);
     };
     previewMod.onpopupdialog = function (name, type) {
         if (currentName != name) {
             typeMod.update(currentName);
             typeMod.show(currentName);
         }
-        dialogMod.setType(type);
-        dialogMod.update(currentPage, currentName, '-val-' + type);
+        // dialogMod.setType(type);
+        // dialogMod.update(currentPage, currentName, '-val-' + type);
+        console.log('onpopuplayer', name, type);
     };
     previewMod.ondisplaylayer = function (name, type) {
         if (currentName != name) {
-            typeMod.update(currentName);
-            typeMod.show(currentName);
+            // typeMod.update(currentName);
+            // typeMod.show(currentName);
         }
-        layerMod.setType(type);
-        layerMod.update(currentPage, currentName);
+        // layerMod.setType(type);
+        // layerMod.update(currentPage, currentName);
+        console.log('ondisplaylayer', name, type);
     };
 
     dialogMod.onsubmit = function (prop, value) {
@@ -120,10 +131,10 @@ define(['data',
         previewMod.updateItem(currentName);
     };
     adjustMod.onmove = function (offset) {
-        previewMod.updatePosition(offset);
+        previewMod.updatePosition(currentName, offset);
     };
     adjustMod.onresize = function (offset) {
-        previewMod.updatePosition(offset);
+        previewMod.updatePosition(currentName, offset);
     };
 
     return {
