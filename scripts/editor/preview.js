@@ -1,4 +1,6 @@
-define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager) {
+define(['lib/zepto', 'data',
+    'editor/widget', 'editor/dialog', 'editor/layer'
+], function ($, data, widgetManager, dialogMod, layerMod) {
     var preview = $('#preview');
     var slide = $('#slide');
 
@@ -75,18 +77,26 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
         mod.onselect && mod.onselect(currentName);
     }
     function edit(name) {
+        focus(name);
         var itemData = data.get(currentPage).getItem(name);
         var type = itemData.getType();
         var editorConfig = widgetManager.getEditorConfig(type);
-        if (!editorConfig) {
+        if (!editorConfig || !editorConfig.display) {
             console.log('no editor for', type, name);
             return;
         }
-        if (editorConfig.display === 'dialog') {
-            mod.onpopupdialog && mod.onpopupdialog(currentName, editorConfig.dialog);
+        var display = editorConfig.display;
+        var title = editorConfig.title;
+        if (display === 'dialog') {
+            dialogMod.setType(editorConfig.dialog);
+            dialogMod.update('-val-' + type, title);
+            dialogMod.show();
         }
-        if (editorConfig.display === 'layer') {
-            mod.ondisplaylayer && mod.ondisplaylayer(currentName, editorConfig.layer);
+        if (display === 'layer') {
+            // layerMod.setType(editorConfig.layer);
+            // layerMod.update(currentPage, name);
+            // layerMod.show();
+            console.log('show dialog', currentPage, name, editorConfig);
         }
     }
 

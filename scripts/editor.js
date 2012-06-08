@@ -26,29 +26,23 @@ define(['lib/zepto', 'data',
         layoutMod.update(currentPage, currentSlide.getLayout());
         pageMod.build();
         pageMod.updateCurrent(currentPage);
-        // itemMod.update(currentPage, '');
         previewMod.updateTheme(data.getTheme());
         previewMod.updateSlide(currentPage, currentSlide);
         previewMod.focus('');
-
-        console.log('load', currentPage, currentSlide);
     }
 
     function initItemEditor() {
-        // dialogMod.hide();
-        // layerMod.hide();
-        // typeMod.hide();
-        // adjustMod.hide();
-        console.log('init item editor');
+        dialogMod.hide();
+        layerMod.hide();
+        typeMod.hide();
+        adjustMod.hide();
     }
 
     themeMod.onthemechange = function (theme) {
         preview.updateTheme(theme);
-        console.log('onthemechange', theme);
     };
     layoutMod.onlayoutchange = function (layout) {
         previewMod.updateLayout(layout);
-        console.log('onlayoutchange', layout);
     };
     pageMod.onpagechange = function (page) {
         initItemEditor();
@@ -61,7 +55,6 @@ define(['lib/zepto', 'data',
         layoutMod.update(currentPage, currentSlide.getLayout());
         previewMod.updateSlide(currentPage, currentSlide);
         previewMod.focus();
-        console.log('onpagechange', currentPage, currentSlide);
     };
     itemMod.onpropchange = function (prop, value) {
         if (prop.match(/^-val-/)) {
@@ -71,78 +64,56 @@ define(['lib/zepto', 'data',
             previewMod.updateStyle(currentName, prop, value);
         }
     };
-    itemMod.onpopupdialog = function (type, prop) {
-        dialogMod.setType(type);
-        dialogMod.update(currentPage, currentName, prop);
-    };
-    itemMod.ondisplaylayer = function (type) {
-        layerMod.setType(type);
-        layerMod.update(currentPage, currentName);
-    };
 
     function select(name) {
         currentName = name;
-        // typeMod.update(currentName);
-        // typeMod.show(currentName);
-        // itemMod.update(currentPage, currentName);
-        console.log('select', name);
+        typeMod.update(currentName);
+        typeMod.show(currentName);
+        adjustMod.update(currentName);
+        adjustMod.show(currentName);
+        itemMod.update(currentPage, currentName);
     }
 
     previewMod.onselect = function (name) {
         select(name);
     };
-    previewMod.onpopupdialog = function (name, type) {
-        if (currentName != name) {
-            select(name);
+
+    dialogMod.onsubmit = function (prop, value) {
+        if (prop.match(/^-val-/)) {
+            previewMod.updateContent(currentName, value);
         }
-        // dialogMod.setType(type);
-        // dialogMod.update(currentPage, currentName, '-val-' + type);
-        console.log('onpopuplayer', name, type);
+        else {
+            previewMod.updateStyle(currentName, prop, value);
+        }
     };
-    previewMod.ondisplaylayer = function (name, type) {
-        if (currentName != name) {
-            select(name);
+    dialogMod.onreset = function (prop) {
+        if (prop.match(/^-val-/)) {
+            previewMod.updateContent(currentName, '');
         }
-        // layerMod.setType(type);
-        // layerMod.update(currentPage, currentName);
-        console.log('ondisplaylayer', name, type);
+        else {
+            previewMod.updateStyle(currentName, prop, '');
+        }
     };
 
-    // dialogMod.onsubmit = function (prop, value) {
-    //     if (prop.match(/^-val-/)) {
-    //         previewMod.updateContent(currentName, value);
-    //     }
-    //     else {
-    //         previewMod.updateStyle(currentName, prop, value);
-    //     }
-    // };
-    // dialogMod.onreset = function (prop) {
-    //     if (prop.match(/^-val-/)) {
-    //         previewMod.updateContent(currentName, '');
-    //     }
-    //     else {
-    //         previewMod.updateStyle(currentName, prop, '');
-    //     }
-    // };
-    // layerMod.onchange = function (value) {
-    //     previewMod.updateContent(currentName, value);
-    // };
-    // layerMod.onsubmit = function (value) {
-    //     previewMod.updateContent(currentName, value);
-    // };
-    // layerMod.onreset = function () {
-    //     previewMod.updateContent(currentName, '');
-    // };
+    layerMod.onchange = function (value) {
+        previewMod.updateContent(currentName, value);
+    };
+    layerMod.onsubmit = function (value) {
+        previewMod.updateContent(currentName, value);
+    };
+    layerMod.onreset = function () {
+        previewMod.updateContent(currentName, '');
+    };
 
-    // typeMod.ontypechange = function (type) {
-    //     previewMod.updateItem(currentName);
-    // };
-    // adjustMod.onmove = function (offset) {
-    //     previewMod.updatePosition(currentName, offset);
-    // };
-    // adjustMod.onresize = function (offset) {
-    //     previewMod.updatePosition(currentName, offset);
-    // };
+    typeMod.ontypechange = function (type) {
+        previewMod.updateItem(currentName);
+    };
+    adjustMod.onmove = function (offset) {
+        previewMod.updatePosition(currentName, offset);
+    };
+    adjustMod.onresize = function (offset) {
+        previewMod.updatePosition(currentName, offset);
+    };
 
     return {
         init: init,

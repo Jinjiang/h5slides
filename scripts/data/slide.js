@@ -25,12 +25,18 @@ define(['data/item'], function (Item) {
             if (!item && DEFAULT_ITEM_NAME_MAP[name]) {
                 item = new Item();
                 items[name] = item;
+                if (name === 'slide') {
+                    item.setType('slide');
+                }
             }
             return item;
         };
         this.setItem = function (name, item) {
             name = (name || '').toString();
             items[name] = item;
+            if (name === 'slide') {
+                item.setType('slide');
+            }
         };
         this.removeItem = function (name) {
             name = (name || '').toString();
@@ -61,6 +67,9 @@ define(['data/item'], function (Item) {
                     for (var name in jsonData.items) {
                         var item = new Item(jsonData.items[name]);
                         items[name] = item;
+                        if (name === 'slide') {
+                            item.setType('slide');
+                        }
                     }
                 }
             }

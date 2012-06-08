@@ -1,9 +1,13 @@
-define(function () {
+define(['editor/widget/slide',
+    'editor/widget/blank',
+    'editor/widget/text',
+    'editor/widget/img'
+], function (Slide, Blank, Text, Img) {
     var widgetMap = {};
 
     function preview(item, itemData) {
         var type = itemData.getType();
-        var widget = getByType(type);
+        var widget = get(type);
         if (widget) {
             if (widget.preview) {
                 widget.preview(item, itemData);
@@ -18,7 +22,7 @@ define(function () {
     }
     function render(item, itemData) {
         var type = itemData.getType();
-        var widget = getByType(type);
+        var widget = get(type);
         if (widget) {
             widget.render(item, itemData);
         }
@@ -27,33 +31,43 @@ define(function () {
         }
     }
     function getPropList(type) {
-        var widget = getByType(type);
-        return widget.propList;
+        var widget = get(type);
+        if (widget) {
+            return widget.propList;
+        }
+        else {
+            return [];
+        }
     }
     function getEditorConfig(type) {
-        var widget = getByType(type);
+        var widget = get(type);
         if (widget) {
             return widget.editorConfig;
         }
         else {
-            return null;
+            return {};
         }
     }
-    function getByType(type) {
+    function get(type) {
         return widgetMap[type];
     }
-    function regType(type, widgetData) {
+    function reg(type, widgetData) {
         widgetMap[type] = widgetData;
     }
 
     var mod = {
-        get: getByType,
-        reg: regType,
+        get: get,
+        reg: reg,
         preview: preview,
         render: render,
         getPropList: getPropList,
         getEditorConfig: getEditorConfig
     };
+
+    reg('slide', Slide);
+    reg('', Blank);
+    reg('text', Text);
+    reg('img', Img);
 
     return mod;
 });
