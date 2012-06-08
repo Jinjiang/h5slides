@@ -17,10 +17,7 @@ define(['lib/zepto', 'data',
     }
 
     function load() {
-        /*dialogMod.hide();
-        layerMod.hide();
-        typeMod.hide();
-        adjustMod.hide();*/
+        initItemEditor();
 
         var currentSlide = data.get(currentPage);
 
@@ -29,12 +26,20 @@ define(['lib/zepto', 'data',
         layoutMod.update(currentPage, currentSlide.getLayout());
         pageMod.build();
         pageMod.updateCurrent(currentPage);
-        /*itemMod.update(currentPage, '');*/
+        // itemMod.update(currentPage, '');
         previewMod.updateTheme(data.getTheme());
         previewMod.updateSlide(currentPage, currentSlide);
         previewMod.focus('');
 
         console.log('load', currentPage, currentSlide);
+    }
+
+    function initItemEditor() {
+        // dialogMod.hide();
+        // layerMod.hide();
+        // typeMod.hide();
+        // adjustMod.hide();
+        console.log('init item editor');
     }
 
     themeMod.onthemechange = function (theme) {
@@ -46,14 +51,13 @@ define(['lib/zepto', 'data',
         console.log('onlayoutchange', layout);
     };
     pageMod.onpagechange = function (page) {
-        // dialogMod.hide();
-        // layerMod.hide();
-        // typeMod.hide();
-        // adjustMod.hide();
+        initItemEditor();
 
         currentPage = page;
         currentName = '';
+
         var currentSlide = data.get(currentPage);
+
         layoutMod.update(currentPage, currentSlide.getLayout());
         previewMod.updateSlide(currentPage, currentSlide);
         previewMod.focus();
@@ -76,16 +80,20 @@ define(['lib/zepto', 'data',
         layerMod.update(currentPage, currentName);
     };
 
-    previewMod.onselect = function (name) {
+    function select(name) {
         currentName = name;
         // typeMod.update(currentName);
         // typeMod.show(currentName);
-        console.log('onselect', name);
+        // itemMod.update(currentPage, currentName);
+        console.log('select', name);
+    }
+
+    previewMod.onselect = function (name) {
+        select(name);
     };
     previewMod.onpopupdialog = function (name, type) {
         if (currentName != name) {
-            typeMod.update(currentName);
-            typeMod.show(currentName);
+            select(name);
         }
         // dialogMod.setType(type);
         // dialogMod.update(currentPage, currentName, '-val-' + type);
@@ -93,49 +101,48 @@ define(['lib/zepto', 'data',
     };
     previewMod.ondisplaylayer = function (name, type) {
         if (currentName != name) {
-            // typeMod.update(currentName);
-            // typeMod.show(currentName);
+            select(name);
         }
         // layerMod.setType(type);
         // layerMod.update(currentPage, currentName);
         console.log('ondisplaylayer', name, type);
     };
 
-    dialogMod.onsubmit = function (prop, value) {
-        if (prop.match(/^-val-/)) {
-            previewMod.updateContent(currentName, value);
-        }
-        else {
-            previewMod.updateStyle(currentName, prop, value);
-        }
-    };
-    dialogMod.onreset = function (prop) {
-        if (prop.match(/^-val-/)) {
-            previewMod.updateContent(currentName, '');
-        }
-        else {
-            previewMod.updateStyle(currentName, prop, '');
-        }
-    };
-    layerMod.onchange = function (value) {
-        previewMod.updateContent(currentName, value);
-    };
-    layerMod.onsubmit = function (value) {
-        previewMod.updateContent(currentName, value);
-    };
-    layerMod.onreset = function () {
-        previewMod.updateContent(currentName, '');
-    };
+    // dialogMod.onsubmit = function (prop, value) {
+    //     if (prop.match(/^-val-/)) {
+    //         previewMod.updateContent(currentName, value);
+    //     }
+    //     else {
+    //         previewMod.updateStyle(currentName, prop, value);
+    //     }
+    // };
+    // dialogMod.onreset = function (prop) {
+    //     if (prop.match(/^-val-/)) {
+    //         previewMod.updateContent(currentName, '');
+    //     }
+    //     else {
+    //         previewMod.updateStyle(currentName, prop, '');
+    //     }
+    // };
+    // layerMod.onchange = function (value) {
+    //     previewMod.updateContent(currentName, value);
+    // };
+    // layerMod.onsubmit = function (value) {
+    //     previewMod.updateContent(currentName, value);
+    // };
+    // layerMod.onreset = function () {
+    //     previewMod.updateContent(currentName, '');
+    // };
 
-    typeMod.ontypechange = function (type) {
-        previewMod.updateItem(currentName);
-    };
-    adjustMod.onmove = function (offset) {
-        previewMod.updatePosition(currentName, offset);
-    };
-    adjustMod.onresize = function (offset) {
-        previewMod.updatePosition(currentName, offset);
-    };
+    // typeMod.ontypechange = function (type) {
+    //     previewMod.updateItem(currentName);
+    // };
+    // adjustMod.onmove = function (offset) {
+    //     previewMod.updatePosition(currentName, offset);
+    // };
+    // adjustMod.onresize = function (offset) {
+    //     previewMod.updatePosition(currentName, offset);
+    // };
 
     return {
         init: init,

@@ -1,4 +1,4 @@
-define(['lib/zepto', 'data'], function ($, data) {
+define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager) {
     var preview = $('#preview');
     var slide = $('#slide');
 
@@ -58,10 +58,15 @@ define(['lib/zepto', 'data'], function ($, data) {
         if (!item) {
             return;
         }
-        console.log('set content', name, value);
+        var itemData = data.get(currentPage).getItem(name);
+        widgetManager.preview(item, itemData);
     }
     function focus(name) {
-        currentName = (name || 'slide').toString();
+        var newName = (name || 'slide').toString();
+        if (currentName === newName) {
+            return;
+        }
+        currentName = newName;
         if (currentItem) {
             currentItem.removeClass('current');
         }
@@ -69,6 +74,33 @@ define(['lib/zepto', 'data'], function ($, data) {
         currentItem.addClass('current');
         mod.onselect && mod.onselect(currentName);
     }
+    function edit(name) {
+        var itemData = data.get(currentPage).getItem(name);
+        var type = itemData.getType();
+        var editorConfig = widgetManager.getEditorConfig(type);
+        if (!editorConfig) {
+            console.log('no editor for', type, name);
+            return;
+        }
+        if (editorConfig.display === 'dialog') {
+            mod.onpopupdialog && mod.onpopupdialog(currentName, editorConfig.dialog);
+        }
+        if (editorConfig.display === 'layer') {
+            mod.ondisplaylayer && mod.ondisplaylayer(currentName, editorConfig.layer);
+        }
+    }
+
+    $.each(itemMap, function (name, item) {
+        item.click(function (e) {
+            e.stopPropagation();
+            focus(name);
+        }).dblclick(function (e) {
+            e.stopPropagation();
+            edit(name);
+        }).mousedown(function (e) {
+            e.preventDefault();
+        });
+    });
 
     var mod = {
         updateTheme: setTheme,
