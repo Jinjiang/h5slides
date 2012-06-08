@@ -67,8 +67,9 @@ define(['lib/zepto', 'data',
 
     function select(name) {
         currentName = name;
-        typeMod.update(currentName);
-        typeMod.show(currentName);
+        var slide = data.get(currentPage);
+        var item = slide.getItem(currentName);
+        typeMod.show(currentName, item.getType());
         adjustMod.update(currentName);
         adjustMod.show(currentName);
         itemMod.update(currentPage, currentName);
@@ -106,6 +107,7 @@ define(['lib/zepto', 'data',
     };
 
     typeMod.ontypechange = function (type) {
+        data.get(currentPage).getItem(currentName).setType(type);
         previewMod.updateItem(currentName);
     };
     adjustMod.onmove = function (offset) {

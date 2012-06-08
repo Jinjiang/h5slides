@@ -494,21 +494,18 @@
 /***** Editor Layers *****/
 
     #main .layer,
-    #layer-container > .bar,
-    #layer-container > .menu,
-    #layer-container > .mask,
-    #layer-container > .dialog {
+    #layer-container > .layer {
         position: absolute;
         display: none;
         z-index: 60;
     }
-    #layer-container > .bar {
+    #layer-container > #adjust-layer {
         z-index: 70;
     }
-    #layer-container > .menu {
+    #layer-container > #type-layer {
         z-index: 80;
     }
-    #layer-container > .mask {
+    #layer-container > #mask-layer {
         z-index: 85;
         top: 0;
         left: 0;
@@ -516,7 +513,7 @@
         bottom: 0;
         background: rgba(255,255,255,0.1);
     }
-    #layer-container > .dialog {
+    #layer-container > #dialog-layer {
         z-index: 90;
         background: white;
         border: 3px black solid;
@@ -527,64 +524,10 @@
         box-shadow: 0 0 10px rgba(255,255,255,0.4);
     }
 
+/* type layer */
 
-/* Input Layer */
-
-    #layer-for-input,
-    #layer-for-input-textarea {
-        box-sizing: content-box;
-    }
-
-    #layer-for-input {
-        top: 0;
-        left: 0;
-    }
-
-    #layer-for-input-textarea {
-        display: block;
-        position: absolute;
-        background: white;
-        color: black;
-        border: 1px black solid;
-        border-radius: 5px;
-        overflow: auto;
-        resize: none;
-        padding: 6px 3px;
-    }
-
-
-/* Bar */
-
-    #bar-for-slide {
-        top: 75px;
-        right: 20px;
-        display: none !important; /* hide temporarily */
-        background: #000000;
-        box-shadow: 0 0 7px rgba(0,0,0, 0.5);
-        padding: 2px;
-        line-height: 1;
-        border-radius: 3px;
-    }
-    #bar-for-slide img:hover {
-        box-shadow: 0 0 7px rgba(255,255,255, 0.5)
-    }
-
-
-/* Dialog */
-
-    #dialog-for-color {
-        text-align: center;
-    }
-    #dialog-for-color-result {
-        margin: 1em 2em;
-        height: 1em;
-    }
-    #dialog-for-image-preview,
-    #dialog-for-img-preview {
-        background-size: contain;
-        height: 200px;
-        background-position: center center;
-        background-repeat: no-repeat;
+    #type-layer .current {
+        color: yellow;
     }
 
 
