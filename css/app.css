@@ -197,13 +197,13 @@
     #menu-ctrl a span:hover {
         background-color: #111111;
     }
-    #menu-ctrl a.ctrl-play span {
+    #menu-ctrl #menu-btn-play span {
         background-position: -55px center;
     }
-    #menu-ctrl a.ctrl-publish span {
+    #menu-ctrl #menu-btn-public span {
         background-position: -115px center;
     }
-    #menu-ctrl a.ctrl-restart span {
+    #menu-ctrl #menu-btn-restart span {
         background-position: -178px center;
     }
 

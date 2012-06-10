@@ -7,16 +7,16 @@ define(['lib/zepto', 'data'], function ($, data) {
         init: function () {
             var that = this;
 
-            btnRestart.onclick = function () {
+            btnRestart.click(function () {
                 that.onreset && that.onreset();
-            };
-            btnPlay.onclick = function () {
+            });
+            btnPlay.click(function () {
                 that.onplay && that.onplay();
-            };
-            btnSave.onclick = function () {
-                data.reset();
+            });
+            btnSave.click(function () {
+                // data.reset();
                 that.onsave && that.onsave();
-            };
+            });
         }
     };
 });
