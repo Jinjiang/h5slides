@@ -5,7 +5,8 @@ define(['lib/zepto', 'editor/dialog', 'editor/layer'], function ($, dialogMod, l
             var li = $('<li><span class="title"></span>: <button>Edit</button></li>');
             li.find('.title').text(title);
             li.find('button').click(function () {
-                dialogMod.setType('img');
+                dialogMod.setType('backgroundimage');
+                dialogMod.setProp('background-image');
                 dialogMod.update(value, title);
                 dialogMod.show();
             });

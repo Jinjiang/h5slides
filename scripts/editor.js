@@ -43,6 +43,7 @@ define(['lib/zepto', 'data',
     };
     layoutMod.onlayoutchange = function (layout) {
         previewMod.updateLayout(layout);
+        typeMod.adjust();
     };
     pageMod.onpagechange = function (page) {
         initItemEditor();
@@ -81,34 +82,46 @@ define(['lib/zepto', 'data',
 
     dialogMod.onsubmit = function (prop, value) {
         if (prop.match(/^-val-/)) {
+            data.get(currentPage).getItem(currentName).setValue(value);
             previewMod.updateContent(currentName, value);
         }
         else {
-            previewMod.updateStyle(currentName, prop, value);
+            var style = {};
+            style[prop] = value;
+            data.get(currentPage).getItem(currentName).setStyle(style);
+            previewMod.updateStyle(currentName, style);
         }
     };
     dialogMod.onreset = function (prop) {
         if (prop.match(/^-val-/)) {
+            data.get(currentPage).getItem(currentName).setValue('');
             previewMod.updateContent(currentName, '');
         }
         else {
-            previewMod.updateStyle(currentName, prop, '');
+            var style = {};
+            style[prop] = '';
+            data.get(currentPage).getItem(currentName).setStyle(style);
+            previewMod.updateStyle(currentName, style);
         }
     };
 
-    layerMod.onchange = function (value) {
-        previewMod.updateContent(currentName, value);
-    };
     layerMod.onsubmit = function (value) {
+        data.get(currentPage).getItem(currentName).setValue(value);
         previewMod.updateContent(currentName, value);
-    };
-    layerMod.onreset = function () {
-        previewMod.updateContent(currentName, '');
+        layerMod.hide();
     };
 
     typeMod.ontypechange = function (type) {
-        data.get(currentPage).getItem(currentName).setType(type);
+        var item = data.get(currentPage).getItem(currentName);
+        item.setType(type);
+        item.setValue('');
+        var style = item.getStyle();
+        $.each(style, function (k, v) {
+            style[k] = '';
+        });
+        item.setStyle(style);
         previewMod.updateItem(currentName);
+        itemMod.update(currentPage, currentName);
     };
     adjustMod.onmove = function (offset) {
         previewMod.updatePosition(currentName, offset);

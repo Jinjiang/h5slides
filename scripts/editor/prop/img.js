@@ -6,6 +6,7 @@ define(['lib/zepto', 'editor/dialog', 'editor/layer'], function ($, dialogMod, l
             li.find('.title').text(title);
             li.find('button').click(function () {
                 dialogMod.setType('img');
+                dialogMod.setProp('-val-img');
                 dialogMod.update(value, title);
                 dialogMod.show();
             });

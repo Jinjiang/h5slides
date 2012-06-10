@@ -6,7 +6,8 @@ define(['lib/zepto', 'editor/dialog', 'editor/layer'], function ($, dialogMod, l
             li.find('.title').text(title);
             li.find('button').click(function () {
                 layerMod.setType('text');
-                layerMod.update(value, title);
+                // layerMod.update(value, title);
+                // layerMod.update(name, itemData.getValue(), title);
                 layerMod.show();
             });
             that.li = li;

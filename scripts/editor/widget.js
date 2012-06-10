@@ -3,10 +3,21 @@ define(['editor/widget/slide',
     'editor/widget/text',
     'editor/widget/img'
 ], function (Slide, Blank, Text, Img) {
+    var defaultTypeMap = {
+        slide: 'slide',
+        title: 'text',
+        subtitle: 'text',
+        subtitle2: 'text',
+        content: 'text',
+        content2: 'text'
+    };
     var widgetMap = {};
 
     function preview(item, itemData) {
         var type = itemData.getType();
+        if (!type) {
+            type = defaultTypeMap[item.attr('data-item')] || '';
+        }
         var widget = get(type);
         if (widget) {
             if (widget.preview) {
@@ -22,6 +33,9 @@ define(['editor/widget/slide',
     }
     function render(item, itemData) {
         var type = itemData.getType();
+        if (!type) {
+            type = defaultTypeMap[item.attr('data-item')] || '';
+        }
         var widget = get(type);
         if (widget) {
             widget.render(item, itemData);
@@ -67,6 +81,7 @@ define(['editor/widget/slide',
     reg('slide', Slide);
     reg('', Blank);
     reg('text', Text);
+    reg('title', Text);
     reg('img', Img);
 
     return mod;

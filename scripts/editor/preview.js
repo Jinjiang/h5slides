@@ -4,6 +4,14 @@ define(['lib/zepto', 'data',
     var preview = $('#preview');
     var slide = $('#slide');
 
+    var defaultTypeMap = {
+        slide: 'slide',
+        title: 'text',
+        subtitle: 'text',
+        subtitle2: 'text',
+        content: 'text',
+        content2: 'text'
+    };
     var itemMap = {
         title: $('#slide-title'),
         content: $('#slide-content'),
@@ -33,6 +41,8 @@ define(['lib/zepto', 'data',
     }
     function setItem(name) {
         var itemData = data.get(currentPage).getItem(name);
+        var item = itemMap[name];
+        item[0].style.cssText = '';
         setPosition(name, itemData.getPosition());
         setStyle(name, itemData.getStyle());
         setContent(name, itemData.getValue());
@@ -43,7 +53,12 @@ define(['lib/zepto', 'data',
             return;
         }
         $.each(position, function (key, value) {
-            item.css(key, '');
+            if (value) {
+                item.css(key, value);
+            }
+            else {
+                item.css(key, '');
+            }
         });
     }
     function setStyle(name, style) {
@@ -52,7 +67,12 @@ define(['lib/zepto', 'data',
             return;
         }
         $.each(style, function (key, value) {
-            item.css(key, '');
+            if (value) {
+                item.css(key, value);
+            }
+            else {
+                item.css(key, '');
+            }
         });
     }
     function setContent(name, value) {
@@ -79,7 +99,7 @@ define(['lib/zepto', 'data',
     function edit(name) {
         focus(name);
         var itemData = data.get(currentPage).getItem(name);
-        var type = itemData.getType();
+        var type = itemData.getType() || defaultTypeMap[name] || '';
         var editorConfig = widgetManager.getEditorConfig(type);
         if (!editorConfig || !editorConfig.display) {
             console.log('no editor for', type, name);
@@ -89,14 +109,14 @@ define(['lib/zepto', 'data',
         var title = editorConfig.title;
         if (display === 'dialog') {
             dialogMod.setType(editorConfig.dialog);
-            dialogMod.update('-val-' + type, title);
+            dialogMod.setProp('-val-' + type);
+            dialogMod.update(itemData.getValue(), title);
             dialogMod.show();
         }
         if (display === 'layer') {
-            // layerMod.setType(editorConfig.layer);
-            // layerMod.update(currentPage, name);
-            // layerMod.show();
-            console.log('show dialog', currentPage, name, editorConfig);
+            layerMod.setType(editorConfig.layer);
+            layerMod.update(name, itemData.getValue(), title);
+            layerMod.show();
         }
     }
 
@@ -107,8 +127,6 @@ define(['lib/zepto', 'data',
         }).dblclick(function (e) {
             e.stopPropagation();
             edit(name);
-        }).mousedown(function (e) {
-            e.preventDefault();
         });
     });
 

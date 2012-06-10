@@ -1,40 +1,70 @@
 define(['editor/dialog/img',
+    'editor/dialog/backgroundimage',
     'editor/dialog/color'
-], function (imgDialog, colorDialog) {
+], function (imgDialog, bgImgDialog, colorDialog) {
     var typeMap = {
         color: colorDialog,
-        img: imgDialog
+        img: imgDialog,
+        backgroundimage: bgImgDialog
     };
-    var dialogRoot;
-    var dialogHeader;
-    var dialogContent;
-    var btnSubmit;
-    var btnReset;
-    var btnCancel;
+    var dialogRoot = $('#dialog-layer');
+    var dialogHeader = $('#dialog-header');
+    var dialogContent = $('#dialog-content');
+    var btnSubmit = $('#dialog-btn-ok');
+    var btnReset = $('#dialog-btn-reset');
+    var btnCancel = $('#dialog-btn-cancel');
+
+    var currentProp;
     var currentDialog;
-    function adjust() {}
-    return {
+
+    function adjust() {
+        var windowWidth = $(window).width();
+        var dialogWidth = dialogRoot.width();
+        var left = Math.round((windowWidth - dialogWidth) / 2);
+        dialogRoot.css('left', left + 'px');
+    }
+
+    btnSubmit.click(function () {
+        var value = currentDialog.val(dialogContent);
+        mod.onsubmit && mod.onsubmit(currentProp, value);
+        mod.hide();
+    });
+    btnReset.click(function () {
+        mod.onreset && mod.onreset(currentProp);
+        mod.hide();
+    });
+    btnCancel.click(function () {
+        mod.hide();
+    });
+
+    var mod = {
+        setProp: function (prop) {
+            currentProp = prop;
+            currentDialog.prop = prop;
+        },
         setType: function (type) {
-            console.log('set dialog type');
-            // currentDialog = typeMap[type];
-            // if (currentDialog) {
-            //     currentDialog.build(dialogContent, type);
-            // }
+            if (currentDialog) {
+                currentDialog.remove(dialogContent);
+            }
+            currentDialog = typeMap[type];
+            if (currentDialog) {
+                currentDialog.build(dialogContent);
+            }
         },
         update: function (value, title) {
-            console.log('update dialog');
-            // if (currentDialog) {
-            //     currentDialog.update(dialogContent, value, title);
-            // }
+            if (currentDialog) {
+                dialogHeader.text(title);
+                currentDialog.update(dialogContent, value);
+            }
         },
         show: function () {
-            console.log('show dialog');
-            // adjust();
-            // dialogRoot.show();
+            dialogRoot.show();
+            adjust();
         },
         hide: function () {
-            console.log('hide dialog');
-            // dialogRoot.hide();
+            dialogRoot.hide();
         }
     };
+
+    return mod;
 });

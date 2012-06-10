@@ -530,6 +530,15 @@
         color: yellow;
     }
 
+/* dialog layer */
+
+    #dialog-header {
+        font-weight: bold;
+    }
+    #dialog-footer {
+        text-align: right;
+    }
+
 
 
 

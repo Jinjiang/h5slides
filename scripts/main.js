@@ -3,7 +3,9 @@ requirejs(['editor', 'player', 'manager', 'backend'],
 
     function load() {
         backend.import();
-        editor.load();
+        setTimeout(function () {
+            editor.load()
+        }, 500);
     }
 
     editor.init();

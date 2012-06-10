@@ -17,7 +17,7 @@ define(['lib/zepto', 'data'], function ($, data) {
     function init() {
         var menu = data.getMenu();
         list.empty();
-        menu.forEach(function (i, title) {
+        menu.forEach(function (title, i) {
             var page = i + 1;
             var item = create(title);
             list.append(item);

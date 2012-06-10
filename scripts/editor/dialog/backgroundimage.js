@@ -1,7 +1,7 @@
 define({
     build: function (dialogContent) {
         dialogContent.html('<p><input type="file"></p>' +
-            '<div class="preview" style="height: 100px; background-position: center center; background-size: contain;"></div>');
+            '<div class="preview" style="height: 100px; background-repeat: no-repeat; background-position: center center; background-size: contain;"></div>');
         dialogContent.find('input').bind('change', function (e) {
             var input = dialogContent.find('input');
             var file = dialogContent.find('input')[0].files[0];
@@ -23,9 +23,10 @@ define({
     val: function (dialogContent) {
         var input = dialogContent.find('input');
         var file = dialogContent.find('input')[0].files[0];
-        var value = '';
+        var value = 'none';
         if (file) {
-            value = window.webkitURL.createObjectURL(file);
+            var url = window.webkitURL.createObjectURL(file);
+            value = 'url(' + url + ')'
         }
         return value;
     }

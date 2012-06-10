@@ -3,15 +3,16 @@ define(['data', 'editor/position'], function (data, positionManager) {
 
     var typeMap = {
         slide: ['slide'],
-        title: ['title'],
-        subtitle: ['title'],
-        subtitle2: ['title'],
+        title: ['text'],
+        subtitle: ['text'],
+        subtitle2: ['text'],
         content: ['text', 'img'],
         content2: ['text', 'img']
     };
 
     var currentType;
     var currentBtn;
+    var currentName;
 
     function build(typeList) {
         layer.empty();
@@ -19,7 +20,10 @@ define(['data', 'editor/position'], function (data, positionManager) {
             var btn = $('<button></button>').text(type).attr('data-type', type);
             btn.click(function () {
                 var type = $(this).attr('data-type');
-                if (currentType !== 'type') {
+                if (currentType !== type) {
+                    if (!confirm('Are you sure?')) {
+                        return;
+                    }
                     setCurrent(type);
                     mod.ontypechange && mod.ontypechange(type);
                 }
@@ -32,11 +36,6 @@ define(['data', 'editor/position'], function (data, positionManager) {
     }
 
     function setCurrent(type) {
-        if (layer.find('button').length === 1) {
-            currentBtn = layer.children().first().addClass('current');
-            currentType = currentBtn.attr('data-type');
-            return;
-        }
         if (currentBtn) {
             currentBtn.removeClass('current');
         }
@@ -47,16 +46,21 @@ define(['data', 'editor/position'], function (data, positionManager) {
 
     var mod = {
         show: function (name, type) {
-            build(typeMap[name]);
-            setCurrent(type);
+            currentName = name;
+            var typeList = typeMap[currentName];
+            build(typeList);
+            setCurrent(type || typeList[0] || '');
             layer.show();
-            var offset = positionManager.offset(name);
-            var height = layer.height();
-            layer.css('left', offset.left);
-            layer.css('top', offset.top - height);
+            this.adjust();
         },
         hide: function () {
             layer.hide();
+        },
+        adjust: function () {
+            var offset = positionManager.offset(currentName);
+            var height = layer.height();
+            layer.css('left', offset.left);
+            layer.css('top', offset.top - height);
         },
         getTypeList: function (name) {
             return typeMap[name];
