@@ -1,6 +1,6 @@
-define(['lib/zepto', 'data',
+define(['lib/zepto', 'data', 'status',
     'editor/widget', 'editor/dialog', 'editor/layer'
-], function ($, data, widgetManager, dialogMod, layerMod) {
+], function ($, data, status, widgetManager, dialogMod, layerMod) {
     var preview = $('#preview');
     var slide = $('#slide');
 
@@ -21,9 +21,15 @@ define(['lib/zepto', 'data',
         slide: slide
     };
 
-    var currentPage;
-    var currentName;
-    var currentItem;
+    var current;
+
+    function init() {
+        var theme = data.getTheme();
+        var slide = data.get(status.page);
+        setTheme(theme);
+        setSlide(slide);
+        focus('slide');
+    }
 
     function setTheme(theme) {
         preview.attr('data-design', theme);
@@ -31,16 +37,14 @@ define(['lib/zepto', 'data',
     function setLayout(layout) {
         itemMap.slide.attr('data-layout', layout);
     }
-    function setSlide(page, slideData) {
-        page = parseInt(page);
-        currentPage = page;
+    function setSlide(slideData) {
         setLayout(slideData.getLayout());
         $.each(itemMap, function (name, item) {
             setItem(name);
         });
     }
     function setItem(name) {
-        var itemData = data.get(currentPage).getItem(name);
+        var itemData = data.get(status.page).getItem(name);
         var item = itemMap[name];
         item[0].style.cssText = '';
         setPosition(name, itemData.getPosition());
@@ -80,25 +84,25 @@ define(['lib/zepto', 'data',
         if (!item) {
             return;
         }
-        var itemData = data.get(currentPage).getItem(name);
+        var itemData = data.get(status.page).getItem(name);
         widgetManager.preview(item, itemData);
     }
     function focus(name) {
         var newName = (name || 'slide').toString();
-        if (currentName === newName) {
+        if (status.name === newName) {
             return;
         }
-        currentName = newName;
-        if (currentItem) {
-            currentItem.removeClass('current');
+        status.name = newName;
+        if (current) {
+            current.removeClass('current');
         }
-        currentItem = itemMap[currentName];
-        currentItem.addClass('current');
-        mod.onselect && mod.onselect(currentName);
+        current = itemMap[status.name];
+        current.addClass('current');
+        mod.onselect && mod.onselect(status.name);
     }
     function edit(name) {
         focus(name);
-        var itemData = data.get(currentPage).getItem(name);
+        var itemData = data.get(status.page).getItem(name);
         var type = itemData.getType() || defaultTypeMap[name] || '';
         var editorConfig = widgetManager.getEditorConfig(type);
         if (!editorConfig || !editorConfig.display) {
@@ -108,15 +112,12 @@ define(['lib/zepto', 'data',
         var display = editorConfig.display;
         var title = editorConfig.title;
         if (display === 'dialog') {
-            dialogMod.setType(editorConfig.dialog);
-            dialogMod.setProp('-val-' + type);
-            dialogMod.update(itemData.getValue(), title);
-            dialogMod.show();
+            status.prop = '-val-' + type;
+            dialogMod.init(editorConfig.dialog, title);
         }
         if (display === 'layer') {
-            layerMod.setType(editorConfig.layer);
-            layerMod.update(name, itemData.getValue(), title);
-            layerMod.show();
+            status.prop = '-val-' + type;
+            layerMod.init(editorConfig.layer, title);
         }
     }
 
@@ -131,6 +132,7 @@ define(['lib/zepto', 'data',
     });
 
     var mod = {
+        init: init,
         updateTheme: setTheme,
         updateSlide: setSlide,
         updateLayout: setLayout,

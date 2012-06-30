@@ -1,4 +1,4 @@
-define(['lib/zepto', 'data'], function ($, data) {
+define(['lib/zepto', 'data', 'status'], function ($, data, status) {
     var THEME_ARRAY = [
         {"key": "blank", "title": "默认"}
     ];
@@ -8,7 +8,7 @@ define(['lib/zepto', 'data'], function ($, data) {
 
     var current;
 
-    function init() {
+    function build() {
         list.empty();
         $.each(THEME_ARRAY, function (index, theme) {
             var imageSrc = 'css/theme/' + theme.key + '/logo.png';
@@ -20,6 +20,10 @@ define(['lib/zepto', 'data'], function ($, data) {
                 attr('alt', theme.title);
             list.append(li);
         });
+    }
+
+    function init() {
+        update(data.getTheme());
     }
 
     function update(key) {
@@ -35,7 +39,7 @@ define(['lib/zepto', 'data'], function ($, data) {
         });
     }
 
-    init();
+    build();
 
     list.delegate('li', 'click', function () {
         if ($(this).hasClass('current')) {
@@ -48,6 +52,7 @@ define(['lib/zepto', 'data'], function ($, data) {
     });
 
     var mod = {
+        init: init,
         update: update
     };
 

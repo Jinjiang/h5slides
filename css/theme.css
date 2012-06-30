@@ -27,6 +27,7 @@
 }
 
 [data-item] {
+    background-color: transparent;
     opacity: 0;
     position: absolute;
     margin: 0;

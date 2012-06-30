@@ -99,7 +99,9 @@ define(function () {
                 this.setConfig(prop.substr(6), value);
             }
             else {
-                this.setStyle(prop, value);
+                var style = {};
+                style[prop] = value;
+                this.setStyle(style);
             }
         };
 

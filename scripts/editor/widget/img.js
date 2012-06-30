@@ -5,11 +5,30 @@ define(['lib/zepto'], function ($) {
         render: function (item, itemData) {
             var src = itemData.getValue();
             if (!src) {
+                item.html('');
+                return;
+            }
+            var img = $('<img>').
+                attr('src', src).
+                css('display', 'block').
+                css('margin', 'auto').
+                css('max-width', '100%').
+                css('max-height', '100%').
+                bind('error', function (e) {
+                    img.remove();
+                });
+            item.empty().append(img);
+        },
+        preview: function (item, itemData) {
+            var src = itemData.getValue();
+            if (!src) {
                 item.html('[no img]');
                 return;
             }
             var img = $('<img>').
                 attr('src', src).
+                css('display', 'block').
+                css('margin', 'auto').
                 css('max-width', '100%').
                 css('max-height', '100%').
                 bind('error', function (e) {

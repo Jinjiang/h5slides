@@ -1,3 +1,8 @@
+RequireJS
+    dialog/color
+    layer
+    layer/text
+    player
 
 widget system (photo/chart)
 resource system (photo)

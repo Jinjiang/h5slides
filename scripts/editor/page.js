@@ -1,4 +1,4 @@
-define(['lib/zepto', 'data'], function ($, data) {
+define(['lib/zepto', 'data', 'status'], function ($, data, status) {
     var rootId = 'panel-paginations'
 
     var labelTotalPage = $('#' + rootId + '-total-page');
@@ -12,7 +12,6 @@ define(['lib/zepto', 'data'], function ($, data) {
     var list = $('#' + rootId + '-list');
 
     var current;
-    var currentPage;
 
     function init() {
         var menu = data.getMenu();
@@ -23,12 +22,15 @@ define(['lib/zepto', 'data'], function ($, data) {
             list.append(item);
         });
         checkHeader();
+        setCurrent(status.page);
     }
+
     function create(title) {
         var li = $('<li><span class="title"></span></li>');
         li.find('.title').text(title || '[NO TITLE]');
         return li;
     }
+
     function add(page) {
         page = parseInt(page);
         var length = data.getLength();
@@ -53,6 +55,7 @@ define(['lib/zepto', 'data'], function ($, data) {
 
         change(page + 1);
     }
+
     function remove(page) {
         page = parseInt(page);
         var length = data.getLength();
@@ -68,26 +71,29 @@ define(['lib/zepto', 'data'], function ($, data) {
         if (page > 1) {
             page--;
         }
-        currentPage = 0;
+        status.page = 0;
         change(page);
     }
+
     function update(page) {
         page = parseInt(page);
         var title = data.get(page).getTitle();
         var li = list.find('li:nth-child(' + page + ')');
         li.find('.title').text(title || '[NO TITLE]');
     }
+
     function change(page) {
         page = parseInt(page);
-        if (page === currentPage) {
+        if (page === status.page) {
             return;
         }
         setCurrent(page);
-        mod.onpagechange && mod.onpagechange(currentPage);
+        mod.onpagechange && mod.onpagechange(status.page);
     }
+
     function setCurrent(page) {
         page = parseInt(page);
-        currentPage = page;
+        status.page = page;
         if (current) {
             current.removeClass('current');
         }
@@ -95,27 +101,28 @@ define(['lib/zepto', 'data'], function ($, data) {
         current.addClass('current');
         checkHeader();
     }
+
     function checkHeader() {
         var length = data.getLength();
-        btnPrevious.prop('disabled', currentPage === 1);
-        btnNext.prop('disabled', currentPage === length);
+        btnPrevious.prop('disabled', status.page === 1);
+        btnNext.prop('disabled', status.page === length);
         btnRemove.prop('disabled', length === 1);
         btnAdd.prop('disabled', length > 20);
-        labelCurrentPage.text(currentPage);
+        labelCurrentPage.text(status.page);
         labelTotalPage.text(length);
     }
 
     btnAdd.click(function () {
-        add(currentPage);
+        add(status.page);
     });
     btnRemove.click(function () {
-        remove(currentPage);
+        remove(status.page);
     });
     btnNext.click(function () {
-        change(currentPage + 1);
+        change(status.page + 1);
     });
     btnPrevious.click(function () {
-        change(currentPage - 1);
+        change(status.page - 1);
     });
     list.delegate('li', 'click', function () {
         var index = $(this).index();
@@ -124,7 +131,7 @@ define(['lib/zepto', 'data'], function ($, data) {
     });
 
     var mod = {
-        build: init,
+        init: init,
         updateCurrent: setCurrent,
         updateTitle: update
     };

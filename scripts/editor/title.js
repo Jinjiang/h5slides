@@ -1,5 +1,9 @@
-define(['lib/zepto', 'data'], function ($, data) {
+define(['lib/zepto', 'data', 'status'], function ($, data, status) {
     var label = $('#main-title');
+
+    function init() {
+        update(data.getTitle());
+    }
 
     function update(title) {
         if (title) {
@@ -23,6 +27,7 @@ define(['lib/zepto', 'data'], function ($, data) {
     });
 
     return {
+        init: init,
         update: update
     }
 });

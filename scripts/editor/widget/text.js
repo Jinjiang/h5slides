@@ -8,7 +8,16 @@ define(['lib/zepto'], function ($) {
                 item.text(value);
             }
             else {
-                item.html('[no text]')
+                item.html('');
+            }
+        },
+        preview: function (item, itemData) {
+            var value = itemData.getValue();
+            if (value) {
+                item.text(value);
+            }
+            else {
+                item.html('[no text]');
             }
         }
     };

@@ -1,27 +1,15 @@
-define(['editor/prop/color',
-    'editor/prop/backgroundimage',
-    'editor/prop/text',
-    'editor/prop/img'
-], function (PropColor, PropBackgroundImage, PropText, PropImg) {
-    var propMap = {};
-
+define(['editor/prop/index'], function (propSet) {
     function get(key) {
-        return propMap[key];
+        return propSet[key];
     }
     function reg(key, Prop) {
-        propMap[key] = Prop;
+        propSet[key] = Prop;
     }
 
     var mod = {
         get: get,
         reg: reg
     };
-
-    reg('color', PropColor);
-    reg('background-image', PropBackgroundImage);
-    reg('-val-text', PropText);
-    reg('-val-title', PropText);
-    reg('-val-img', PropImg);
 
     return mod;
 });

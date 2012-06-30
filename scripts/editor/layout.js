@@ -1,4 +1,4 @@
-define(['lib/zepto', 'data'], function ($, data) {
+define(['lib/zepto', 'data', 'status'], function ($, data, status) {
     var LAYOUT_ARRAY = [
         {"key": "title", "title": "大标题"},
         {"key": "subtitle", "title": "章节标题"},
@@ -11,9 +11,8 @@ define(['lib/zepto', 'data'], function ($, data) {
     var list = $('#panel-layout-list');
 
     var current;
-    var currentPage;
 
-    function init() {
+    function build() {
         list.empty();
         $.each(LAYOUT_ARRAY, function (index, layout) {
             var li = $('<li></li>').
@@ -23,8 +22,12 @@ define(['lib/zepto', 'data'], function ($, data) {
         });
     }
 
-    function update(page, key) {
-        currentPage = page;
+    function init() {
+        var currentSlide = data.get(status.page);
+        update(currentSlide.getLayout());
+    }
+
+    function update(key) {
         list.find('li').each(function (index, item) {
             item = $(item);
             if (item.attr('data-key') == key) {
@@ -37,19 +40,20 @@ define(['lib/zepto', 'data'], function ($, data) {
         });
     }
 
-    init();
+    build();
 
     list.delegate('li', 'click', function () {
         if ($(this).hasClass('current')) {
             return;
         }
         var key = $(this).attr('data-key');
-        update(currentPage, key);
-        data.get(currentPage).setLayout(key);
-        mod.onlayoutchange && mod.onlayoutchange(key);
+        update(key);
+        data.get(status.page).setLayout(key);
+        mod.onlayoutchange && mod.onlayoutchange(status.page, key);
     });
 
     var mod = {
+        init: init,
         update: update
     };
 

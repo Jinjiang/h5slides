@@ -519,7 +519,6 @@
         border: 3px black solid;
         border-radius: 3px;
         padding: 1em 2em;
-        margin-left: -150px;
         top: 80px;
         box-shadow: 0 0 10px rgba(255,255,255,0.4);
     }

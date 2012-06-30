@@ -8,13 +8,13 @@ define(['lib/zepto', 'data'], function ($, data) {
             var that = this;
 
             btnRestart.click(function () {
+                // data.reset();
                 that.onreset && that.onreset();
             });
             btnPlay.click(function () {
                 that.onplay && that.onplay();
             });
             btnSave.click(function () {
-                // data.reset();
                 that.onsave && that.onsave();
             });
         }

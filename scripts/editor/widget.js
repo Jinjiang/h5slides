@@ -1,8 +1,4 @@
-define(['editor/widget/slide',
-    'editor/widget/blank',
-    'editor/widget/text',
-    'editor/widget/img'
-], function (Slide, Blank, Text, Img) {
+define(['editor/widget/index'], function (widgetSet) {
     var defaultTypeMap = {
         slide: 'slide',
         title: 'text',
@@ -11,7 +7,6 @@ define(['editor/widget/slide',
         content: 'text',
         content2: 'text'
     };
-    var widgetMap = {};
 
     function preview(item, itemData) {
         var type = itemData.getType();
@@ -63,10 +58,10 @@ define(['editor/widget/slide',
         }
     }
     function get(type) {
-        return widgetMap[type];
+        return widgetSet[type];
     }
     function reg(type, widgetData) {
-        widgetMap[type] = widgetData;
+        widgetSet[type] = widgetData;
     }
 
     var mod = {
@@ -77,12 +72,6 @@ define(['editor/widget/slide',
         getPropList: getPropList,
         getEditorConfig: getEditorConfig
     };
-
-    reg('slide', Slide);
-    reg('', Blank);
-    reg('text', Text);
-    reg('title', Text);
-    reg('img', Img);
 
     return mod;
 });
