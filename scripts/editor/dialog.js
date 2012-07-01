@@ -37,12 +37,12 @@ define(['lib/zepto', 'data', 'status',
             if (current) {
                 current.build(title);
                 elements.header.text(title);
-                elements.root.show();
+                elements.root.attr('data-type', type).show();
                 adjust();
             }
             else {
                 elements.header.text('');
-                elements.root.hide();
+                elements.root.removeAttr('data-type').hide();
             }
         },
         hide: function () {

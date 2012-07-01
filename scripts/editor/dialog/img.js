@@ -4,9 +4,7 @@ define(['lib/zepto', 'data', 'status', 'editor/dialog/elements'],
 
     function build() {
         content.html('<p><input type="file"></p>' +
-            '<div class="preview" style="height: 100px; ' +
-            'background-repeat: no-repeat; background-position: center center; ' +
-            'background-size: contain;"></div>');
+            '<div class="preview"></div>');
         content.find('input').bind('change', function (e) {
             var input = content.find('input');
             var file = content.find('input')[0].files[0];

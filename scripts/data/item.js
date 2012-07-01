@@ -84,10 +84,10 @@ define(function () {
                 return this.getValue();
             }
             else if (prop.match(/^-conf-/)) {
-                return this.getConfig(prop.substr(6));
+                return this.getConfig()[prop.substr(6)];
             }
             else {
-                return this.getStyle(prop);
+                return this.getStyle()[prop];
             }
         };
         this.setProp = function (prop, value) {
@@ -96,7 +96,9 @@ define(function () {
                 this.setValue(value);
             }
             else if (prop.match(/^-conf-/)) {
-                this.setConfig(prop.substr(6), value);
+                var style = {};
+                style[prop.substr(6)] = value;
+                this.setConfig(style);
             }
             else {
                 var style = {};

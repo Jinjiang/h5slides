@@ -538,6 +538,21 @@
         text-align: right;
     }
 
+    #dialog-layer[data-type="img"] .preview {
+        height: 100px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+    }
+    #dialog-layer[data-type="color"] img {
+        display: block;
+        margin: 1em auto;
+    }
+    #dialog-layer[data-type="color"] .preview {
+        height: 1em;
+        margin: 1em;
+    }
+
 
 
 
