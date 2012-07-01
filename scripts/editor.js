@@ -84,16 +84,17 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
 
     dialogMod.onsubmit = function (page, name, prop, value) {
         checkProp(page, name, prop, value);
+        dialogMod.hide();
     };
     dialogMod.onreset = function (page, name, prop) {
         checkProp(page, name, prop, '');
+        dialogMod.hide();
     };
 
-    // layerMod.onsubmit = function (value) {
-    //     data.get(currentPage).getItem(currentName).setValue(value);
-    //     previewMod.updateContent(currentName, value);
-    //     layerMod.hide();
-    // };
+    layerMod.onsubmit = function (page, name, prop, value) {
+        checkProp(page, name, prop, value);
+        layerMod.hide();
+    };
 
     return {
         init: init,

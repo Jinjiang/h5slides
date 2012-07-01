@@ -1,23 +1,32 @@
-define({
-    build: function (layerRoot) {
-        var that = this;
+define(['lib/zepto', 'data', 'status'], function ($, data, status) {
+    var layerRoot = $('#item-layer');
+
+    function build(title) {
         layerRoot.html('<textarea style="width: 100%; height: 100%;"></textarea>');
         var textarea = layerRoot.find('textarea');
         textarea.bind('blur', function (e) {
-            var value = that.val(layerRoot);
-            that.onsubmit && that.onsubmit(value);
+            var value = val();
+            mod.onsubmit && mod.onsubmit(value);
         });
-    },
-    show: function (layerRoot) {
-        layerRoot.find('textarea').focus();
-    },
-    update: function (layerRoot, value) {
+        update(data.get(status.page).getItem(status.name).getProp(status.prop));
+        textarea.focus();
+    }
+    function update(value) {
         layerRoot.find('textarea').val(value);
-    },
-    remove: function (layerRoot) {
+    }
+    function clear() {
         layerRoot.html('');
-    },
-    val: function (layerRoot) {
+    }
+    function val() {
         return layerRoot.find('textarea').val();
     }
+
+    var mod = {
+        build: build,
+        update: update,
+        clear: clear,
+        val: val
+    };
+
+    return mod;
 });

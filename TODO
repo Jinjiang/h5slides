@@ -1,6 +1,4 @@
 RequireJS
-    layer
-    layer/text
     player
 
 widget system (photo/chart)

@@ -43,7 +43,7 @@ define(['data', 'status', 'editor/position'], function (data, status, positionMa
             });
             item.setStyle(style);
 
-            mod.ontypechange && mod.ontypechange(page, name, type);
+            mod.ontypechange && mod.ontypechange(status.page, status.name, type);
         }
     }
 
