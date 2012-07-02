@@ -181,6 +181,18 @@ p.tagline {
   -moz-opacity: 1;
   filter:alpha(opacity=1);
 }
+.download-bar a.demo {
+  padding-left: 1em;
+  margin-top: 8px;
+  display: block;
+  float: left;
+  text-indent: 0;
+  width: auto;
+  height: auto;
+  opacity: 1;
+  -moz-opacity: 1;
+  filter:alpha(opacity=1);
+}
 
 .current-section {
   position: fixed;
