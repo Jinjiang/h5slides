@@ -12,14 +12,12 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     var layerMod = editorModSet.layerMod;
     var resizeMod = editorModSet.resizeMod;
 
-    var currentPage = status.page;
-    var currentName = status.name;
-
     function init() {
         $('#splash').css('top', '-100%').css('bottom', '100%');
     }
 
     function load() {
+        console.log('load');
         titleMod.init();
         themeMod.init();
         layoutMod.init();
@@ -43,8 +41,8 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
         }
     };
     pageMod.onpagechange = function (page) {
-        status.page = currentPage = page;
-        status.name = currentName = 'slide';
+        status.page = page;
+        status.name = 'slide';
 
         initItemEditor();
 
@@ -53,7 +51,7 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     };
 
     previewMod.onselect = function (name) {
-        status.name = currentName = name;
+        status.name = name;
         typeMod.init();
         itemMod.init();
     };

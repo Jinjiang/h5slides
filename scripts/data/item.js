@@ -1,4 +1,4 @@
-define(function () {
+define(['data/event'], function (evt) {
     return function (jsonData) {
         var currentValue;
         var currentType;
@@ -11,6 +11,7 @@ define(function () {
         };
         this.setValue = function (value) {
             currentValue = (value || '').toString();
+            evt.change();
         };
 
         this.getType = function () {
@@ -18,12 +19,14 @@ define(function () {
         };
         this.setType = function (type) {
             currentType = (type || '').toString();
+            evt.change();
         };
         this.hasType = function () {
             return !!currentType;
         };
         this.clearType = function () {
             currentType = '';
+            evt.change();
         };
 
         function cloneMap(map) {
@@ -53,9 +56,11 @@ define(function () {
         };
         this.setPosition = function (position) {
             updateMap(currentPosition, position);
+            evt.change();
         };
         this.resetPosition = function () {
             currentPosition = {};
+            evt.change();
         };
 
         this.getStyle = function () {
@@ -63,9 +68,11 @@ define(function () {
         };
         this.setStyle = function (style) {
             updateMap(currentStyle, style);
+            evt.change();
         };
         this.resetStyle = function () {
             currentStyle = {};
+            evt.change();
         };
 
         this.getConfig = function () {
@@ -73,9 +80,11 @@ define(function () {
         };
         this.setConfig = function (config) {
             updateMap(currentConfig, config);
+            evt.change();
         };
         this.resetConfig = function () {
             currentStyle = {};
+            evt.change();
         };
 
         this.getProp = function (prop) {
@@ -91,6 +100,7 @@ define(function () {
             }
         };
         this.setProp = function (prop, value) {
+            console.log(prop, value);
             prop = (prop || '').toString();
             if (prop.match(/^-val-/)) {
                 this.setValue(value);
@@ -131,8 +141,8 @@ define(function () {
             currentConfig = {};
 
             if (jsonData) {
-                currentValue = (jsonData.value || '').toString;
-                currentType = (jsonData.type || '').toString;
+                currentValue = (jsonData.value || '').toString();
+                currentType = (jsonData.type || '').toString();
                 if (jsonData.position) {
                     this.setPosition(jsonData.position);
                 }
@@ -181,5 +191,7 @@ define(function () {
             }
             return jsonData;
         };
+
+        this.fromJSON(jsonData);
     }
 })

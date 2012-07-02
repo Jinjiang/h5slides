@@ -20,4 +20,5 @@ requirejs(['editor', 'player', 'manager', 'backend', 'data'],
 
     load();
     data.onchange = backend.mark;
+    data.onreset = backend.clear;
 });

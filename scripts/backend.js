@@ -5,6 +5,7 @@ define(['data'], function (data) {
         },
         import: function () {
             var dataString = localStorage.getItem('draft');
+            console.log('import', dataString);
             if (dataString) {
                 var dataJSON = JSON.parse(dataString);
                 data.fromJSON(dataJSON);
@@ -23,6 +24,9 @@ define(['data'], function (data) {
         },
         export: function () {
             // console.log('export');
+        },
+        clear: function () {
+            localStorage.removeItem('draft');
         },
         mark: function () {
             var dataJSON = data.toJSON();

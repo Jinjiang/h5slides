@@ -1,4 +1,4 @@
-define(['data/slide'], function (Slide) {
+define(['data/slide', 'data/event'], function (Slide, evt) {
     var data = {};
 
     var currentTheme = '';
@@ -13,7 +13,7 @@ define(['data/slide'], function (Slide) {
     data.setTitle = function (title) {
         title = title || '';
         currentTitle = title.toString();
-        data.onchange && data.onchange();
+        evt.change();
     };
 
     data.getTheme = function () {
@@ -22,25 +22,25 @@ define(['data/slide'], function (Slide) {
     data.setTheme = function (theme) {
         theme = theme || '';
         currentTheme = theme.toString();
-        data.onchange && data.onchange();
+        evt.change();
     };
 
     data.add = function (page) {
         var slide = new Slide();
         var index = page - 1;
         slideList.splice(index + 1, 0, slide);
-        data.onchange && data.onchange();
+        evt.change();
         return slide;
     };
     data.del = function (page) {
         var index = page - 1;
         slideList.splice(index, 1);
-        data.onchange && data.onchange();
+        evt.change();
     };
     data.set = function (page, slide) {
         var index = page - 1;
         slideList[index] = slide;
-        data.onchange && data.onchange();
+        evt.change();
     };
     data.get = function (page) {
         var index = page - 1;
@@ -65,10 +65,12 @@ define(['data/slide'], function (Slide) {
         currentTitle = jsonData.title || '';
         currentTheme = jsonData.theme || '';
         slideList = [];
-        jsonData.slides.forEach(function (slideData) {
-            var slide = new Slide(slideData);
-            slideList.push(slide);
-        });
+        if (jsonData.slides) {
+            jsonData.slides.forEach(function (slideData) {
+                var slide = new Slide(slideData);
+                slideList.push(slide);
+            });
+        }
         if (slideList.length === 0) {
             slideList.push(new Slide());
         }
@@ -91,6 +93,10 @@ define(['data/slide'], function (Slide) {
 
     data.reset = function () {
         data.fromJSON({});
+        data.onreset && data.onreset();
+    };
+
+    evt.onchange = function () {
         data.onchange && data.onchange();
     };
 

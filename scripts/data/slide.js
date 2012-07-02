@@ -1,4 +1,4 @@
-define(['data/item'], function (Item) {
+define(['data/item', 'data/event'], function (Item, evt) {
     return function (jsonData) {
         var DEFAULT_ITEM_NAME_MAP = {
             title: true,
@@ -17,6 +17,7 @@ define(['data/item'], function (Item) {
         };
         this.setLayout = function (layout) {
             currentLayout = (layout || '').toString();
+            evt.change();
         };
 
         this.getItem = function (name) {
@@ -37,6 +38,7 @@ define(['data/item'], function (Item) {
             if (name === 'slide') {
                 item.setType('slide');
             }
+            evt.change();
         };
         this.removeItem = function (name) {
             name = (name || '').toString();
