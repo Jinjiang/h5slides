@@ -4,7 +4,7 @@ define(['data'], function (data) {
             // console.log('init backend');
         },
         import: function () {
-            var dataString = localStorage.getItem('draft');
+            var dataString = localStorage.getItem('draft2');
             console.log('import', dataString);
             if (dataString) {
                 var dataJSON = JSON.parse(dataString);
@@ -26,11 +26,11 @@ define(['data'], function (data) {
             // console.log('export');
         },
         clear: function () {
-            localStorage.removeItem('draft');
+            localStorage.removeItem('draft2');
         },
         mark: function () {
             var dataJSON = data.toJSON();
-            localStorage.setItem('draft', JSON.stringify(dataJSON));
+            localStorage.setItem('draft2', JSON.stringify(dataJSON));
         }
     }
 });
