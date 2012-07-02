@@ -1,6 +1,3 @@
-RequireJS
-    player
-
 widget system (photo/chart)
 resource system (photo)
 undo/revert system
