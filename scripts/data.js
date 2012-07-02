@@ -84,9 +84,14 @@ define(['data/slide'], function (Slide) {
             jsonData.theme = currentTheme;
         }
         slideList.forEach(function (slide) {
-            slides.push(slide.toJSON());
+            jsonData.slides.push(slide.toJSON());
         });
         return jsonData;
+    };
+
+    data.reset = function () {
+        data.fromJSON({});
+        data.onchange && data.onchange();
     };
 
     return data;

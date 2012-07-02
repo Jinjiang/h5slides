@@ -8,8 +8,10 @@ define(['lib/zepto', 'data'], function ($, data) {
             var that = this;
 
             btnRestart.click(function () {
-                // data.reset();
-                that.onreset && that.onreset();
+                if (confirm('重新编辑？')) {
+                    data.reset();
+                    that.onreset && that.onreset();
+                }
             });
             btnPlay.click(function () {
                 that.onplay && that.onplay();

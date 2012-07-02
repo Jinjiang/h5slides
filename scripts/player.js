@@ -73,6 +73,14 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
             root.empty().attr('data-design', design);
             player.attr('data-background-design', design);
 
+            function setMap(item, map) {
+                if (map && item) {
+                    $.each(map, function (k, v) {
+                        item.css(k, v);
+                    });
+                }
+            }
+
             // 插入每一张幻灯片
             for (var i = 1; i <= length; i++) {
                 var page = data.get(i);
@@ -119,49 +127,16 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
                     content2: true,
                     slide: true
                 }, function (k, v) {
-                    // setPosition(name, itemData.getPosition());
-                    // setStyle(name, itemData.getStyle());
+                    var item = section.find('[data-item="' + k + '"]');
+                    var itemData = page.getItem(k);
+                    setMap(item, itemData.getPosition());
+                    setMap(item, itemData.getStyle());
                     widgetManager.render(
-                        section.find('[data-item="' + k + '"]'),
-                        page.getItem(k)
+                        item,
+                        itemData
                     );
                 });
 
-                // widgetManager.render(header.find('[data-item="title"]'), page.getItem('title'));
-                // widgetManager.render(content.find('[data-item="subtitle"]'), items.subtitle);
-                // widgetManager.render(content.find('[data-item="subtitle2"]'), items.subtitle2);
-                // widget[items.content.type || 'text'].render(content.find('[data-item="content"]'), items.content);
-                // widget[(items.content2 ? items.content2.type : '') || 'text'].render(content.find('[data-item="content2"]'), items.content2);
-
-                // 设置幻灯片各元素的自定义样式和位置
-                // $.each(items, function (name, itemData) {
-                //     var item;
-                //     if (name == 'slide') {
-                //         item = section;
-                //     }
-                //     else {
-                //         item = section.find('[data-item="' + name + '"]');
-                //     }
-
-                //     if (itemData.style) {
-                //         $.each(itemData.style, function (key, value) {
-                //             if (key == '-ppt-size') {
-                //                 if (value && value != 'normal') {
-                //                     item.addClass(value + '-font-size');
-                //                 }
-                //             }
-                //             else {
-                //                 item.css(key, value);
-                //             }
-                //         });
-                //     }
-
-                //     if (itemData.position) {
-                //         $.each(itemData.position, function (key, value) {
-                //             item.css(key, value);
-                //         });
-                //     }
-                // });
             }
 
             // 初始化变量

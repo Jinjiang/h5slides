@@ -1,5 +1,5 @@
-requirejs(['editor', 'player', 'manager', 'backend'],
-    function (editor, player, manager, backend) {
+requirejs(['editor', 'player', 'manager', 'backend', 'data'],
+    function (editor, player, manager, backend, data) {
 
     function load() {
         backend.import();
@@ -19,4 +19,5 @@ requirejs(['editor', 'player', 'manager', 'backend'],
     manager.onreset = load;
 
     load();
+    data.onchange = backend.mark;
 });
