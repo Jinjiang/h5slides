@@ -9,7 +9,9 @@ define(['lib/zepto', 'data', 'status'], function ($, data, status) {
             mod.onsubmit && mod.onsubmit(value);
         });
         update(data.get(status.page).getItem(status.name).getProp(status.prop));
-        textarea.focus();
+        setTimeout(function () {
+            textarea.focus();
+        }, 13);
     }
     function update(value) {
         layerRoot.find('textarea').val(value);
