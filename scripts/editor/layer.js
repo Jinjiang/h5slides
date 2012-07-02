@@ -49,6 +49,11 @@ define(['lib/zepto',
                 layerRoot.removeAttr('data-type').hide();
             }
         },
+        adjust: function () {
+            if (current) {
+                adjust();
+            }
+        },
         hide: function () {
             if (current) {
                 current.clear();

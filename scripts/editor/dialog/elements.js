@@ -5,6 +5,7 @@ define(['lib/zepto'], function ($) {
         content: $('#dialog-content'),
         btnSubmit: $('#dialog-btn-ok'),
         btnReset: $('#dialog-btn-reset'),
-        btnCancel: $('#dialog-btn-cancel')
+        btnCancel: $('#dialog-btn-cancel'),
+        mask: $('#mask-layer')
     };
 });

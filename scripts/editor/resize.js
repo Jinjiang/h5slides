@@ -76,6 +76,10 @@ define(['lib/zepto'], function ($) {
         title.css({
             'left': that.side + 'px'
         });
+
+        setTimeout(function () {
+            that.onresize && that.onresize();
+        }, 500);
     }
 
     function resizeHandler() {

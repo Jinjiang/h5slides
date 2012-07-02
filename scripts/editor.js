@@ -94,6 +94,12 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
         layerMod.hide();
     };
 
+    resizeMod.onresize = function () {
+        layerMod.adjust();
+        typeMod.adjust();
+        dialogMod.adjust();
+    };
+
     return {
         init: init,
         load: load

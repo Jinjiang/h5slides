@@ -40,6 +40,7 @@ define(['lib/zepto', 'data', 'status',
 
                 current.build(title);
                 elements.header.text(title);
+                elements.mask.show();
                 elements.root.attr('data-type', type).show();
                 adjust();
             }
@@ -47,6 +48,12 @@ define(['lib/zepto', 'data', 'status',
                 page = name = prop = '';
                 elements.header.text('');
                 elements.root.removeAttr('data-type').hide();
+                elements.mask.hide();
+            }
+        },
+        adjust: function () {
+            if (current) {
+                adjust();
             }
         },
         hide: function () {
@@ -57,6 +64,7 @@ define(['lib/zepto', 'data', 'status',
             page = name = prop = '';
             elements.header.text('');
             elements.root.removeAttr('data-type').hide();
+            elements.mask.hide();
         }
     };
 
