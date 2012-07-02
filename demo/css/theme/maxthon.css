@@ -11,15 +11,16 @@
 [data-background-design="maxthon"] {
     background-color: white;
 }
-[data-background-layout="title"] {
+[data-background-layout="maxthon_title"] {
     background-color: #073fa0;
 }
-[data-background-layout="subtitle"] {
+[data-background-layout="maxthon_subtitle"] {
     background-color: #073fa0;
 }
 
 [data-design="maxthon"] {
     color: #333;
+    background-color: transparent;
 }
 [data-design="maxthon"] a {
     color: #e36c09;

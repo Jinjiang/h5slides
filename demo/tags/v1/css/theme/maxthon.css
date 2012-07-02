@@ -1,0 +1,52 @@
+/**
+    @fileOverview
+    幻灯片主题样式：maxthon
+    用于播放器
+    @author Jinjiang<zhaojinjiang@yahoo.com.cn>
+ */
+
+
+
+
+[data-background-design="maxthon"] {
+    background-color: white;
+}
+[data-background-layout="title"] {
+    background-color: #073fa0;
+}
+[data-background-layout="subtitle"] {
+    background-color: #073fa0;
+}
+
+[data-design="maxthon"] {
+    color: #333;
+}
+[data-design="maxthon"] a {
+    color: #e36c09;
+}
+
+[data-design="maxthon"] [data-layout] {
+    background-image: url(maxthon/bg-normal.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+[data-design="maxthon"] [data-layout="title"] {
+    background-image: url(maxthon/bg-title.jpg);
+}
+[data-design="maxthon"] [data-layout="subtitle"] {
+    background-image: none;
+}
+[data-design="maxthon"] [data-layout="title"],
+[data-design="maxthon"] [data-layout="subtitle"] {
+    background-color: #073fa0;
+}
+[data-design="maxthon"] [data-layout="title"],
+[data-design="maxthon"] [data-layout="subtitle"] {
+    color: white;
+}
+[data-design="maxthon"] [data-layout="title"] a,
+[data-design="maxthon"] [data-layout="subtitle"] a {
+    color: yellow;
+}
+
+

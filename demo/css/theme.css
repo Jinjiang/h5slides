@@ -9,12 +9,31 @@
 
 /***** General *****/
 
+[data-background-design] {
+    background-color: white;
+}
+
+[data-design] {
+    color: black;
+}
+
+[data-background-design],
+[data-design],
+[data-layout],
 [data-item] {
+    background: white none no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+[data-item] {
+    background-color: transparent;
     opacity: 0;
     position: absolute;
     margin: 0;
     padding: 0;
     line-height: 1.5;
+    min-height: 1.5em;
 
     -webkit-transform-origin: left top;
     -moz-transform-origin: left top;

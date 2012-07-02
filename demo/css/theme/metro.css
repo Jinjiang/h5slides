@@ -1,0 +1,104 @@
+/**
+    @fileOverview
+    幻灯片主题样式：metro
+    用于播放器
+    @author Jinjiang<zhaojinjiang@yahoo.com.cn>
+ */
+
+
+
+#COLOR_SET {
+    color: #008641;
+    color: #662D91;
+
+    color: #0072BC;
+    color: #CD4900;
+}
+
+
+[data-background-design="metro"] {
+    /*background-color: #008641;*/
+    /*background-image: url(metro/bg-title.png);*/
+    background-color: #f0f0f0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+[data-background-layout="metro_title"],
+[data-background-layout="metro_subtitle"] {
+    /*background-color: #0072BC;*/
+    /*background-image: url(metro/bg-title.png);*/
+}
+
+[data-design="metro"] {
+    color: #fff;
+    background-color: transparent;
+    font-family: "Segoe UI", Tahoma, Arial, Verdana, sans-serif;
+}
+[data-design="metro"] a {
+    color: yellow;
+}
+
+[data-design="metro"] [data-item] {
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+[data-design="metro"] [data-item="title"] {
+    height: 92px;
+}
+[data-design="metro"] [data-layout="title"] [data-item="title"] {
+    height: 128px;
+}
+[data-design="metro"] [data-layout] [data-item="subtitle"],
+[data-design="metro"] [data-layout] [data-item="subtitle2"] {
+    top: 190px;
+    height: 65px;
+}
+[data-design="metro"] [data-layout] [data-item="content"],
+[data-design="metro"] [data-layout] [data-item="content2"] {
+    top: 200px;
+}
+[data-design="metro"] [data-layout="title"] [data-item="content"] {
+    top: 395px;
+    padding: 20px;
+}
+[data-design="metro"] [data-layout="subtitle"] [data-item="content"] {
+    top: 420px;
+    padding: 20px;
+}
+[data-design="metro"] [data-layout="double-subtitle"] [data-item="content"],
+[data-design="metro"] [data-layout="double-subtitle"] [data-item="content2"] {
+    top: 280px;
+}
+
+/*[data-design="metro"] [data-item="title"] {
+    background-color: #CD4900;
+}
+
+[data-design="metro"] [data-item="subtitle"],
+[data-design="metro"] [data-item="subtitle2"] {
+    background-color: #662D91;
+}
+
+[data-design="metro"] [data-item="content"],
+[data-design="metro"] [data-item="content2"] {
+    background-color: #0072BC;
+}*/
+
+[data-design="metro"] [data-item="title"],
+[data-design="metro"] [data-item="title"] {
+    background-color: #008641;
+}
+
+[data-design="metro"] [data-item="subtitle"],
+[data-design="metro"] [data-item="subtitle2"] {
+    background-color: #0072BC;
+}
+
+[data-design="metro"] [data-item="content"],
+[data-design="metro"] [data-item="content2"] {
+    background-color: #662D91;
+}
+
+
+

@@ -154,7 +154,7 @@
         padding: 0 0 0 20px;
     }
 
-    #menu-title {
+    #main-title {
         color: #999999;
         cursor: pointer;
         border: 1px gray dotted;
@@ -162,11 +162,11 @@
         padding: 3px 5px;
     }
 
-    #menu-title.customized {
+    #main-title.empty {
         color: #999999;
     }
 
-    #menu-title:hover {
+    #main-title:hover {
 
         color: white;
         border-color: #ffffff;
@@ -197,13 +197,13 @@
     #menu-ctrl a span:hover {
         background-color: #111111;
     }
-    #menu-ctrl a.ctrl-play span {
+    #menu-ctrl #menu-btn-play span {
         background-position: -55px center;
     }
-    #menu-ctrl a.ctrl-publish span {
+    #menu-ctrl #menu-btn-public span {
         background-position: -115px center;
     }
-    #menu-ctrl a.ctrl-restart span {
+    #menu-ctrl #menu-btn-restart span {
         background-position: -178px center;
     }
 
@@ -436,10 +436,8 @@
 /***** Editor Main *****/
 
     #main {
-        background: white none no-repeat;
         background-size: cover;
         background-position: center center;
-        color: black;
         outline: 3px black solid;
         box-shadow: 2px 2px 2px solid;
     }
@@ -459,9 +457,6 @@
     #slide-content2 {
         display: block;
         border: 1px gray dashed;
-        margin: 0;
-        padding: 0;
-        border-radius: 2px;
     }
     #preview #slide-title:hover,
     #preview #slide-subtitle:hover,
@@ -499,21 +494,18 @@
 /***** Editor Layers *****/
 
     #main .layer,
-    #layer-container > .bar,
-    #layer-container > .menu,
-    #layer-container > .mask,
-    #layer-container > .dialog {
+    #layer-container > .layer {
         position: absolute;
         display: none;
         z-index: 60;
     }
-    #layer-container > .bar {
+    #layer-container > #adjust-layer {
         z-index: 70;
     }
-    #layer-container > .menu {
+    #layer-container > #type-layer {
         z-index: 80;
     }
-    #layer-container > .mask {
+    #layer-container > #mask-layer {
         z-index: 85;
         top: 0;
         left: 0;
@@ -521,74 +513,44 @@
         bottom: 0;
         background: rgba(255,255,255,0.1);
     }
-    #layer-container > .dialog {
+    #layer-container > #dialog-layer {
         z-index: 90;
         background: white;
         border: 3px black solid;
         border-radius: 3px;
         padding: 1em 2em;
-        margin-left: -150px;
         top: 80px;
         box-shadow: 0 0 10px rgba(255,255,255,0.4);
     }
 
+/* type layer */
 
-/* Input Layer */
-
-    #layer-for-input,
-    #layer-for-input-textarea {
-        box-sizing: content-box;
+    #type-layer .current {
+        color: yellow;
     }
 
-    #layer-for-input {
-        top: 0;
-        left: 0;
+/* dialog layer */
+
+    #dialog-header {
+        font-weight: bold;
+    }
+    #dialog-footer {
+        text-align: right;
     }
 
-    #layer-for-input-textarea {
-        display: block;
-        position: absolute;
-        background: white;
-        color: black;
-        border: 1px black solid;
-        border-radius: 5px;
-        overflow: auto;
-        resize: none;
-        padding: 6px 3px;
-    }
-
-
-/* Bar */
-
-    #bar-for-slide {
-        top: 75px;
-        right: 20px;
-        display: none !important; /* hide temporarily */
-        background: #000000;
-        box-shadow: 0 0 7px rgba(0,0,0, 0.5);
-        padding: 2px;
-        line-height: 1;
-        border-radius: 3px;
-    }
-    #bar-for-slide img:hover {
-        box-shadow: 0 0 7px rgba(255,255,255, 0.5)
-    }
-
-
-/* Dialog */
-
-    #dialog-for-color {
-        text-align: center;
-    }
-    #dialog-for-color-result {
-        margin: 1em 2em;
-        height: 1em;
-    }
-    #dialog-for-image-preview {
-        background-size: contain;
-        height: 200px;
-        background-position: center center;
+    #dialog-layer[data-type="img"] .preview {
+        height: 100px;
         background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+    }
+    #dialog-layer[data-type="color"] img {
+        display: block;
+        margin: 1em auto;
+    }
+    #dialog-layer[data-type="color"] .preview {
+        height: 1em;
+        margin: 1em;
     }
 
 
@@ -656,8 +618,11 @@
         -ms-perspective: 300px;
         -o-perspective: 300px;
         perspective: 300px;
-        -webkit-transform-origin: center center;
-        -moz-transform-origin: center 0; /* 存在兼容性问题 */
+        -webkit-transform-origin: center 0;
+        -moz-transform-origin: center 0;
+        -ms-transform-origin: center 0;
+        -o-transform-origin: center 0;
+        transform-origin: center 0;
     }
 
 

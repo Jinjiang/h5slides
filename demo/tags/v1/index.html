@@ -1,0 +1,205 @@
+<!doctype html>
+
+<html>
+<head>
+
+<meta charset="utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<title>在线幻灯片编辑器</title>
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/app.css" />
+<link rel="stylesheet" href="css/theme.css" />
+<link rel="stylesheet" href="css/transition.css" />
+
+</head>
+<body>
+
+<div id="editor-wrapper">
+    
+    <div id="splash">
+        欢迎使用在线幻灯片编辑器<br />
+        <small>Loading...</small>
+    </div>
+
+    <div id="menu">
+
+
+        <div id="menu-ctrl">
+            <a href="#" onclick="return false" id="menu-btn-restart" class="ctrl-restart"><span></span></a>
+            <a href="#" onclick="return false" id="menu-btn-play" class="ctrl-play"><span></span></a>
+            <a href="#" onclick="return false" id="menu-btn-save" class="ctrl-save"><span></span></a>
+        </div>
+
+    </div>
+
+    <div id="sidebar">
+
+        <div id="panel-style" class="panel expanded">
+            <div class="header">
+                <h3>样式</h3>
+            </div>
+            <div class="content">
+                <p class="ps">选定元素后设置相关样式.</p>
+                <div id="panel-style-btn-list">
+                    <p data-key="color">颜色
+                    <img id="panel-style-btn-color-dialog" class="dialog" data-key="color" title="文字颜色" src="images/nav-color.png" />
+                    </p>
+                    <p data-key="-ppt-size">大小
+                    <img id="panel-style-btn-size-small" class="radio" data-key="-ppt-size" data-value="small" title="小字" src="images/nav-auto-adjust.png" />
+                    <img id="panel-style-btn-size-normal" class="radio" data-key="-ppt-size" data-value="normal" title="大小适中" src="images/nav-auto-adjust.png" />
+                    <img id="panel-style-btn-size-large" class="radio" data-key="-ppt-size" data-value="large" title="大字" src="images/nav-auto-adjust.png" />
+                </div>
+            </div>
+        </div>
+
+        <div id="panel-themes" class="panel expanded">
+            <div class="header">
+                <h3>主题</h3>
+            </div>
+            <div class="content">
+                <ul id="panel-themes-list">
+                    <!-- template
+                    <li>Theme 1</li>
+                    -->
+                </ul>
+            </div>
+        </div>
+
+        <div id="panel-layout" class="panel expanded">
+            <div class="header">
+                <h3>布局</h3>
+            </div>
+            <div class="content">
+                <ul id="panel-layout-list">
+                    <!-- template
+                    <li>Layout 1</li>
+                    -->
+                </ul>
+            </div>
+        </div>
+
+        <div id="panel-paginations" class="panel expanded">
+            <div class="header">
+                <h3>浏览</h3>
+            </div>
+            <div class="content">
+                <div class="actions">
+                    <button id="panel-paginations-btn-add">添加页</button>
+                    <button id="panel-paginations-btn-remove">删除页</button>
+                    <div class="controls">
+                        <button id="panel-paginations-btn-previous">前一页</button>
+                        <span id="panel-paginations-current-page"></span> /
+                        <span id="panel-paginations-total-page"></span>
+                        <button id="panel-paginations-btn-next">后一页</button>
+                    </div>
+                </div>
+                <ol id="panel-paginations-list">
+                    <!-- template
+                    <li>Title 1</li>
+                    -->
+                </ol>
+            </div>
+        </div>
+
+    </div>
+    <div id="menu-info">
+        演示名称：<span id="menu-title">untitled</span>
+    </div>
+    <div id="main">
+
+        <div id="preview" data-design="blank">
+            <div id="slide" data-layout="normal" data-page="1">
+                <div id="slide-title" data-item="title">
+                    <!-- template: 标题 -->
+                </div>
+                <div id="slide-subtitle" data-item="subtitle">
+                    <!-- template: 副标题 -->
+                </div>
+                <div id="slide-subtitle2" data-item="subtitle2">
+                    <!-- template: 副标题2 -->
+                </div>
+                <div id="slide-content" data-item="content">
+                    <!-- template: 正文 -->
+                </div>
+                <div id="slide-content2" data-item="content2">
+                    <!-- template: 正文2 -->
+                </div>
+            </div>
+        </div>
+
+        <div id="layer-for-input" data-type="text" class="layer">
+            <textarea id="layer-for-input-textarea"></textarea>
+        </div>
+
+    </div>
+
+    <div id="layer-container">
+
+        <div id="bar-for-slide" class="bar">
+            <img id="bar-for-block-btn-image-dialog" class="dialog" data-key="image" title="幻灯片背景" src="images/nav-image.png" />
+        </div>
+
+        <div id="layer-for-mask" class="mask">
+        </div>
+
+        <div id="dialog-for-color" class="dialog">
+            <strong>请在此选择颜色</strong><br /><br />
+            <img src="images/colormap.gif" usemap="#colormap" alt="colormap">
+            <map id="dialog-for-color-map" name="colormap">
+            </map>
+            <div id="dialog-for-color-result"></div>
+            <button id="dialog-for-color-btn-default">使用默认色</button>
+        </div>
+
+        <div id="dialog-for-image" class="dialog">
+            <p><strong id="dialog-for-image-title">请在此选择图片</strong></p>
+            <p><input type="file" id="dialog-for-image-input" /></p>
+            <div id="dialog-for-image-preview"></div>
+            <p><button id="dialog-for-image-btn-ok">确定更改</button>
+                <button id="dialog-for-image-btn-clear">清除图片</button>
+                <button id="dialog-for-image-btn-cancel">放弃修改</button></p>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="player-wrapper">
+
+    <div id="player">
+    </div>
+
+    <div id="player-helper">
+    </div>
+
+</div>
+
+<script src="data/default.js"></script>
+<script src="data/layout.js"></script>
+<script src="data/themes.js"></script>
+<script src="js/lib/zepto.js"></script>
+<script src="js/lib/base-mod.js"></script>
+<script src="js/lib/data.js"></script>
+<script src="js/lib/text-parser.js"></script>
+<script src="js/ui/splash.js"></script>
+<script src="js/ui/menu.js"></script>
+<script src="js/ui/wrapper.js"></script>
+<script src="js/ui/sidebar.js"></script>
+<script src="js/ui/sidebar-style.js"></script>
+<script src="js/ui/sidebar-paginations.js"></script>
+<script src="js/ui/sidebar-layout.js"></script>
+<script src="js/ui/sidebar-themes.js"></script>
+<script src="js/ui/slide.js"></script>
+<script src="js/ui/layer-input.js"></script>
+<script src="js/ui/layer-block.js"></script>
+<script src="js/ui/layer-mask.js"></script>
+<script src="js/ui/dialog-color.js"></script>
+<script src="js/ui/dialog-image.js"></script>
+<script src="js/app-css.js"></script>
+<script src="js/app-player.js"></script>
+<script src="js/app-editor.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
