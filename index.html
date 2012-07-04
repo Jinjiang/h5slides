@@ -199,7 +199,7 @@
 
 <h3>使用定义好的皮肤</h3>
 
-<p>打开<code>/data/themes.js</code>，加入一行数据，比如：<code>{"key": "blue-summer", "title": "蓝色夏天"}</code>，同时，在<code>/css/theme/</code>下新建一个该皮肤的同名目录，并放入<code>logo.png</code>作为皮肤展示时的缩略图。然后在编辑器左侧边栏的“主题”面板下会看到这个主题的缩略图。点击该缩略图，即可应用主题。</p>
+<p>打开<code>/scripts/editor/theme.js</code>，在<code>THEME_ARRAY</code>中加入一行数据，比如：<code>{"key": "blue-summer", "title": "蓝色夏天"}</code>，同时，在<code>/css/theme/</code>下新建一个该皮肤的同名目录，并放入<code>logo.png</code>作为皮肤展示时的缩略图。然后在编辑器左侧边栏的“主题”面板下会看到这个主题的缩略图。点击该缩略图，即可应用主题。</p>
 
 <hr><h2>动画开发文档</h2>
 
@@ -262,42 +262,42 @@
 <li>
 <code>/css/transition/</code>: 切换动画集合，每个动画是一个同名css文件</li>
 <li>
-<code>/js/</code>: 脚本文件</li>
-<li>
-<code>/js/lib/</code>: 基础函数库</li>
-<li>
-<code>/js/ui/</code>: 界面相关的脚本</li>
-<li>
-<code>/data/</code>: 脚本数据，包括可用布局列表、可选主题列表、初始化数据信息等</li>
+<code>/scripts/</code>: 脚本文件</li>
 </ul><hr><h2>数据格式说明文档</h2>
 
-<p>默认数据保存在<code>/data/default.js</code>中，变量名为<code>defaultData</code>。</p>
+<p>默认数据保存在<code>window.localStorage</code>中，键名为<code>draft2</code>，JSON格式，类似如下结构：</p>
 
-<pre><code>var defaultData = {
-    "theme": "blank",
-    "slides": [
-        {
-            "layout": "title",
-            "content": {
-                "title": "幻灯片标题",
-                "content": "你的名字"
-            }
+<pre><code>{
+  "theme": "blank",
+  "slides": [
+    {
+      "items": {
+        "title": {
+          "value": "Title Here",
+          "style": {
+            "color": "#FF0000"
+          }
         },
-        {
-            "layout": "normal",
-            "content": {
-                "title": "正文标题",
-                "content": "正文内容\n是可以多行显示的"
-            }
+        "content": {
+          "value": "Content Here"
         },
-        {
-            "layout": "subtitle",
-            "content": {
-                "title": "THE END",
-                "content": "谢谢大家"
-            }
+        "slide": {
+          "type": "slide"
         }
-    ]
+      },
+      "layout": "title"
+    },
+    {
+      "items": {
+        "title": {
+          "value": "Title2 Here"
+        },
+        "content": {
+          "value": "Content2 Here"
+        }
+      }
+    }
+  ]
 };
 </code></pre>
 
@@ -315,23 +315,21 @@
 
 <p>某张幻灯片的布局类型，有效的值有：<code>title</code>、<code>subtitle</code>、<code>normal</code>、<code>double</code>、<code>double-subtitle</code></p>
 
-<h4><code>slides[i].content[key]</code></h4>
+<h4><code>slides[i].items[key]</code></h4>
 
 <p>某张幻灯片的所有内部元素的文字内容，有效的key值有：<code>title</code>、<code>subtitle</code>、<code>subtitle2</code>、<code>content</code>、<code>content2</code></p>
 
-<h4><code>slides[i].position[key][cssName]</code></h4>
+<h4><code>slides[i].items[key].position[cssName]</code></h4>
 
 <p>某张幻灯片的自定义元素尺寸和位置，有效的key值同上，有效的cssName值有：<code>left</code>、<code>top</code>、<code>width</code>、<code>height</code>。</p>
 
 <p>目前我们的编辑器暂不支持编辑尺寸和位置，使用时可以通过直接修改<code>defaultData</code>的值来应用这一规则。</p>
 
-<h4><code>slides[i].style[key][cssName]</code></h4>
+<h4><code>slides[i].items[key].style[cssName]</code></h4>
 
-<p>某张幻灯片的自定义元素尺寸和位置，有效的key值在同上的基础上外加一个<code>slide</code>，表示该幻灯片整体的样式，有效的cssName值除了上一条提到的属性值外，还不支持：<code>right</code>、<code>bottom</code>；另外支持形如<code>-ppt-*</code>的属性值，以备扩展。</p>
+<p>某张幻灯片的自定义元素尺寸和位置，有效的key值在同上的基础上外加一个<code>slide</code>，表示该幻灯片整体的样式，有效的cssName值除了上一条提到的属性值外，还不支持：<code>right</code>、<code>bottom</code>。</p>
 
-<p>目前已有的扩展只有一个，就是<code>-ppt-size</code>，用来控制文字大小，可选的<code>-ppt-size</code>属性值有：<code>small</code>、<code>normal</code>、<code>large</code>。</p>
-
-<p>目前我们的编辑器暂支持编辑<code>color</code>、<code>-ppt-size</code>和<code>slide</code>下的<code>background-image</code>这几个css属性。若想使用其它css属性，可以通过直接修改<code>defaultData</code>的值来应用这一规则。</p>
+<p>目前我们的编辑器暂支持编辑<code>color</code>、<code>background-image</code>等几个css属性。</p>
         </article>
       </div>
     </div>
