@@ -150,7 +150,7 @@
 
 ### 使用定义好的皮肤
 
-打开`/data/themes.js`，加入一行数据，比如：`{"key": "blue-summer", "title": "蓝色夏天"}`，同时，在`/css/theme/`下新建一个该皮肤的同名目录，并放入`logo.png`作为皮肤展示时的缩略图。然后在编辑器左侧边栏的“主题”面板下会看到这个主题的缩略图。点击该缩略图，即可应用主题。
+打开`/scripts/editor/theme.js`，在`THEME_ARRAY`中加入一行数据，加入一行数据，比如：`{"key": "blue-summer", "title": "蓝色夏天"}`，同时，在`/css/theme/`下新建一个该皮肤的同名目录，并放入`logo.png`作为皮肤展示时的缩略图。然后在编辑器左侧边栏的“主题”面板下会看到这个主题的缩略图。点击该缩略图，即可应用主题。
 
 ----
 
@@ -209,39 +209,42 @@
 * `/css/`: 基本样式文件
 * `/css/theme/`: 主题样式集合，每个主题是一个同名css文件，可以伴随同名文件夹包含更多内容
 * `/css/transition/`: 切换动画集合，每个动画是一个同名css文件
-* `/js/`: 脚本文件
-* `/js/lib/`: 基础函数库
-* `/js/ui/`: 界面相关的脚本
-* `/data/`: 脚本数据，包括可用布局列表、可选主题列表、初始化数据信息等
+* `/scripts/`: 脚本文件
 
 ----
 
 ## 数据格式说明文档
 
-默认数据保存在`/data/default.js`中，变量名为`defaultData`。
+默认数据保存在`window.localStorage`中，键名为`draft2`，JSON格式，类似如下结构：
 
-    var defaultData = {
+    {
         "theme": "blank",
         "slides": [
             {
-                "layout": "title",
-                "content": {
-                    "title": "幻灯片标题",
-                    "content": "你的名字"
-                }
+                "items": {
+                    "title": {
+                        "value": "Title Here",
+                        "style": {
+                            "color": "#FF0000"
+                        }
+                    },
+                    "content": {
+                        "value": "Content Here"
+                    },
+                    "slide": {
+                        "type": "slide"
+                    }
+                },
+                "layout": "title"
             },
             {
-                "layout": "normal",
-                "content": {
-                    "title": "正文标题",
-                    "content": "正文内容\n是可以多行显示的"
-                }
-            },
-            {
-                "layout": "subtitle",
-                "content": {
-                    "title": "THE END",
-                    "content": "谢谢大家"
+                "items": {
+                    "title": {
+                        "value": "Title2 Here"
+                    },
+                    "content": {
+                        "value": "Content2 Here"
+                    }
                 }
             }
         ]
@@ -261,21 +264,18 @@
 
 某张幻灯片的布局类型，有效的值有：`title`、`subtitle`、`normal`、`double`、`double-subtitle`
 
-#### `slides[i].content[key]`
+#### `slides[i].items[key].content[key]`
 
 某张幻灯片的所有内部元素的文字内容，有效的key值有：`title`、`subtitle`、`subtitle2`、`content`、`content2`
 
-#### `slides[i].position[key][cssName]`
+#### `slides[i].items[key].position[cssName]`
 
 某张幻灯片的自定义元素尺寸和位置，有效的key值同上，有效的cssName值有：`left`、`top`、`width`、`height`。
 
-目前我们的编辑器暂不支持编辑尺寸和位置，使用时可以通过直接修改`defaultData`的值来应用这一规则。
+目前我们的编辑器暂不支持编辑尺寸和位置。
 
-#### `slides[i].style[key][cssName]`
+#### `slides[i].items[key].style[cssName]`
 
-某张幻灯片的自定义元素尺寸和位置，有效的key值在同上的基础上外加一个`slide`，表示该幻灯片整体的样式，有效的cssName值除了上一条提到的属性值外，还不支持：`right`、`bottom`；另外支持形如`-ppt-*`的属性值，以备扩展。
+某张幻灯片的自定义元素尺寸和位置，有效的key值在同上的基础上外加一个`slide`，表示该幻灯片整体的样式，有效的cssName值除了上一条提到的属性值外，还不支持：`right`、`bottom`。
 
-目前已有的扩展只有一个，就是`-ppt-size`，用来控制文字大小，可选的`-ppt-size`属性值有：`small`、`normal`、`large`。
-
-目前我们的编辑器暂支持编辑`color`、`-ppt-size`和`slide`下的`background-image`这几个css属性。若想使用其它css属性，可以通过直接修改`defaultData`的值来应用这一规则。
-
+目前我们的编辑器暂支持编辑`color`、`background-image`等几个css属性。
