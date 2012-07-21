@@ -456,7 +456,7 @@
     #slide-content,
     #slide-content2 {
         display: block;
-        border: 1px gray dashed;
+        border: 3px gray dashed;
     }
     #preview #slide-title:hover,
     #preview #slide-subtitle:hover,
