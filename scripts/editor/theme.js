@@ -1,4 +1,4 @@
-define(['lib/zepto', 'data', 'status'], function ($, data, status) {
+define(['lib/zepto', 'data', 'status', 'stylesheet'], function ($, data, status, stylesheet) {
     var THEME_ARRAY = [
         {"key": "blank", "title": "默认"}
     ];
@@ -27,6 +27,7 @@ define(['lib/zepto', 'data', 'status'], function ($, data, status) {
     }
 
     function update(key) {
+        stylesheet.load('theme', key);
         list.find('li').each(function (index, item) {
             item = $(item);
             if (item.attr('data-key') == key) {
