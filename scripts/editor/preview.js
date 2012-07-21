@@ -1,6 +1,7 @@
 define(['lib/zepto', 'data', 'status',
     'editor/widget', 'editor/dialog', 'editor/layer'
 ], function ($, data, status, widgetManager, dialogMod, layerMod) {
+    var background = $('#main');
     var preview = $('#preview');
     var slide = $('#slide');
 
@@ -33,12 +34,21 @@ define(['lib/zepto', 'data', 'status',
 
     function setTheme(theme) {
         preview.attr('data-design', theme);
+        udpateBackground();
     }
     function setLayout(layout) {
         itemMap.slide.attr('data-layout', layout);
+        udpateBackground();
+    }
+    function udpateBackground() {
+        var theme = preview.attr('data-design');
+        var layout = itemMap.slide.attr('data-layout');
+        background.attr('data-background-design', theme);
+        background.attr('data-background-layout', theme + '_' + layout);
     }
     function setSlide(slideData) {
         setLayout(slideData.getLayout());
+        udpateBackground();
         $.each(itemMap, function (name, item) {
             setItem(name);
         });
