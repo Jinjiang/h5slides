@@ -8,6 +8,7 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     var itemMod = editorModSet.itemMod;
     var previewMod = editorModSet.previewMod;
     var typeMod = editorModSet.typeMod;
+    var adjustMod = editorModSet.adjustMod;
     var dialogMod = editorModSet.dialogMod;
     var layerMod = editorModSet.layerMod;
     var resizeMod = editorModSet.resizeMod;
@@ -38,6 +39,7 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
         if (page == status.page) {
             previewMod.updateLayout(layout);
             typeMod.adjust();
+            adjustMod.adjust();
         }
     };
     pageMod.onpagechange = function (page) {
@@ -53,6 +55,7 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     previewMod.onselect = function (name) {
         status.name = name;
         typeMod.init();
+        adjustMod.init();
         itemMod.init();
     };
 
@@ -61,6 +64,11 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
             previewMod.updateItem(status.name);
             itemMod.init();
         }
+    };
+
+    adjustMod.onpositionchange = function () {
+        layerMod.adjust();
+        typeMod.adjust();
     };
 
     function checkProp(page, name, prop, value) {
@@ -97,6 +105,7 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     resizeMod.onresize = function () {
         layerMod.adjust();
         typeMod.adjust();
+        adjustMod.adjust();
         dialogMod.adjust();
     };
 

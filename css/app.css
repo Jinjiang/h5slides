@@ -529,6 +529,22 @@
         color: yellow;
     }
 
+/* adjust layer */
+
+    #adjust-layer button {
+        position: absolute;
+    }
+    #adjust-layer #adjust-move {
+        bottom: 100%;
+        right: 100%;
+        cursor: move;
+    }
+    #adjust-layer #adjust-resize {
+        bottom: 0;
+        right: 0;
+        cursor: nw-resize;
+    }
+
 /* dialog layer */
 
     #dialog-header {

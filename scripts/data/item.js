@@ -100,7 +100,6 @@ define(['data/event'], function (evt) {
             }
         };
         this.setProp = function (prop, value) {
-            console.log(prop, value);
             prop = (prop || '').toString();
             if (prop.match(/^-val-/)) {
                 this.setValue(value);
