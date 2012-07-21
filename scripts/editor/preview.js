@@ -128,6 +128,9 @@ define(['lib/zepto', 'data', 'status',
         }).dblclick(function (e) {
             e.stopPropagation();
             edit(name);
+        }).doubleTap(function (e) {
+            e.stopPropagation();
+            edit(name);
         });
     });
 
