@@ -1,10 +1,48 @@
-firefox/opera/ie
+# TODO List
 
-widget system (photo/chart)
-resource system (photo)
-undo/revert system
-plugin system (navigator/brush)
-sortable page list
+## milestones
 
-action system
-WYSIWYG rich text editor (find a open source)
+### milestone1
+
+* image type details
+* font details
+
+### milestone2
+
+* undo/revert system
+
+### milestone3
+
+* player functions
+
+### milestone4
+
+* sortable page list
+
+### further
+
+* plugin system (navigator/brush)
+* widget system (photo/chart)
+* resource system (photo)
+
+* action system
+* WYSIWYG rich text editor (find a open source)
+
+## Details
+
+### [image type details]
+
+#### Dialog HTML
+
+* radio + input file
+* radio + input url
+    * warning
+* preview
+
+#### Data
+
+* data/files.js
+    * files.get(page, name)
+    * files.set(page, name, file)
+    * files.remove(page, name)
+    * files.clear()
