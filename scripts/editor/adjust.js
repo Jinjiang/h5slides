@@ -1,4 +1,4 @@
-define(['data', 'status', 'editor/position', 'editor/resize'], function (data, status, positionManager, resizeMod) {
+define(['data', 'status', 'editor/position', 'editor/resize', 'editor/preview'], function (data, status, positionManager, resizeMod, previewMod) {
 
     var layer = $('#adjust-layer');
     var slide = $('#slide');
@@ -81,8 +81,17 @@ define(['data', 'status', 'editor/position', 'editor/resize'], function (data, s
     }
 
 
+    function edit(e) {
+        var target = e.target;
+        previewMod.editCurrent();
+    }
+
+
     btnMove.bind('mousedown', moveStart);
     btnResize.bind('mousedown', resizeStart);
+    layer.bind('mousedown', function (e) {
+        e.preventDefault();
+    }).dblclick(edit).doubleTap(edit);
 
     var mod = {
         init: function () {

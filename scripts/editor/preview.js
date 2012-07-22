@@ -131,6 +131,12 @@ define(['lib/zepto', 'data', 'status',
         }
     }
 
+    function editCurrent() {
+        if (status.name != 'slide') {
+            edit(status.name);
+        }
+    }
+
     $.each(itemMap, function (name, item) {
         item.click(function (e) {
             e.stopPropagation();
@@ -153,7 +159,8 @@ define(['lib/zepto', 'data', 'status',
         updateStyle: setStyle,
         updatePosition: setPosition,
         updateItem: setItem,
-        focus: focus
+        focus: focus,
+        editCurrent: editCurrent
     };
 
     return mod;
