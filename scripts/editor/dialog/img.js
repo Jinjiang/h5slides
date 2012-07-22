@@ -1,5 +1,5 @@
-define(['lib/zepto', 'data', 'status', 'editor/dialog/elements'],
-        function ($, data, status, elements) {
+define(['lib/zepto', 'data', 'status', 'editor/dialog/elements', 'editor/dialog/img_files'],
+        function ($, data, status, elements, files) {
     var content = elements.content;
 
     function build() {
