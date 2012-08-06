@@ -469,6 +469,11 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
             结束幻灯演示
          */
         function end() {
+            if (!that.previewMode) {
+                alert('播放已结束，现在开始再次从头播放。');
+                nav(1);
+                return;
+            }
             sectionList = null;
             pageNum = null;
             pageLength = null;
@@ -498,14 +503,16 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
 
     return {
         init: function () {
-            // console.log('init player');
         },
         play: function () {
-            // console.log('play');
+            player.previewMode = false;
+            player.play();
+        },
+        preview: function () {
+            player.previewMode = true;
             player.play();
         },
         end: function () {
-            // console.log('end');
             player.end();
         }
     };

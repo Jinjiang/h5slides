@@ -14,7 +14,7 @@ define(['lib/zepto', 'data'], function ($, data) {
                 }
             });
             btnPlay.click(function () {
-                that.onplay && that.onplay();
+                that.onpreview && that.onpreview();
             });
             btnSave.click(function () {
                 that.onsave && that.onsave();

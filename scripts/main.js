@@ -13,7 +13,7 @@ requirejs(['editor', 'player', 'manager', 'backend', 'data'],
     manager.init();
     backend.init();
 
-    manager.onplay = player.play;
+    manager.onpreview = player.preview;
     manager.onend = player.end;
     manager.onsave = backend.export;
     manager.onreset = load;
