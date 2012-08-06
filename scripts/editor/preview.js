@@ -97,6 +97,21 @@ define(['lib/zepto', 'data', 'status',
         var itemData = data.get(status.page).getItem(name);
         widgetManager.preview(item, itemData);
     }
+    function resetPosition() {
+        $.each(itemMap, function (name, item) {
+            if (name == 'slide') {
+                return;
+            }
+            else {
+                setPosition(name, {
+                    left: null,
+                    top: null,
+                    width: null,
+                    height: null
+                });
+            }
+        });
+    }
     function focus(name) {
         var newName = (name || 'slide').toString();
         if (status.name === newName) {
@@ -159,6 +174,7 @@ define(['lib/zepto', 'data', 'status',
         updateStyle: setStyle,
         updatePosition: setPosition,
         updateItem: setItem,
+        resetPosition: resetPosition,
         focus: focus,
         editCurrent: editCurrent
     };

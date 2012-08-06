@@ -7,6 +7,8 @@ define(['lib/zepto', 'data', 'status'], function ($, data, status) {
         {"key": "double-subtitle", "title": "两列带副标题"}
     ];
 
+    var ITEM_NAME_ARRAY = ['title', 'subtitle', 'content', 'subtitle2', 'content2'];
+
     var root = $('#panel-layout');
     var list = $('#panel-layout-list');
 
@@ -47,8 +49,12 @@ define(['lib/zepto', 'data', 'status'], function ($, data, status) {
             return;
         }
         var key = $(this).attr('data-key');
+        var page = data.get(status.page);
         update(key);
-        data.get(status.page).setLayout(key);
+        page.setLayout(key);
+        $.each(ITEM_NAME_ARRAY, function (i, name) {
+            page.getItem(name).resetPosition();
+        });
         mod.onlayoutchange && mod.onlayoutchange(status.page, key);
     });
 

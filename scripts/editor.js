@@ -18,7 +18,7 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     }
 
     function load() {
-        console.log('load');
+        // console.log('load');
         titleMod.init();
         themeMod.init();
         layoutMod.init();
@@ -30,6 +30,8 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     function initItemEditor() {
         dialogMod.hide();
         layerMod.hide();
+        typeMod.init();
+        adjustMod.init();
     }
 
     themeMod.onthemechange = function (theme) {
@@ -38,6 +40,7 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     layoutMod.onlayoutchange = function (page, layout) {
         if (page == status.page) {
             previewMod.updateLayout(layout);
+            previewMod.resetPosition();
             typeMod.adjust();
             adjustMod.adjust();
         }
