@@ -16,7 +16,7 @@
         font-family: "Microsoft Yahei";
     }
     body:after {
-        content: "html5 presentation editor";
+        content: "H5Slides";
     }
 
     /* Scrollbar */

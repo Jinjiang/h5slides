@@ -27,7 +27,7 @@ define(['lib/zepto', 'data', 'status'], function ($, data, status) {
 
     function create(title) {
         var li = $('<li><span class="title"></span></li>');
-        li.find('.title').text(title || '[NO TITLE]');
+        li.find('.title').text(title || '[无标题]');
         return li;
     }
 
@@ -79,7 +79,7 @@ define(['lib/zepto', 'data', 'status'], function ($, data, status) {
         page = parseInt(page);
         var title = data.get(page).getTitle();
         var li = list.find('li:nth-child(' + page + ')');
-        li.find('.title').text(title || '[NO TITLE]');
+        li.find('.title').text(title || '[无标题]');
     }
 
     function change(page) {

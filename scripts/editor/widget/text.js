@@ -17,7 +17,7 @@ define(['lib/zepto'], function ($) {
                 item.text(value);
             }
             else {
-                item.html('[no text]');
+                item.html('[请双击填入文字]');
             }
         }
     };

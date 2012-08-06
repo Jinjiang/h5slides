@@ -22,7 +22,7 @@ define(['lib/zepto'], function ($) {
         preview: function (item, itemData) {
             var src = itemData.getValue();
             if (!src) {
-                item.html('[no img]');
+                item.html('<span style="font-style: italic;">无图无真相 :-(<br>请双击后编辑</span>');
                 return;
             }
             var img = $('<img>').

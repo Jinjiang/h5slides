@@ -2,12 +2,12 @@ define(['data', 'status', 'editor/position'], function (data, status, positionMa
     var layer = $('#type-layer');
 
     var typeMap = {
-        slide: ['slide'],
-        title: ['text'],
-        subtitle: ['text'],
-        subtitle2: ['text'],
-        content: ['text', 'img'],
-        content2: ['text', 'img']
+        slide: [{name: 'slide', title: '背景'}],
+        title: [{name: 'text', title: '字'}],
+        subtitle: [{name: 'text', title: '字'}],
+        subtitle2: [{name: 'text', title: '字'}],
+        content: [{name: 'text', title: '字'}, {name: 'img', title: '图'}],
+        content2: [{name: 'text', title: '字'}, {name: 'img', title: '图'}]
     };
 
     var currentType;
@@ -16,12 +16,12 @@ define(['data', 'status', 'editor/position'], function (data, status, positionMa
     function build(typeList) {
         layer.empty();
         $.each(typeList, function (i, type) {
-            var btn = $('<button></button>').text(type).attr('data-type', type);
+            var btn = $('<button></button>').text(type.title).attr('data-type', type.name);
             btn.click(clickBtn);
             layer.append(btn);
         });
         if (typeList.length === 1) {
-            setCurrent(typeList[0]);
+            setCurrent(typeList[0].name);
         }
     }
 
@@ -62,9 +62,10 @@ define(['data', 'status', 'editor/position'], function (data, status, positionMa
         init: function () {
             var typeList = typeMap[status.name];
             var type = data.get(status.page).getItem(status.name).getType();
+            var firstType = typeList[0] || {};
 
             build(typeList);
-            setCurrent(type || typeList[0] || '');
+            setCurrent(type || firstType.name || '');
             this.adjust();
         },
         adjust: function () {
@@ -74,6 +75,11 @@ define(['data', 'status', 'editor/position'], function (data, status, positionMa
             layer.css('top', offset.top - height);
         },
         getTypeList: function (name) {
+            var typeList = typeMap[name];
+            var result = [];
+            $.each(typeList, function (i, type) {
+                result.push(type.name);
+            });
             return typeMap[name];
         }
     };
