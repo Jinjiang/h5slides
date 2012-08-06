@@ -5,21 +5,21 @@ define(['data'], function (data) {
         },
         import: function () {
             var dataString = localStorage.getItem('draft2');
-            console.log('import', dataString);
+            // console.log('import', dataString);
             if (dataString) {
                 var dataJSON = JSON.parse(dataString);
                 data.fromJSON(dataJSON);
-                console.log('load from localStorage');
+                // console.log('load from localStorage');
             }
             else {
                 var page1 = data.get(1);
                 var page2 = data.add(2);
                 page1.setLayout('title');
-                page1.getItem('title').setValue('Title Here');
-                page1.getItem('content').setValue('Content Here');
-                page2.getItem('title').setValue('Title2 Here');
-                page2.getItem('content').setValue('Content2 Here');
-                console.log('load by default');
+                // page1.getItem('title').setValue('Title Here');
+                // page1.getItem('content').setValue('Content Here');
+                // page2.getItem('title').setValue('Title2 Here');
+                // page2.getItem('content').setValue('Content2 Here');
+                // console.log('load by default');
             }
         },
         export: function () {
