@@ -7,24 +7,74 @@ define(['data', 'status', 'editor/position', 'editor/resize', 'editor/preview'],
     var btnResize = $('#adjust-resize');
 
     var visibility = false;
-    var movingStatus = {};
-    var resizingStatus = {};
+    var touchStatus = "createTouch" in document;
 
-    function moveStart(e) {
-        var offset = positionManager.offset(status.name);
-        movingStatus.oriOffset = positionManager.offset(status.name);
-        movingStatus.oriClientX = e.clientX;
-        movingStatus.oriClientY = e.clientY;
-        $('html').bind('mousemove', moveDoing);
-        $('html').bind('mouseup', moveEnd);
-        e.preventDefault();
+    function edit(e) {
+        var target = e.target;
+        previewMod.editCurrent();
     }
 
-    function moveDoing(e) {
-        var movingLeft = e.clientX - movingStatus.oriClientX;
-        var movingTop = e.clientY - movingStatus.oriClientY;
-        var screenLeft = movingStatus.oriOffset.left + movingLeft;
-        var screenTop = movingStatus.oriOffset.top + movingTop;
+
+    function bindDnd(target, onchangeHandler) {
+        var host = $('html');
+
+        var startTarget = {};
+        var startEvent = {};
+
+        function startDrag(e) {
+            e.preventDefault();
+            startTarget = positionManager.offset(status.name);
+            if (touchStatus) {
+                startEvent.x = e.touches[0].pageX;
+                startEvent.y = e.touches[0].pageY;
+                host.on('touchmove', moveDrag);
+                host.on('touchend', endDrag);
+            }
+            else {
+                startEvent.x = e.clientX;
+                startEvent.y = e.clientY;
+                host.on('mousemove', moveDrag);
+                host.on('mouseup', endDrag);
+            }
+        }
+
+        function moveDrag(e) {
+            var move = {};
+
+            if (touchStatus) {
+                move.x = e.touches[0].pageX - startEvent.x;
+                move.y = e.touches[0].pageY - startEvent.y;
+            }
+            else {
+                move.x = e.clientX - startEvent.x;
+                move.y = e.clientY - startEvent.y;
+            }
+
+            onchangeHandler(startTarget, move);
+        }
+
+        function endDrag(e) {
+            if (touchStatus) {
+                host.off('touchmove', moveDrag);
+                host.off('touchend', endDrag);
+            }
+            else {
+                host.off('mousemove', moveDrag);
+                host.off('mouseup', endDrag);
+            }
+        }
+
+        if (touchStatus) {
+            target.on('touchstart', startDrag);
+        }
+        else {
+            target.on('mousedown', startDrag);
+        }
+    }
+
+    bindDnd(btnMove, function (start, move) {
+        var screenLeft = start.left + move.x;
+        var screenTop = start.top + move.y;
         layer.css('left', screenLeft);
         layer.css('top', screenTop);
         var slideOffset = slide.offset();
@@ -37,30 +87,11 @@ define(['data', 'status', 'editor/position', 'editor/resize', 'editor/preview'],
         positionManager.move(status.name, position);
         data.get(status.page).getItem(status.name).setPosition(position);
         mod.onpositionchange && mod.onpositionchange(status.page, status.name);
-    }
+    });
 
-    function moveEnd(e) {
-        movingStatus = {};
-        $('html').unbind('mousemove', moveDoing);
-        $('html').unbind('mouseup', moveEnd);
-    }
-
-
-    function resizeStart(e) {
-        var offset = positionManager.offset(status.name);
-        resizingStatus.oriOffset = positionManager.offset(status.name);
-        resizingStatus.oriClientX = e.clientX;
-        resizingStatus.oriClientY = e.clientY;
-        $('html').bind('mousemove', resizeDoing);
-        $('html').bind('mouseup', resizeEnd);
-        e.preventDefault();
-    }
-
-    function resizeDoing(e) {
-        var movingLeft = e.clientX - resizingStatus.oriClientX;
-        var movingTop = e.clientY - resizingStatus.oriClientY;
-        var screenWidth = resizingStatus.oriOffset.width + movingLeft;
-        var screenHeight = resizingStatus.oriOffset.height + movingTop;
+    bindDnd(btnResize, function (start, move) {
+        var screenWidth = start.width + move.x;
+        var screenHeight = start.height + move.y;
         layer.css('width', screenWidth);
         layer.css('height', screenHeight);
         var realWidth = screenWidth / resizeMod.scale;
@@ -72,23 +103,8 @@ define(['data', 'status', 'editor/position', 'editor/resize', 'editor/preview'],
         positionManager.move(status.name, size);
         data.get(status.page).getItem(status.name).setPosition(size);
         mod.onpositionchange && mod.onpositionchange(status.page, status.name);
-    }
+    });
 
-    function resizeEnd(e) {
-        resizingStatus = {};
-        $('html').unbind('mousemove', resizeDoing);
-        $('html').unbind('mouseup', resizeEnd);
-    }
-
-
-    function edit(e) {
-        var target = e.target;
-        previewMod.editCurrent();
-    }
-
-
-    btnMove.bind('mousedown', moveStart);
-    btnResize.bind('mousedown', resizeStart);
     layer.bind('mousedown', function (e) {
         e.preventDefault();
     }).dblclick(edit).doubleTap(edit);

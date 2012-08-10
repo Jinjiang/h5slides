@@ -435,8 +435,6 @@
 /***** Editor Main *****/
 
     #main {
-        background-size: cover;
-        background-position: center center;
         outline: 3px black solid;
         box-shadow: 2px 2px 2px solid;
     }
@@ -498,7 +496,7 @@
         display: none;
         z-index: 60;
     }
-    #layer-container > #adjust-layer {
+    #layer-container > #item-layer {
         z-index: 70;
     }
     #layer-container > #type-layer {
