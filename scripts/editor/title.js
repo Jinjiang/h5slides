@@ -10,7 +10,7 @@ define(['lib/zepto', 'data', 'status'], function ($, data, status) {
             label.text(title).removeClass('empty');
         }
         else {
-            label.text('NO TITLE').addClass('empty');
+            label.text('无标题').addClass('empty');
         }
     }
 

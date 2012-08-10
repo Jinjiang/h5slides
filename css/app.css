@@ -70,7 +70,7 @@
         left: 0;
         right: 0;
         top: 0;
-        background: #232729 url(../images/logo.png) no-repeat 20px center;
+        background: #232729;
         border-bottom: 1px solid #101010;
         color: black;
         font-weight: bold;
@@ -145,13 +145,14 @@
         -o-box-flex: 1;
         box-flex: 1;
         line-height: 2;
-        position: absolute;
-        left: 0;
-        top: 68px;
         font-size: 16px;
         line-height: 50px;
         color: #848484;
         padding: 0 0 0 20px;
+    }
+
+    #logo {
+        vertical-align: middle;
     }
 
     #main-title {
@@ -173,8 +174,6 @@
     }
 
     #menu-ctrl {
-        width: 100%;
-        text-align: right;
     }
 
     #menu-ctrl a {
