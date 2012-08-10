@@ -9,10 +9,6 @@
 
 /***** General *****/
 
-[data-background-design] {
-    background-color: white;
-}
-
 [data-design] {
     color: black;
 }
@@ -21,13 +17,16 @@
 [data-design],
 [data-layout],
 [data-item] {
-    background: white none no-repeat;
+    background: transparent none no-repeat;
     background-size: cover;
     background-position: center center;
 }
 
+[data-background-design] {
+    background-color: white;
+}
+
 [data-item] {
-    background-color: transparent;
     opacity: 0;
     position: absolute;
     margin: 0;
