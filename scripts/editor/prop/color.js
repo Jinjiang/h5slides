@@ -5,7 +5,7 @@ define(['lib/zepto', 'data', 'status', 'editor/dialog', 'editor/layer'],
         that.key = prop;
 
         function build(value, title) {
-            var li = $('<li><span class="title"></span>: <button>Edit</button></li>');
+            var li = $('<li><span class="title"></span>: <button>编辑</button></li>');
             li.find('.title').text(title);
             li.find('button').click(function () {
                 status.prop = prop;
