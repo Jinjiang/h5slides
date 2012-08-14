@@ -57,6 +57,13 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
                 css('-ms-transform', 'scale(' + scale + ')').
                 css('-o-transform', 'scale(' + scale + ')').
                 css('-webkit-transform', 'scale(' + scale + ')');
+            var widthDiff = playerSize.width - slideSize.width;
+            if (widthDiff < 0) {
+                root.css('margin', '0 ' + (widthDiff / 2) + 'px');
+            }
+            else {
+                root.css('margin', 'auto');
+            }
         }
 
         /**

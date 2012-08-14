@@ -75,6 +75,9 @@ define(['lib/zepto', 'data', 'status', 'editor/index'],
     };
 
     function checkProp(page, name, prop, value) {
+        if (name == 'title' && prop == '-val-text') {
+            pageMod.updateTitle(page);
+        }
         if (page == status.page && name == status.name) {
             if (prop.match(/^-val-/)) {
                 previewMod.updateContent(name, value);

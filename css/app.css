@@ -589,24 +589,6 @@
         right: 0;
         z-index: 100;
 
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-box;
-        display: -o-box;
-        display: box;
-
-        -webkit-box-pack: center;
-        -moz-box-pack: center;
-        -ms-box-pack: center;
-        -o-box-pack: center;
-        box-pack: center;
-
-        -webkit-box-align: center;
-        -moz-box-align: center;
-        -ms-box-align: center;
-        -o-box-align: center;
-        box-align: center;
-
         -webkit-transition: all 0.5s;
         -moz-transition: all 0.5s;
         -ms-transition: all 0.5s;
