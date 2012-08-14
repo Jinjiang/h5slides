@@ -1,4 +1,4 @@
-define(['lib/zepto', 'data'], function ($, data) {
+define(['lib/zepto', 'data', 'status'], function ($, data, status) {
     var btnRestart = $('#menu-btn-restart');
     var btnPlay = $('#menu-btn-play');
     var btnSave = $('#menu-btn-save');
@@ -10,6 +10,8 @@ define(['lib/zepto', 'data'], function ($, data) {
             btnRestart.click(function () {
                 if (confirm('重新编辑？')) {
                     data.reset();
+                    status.page = 1;
+                    status.name = 'slide';
                     that.onreset && that.onreset();
                 }
             });

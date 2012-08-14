@@ -28,7 +28,7 @@ define(['data/slide', 'data/event'], function (Slide, evt) {
     data.add = function (page) {
         var slide = new Slide();
         var index = page - 1;
-        slideList.splice(index + 1, 0, slide);
+        slideList.splice(index, 0, slide);
         evt.change();
         return slide;
     };
