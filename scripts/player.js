@@ -34,6 +34,8 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
         var prevAction;
 
         var playing = false;
+        var autoplay = false;
+        var autoplayTimer;
         var helperVisibility = false;
         var touchMode = "createTouch" in document;
         var compatibleMode = !window.HTMLVideoElement || window.innerWidth < 350;
@@ -205,9 +207,11 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
 
             // 页码容错
             if (newPageNum == pageNum) {
+                checkAutoplay();
                 return;
             }
             if (newPageNum < 1) {
+                checkAutoplay();
                 return;
             }
 
@@ -262,6 +266,26 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
             else {
                 actionNum = -1;
             }
+
+            checkAutoplay();
+        }
+
+        /**
+            控制是否自动播放
+         */
+        function toggleAutoplay() {
+            autoplay = !autoplay;
+            checkAutoplay();
+        }
+
+        /**
+            检测是否继续自动播放
+         */
+        function checkAutoplay() {
+            clearTimeout(autoplayTimer);
+            if (autoplay) {
+                autoplayTimer = setTimeout(action, 5000);
+            }
         }
 
         /**
@@ -313,6 +337,8 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
                 player[0].scrollLeft =
                 player[0].scrollTop = 0;
             }
+
+            checkAutoplay();
         }
 
         /**
@@ -378,12 +404,16 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
                         event.preventDefault();
                         help();
                         break;
+                    case 32:
+                        event.preventDefault();
+                        toggleAutoplay();
+                        break;
                     case 229:
                         event.preventDefault();
                         alert('请切换输入法到英文输入状态，以保证\n快捷键可以生效。谢谢。');
                         break;
                     default:
-                        ;
+                        // console.log(keyCode);
                     }
                 })
             }
@@ -445,6 +475,7 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
                     'End': '前往最后一页',
                     'G': '快速翻到任意页',
                     'H': '显示/隐藏帮助信息',
+                    '空格': '启用/关闭自动播放',
                     'ESC': '结束播放'
                 };
                 ul = $('<ul></ul>').appendTo(helper);
@@ -476,8 +507,15 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
             结束幻灯演示
          */
         function end() {
-            if (!that.previewMode) {
-                alert('播放已结束，现在开始再次从头播放。');
+            if (that.previewMode) {
+                if (autoplay) {
+                    toggleAutoplay();
+                }
+            }
+            else {
+                if (!autoplay) {
+                    alert('播放已结束，现在开始再次从头播放。');
+                }
                 nav(1);
                 return;
             }
