@@ -1,10 +1,19 @@
 define(['lib/zepto'], function ($) {
 
+    var REGEXP_URL = /(https?:\/\/[\w-]*(?:\.[\w-]*)+\/?[^\s\u4e00-\u9fa5]*)/ig;
+    // var test = 'd 的http://www.baidu.com/asdfasdf?asdfasdf#afdsadf的'.
+    //         replace(REGEXP_URL, '<a href="$1">$1</a>');
+    // console.log(test);
+
     function parseText2Html(text) {
         return (text || '').replace(/\&/g, '&amp;').
                 replace(/\</g, '&lt;').
                 replace(/\>/g, '&gt;').
                 replace(/\n/g, '<br>');
+    }
+
+    function parseLinkFromHtml(html) {
+        return html.replace(REGEXP_URL, '<a href="$1">$1</a>');
     }
 
     var mod = {
@@ -13,7 +22,7 @@ define(['lib/zepto'], function ($) {
         render: function (item, itemData) {
             var value = itemData.getValue();
             if (value) {
-                item.html(parseText2Html(value));
+                item.html(parseLinkFromHtml(parseText2Html(value)));
             }
             else {
                 item.html('');
