@@ -1,4 +1,4 @@
-define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager) {
+define(['lib/zepto', 'data', 'editor/widget', 'stylesheet'], function ($, data, widgetManager, stylesheet) {
 
     /**
         @fileOverview
@@ -77,7 +77,8 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
             var defaultLayout = 'normal';
             var design = data.getTheme();
 
-            // that.notify('loadcss', defaultTransition);
+            var defaultTransition = 'horizontal3d';
+            stylesheet.load('transition', defaultTransition);
 
             root.empty().attr('data-design', design);
             player.attr('data-background-design', design);
@@ -98,9 +99,7 @@ define(['lib/zepto', 'data', 'editor/widget'], function ($, data, widgetManager)
                 // 设置布局信息和切换动画的信息
                 var layout = page.getLayout() || defaultLayout;
                 section.attr('data-layout', layout);
-
-                // var transition = slide.transition || defaultTransition;
-                // section.attr('data-transition', transition);
+                section.attr('data-transition', defaultTransition);
 
                 // 生成幻灯片基本结构
                 var layoutHtml =

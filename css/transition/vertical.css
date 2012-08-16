@@ -1,7 +1,7 @@
-#player section[data-transition="transition_vertical"].next {
+#player section[data-transition="vertical"].next {
     top: 450px;
 }
-#player section[data-transition="transition_vertical"].prev {
+#player section[data-transition="vertical"].prev {
     top: -450px;
 }
 

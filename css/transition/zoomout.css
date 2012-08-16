@@ -1,10 +1,10 @@
-#player section[data-transition="transition_zoomout"].prev {
+#player section[data-transition="zoomout"].prev {
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
     transform: scale(1.2);
 }
-#player section[data-transition="transition_zoomout"].next {
+#player section[data-transition="zoomout"].next {
     -webkit-transform: scale(0.8);
     -moz-transform: scale(0.8);
     -ms-transform: scale(0.8);
