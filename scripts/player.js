@@ -436,7 +436,10 @@ define(['lib/zepto', 'data', 'editor/widget', 'stylesheet'], function ($, data, 
                 });
                 player.longTap(function () {
                     end();
-                })
+                });
+                player.doubleTap(function () {
+                    toggleAutoplay();
+                });
                 player.bind('touchstart', function (e) {
                     e.preventDefault();
                 })
@@ -494,7 +497,7 @@ define(['lib/zepto', 'data', 'editor/widget', 'stylesheet'], function ($, data, 
             play();
             if (touchMode) {
                 player.addClass('touch');
-                alert('请用 ← 或 → 滑动播放\n滑动到最后一张幻灯片可结束播放');
+                alert('请用 ← 或 → 滑动播放\n长按可结束播放\n双击自动播放');
             }
             playing = true;
             document.body.className = 'playing';
