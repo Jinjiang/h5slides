@@ -166,6 +166,9 @@ define(['lib/zepto', 'data', 'editor/widget', 'stylesheet'], function ($, data, 
                 setTimeout(function () {
                     compatiblilityInput.blur();
                 }, 500);
+                setTimeout(function () {
+                    compatiblilityInput.remove();
+                }, 1000);
             }
 
             player.addClass('play');
