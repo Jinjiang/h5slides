@@ -13,7 +13,7 @@ define(['lib/zepto'], function ($) {
     }
 
     function parseLinkFromHtml(html) {
-        return html.replace(REGEXP_URL, '<a href="$1">$1</a>');
+        return html.replace(REGEXP_URL, '<a href="$1" target="_blank">$1</a>');
     }
 
     var mod = {
