@@ -157,6 +157,17 @@ define(['lib/zepto', 'data', 'editor/widget', 'stylesheet'], function ($, data, 
             @param {integer} initPageNum
          */
         function play(initPageNum) {
+
+            // 加入一个input，聚焦，再失焦，以避免中文输入法下不识别keyCode的问题
+            if (!touchMode) {
+                var compatiblilityInput = $('<input style="visibility: hidden;">');
+                compatiblilityInput.appendTo($('body'));
+                compatiblilityInput.focus();
+                setTimeout(function () {
+                    compatiblilityInput.blur();
+                }, 500);
+            }
+
             player.addClass('play');
 
             // 初始化页数容错
