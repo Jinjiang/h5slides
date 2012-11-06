@@ -1,10 +1,8 @@
 define(['editor/dialog/img',
-    'editor/dialog/color',
-    'editor/dialog/demo'
-], function (img, color, demo) {
+    'editor/dialog/color'
+], function (img, color) {
     return {
         img: img,
-        color: color,
-        demo: demo
+        color: color
     };
 });

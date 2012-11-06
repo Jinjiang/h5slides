@@ -6,8 +6,8 @@
         title: [{name: 'text', title: '字'}],
         subtitle: [{name: 'text', title: '字'}],
         subtitle2: [{name: 'text', title: '字'}],
-        content: [{name: 'text', title: '字'}, {name: 'img', title: '图'}, {name: 'demo', title: '码'}],
-        content2: [{name: 'text', title: '字'}, {name: 'img', title: '图'}, {name: 'demo', title: '码'}]
+        content: [{name: 'text', title: '字'}, {name: 'img', title: '图'}],
+        content2: [{name: 'text', title: '字'}, {name: 'img', title: '图'}]
     };
 
     var currentType;

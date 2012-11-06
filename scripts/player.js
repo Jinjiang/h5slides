@@ -137,6 +137,9 @@ define(['lib/zepto', 'data', 'editor/widget', 'stylesheet'], function ($, data, 
                 }, function (k, v) {
                     var item = section.find('[data-item="' + k + '"]');
                     var itemData = page.getItem(k);
+                    if (k == 'slide' && !item.length) {
+                        item = section;
+                    }
                     setMap(item, itemData.getPosition());
                     setMap(item, itemData.getStyle());
                     widgetManager.render(
