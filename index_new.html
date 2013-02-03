@@ -9,6 +9,7 @@
 <title>H5Slides</title>
 <!-- <link rel="stylesheet" href="http://bootswatch.com/slate/bootstrap.css"> -->
 <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+<link rel="stylesheet" href="css-new/stage.css">
 
 </head>
 
@@ -33,10 +34,10 @@
   </div>
 </div>
 
-<div class="navbar navbar-fixed-top" style="position: static;">
+<div id="toolbar" class="navbar navbar-fixed-top" style="position: static;">
   <div class="navbar-inner" style="padding: 0 20px;">
     <div class="btn-group">
-      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-family" href="#">
         Font Family
         <span class="caret"></span>
       </a>
@@ -47,13 +48,11 @@
       </ul>
     </div>
     <div class="btn-group">
-      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-size" href="#">
         Size
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-        <li><a href="#" style="font-size: 14px; line-height: 1.2;">14</a></li>
-        <li><a href="#" style="font-size: 16px; line-height: 1.2;">16</a></li>
         <li><a href="#" style="font-size: 20px; line-height: 1.2;">20</a></li>
         <li><a href="#" style="font-size: 24px; line-height: 1.2;">24</a></li>
         <li><a href="#" style="font-size: 32px; line-height: 1.2;">32</a></li>
@@ -62,12 +61,8 @@
         <li><a href="#" style="font-size: 96px; line-height: 1.2;">96</a></li>
       </ul>
     </div>
-    <div class="btn-group" data-toggle="buttons-checkbox">
-      <button class="btn"><i class="icon-bold"></i></button>
-      <button class="btn"><i class="icon-italic"></i></button>
-    </div>
     <div class="btn-group">
-      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-color" href="#">
         Color
         <span class="caret"></span>
       </a>
@@ -81,32 +76,36 @@
         <li><a href="#" style="color: White;"><span style="background: gray;">White</span></a></li>
       </ul>
     </div>
+    <div class="btn-group" data-toggle="buttons-checkbox">
+      <button class="btn" data-key="font-bold"><i class="icon-bold"></i></button>
+      <button class="btn" data-key="font-italic"><i class="icon-italic"></i></button>
+    </div>
     <div class="btn-group">
-      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="link" href="#">
         <i class="icon-share"></i>
         Link
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-        <li><a href="#">URL</a></li>
-        <li><a href="#">Slide</a></li>
-        <li class="disabled"><a href="#">Remove</a></li>
+        <li><a href="#" data-key="link-url">URL</a></li>
+        <li><a href="#" data-key="link-slide">Slide</a></li>
+        <li class="disabled"><a href="#" data-key="link-remove">Remove</a></li>
       </ul>
     </div>
     <div class="btn-group" data-toggle="buttons-radio">
-      <button class="btn"><i class="icon-align-justify"></i></button>
-      <button class="btn"><i class="icon-list"></i></button>
+      <button class="btn" data-key="format-plain"><i class="icon-align-justify"></i></button>
+      <button class="btn" data-key="format-list"><i class="icon-list"></i></button>
     </div>
     <div class="btn-group">
-      <button class="btn"><i class="icon-indent-right"></i></button>
-      <button class="btn"><i class="icon-indent-left"></i></button>
+      <button class="btn" data-key="indent-right"><i class="icon-indent-right"></i></button>
+      <button class="btn" data-key="indent-left"><i class="icon-indent-left"></i></button>
     </div>
     <div class="btn-group">
-      <button class="btn"><i class="icon-picture"></i> <span class="caret"></span></button>
+      <button class="btn" data-key="picture"><i class="icon-picture"></i> <span class="caret"></span></button>
     </div>
     <div class="btn-group pull-right">
-      <button class="btn"><i class="icon-step-backward"></i></button>
-      <button class="btn"><i class="icon-step-forward"></i></button>
+      <button class="btn" data-key="history-undo"><i class="icon-step-backward"></i></button>
+      <button class="btn" data-key="history-revert"><i class="icon-step-forward"></i></button>
     </div>
   </div>
 </div>
@@ -176,9 +175,15 @@
       </div>
     </div>
   </div>
-  <div style="width: 1px; background-color: silver; margin: 20px; margin-right: 10px;"></div>
-  <div id="stage" style="-webkit-box-flex: 1; display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; overflow: auto; margin-right: 10px;">
-    <div id="slide" style="width: 640px; height: 480px; border: 1px silver solid; border-radius: 5px;">Stage</div>
+  <div style="width: 1px; background-color: silver; margin: 20px; margin-right: 0px;"></div>
+  <div id="editor-stage" class="stage" data-design="default" style="-webkit-box-flex: 1; display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; overflow: auto; padding: 0 10px;">
+    <div id="editor-slide" class="slide" data-layout="subtitle" style="width: 640px; height: 480px; border: 1px silver solid; border-radius: 5px;">
+      <div id="slide-title" data-key="title">Title</div>
+      <div id="slide-subtitle" data-key="subtitle">Subtitle</div>
+      <div id="slide-content" data-key="content">Content</div>
+      <div id="slide-subtitle2" data-key="subtitle2">Subtitle</div>
+      <div id="slide-content2" data-key="content2">Content</div>
+    </div>
   </div>
 </div>
 

@@ -1,5 +1,5 @@
 require(
-    ['title-in', 'menu-in'],
+    ['title/input', 'menu/input', 'toolbar/input', 'stage/input'],
     function (title, menu) {
     }
 );
