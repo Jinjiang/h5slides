@@ -1,5 +1,7 @@
-define(['title/output', 'toolbar/output'], function (title, toolbar) {
-    var stage = $('#stage');
+define(['title/output', 'toolbar/output', 'stage/output'], function (title, toolbar, stage) {
+    stage.getItem('title').text('Hello World!');
+    stage.getItem('content').text('This is a presentation by HTML5.');
+    stage.setLayout('title');
     title.updateTitle('First Work');
     toolbar.setTextBtns(false);
     return {
@@ -7,7 +9,7 @@ define(['title/output', 'toolbar/output'], function (title, toolbar) {
             title.updateTitle(val);
         },
         changeFontFamily: function (val) {
-            stage.css('font-family', val);
+            stage.getItem('slide').css('font-family', val);
         },
         changeItem: function (key) {
             if (key) {
