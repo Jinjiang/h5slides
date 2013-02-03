@@ -1,52 +1,27 @@
-# TODO List
+sidebar
+    layout -> template
+    pagenav 1d
+dialog
+    theme 0.5d
+data
+status 1d
+player 1d
 
-## milestones
+multi-types 2d
+code 1d
+video embed
+map embed 0.5d
+picture manager 1d
+    picture
+richtext 2d
 
-### milestone1
+undo manager 2d
 
-* image type details
-* font details
+plugins 2d
 
-### milestone2
+page manager 1d
+more template 0.5d
 
-* undo/revert system
+guidetips 1d
 
-### milestone3
-
-* player functions
-
-### milestone4
-
-* sortable page list
-
-### further
-
-* plugin system (navigator/brush)
-* widget system (photo/chart)
-* resource system (photo)
-
-* action system
-* WYSIWYG rich text editor (find a open source)
-* gist backend
-* theme + transition = solution
-* tree list
-* seajs + gesture.js
-
-## Details
-
-### [image type details]
-
-#### Dialog HTML
-
-* radio + input file
-* radio + input url
-    * warning
-* preview
-
-#### Data
-
-* data/files.js
-    * files.get(page, name)
-    * files.set(page, name, file)
-    * files.remove(page, name)
-    * files.clear()
+total 16.5d
