@@ -1,8 +1,19 @@
 define(['template/elements'], function (root) {
+    var TEMPLATE_DATA_LIST = root.TEMPLATE_DATA_LIST;
     var list = root.list;
+
     return {
+        build: function () {
+            list.empty();
+            TEMPLATE_DATA_LIST.forEach(function (dataItem) {
+                var li = $('<li class="span1"><a href="#" class="thumbnail"><img></a></li>');
+                li.attr('data-key', dataItem.key);
+                li.find('img').attr('src', 'images/layout-' + dataItem.thumbnail + '.png');
+                list.append(li);
+            });
+        },
         setCurrent: function (key) {
-            var currentItem = list.find('.current');
+            var currentItem = list.find('.active');
             var currentKey = currentItem.attr('data-key');
 
             var item = list.find('[data-key="' + key + '"]');
@@ -11,8 +22,8 @@ define(['template/elements'], function (root) {
                 return;
             }
             if (item.length) {
-                currentItem.removeClass('current');
-                item.addClass('current');
+                currentItem.removeClass('active');
+                item.addClass('active');
             }
         }
     };

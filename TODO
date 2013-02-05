@@ -1,6 +1,6 @@
 sidebar
     layout -> template *
-    pagenav 1d
+    pagenav 1d *
 dialog
     theme 0.5d
 data

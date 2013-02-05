@@ -1,19 +1,25 @@
 define(['cmd-center', 'pagenav/elements'], function (_, root) {
     var pageList = root.list;
     var btnList = root.btnList;
+
     pageList.delegate('a', 'click', function (e) {
-        var item = $(this);
-        var index = item.attr('data-index');
+        var li = $(this).parent();
+        var index = li.attr('data-index');
+
         e.preventDefault();
-        if (!item.hasClass('current')) {
+
+        if (!li.hasClass('active')) {
             _.changePage(index);
         }
     });
-    btnList.forEach(function (btn, key) {
-        var currentPage = pageList.find('.current');
-        var currentIndex = currentPage.attr('data-index');
-        btn.click(function () {
-            _[key + 'Page'](currentIndex);
+    $.each(btnList, function (key, btn) {
+        $(btn).click(function (e) {
+            if (key == 'remove') {
+                if (!confirm('Are you sure to remove the current page?')) {
+                    return;
+                }
+            }
+            _[key + 'Page']();
         });
     });
 });
