@@ -8,7 +8,7 @@ define(['template/elements'], function (root) {
             TEMPLATE_DATA_LIST.forEach(function (dataItem) {
                 var li = $('<li class="span1"><a href="#" class="thumbnail"><img></a></li>');
                 li.attr('data-key', dataItem.key);
-                li.find('img').attr('src', 'images/layout-' + dataItem.thumbnail + '.png');
+                li.find('img').attr('src', 'images-new/template/' + dataItem.thumbnail + '.png');
                 list.append(li);
             });
         },

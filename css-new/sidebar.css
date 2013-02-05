@@ -1,4 +1,5 @@
-#template-list .active a {
+#template-list .active a,
+#design-list .active a {
   border-color: #960;
   -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
      -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
@@ -8,4 +9,24 @@
 #page-list .active a {
     color: #ffffff;
     background-color: #0088cc;
+}
+
+#design-list li {
+    position: relative;
+}
+#design-list li .title {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background-color: rgba(127, 127, 127, 0.5);
+    color: white;
+    line-height: 2;
+    text-align: center;
+}
+
+#theme-manager .modal-body {
+    min-height: 160px;
+    max-height: 360px;
+    overflow: auto;
 }

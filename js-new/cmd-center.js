@@ -1,9 +1,10 @@
-define(['title/output', 'toolbar/output', 'stage/output', 'template/output', 'pagenav/output'], function (title, toolbar, stage, template, pagenav) {
-    var currentLayout;
+define(['title/output', 'toolbar/output', 'stage/output', 'template/output', 'pagenav/output', 'design/output'], function (title, toolbar, stage, template, pagenav, design) {
+    var currentTitle;
+    var currentDesign;
     var currentTemplate;
+    var currentLayout;
     var currentTypeMap;
     var currentPage;
-    var currentTitle;
     var currentFontFamily;
     var currentItem;
     var focusedItem;
@@ -11,9 +12,10 @@ define(['title/output', 'toolbar/output', 'stage/output', 'template/output', 'pa
 
     setTimeout(function () {
         currentTitle = 'First Work';
+        currentDesign = 'default';
         currentTemplate = 'title';
-        currentPage = 0;
         currentLayout = 'title';
+        currentPage = 0;
         currentPageList = [
             {title: 'Hello world!'},
             {title: 'I\'am Jinks'},
@@ -25,6 +27,10 @@ define(['title/output', 'toolbar/output', 'stage/output', 'template/output', 'pa
 
         title.updateTitle(currentTitle);
 
+        design.build();
+        design.save(currentDesign);
+        design.setCurrent(currentDesign);
+
         toolbar.setTextBtns(false);
 
         template.build();
@@ -33,6 +39,7 @@ define(['title/output', 'toolbar/output', 'stage/output', 'template/output', 'pa
         pagenav.build(currentPageList);
         pagenav.setCurrent(currentPage);
 
+        stage.setDesign(currentDesign);
         stage.setLayout(currentLayout);
         stage.getItem('title').text('Hello World!');
         stage.getItem('content').text('This is a presentation by HTML5.');
@@ -64,6 +71,22 @@ define(['title/output', 'toolbar/output', 'stage/output', 'template/output', 'pa
         blurItem: function (key) {
             focusedItem = null;
             console.log('blur', key);
+        },
+
+        previewDesign: function (key) {
+            console.log('preview', key);
+            design.setCurrent(key);
+            stage.setDesign(key);
+        },
+        saveDesign: function (key) {
+            console.log('save', key);
+            currentDesign = key;
+            design.save(key);
+            this.previewDesign(key);
+        },
+        revertDesign: function () {
+            console.log('revert');
+            this.previewDesign(currentDesign);
         },
 
         setTemplate: function (key, layout, typeMap) {

@@ -2,7 +2,7 @@ sidebar
     layout -> template *
     pagenav 1d *
 dialog
-    theme 0.5d
+    theme 0.5d *
 data
 status 1d
 player 1d

@@ -161,7 +161,7 @@
 </div>
 
 <div style="position: absolute;">
-  <div id="theme-manager" class="modal hide fade">
+  <div id="theme-manager" class="modal hide fade" data-key="default">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">×</button>
       <h3>Theme Manager</h3>
@@ -169,42 +169,29 @@
     <div class="modal-body">
       <div class="span6">
         <ul id="theme-manager-tabs" class="nav nav-tabs">
-          <li class="active"><a href="#design-list" data-toggle="tab">Designs</a></li>
-          <li><a href="#transition-list" data-toggle="tab">Transitions</a></li>
+          <li class="active"><a href="#design-panel" data-toggle="tab">Designs</a></li>
+          <li><a href="#transition-panel" data-toggle="tab">Transitions</a></li>
         </ul>
         <div class="tab-content">
-          <div class="tab-pane active" id="design-list">
-            <ul class="thumbnails">
-              <li class="span2">
+          <div class="tab-pane active" id="design-panel">
+            <ul class="thumbnails" id="design-list">
+              <!--li class="span2" data-key="default">
                 <a href="#" class="thumbnail">
-                  <img src="images/layout-normal.png" />
+                  <img src="images-new/design/default.png" />
+                  <span class="title">默认</span>
                 </a>
               </li>
-              <li class="span2">
+              <li class="span2" data-key="revert">
                 <a href="#" class="thumbnail">
-                  <img src="images/layout-title.png" />
+                  <img src="images-new/design/revert.png" />
+                  <span class="title">反色</span>
                 </a>
-              </li>
-              <li class="span2">
-                <a href="#" class="thumbnail">
-                  <img src="images/layout-double.png" />
-                </a>
-              </li>
-              <li class="span2">
-                <a href="#" class="thumbnail">
-                  <img src="images/layout-subtitle.png" />
-                </a>
-              </li>
-              <li class="span2">
-                <a href="#" class="thumbnail">
-                  <img src="images/layout-double-subtitle.png" />
-                </a>
-              </li>
+              </li-->
             </ul>
           </div>
-          <div class="tab-pane" id="transition-list">
-            <ul class="thumbnails">
-              <li class="span2">
+          <div class="tab-pane" id="transition-panel">
+            <ul class="thumbnails" id="transition-list">
+              <!--li class="span2">
                 <a href="#" class="thumbnail">
                   <img src="images/layout-normal.png" />
                 </a>
@@ -218,7 +205,7 @@
                 <a href="#" class="thumbnail">
                   <img src="images/layout-double.png" />
                 </a>
-              </li>
+              </li-->
             </ul>
           </div>
         </div>
@@ -226,7 +213,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal">Close</button>
-      <button class="btn btn-primary">Save changes</button>
+      <button class="btn btn-primary" data-dismiss="modal" data-action="save">Save changes</button>
     </div>
   </div>
 </div>
