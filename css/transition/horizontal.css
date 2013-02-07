@@ -1,6 +1,0 @@
-#player section[data-transition="horizontal"].next {
-    left: 450px;
-}
-#player section[data-transition="horizontal"].prev {
-    left: -450px;
-}

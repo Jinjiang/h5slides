@@ -1,7 +1,0 @@
-#player section[data-transition="vertical"].next {
-    top: 450px;
-}
-#player section[data-transition="vertical"].prev {
-    top: -450px;
-}
-

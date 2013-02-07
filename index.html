@@ -1,157 +1,240 @@
 <!doctype html>
+<html style="height: 100%">
 
-<html>
 <head>
 
-<meta charset="utf-8" />
+<meta charset="utf-8">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
-<title>在线幻灯片编辑器</title>
-<link rel="stylesheet" href="css/main.css" />
+<title>H5Slides</title>
+<!-- <link rel="stylesheet" href="http://bootswatch.com/slate/bootstrap.css"> -->
+<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+<link rel="stylesheet" href="css/stage.css">
+<link rel="stylesheet" href="css/sidebar.css">
 
 </head>
-<body>
 
-<div id="editor-wrapper">
-    
-    <div id="splash">
-        欢迎使用在线幻灯片编辑器<br />
-        <small>Loading...</small>
-    </div>
+<body id="editor" style="display: -webkit-box; -webkit-box-orient: vertical; height: 100%;">
 
-    <div id="menu">
-        <div id="menu-info">
-            <img id="logo" src="images/logo.png" height="64" />
-            演示名称：<span id="main-title"></span>
-        </div>
-
-        <div id="menu-ctrl">
-            <a href="#" onclick="return false" id="menu-btn-restart"><span></span></a>
-            <a href="#" onclick="return false" id="menu-btn-play"><span></span></a>
-            <a href="#" onclick="return false" id="menu-btn-save"><span></span></a>
-        </div>
-
-    </div>
-
-    <div id="sidebar">
-
-        <div id="panel-style" class="panel expanded">
-            <div class="header">
-                <h3>样式</h3>
-            </div>
-            <div class="content">
-                <ul id="panel-style-list"></ul>
-            </div>
-        </div>
-
-        <div id="panel-themes" class="panel expanded">
-            <div class="header">
-                <h3>主题</h3>
-            </div>
-            <div class="content">
-                <ul id="panel-themes-list">
-                    <!-- template
-                    <li>Theme 1</li>
-                    -->
-                </ul>
-            </div>
-        </div>
-
-        <div id="panel-layout" class="panel expanded">
-            <div class="header">
-                <h3>布局</h3>
-            </div>
-            <div class="content">
-                <ul id="panel-layout-list">
-                    <!-- template
-                    <li>Layout 1</li>
-                    -->
-                </ul>
-            </div>
-        </div>
-
-        <div id="panel-paginations" class="panel expanded">
-            <div class="header">
-                <h3>浏览</h3>
-            </div>
-            <div class="content">
-                <div class="actions">
-                    <button id="panel-paginations-btn-add">添加页</button>
-                    <button id="panel-paginations-btn-remove">删除页</button>
-                    <div class="controls">
-                        <button id="panel-paginations-btn-previous">前一页</button>
-                        <span id="panel-paginations-current-page"></span> /
-                        <span id="panel-paginations-total-page"></span>
-                        <button id="panel-paginations-btn-next">后一页</button>
-                    </div>
-                </div>
-                <ol id="panel-paginations-list">
-                    <!-- template
-                    <li>Title 1</li>
-                    -->
-                </ol>
-            </div>
-        </div>
-    </div>
-
-    <div id="main">
-
-        <div id="preview" data-theme="blank">
-            <div id="slide" data-layout="normal" data-page="1">
-                <div id="slide-title" data-item="title">
-                    <!-- template: 标题 -->
-                </div>
-                <div id="slide-subtitle" data-item="subtitle">
-                    <!-- template: 副标题 -->
-                </div>
-                <div id="slide-subtitle2" data-item="subtitle2">
-                    <!-- template: 副标题2 -->
-                </div>
-                <div id="slide-content" data-item="content">
-                    <!-- template: 正文 -->
-                </div>
-                <div id="slide-content2" data-item="content2">
-                    <!-- template: 正文2 -->
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div id="layer-container">
-
-        <div id="item-layer" class="layer"></div>
-        <div id="adjust-layer" class="layer">
-            <button id="adjust-move">M</button>
-            <button id="adjust-resize">_|</button>
-        </div>
-        <div id="type-layer" class="layer"></div>
-        <div id="mask-layer" class="layer"></div>
-        <div id="dialog-layer" class="layer">
-            <div id="dialog-header"></div>
-            <div id="dialog-content"></div>
-            <div id="dialog-footer">
-                <button id="dialog-btn-ok">确定</button>
-                <button id="dialog-btn-reset">恢复默认</button>
-                <button id="dialog-btn-cancel">取消</button>
-            </div>
-        </div>
-
-    </div>
-
+<div class="navbar navbar-fixed-top" style="position: static;">
+  <div class="navbar-inner" style="padding: 0 20px; z-index: 1;">
+    <a class="brand" href="#">H5Slides</a>
+    <ul class="nav" id="title-label-wrapper">
+        <li><a href="#" id="label-title">edit title ...</a></li>
+    </ul>
+    <form class="navbar-form pull-left" id="title-editor-wrapper" style="display: none;">
+        <input type="text" class="span2" id="input-title" placeholder="Input Title here...">
+    </form>
+    <ul class="nav pull-right">
+      <li><a href="#theme-manager" data-toggle="modal"><i class="icon-briefcase"></i> Themes</a></li>
+      <li><a href="#" id="reset-btn"><i class="icon-repeat"></i> Reset</a></li>
+      <li><a href="#" id="preview-btn"><i class="icon-play"></i> Preview</a></li>
+      <li><a href="#" id="publish-btn"><i class="icon-ok"></i> Publish</a></li>
+      <li><a href="#" id="remove-btn"><i class="icon-remove"></i> Remove</a></li>
+    </ul>
+  </div>
 </div>
 
-<div id="player-wrapper">
-
-    <div id="player">
+<div id="toolbar" class="navbar navbar-fixed-top" style="position: static;">
+  <div class="navbar-inner" style="padding: 0 20px;">
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-family" href="#">
+        Font Family
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" style="font-family: Arial;">Arial</a></li>
+        <li><a href="#" style="font-family: Verdana;">Verdana</a></li>
+        <li><a href="#" style="font-family: Tahoma;">Tahoma</a></li>
+      </ul>
     </div>
-
-    <div id="player-helper">
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-size" href="#">
+        Size
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" style="font-size: 20px; line-height: 1.2;">20</a></li>
+        <li><a href="#" style="font-size: 24px; line-height: 1.2;">24</a></li>
+        <li><a href="#" style="font-size: 32px; line-height: 1.2;">32</a></li>
+        <li><a href="#" style="font-size: 48px; line-height: 1.2;">48</a></li>
+        <li><a href="#" style="font-size: 64px; line-height: 1.2;">64</a></li>
+        <li><a href="#" style="font-size: 96px; line-height: 1.2;">96</a></li>
+      </ul>
     </div>
-
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-color" href="#">
+        Color
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" style="color: Red;">Red</a></li>
+        <li><a href="#" style="color: Blue;">Blue</a></li>
+        <li><a href="#" style="color: Green;">Green</a></li>
+        <li><a href="#" style="color: Yellow;">Yellow</a></li>
+        <li><a href="#" style="color: Black;">Black</a></li>
+        <li><a href="#" style="color: Gray;">Gray</a></li>
+        <li><a href="#" style="color: White;"><span style="background: gray;">White</span></a></li>
+      </ul>
+    </div>
+    <div class="btn-group" data-toggle="buttons-checkbox">
+      <button class="btn" data-key="font-bold"><i class="icon-bold"></i></button>
+      <button class="btn" data-key="font-italic"><i class="icon-italic"></i></button>
+    </div>
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="link" href="#">
+        <i class="icon-share"></i>
+        Link
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" data-key="link-url">URL</a></li>
+        <li><a href="#" data-key="link-slide">Slide</a></li>
+        <li class="disabled"><a href="#" data-key="link-remove">Remove</a></li>
+      </ul>
+    </div>
+    <div class="btn-group" data-toggle="buttons-radio">
+      <button class="btn" data-key="format-plain"><i class="icon-align-justify"></i></button>
+      <button class="btn" data-key="format-list"><i class="icon-list"></i></button>
+    </div>
+    <div class="btn-group">
+      <button class="btn" data-key="indent-right"><i class="icon-indent-right"></i></button>
+      <button class="btn" data-key="indent-left"><i class="icon-indent-left"></i></button>
+    </div>
+    <div class="btn-group">
+      <button class="btn" data-key="picture"><i class="icon-picture"></i> <span class="caret"></span></button>
+    </div>
+    <div class="btn-group pull-right">
+      <button class="btn" data-key="history-undo"><i class="icon-step-backward"></i></button>
+      <button class="btn" data-key="history-revert"><i class="icon-step-forward"></i></button>
+    </div>
+  </div>
 </div>
 
-<script data-main="scripts/main.js" src="scripts/require.js"></script>
+<div style="display: -webkit-box; -webkit-box-flex: 1; min-height: 500px;">
+  <div id="sidebar" class="span3" style="padding: 10px 0 20px; float: none; display: -webkit-box; -webkit-box-orient: vertical;">
+    <div id="template-panel">
+      <h3>Template</h3>
+      <ul id="template-list" class="thumbnails" data-bind="foreach: templateList">
+        <li class="span1" data-bind="css: {avtive: $index = 1}, click: setTemplate">
+          <a href="#" class="thumbnail" data-bind="attr: {'data-key': key}">
+            <img data-bind="attr: {'data-key': 'images/temlate-' + key + '.png'}" />
+          </a>
+        </li>
+      </ul>
+      <!-- <button class="btn">More...</button> -->
+    </div>
+    <div id="page-nav" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-box-flex: 1;">
+      <h3>Pagination
+        <div class="btn-group pull-right">
+          <button class="btn" data-key="prev"><i class="icon-chevron-up"></i></button>
+          <button class="btn" data-key="next"><i class="icon-chevron-down"></i></button>
+        </div>
+      </h3>
+      <div style="-webkit-box-flex: 1; overflow: auto; margin-bottom: 10px;">
+        <ul id="page-list" class="nav nav-tabs nav-stacked">
+          <!-- <li><a href="#">First Slide</a></li>
+          <li><a href="#">Second Slide</a></li> -->
+        </ul>
+      </div>
+      <div class="btn-group">
+        <button class="btn" data-key="add"><i class="icon-plus"></i></button>
+        <button class="btn" data-key="clone"><i class="icon-file"></i></button>
+        <button class="btn" data-key="moveup"><i class="icon-arrow-up"></i></button>
+        <button class="btn" data-key="movedown"><i class="icon-arrow-down"></i></button>
+      </div>
+      <div class="btn-group pull-right">
+        <button class="btn" data-key="remove"><i class="icon-trash"></i></button>
+      </div>
+    </div>
+  </div>
+  <div style="width: 1px; background-color: silver; margin: 20px; margin-right: 0px;"></div>
+  <div id="editor-stage" class="stage" data-design="default" style="-webkit-box-flex: 1; display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; overflow: auto; padding: 0 10px;">
+    <div id="editor-slide" class="slide" data-layout="normal" style="width: 640px; height: 480px; border: 1px silver solid; border-radius: 5px;">
+      <div id="slide-title" data-key="title">Title</div>
+      <div id="slide-subtitle" data-key="subtitle">Subtitle</div>
+      <div id="slide-content" data-key="content">Content</div>
+      <div id="slide-subtitle2" data-key="subtitle2">Subtitle</div>
+      <div id="slide-content2" data-key="content2">Content</div>
+    </div>
+  </div>
+</div>
+
+<div style="position: absolute;">
+  <div id="theme-manager" class="modal hide fade" data-key="default">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Theme Manager</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        <ul id="theme-manager-tabs" class="nav nav-tabs">
+          <li class="active"><a href="#design-panel" data-toggle="tab">Designs</a></li>
+          <li><a href="#transition-panel" data-toggle="tab">Transitions</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="design-panel">
+            <ul class="thumbnails" id="design-list">
+              <!--li class="span2" data-key="default">
+                <a href="#" class="thumbnail">
+                  <img src="images/design/default.png" />
+                  <span class="title">默认</span>
+                </a>
+              </li>
+              <li class="span2" data-key="revert">
+                <a href="#" class="thumbnail">
+                  <img src="images/design/revert.png" />
+                  <span class="title">反色</span>
+                </a>
+              </li-->
+            </ul>
+          </div>
+          <div class="tab-pane" id="transition-panel">
+            <ul class="thumbnails" id="transition-list">
+              <!--li class="span2">
+                <a href="#" class="thumbnail">
+                  <img src="images/layout-normal.png" />
+                </a>
+              </li>
+              <li class="span2">
+                <a href="#" class="thumbnail">
+                  <img src="images/layout-title.png" />
+                </a>
+              </li>
+              <li class="span2">
+                <a href="#" class="thumbnail">
+                  <img src="images/layout-double.png" />
+                </a>
+              </li-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal">Close</button>
+      <button class="btn btn-primary" data-dismiss="modal" data-action="save">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+
+<script src="http://knockoutjs.com/downloads/knockout-2.0.0.debug.js"></script>
+
+<script>
+$('#theme-manager-tabs a').click(function (e) {
+  e.preventDefault();
+  $(this).tab('show');
+});
+</script>
+
+<script data-main="js/main.js" src="js/require.js"></script>
 
 </body>
+
 </html>

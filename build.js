@@ -1,6 +1,6 @@
 ({
     appDir: "./",
-    baseUrl: "./scripts",
+    baseUrl: "./js",
     dir: "./build",
 
     //As of RequireJS 2.0.2, the dir above will be deleted before the
@@ -54,15 +54,7 @@
         //of its dependencies includes i18n bundles, they may not be included in the
         //built file unless the locale: section is set above.
         {
-            name: "main",
-            exclude: ['lib/zepto']
-        },
-
-        //This module entry combines all the dependencies of foo/bar/bop and foo/bar/bee
-        //and any of their dependencies into one file.
-        {
-            name: "main-player",
-            exclude: ['lib/zepto']
+            name: "main"
         }
     ],
 

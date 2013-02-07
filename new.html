@@ -1,0 +1,39 @@
+<!doctype html>
+<html style="height: 100%">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<title>H5Slides</title>
+
+</head>
+
+<body>
+
+<ul data-bind="foreach: list">
+  <li>
+      <span data-bind="text: $index"> </span>
+  </li>
+</ul>
+
+<script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+<script src="http://knockoutjs.com/downloads/knockout-2.0.0.debug.js"></script>
+
+<script>
+var list = ko.observableArray([
+    {key: 'normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
+    {key: 'title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
+    {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'picture'}}
+]);
+var vm = {
+  list: list,
+  setTemplate: function (e) {console.log(e);}
+};
+ko.applyBindings(vm);
+</script>
+
+</body>
+
+</html>
