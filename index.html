@@ -116,9 +116,9 @@
     <div id="template-panel">
       <h3>Template</h3>
       <ul id="template-list" class="thumbnails" data-bind="foreach: templateList">
-        <li class="span1" data-bind="css: {avtive: $index = 1}, click: setTemplate">
-          <a href="#" class="thumbnail" data-bind="attr: {'data-key': key}">
-            <img data-bind="attr: {'data-key': 'images/temlate-' + key + '.png'}" />
+        <li class="span1" data-bind="css: {active: key == $root.currentTemplate()}">
+          <a href="#" class="thumbnail" data-bind="attr: {'data-key': key}, click: $parent.setCurrent">
+            <img data-bind="attr: {'data-key': key, src: 'images/template/' + key + '.png'}" />
           </a>
         </li>
       </ul>
@@ -224,16 +224,28 @@
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
 
-<script src="http://knockoutjs.com/downloads/knockout-2.0.0.debug.js"></script>
+<script src="http://knockoutjs.com/downloads/knockout-2.2.1.debug.js"></script>
 
 <script>
 $('#theme-manager-tabs a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
 });
+var vm = {
+    templateList: ko.observableArray([
+        {key: 'normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
+        {key: 'title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
+        {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'picture'}}
+    ]),
+    currentTemplate: ko.observable('title'),
+    setCurrent: function (templateData, e) {
+      vm.currentTemplate(templateData.key);
+    }
+};
+ko.applyBindings(vm);
 </script>
 
-<script data-main="js/main.js" src="js/require.js"></script>
+<!-- <script data-main="js/main.js" src="js/require.js"></script> -->
 
 </body>
 
