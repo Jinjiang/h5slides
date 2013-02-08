@@ -1,0 +1,13 @@
+html {height: 100%;}
+#editor {display: -webkit-box; -webkit-box-orient: vertical; height: 100%;}
+#topbar {position: static;}
+#topbar .navbar-inner {padding: 0 20px; z-index: 1;}
+#toolbar {position: static;}
+#toolbar .navbar-inner {padding: 0 20px;}
+#content {display: -webkit-box; -webkit-box-flex: 1; min-height: 500px;}
+#sidebar {padding: 10px 0 20px; float: none; display: -webkit-box; -webkit-box-orient: vertical;}
+#page-nav {display: -webkit-box; -webkit-box-orient: vertical; -webkit-box-flex: 1;}
+#page-list-wrapper {-webkit-box-flex: 1; overflow: auto; margin-bottom: 10px;}
+#content .vr {width: 1px; background-color: silver; margin: 20px; margin-right: 0px;}
+#editor-stage {-webkit-box-flex: 1; display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; overflow: auto; padding: 0 10px;}
+#editor-slide {width: 640px; height: 480px; border: 1px silver solid; border-radius: 5px;}
