@@ -1,27 +1,19 @@
-sidebar
-    layout -> template *
-    pagenav 1d *
-dialog
-    theme 0.5d *
-data
-status 1d
-player 1d
+title *
+template *
+design *
+page *
+stage display 0.5d
+data 1d
+picture 1d
+text editor 0.5d
+picture editor 1d
+player 0.5d
+rich text editor 2d
+toolbar 1d
+undo 2d
+plugins
+    pagenav 1d
+    draw sth. 1d
+transition 0.5d
 
-multi-types 2d
-code 1d
-video embed
-map embed 0.5d
-picture manager 1d
-    picture
-richtext 2d
-
-undo manager 2d
-
-plugins 2d
-
-page manager 1d
-more template 0.5d
-
-guidetips 1d
-
-total 16.5d
+total: 12d

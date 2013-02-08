@@ -20,11 +20,11 @@
 <div id="topbar" class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <a class="brand" href="#">H5Slides</a>
-    <ul class="nav" id="title-label-wrapper">
-        <li><a href="#" id="label-title">edit title ...</a></li>
+    <ul class="nav" id="title-label-wrapper" data-bind="visible: !editingTitle()">
+        <li><a href="#" id="label-title" data-bind="text: titleDisplay, click: editTitle"></a></li>
     </ul>
-    <form class="navbar-form pull-left" id="title-editor-wrapper" style="display: none;">
-        <input type="text" class="span2" id="input-title" placeholder="Input Title here...">
+    <form class="navbar-form pull-left" id="title-editor-wrapper" data-bind="visible: editingTitle" onsubmit="return false;">
+        <input type="text" class="span2" id="input-title" placeholder="Input Title here..." data-bind="value: title, hasfocus: editingTitle">
     </form>
     <ul class="nav pull-right">
       <li><a href="#theme-manager" data-toggle="modal"><i class="icon-briefcase"></i> Themes</a></li>
@@ -187,21 +187,6 @@
           </div>
           <div class="tab-pane" id="transition-panel">
             <ul class="thumbnails" id="transition-list">
-              <!--li class="span2">
-                <a href="#" class="thumbnail">
-                  <img src="images/layout-normal.png" />
-                </a>
-              </li>
-              <li class="span2">
-                <a href="#" class="thumbnail">
-                  <img src="images/layout-title.png" />
-                </a>
-              </li>
-              <li class="span2">
-                <a href="#" class="thumbnail">
-                  <img src="images/layout-double.png" />
-                </a>
-              </li-->
             </ul>
           </div>
         </div>
