@@ -2,6 +2,7 @@ define(function () {
     var templateList = [
             {key: 'normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
             {key: 'title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
+            {key: 'subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
             {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'picture'}}
         ];
     var designList = [
@@ -45,14 +46,14 @@ define(function () {
             });
             return list;
         },
-        getSlide: function (sid) {
-            var result;
-            data.slides.forEach(function (slideData) {
-                if (slideData.sid == sid) {
-                    result = slideData
-                }
-            });
-            return result;
+        getSlide: function (page) {
+            return data.slides[page];
+        },
+        getItem: function (page, key) {
+            var slideData = data.slides[page] || {};
+            var itemMap = slideData.items || {};
+            var item = itemMap[key] || {};
+            return item;
         }
     };
 

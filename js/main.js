@@ -7,30 +7,28 @@
 // currentPage **
 // currentLayout **
 
-// title *
-// editingTitle *
+// title **
+// titleDisplay **
+// editingTitle **
 
-// currentItem
-// current<item>type
-// current<item>html
-// current<item>position
+// currentItem *
+// stageItems[item].type *
+// stageItems[item].value *
+// stageItems[item].position *
 
-// clickTpl *
-// clickDesign
-// clickPage *
+// clickTpl **
+// clickDesign **
+// clickPage **
 
-// addPage *
-// clonePage *
-// removePage *
-// nextPage *
-// prevPage *
-// moveUpPage *
-// moveDownPage *
+// addPage **
+// clonePage **
+// removePage **
+// nextPage **
+// prevPage **
+// moveUpPage **
+// moveDownPage **
 
-// clickSave
-// clickCancel
-
-// toggleTitle
+// editTitle **
 
 // clickStage
 // clickItem
@@ -38,10 +36,12 @@
 
 
 requirejs(
-    ['data', 'title', 'page', 'status'],
-    function (dataManager, titleManager, pageManager, statusManager) {
+    ['data', 'title', 'page', 'status', 'stage'],
+    function (dataManager, titleManager, pageManager, statusManager, stageManager) {
+        var itemKeyMap = ['title', 'content', 'content2', 'subtitle', 'subtitle2'];
 
         var currentPage = 0;
+        var currentSlide = dataManager.getSlideList()[currentPage];
 
         var vm = {
             title: ko.observable(dataManager.getTitle()),
@@ -51,8 +51,28 @@ requirejs(
             pageList: ko.observableArray(dataManager.getPageList()),
             currentDesign: ko.observable(dataManager.getDesign()),
             currentPage: ko.observable(currentPage),
-            currentTpl: ko.observable(dataManager.getSlideList()[currentPage].template)
+            currentTpl: ko.observable(currentSlide.template),
+            currentItem: ko.observable('slide')
         };
+
+        vm.stageItems = {};
+
+        itemKeyMap.forEach(function (key) {
+            vm.stageItems[key] = {
+                type: ko.computed(function () {
+                    var itemData = dataManager.getItem(vm.currentPage(), key);
+                    return itemData.type || 'text';
+                }),
+                value: ko.computed(function () {
+                    var itemData = dataManager.getItem(vm.currentPage(), key);
+                    return itemData.value || '';
+                }),
+                position: ko.computed(function () {
+                    var itemData = dataManager.getItem(vm.currentPage(), key);
+                    return JSON.stringify(itemData.position || '');
+                })
+            };
+        });
 
         vm.currentLayout = ko.computed(function () {
             var layout;
@@ -68,6 +88,7 @@ requirejs(
         titleManager.init(vm);
         statusManager.init(vm);
         pageManager.init(vm);
+        stageManager.init(vm);
 
         ko.applyBindings(vm);
         window.vm = vm;

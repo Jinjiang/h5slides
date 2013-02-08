@@ -1,9 +1,9 @@
 title *
 template *
 design *
-page *
-stage display 0.5d
-data 1d
+page * +
+stage display *
+data *
 picture 1d
 text editor 0.5d
 picture editor 1d

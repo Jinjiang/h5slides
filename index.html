@@ -153,11 +153,11 @@
   <div class="vr"></div>
   <div id="editor-stage" class="stage" data-bind="attr: {'data-design': currentDesign}">
     <div id="editor-slide" class="slide" data-bind="attr: {'data-layout': currentLayout}">
-      <div id="slide-title" data-key="title">Title</div>
-      <div id="slide-subtitle" data-key="subtitle">Subtitle</div>
-      <div id="slide-content" data-key="content">Content</div>
-      <div id="slide-subtitle2" data-key="subtitle2">Subtitle</div>
-      <div id="slide-content2" data-key="content2">Content</div>
+      <div id="slide-title" data-key="title" data-bind="text: stageItems.title.value, attr: {'data-type': stageItems.title.key, style: stageItems.title.position}"></div>
+      <div id="slide-subtitle" data-key="subtitle" data-bind="text: stageItems.subtitle.value, attr: {'data-type': stageItems.subtitle.key, style: stageItems.subtitle.position}"></div>
+      <div id="slide-content" data-key="content" data-bind="text: stageItems.content.value, attr: {'data-type': stageItems.content.key, style: stageItems.content.position}"></div>
+      <div id="slide-subtitle2" data-key="subtitle2" data-bind="text: stageItems.subtitle2.value, attr: {'data-type': stageItems.subtitle2.key, style: stageItems.subtitle2.position}"></div>
+      <div id="slide-content2" data-key="content2" data-bind="text: stageItems.content2.value, attr: {'data-type': stageItems.content2.key, style: stageItems.content2.position}"></div>
     </div>
   </div>
 </div>
@@ -193,7 +193,6 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn" data-dismiss="modal">Close</button>
       <button class="btn btn-primary" data-dismiss="modal" data-action="save">Save changes</button>
     </div>
   </div>
