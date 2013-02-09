@@ -38,8 +38,6 @@
 requirejs(
     ['data', 'title', 'page', 'status', 'stage'],
     function (dataManager, titleManager, pageManager, statusManager, stageManager) {
-        var itemKeyMap = ['title', 'content', 'content2', 'subtitle', 'subtitle2'];
-
         var currentPage = 0;
         var currentSlide = dataManager.getSlideList()[currentPage];
 
@@ -55,23 +53,10 @@ requirejs(
             currentItem: ko.observable('slide')
         };
 
-        vm.stageItems = {};
-
-        itemKeyMap.forEach(function (key) {
-            vm.stageItems[key] = {
-                type: ko.computed(function () {
-                    var itemData = dataManager.getItem(vm.currentPage(), key);
-                    return itemData.type || 'text';
-                }),
-                value: ko.computed(function () {
-                    var itemData = dataManager.getItem(vm.currentPage(), key);
-                    return itemData.value || '';
-                }),
-                position: ko.computed(function () {
-                    var itemData = dataManager.getItem(vm.currentPage(), key);
-                    return JSON.stringify(itemData.position || '');
-                })
-            };
+        vm.currentSid = ko.computed(function () {
+            var page = vm.currentPage();
+            var pageList = vm.pageList();
+            return pageList[page].sid;
         });
 
         vm.currentLayout = ko.computed(function () {
@@ -91,6 +76,7 @@ requirejs(
         stageManager.init(vm);
 
         ko.applyBindings(vm);
+        vm.previewAll();
         window.vm = vm;
     }
 );

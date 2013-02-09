@@ -49,6 +49,15 @@ define(function () {
         getSlide: function (page) {
             return data.slides[page];
         },
+        getSlideById: function (sid) {
+            var result;
+            data.slides.forEach(function (slideData) {
+                if (slideData.sid == sid) {
+                    result = slideData;
+                }
+            });
+            return result;
+        },
         getItem: function (page, key) {
             var slideData = data.slides[page] || {};
             var itemMap = slideData.items || {};

@@ -18,12 +18,14 @@ define(['data'], function (dataManager) {
                 var $index;
                 var slideList;
                 var slide;
+                var sid = (new Date).toString();
 
                 $index = vm.currentPage();
-                vm.pageList.splice($index + 1, 0, {title: 'new slide'});
+                vm.pageList.splice($index + 1, 0, {sid: sid, title: 'new slide'});
 
                 slideList = dataManager.getSlideList();
                 slide = {
+                        sid: sid,
                         template: 'normal', layout: 'normal',
                         items: {
                             title: {type: 'text', value: ''},
@@ -39,13 +41,18 @@ define(['data'], function (dataManager) {
                 var page;
                 var slideList;
                 var slide;
+                var sid = (new Date).toString();
 
                 $index = vm.currentPage();
-                page = JSON.parse(JSON.stringify(vm.pageList.slice($index, $index + 1)[0]));
+                page = JSON.stringify(vm.pageList.slice($index, $index + 1)[0]);
+                page.sid = sid;
+                page = JSON.parse(page);
                 vm.pageList.splice($index + 1, 0, page);
 
                 slideList = dataManager.getSlideList();
-                slide = JSON.parse(JSON.stringify(dataManager.getSlide($index)));
+                slide = JSON.stringify(dataManager.getSlide($index));
+                slide.sid = sid;
+                slide = JSON.parse(slide);
                 slideList.splice($index + 1, 0, slide);
 
                 vm.currentPage($index + 1);
