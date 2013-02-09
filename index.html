@@ -151,13 +151,13 @@
     </div>
   </div>
   <div class="vr"></div>
-  <div id="editor-stage" class="stage" data-bind="attr: {'data-design': currentDesign}">
+  <div id="editor-stage" class="stage" data-bind="attr: {'data-design': currentDesign}, click: hideEditor">
     <div id="editor-slide" class="slide" data-bind="attr: {'data-layout': currentLayout}">
-      <div id="slide-title" data-key="title"></div>
-      <div id="slide-subtitle" data-key="subtitle"></div>
-      <div id="slide-content" data-key="content"></div>
-      <div id="slide-subtitle2" data-key="subtitle2"></div>
-      <div id="slide-content2" data-key="content2"></div>
+      <div id="slide-title" data-key="title" data-bind="click: showEditor"></div>
+      <div id="slide-subtitle" data-key="subtitle" data-bind="click: showEditor"></div>
+      <div id="slide-content" data-key="content" data-bind="click: showEditor"></div>
+      <div id="slide-subtitle2" data-key="subtitle2" data-bind="click: showEditor"></div>
+      <div id="slide-content2" data-key="content2" data-bind="click: showEditor"></div>
       <div id="item-editor-layer"></div>
     </div>
   </div>

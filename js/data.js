@@ -3,7 +3,7 @@ define(function () {
             {key: 'normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
             {key: 'title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
             {key: 'subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
-            {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'picture'}}
+            {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'img'}}
         ];
     var designList = [
             {key: 'default', title: 'Default'},
@@ -26,6 +26,24 @@ define(function () {
         },
         getDesignList: function () {
             return designList;
+        },
+        getTplByKey: function (key) {
+            var result;
+            templateList.forEach(function (tplData) {
+                if (tplData.key == key) {
+                    result = tplData;
+                }
+            });
+            return result;
+        },
+        getDesignByKey: function (key) {
+            var result;
+            designList.forEach(function (designData) {
+                if (designData.key == key) {
+                    result = designData;
+                }
+            });
+            return result;
         },
         getData: function () {
             return data;
@@ -63,8 +81,34 @@ define(function () {
             var itemMap = slideData.items || {};
             var item = itemMap[key] || {};
             return item;
+        },
+        changeTemplate: function (page, template) {
+            var slideData = data.slides[page];
+            var tplData = manager.getTplByKey(template);
+            var hasNewLayout = (slideData.layout != tplData.layout);
+
+            slideData.template = template;
+
+            if (hasNewLayout) {
+                slideData.layout = tplData.layout;
+            }
+
+            $.each(tplData.typeMap, function (key, type) {
+                var itemData = slideData.items[key];
+
+                if (hasNewLayout) {
+                    itemData.position = {};
+                }
+                if (!itemData.value) {
+                    itemData.type = type;
+                    itemData.config = {};
+                    vm.previewItem(key);
+                }
+            });
         }
     };
+
+    window.data = data;
 
     return manager;
 });

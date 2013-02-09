@@ -1,6 +1,18 @@
 define(['data'], function (dataManager) {
+    var cssLinkMap = {};
+
+    function loadCssLink(key) {
+        if (!cssLinkMap[key]) {
+            cssLink = $('<link rel="stylesheet">').attr('href', 'css/design/' + key + '.css');
+            $('head').append(cssLink);
+            cssLinkMap[key] = cssLink;
+        }
+    }
+
     return {
         init: function (vm) {
+            loadCssLink(vm.currentDesign());
+
             vm.clickTpl = function (templateData, e) {
                 vm.currentTpl(templateData.key);
             };
@@ -9,17 +21,20 @@ define(['data'], function (dataManager) {
                 vm.currentPage($index);
             };
             vm.clickDesign = function (designData, e) {
-                vm.currentDesign(designData.key);
+                var key = designData.key;
+                var cssLink;
+
+                loadCssLink(key);
+                vm.currentDesign(key);
             };
 
             vm.currentTpl.subscribe(function (newValue) {
                 var page = vm.currentPage();
-                var slide = dataManager.getSlide(page);
-                slide.template = newValue;
+                dataManager.changeTemplate(page, newValue);
             });
             vm.currentPage.subscribe(function (newValue) {
-                var slide = dataManager.getSlide(newValue);
-                vm.currentTpl(slide.template);
+                var slideData = dataManager.getSlide(newValue);
+                vm.currentTpl(slideData.template);
             });
             vm.currentDesign.subscribe(function (newValue) {
                 dataManager.getData().design = newValue;

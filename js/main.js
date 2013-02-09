@@ -11,11 +11,6 @@
 // titleDisplay **
 // editingTitle **
 
-// currentItem *
-// stageItems[item].type *
-// stageItems[item].value *
-// stageItems[item].position *
-
 // clickTpl **
 // clickDesign **
 // clickPage **
@@ -30,9 +25,12 @@
 
 // editTitle **
 
-// clickStage
-// clickItem
-// dblclickItem
+// previewItem **
+// previewAll **
+// editItem **
+
+// hideEditor **
+// showEditor **
 
 
 requirejs(
@@ -49,8 +47,7 @@ requirejs(
             pageList: ko.observableArray(dataManager.getPageList()),
             currentDesign: ko.observable(dataManager.getDesign()),
             currentPage: ko.observable(currentPage),
-            currentTpl: ko.observable(currentSlide.template),
-            currentItem: ko.observable('slide')
+            currentTpl: ko.observable(currentSlide.template)
         };
 
         vm.currentSid = ko.computed(function () {

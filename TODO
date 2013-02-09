@@ -4,8 +4,8 @@ design *
 page * +
 stage display *
 data *
-picture 1d
-text editor 0.5d
+picture *
+text editor * +
 picture editor 1d
 player 0.5d
 rich text editor 2d
@@ -15,5 +15,6 @@ plugins
     pagenav 1d
     draw sth. 1d
 transition 0.5d
+notifications 0.5d
 
-total: 12d
+total: 10d

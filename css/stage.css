@@ -147,3 +147,12 @@
 
 
 
+.slide ul {
+    margin-bottom: 0;
+}
+.slide li {
+    line-height: inherit;
+}
+
+
+
