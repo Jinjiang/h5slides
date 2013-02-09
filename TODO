@@ -7,6 +7,7 @@ data *
 picture *
 text editor * +
 picture editor 1d
+    storage 1d
 player 0.5d
 rich text editor 2d
 toolbar 1d
@@ -17,4 +18,4 @@ plugins
 transition 0.5d
 notifications 0.5d
 
-total: 10d
+total: 10.5d
