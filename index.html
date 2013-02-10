@@ -164,7 +164,8 @@
 </div>
 
 <div style="position: absolute;">
-  <div id="theme-manager" class="modal hide fade" data-key="default">
+
+  <div id="theme-manager" class="modal hide fade">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">×</button>
       <h3>Theme Manager</h3>
@@ -194,10 +195,11 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-primary" data-dismiss="modal" data-action="save">Save changes</button>
+      <button class="btn btn-primary" data-dismiss="modal">Close</button>
     </div>
   </div>
-  <div id="reset-confirm" class="modal hide fade" data-key="default">
+
+  <div id="reset-confirm" class="modal hide fade">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">×</button>
       <h3>Reset Data</h3>
@@ -210,6 +212,46 @@
       <button class="btn btn-primary" data-dismiss="modal" data-bind="click: resetData">Reset</button>
     </div>
   </div>
+
+  <div id="img-manager" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Image Manager</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        <ul id="img-manager-tabs" class="nav nav-tabs">
+          <li class="active" data-key="list"><a href="#my-img-panel" data-toggle="tab">My Images</a></li>
+          <li data-key="local"><a href="#img-local-panel" data-toggle="tab">Local</a></li>
+          <li data-key="url"><a href="#img-url-panel" data-toggle="tab">URL</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="my-img-panel">
+            <ul class="thumbnails" id="my-img-list">
+              <!--li class="span2">
+                <a href="#" class="thumbnail">
+                  <img>
+                </a>
+              </li-->
+            </ul>
+          </div>
+          <div class="tab-pane" id="img-local-panel">
+            <p><input type="file"></p>
+            <div class="thumbnail"></div>
+          </div>
+          <div class="tab-pane" id="img-url-panel">
+            <p><input type="text"></p>
+            <div class="thumbnail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" data-action="save">OK</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+
 </div>
 
 <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>

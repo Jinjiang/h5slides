@@ -10,7 +10,9 @@ define(['data'], function (dataManager) {
         pageList: ko.observableArray(dataManager.getPageList()),
         currentDesign: ko.observable(dataManager.getDesign()),
         currentPage: ko.observable(currentPage),
-        currentTpl: ko.observable(currentSlide.template)
+        currentTpl: ko.observable(currentSlide.template),
+        currentItem: ko.observable(''),
+        currentItemDataCopy: ko.observable(null)
     };
 
     vm.currentSid = ko.computed(function () {

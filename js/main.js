@@ -6,6 +6,8 @@
 // currentTpl **
 // currentPage **
 // currentLayout **
+// currentItem **
+// currentItemDataCopy *
 
 // title **
 // titleDisplay **

@@ -41,6 +41,7 @@ define(function () {
         list.push(mid);
         storage.setItem(key, media);
         storage.setItem('h5slides-medialist', JSON.stringify(list));
+        return mid;
     }
     function getMediaList() {
         var list;

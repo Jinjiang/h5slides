@@ -6,9 +6,11 @@ stage display *
 data *
 picture *
 text editor * +
-picture editor 0.5d
+picture editor * +
     storage * +
     reset *
+    remove picture 0.5d
+    resize picture 0.5d
 player 0.5d
 rich text editor 2d
 toolbar 1d

@@ -21,7 +21,7 @@ define(['storage'], function (storage) {
 
     var defaultData = {
         design: 'default',
-        title: 'Test A',
+        title: '',
         slides: [
             {sid: 'A', template: 'title', layout: 'title', items: {title: {type: 'text', value: 'Hello World'}, content: {type: 'text', value: 'test info'}}},
             {sid: 'B', template: 'subtitle', layout: 'subtitle', items: {title: {type: 'text', value: 'Content'}, content: {type: 'text', value: 'this is the menu here.'}}},
@@ -32,6 +32,35 @@ define(['storage'], function (storage) {
     var data = storage.readData() || JSON.parse(JSON.stringify(defaultData));
 
     var onStorage = true;
+
+    function mapToArray(obj) {
+        var newObj;
+        if (Object.prototype.toString.call(obj) == '[object Object]') {
+            newObj = [];
+            $.each(obj, function (k, v) {
+                newObj.push([k, mapToArray(v)]);
+            });
+            newObj.sort(function (a, b) {
+                return a[0] > b[0];
+            });
+        }
+        else if (Object.prototype.toString.call(obj) == '[object Array]') {
+            newObj = [];
+            $.each(obj, function (i, v) {
+                newObj.push(mapToArray(v));
+            });
+        }
+        else {
+            newObj = obj;
+        }
+        return newObj;
+    }
+    function checkChanged(objA, objB) {
+        var newObjA = mapToArray(objA);
+        var newObjB = mapToArray(objB);
+
+        return JSON.stringify(newObjA) !== JSON.stringify(newObjB);
+    }
 
     var manager = {
         getTplList: function () {
@@ -85,6 +114,19 @@ define(['storage'], function (storage) {
             });
             return list;
         },
+        getMediaList: function () {
+            return storage.getMediaList();
+        },
+
+        readMedia: function (mid) {
+            return storage.readMedia(mid);
+        },
+        saveMedia: function (media) {
+            return storage.saveMedia(media);
+        },
+        removeMedia: function (mid) {
+            storage.removeMedia(mid);
+        },
 
         getSlideList: function () {
             return data.slides;
@@ -104,12 +146,12 @@ define(['storage'], function (storage) {
         getItem: function (page, key) {
             var slideData = data.slides[page] || {};
             var itemMap = slideData.items || {};
-            var item = itemMap[key] || {};
-            return item;
+            var itemData = itemMap[key] || {};
+            return itemData;
         },
 
         changeTemplate: function (page, template) {
-            var slideData = data.slides[page];
+            var slideData = data.slides[page] || {};
             var tplData = manager.getTplByKey(template);
             var hasNewLayout = (slideData.layout != tplData.layout);
 
@@ -133,9 +175,8 @@ define(['storage'], function (storage) {
             });
         },
         setValue: function (page, key, value) {
-            var slideData = data.slides[page];
-            var item = slideData.items[key];
-            item.value = value;
+            var itemData = manager.getItem(page, key);
+            itemData.value = value;
         },
 
         startStorage: function () {
@@ -143,6 +184,12 @@ define(['storage'], function (storage) {
         },
         stopStorage: function () {
             onStorage = false;
+        },
+
+        checkItemChanged: function (page, key, outerData) {
+            var itemData = manager.getItem(page, key);
+
+            return checkChanged(itemData, outerData);
         },
 
         reset: function () {

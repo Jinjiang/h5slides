@@ -1,4 +1,5 @@
 #template-list .active a,
+#my-img-list .active a,
 #design-list .active a {
   border-color: #960;
   -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);

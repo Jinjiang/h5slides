@@ -51,7 +51,9 @@ define(['data'], function (dataManager) {
             });
             vm.currentPage.subscribe(function (newValue) {
                 var slideData = dataManager.getSlide(newValue);
+                dataManager.stopStorage();
                 vm.currentTpl(slideData.template);
+                dataManager.startStorage();
             });
             vm.currentDesign.subscribe(function (newValue) {
                 dataManager.setDesign(newValue);
