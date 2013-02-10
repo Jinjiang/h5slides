@@ -35,6 +35,8 @@ define(['data'], function (dataManager) {
                 slideList.splice($index + 1, 0, slide);
 
                 vm.currentPage($index + 1);
+
+                dataManager.save();
             };
             vm.clonePage = function () {
                 var $index;
@@ -56,6 +58,8 @@ define(['data'], function (dataManager) {
                 slideList.splice($index + 1, 0, slide);
 
                 vm.currentPage($index + 1);
+
+                dataManager.save();
             };
             vm.removePage = function () {
                 var $index;
@@ -72,6 +76,7 @@ define(['data'], function (dataManager) {
 
                 slideList = dataManager.getSlideList();
                 slideList.splice($index, 1);
+                dataManager.save();
             };
             vm.moveUpPage = function () {
                 var $index;
@@ -90,6 +95,8 @@ define(['data'], function (dataManager) {
                     slideList.splice($index - 1, 0, slide);
 
                     vm.currentPage($index - 1);
+
+                    dataManager.save();
                 }
             };
             vm.moveDownPage = function () {
@@ -109,6 +116,8 @@ define(['data'], function (dataManager) {
                     slideList.splice($index + 1, 0, slide);
 
                     vm.currentPage($index + 1);
+
+                    dataManager.save();
                 }
             };
         }

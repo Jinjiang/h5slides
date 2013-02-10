@@ -28,7 +28,7 @@
     </form>
     <ul class="nav pull-right">
       <li><a href="#theme-manager" data-toggle="modal"><i class="icon-briefcase"></i> Themes</a></li>
-      <li><a href="#" id="reset-btn"><i class="icon-repeat"></i> Reset</a></li>
+      <li><a href="#reset-confirm" data-toggle="modal"><i class="icon-repeat"></i> Reset</a></li>
       <li><a href="#" id="preview-btn"><i class="icon-play"></i> Preview</a></li>
       <li><a href="#" id="publish-btn"><i class="icon-ok"></i> Publish</a></li>
       <li><a href="#" id="remove-btn"><i class="icon-remove"></i> Remove</a></li>
@@ -195,6 +195,19 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-primary" data-dismiss="modal" data-action="save">Save changes</button>
+    </div>
+  </div>
+  <div id="reset-confirm" class="modal hide fade" data-key="default">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Reset Data</h3>
+    </div>
+    <div class="modal-body">
+      Are you sure to RESET the all data?
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal">No</button>
+      <button class="btn btn-primary" data-dismiss="modal" data-bind="click: resetData">Reset</button>
     </div>
   </div>
 </div>

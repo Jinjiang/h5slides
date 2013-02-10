@@ -27,17 +27,35 @@ define(['data'], function (dataManager) {
                 loadCssLink(key);
                 vm.currentDesign(key);
             };
+            vm.resetData = function () {
+                dataManager.reset();
+                dataManager.stopStorage();
+
+                var currentPage = 0;
+                var currentSlide = dataManager.getSlideList()[currentPage];
+
+                vm.title(dataManager.getTitle()),
+                vm.pageList(dataManager.getPageList());
+                vm.currentDesign(dataManager.getDesign());
+                vm.currentPage(currentPage);
+                vm.currentTpl(currentSlide.template);
+
+                dataManager.startStorage();
+                dataManager.save();
+            };
 
             vm.currentTpl.subscribe(function (newValue) {
                 var page = vm.currentPage();
                 dataManager.changeTemplate(page, newValue);
+                dataManager.save();
             });
             vm.currentPage.subscribe(function (newValue) {
                 var slideData = dataManager.getSlide(newValue);
                 vm.currentTpl(slideData.template);
             });
             vm.currentDesign.subscribe(function (newValue) {
-                dataManager.getData().design = newValue;
+                dataManager.setDesign(newValue);
+                dataManager.save();
             });
         }
     };

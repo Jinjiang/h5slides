@@ -6,8 +6,9 @@ stage display *
 data *
 picture *
 text editor * +
-picture editor 1d
-    storage 1d
+picture editor 0.5d
+    storage * +
+    reset *
 player 0.5d
 rich text editor 2d
 toolbar 1d
@@ -18,4 +19,4 @@ plugins
 transition 0.5d
 notifications 0.5d
 
-total: 10.5d
+total: 9d

@@ -1,4 +1,13 @@
-define(function () {
+// set data
+// set title *
+// set design *
+// add/clone/remove slide *
+// move slide *
+// change template *
+// edit item
+// reset
+
+define(['storage'], function (storage) {
     var templateList = [
             {key: 'normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
             {key: 'title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
@@ -10,7 +19,7 @@ define(function () {
             {key: 'revert', title: 'Revert'}
         ];
 
-    var data = {
+    var defaultData = {
         design: 'default',
         title: 'Test A',
         slides: [
@@ -19,6 +28,10 @@ define(function () {
             {sid: 'C', template: 'picture', layout: 'normal', items: {title: {type: 'text', value: 'Favicon'}, content: {type: 'img', value: 'http://www.baidu.com/favicon.ico'}}}
         ]
     };
+
+    var data = storage.readData() || JSON.parse(JSON.stringify(defaultData));
+
+    var onStorage = true;
 
     var manager = {
         getTplList: function () {
@@ -45,6 +58,7 @@ define(function () {
             });
             return result;
         },
+
         getData: function () {
             return data;
         },
@@ -54,15 +68,26 @@ define(function () {
         getTitle: function () {
             return data.title;
         },
-        getSlideList: function () {
-            return data.slides;
+        setData: function (newData) {
+            data = newData;
         },
+        setDesign: function (newDesign) {
+            data.design = newDesign;
+        },
+        setTitle: function (newTitle) {
+            data.title = newTitle;
+        },
+
         getPageList: function () {
             var list = [];
             data.slides.forEach(function (slideData) {
                 list.push({sid: slideData.sid, title: slideData.items.title.value});
             });
             return list;
+        },
+
+        getSlideList: function () {
+            return data.slides;
         },
         getSlide: function (page) {
             return data.slides[page];
@@ -82,6 +107,7 @@ define(function () {
             var item = itemMap[key] || {};
             return item;
         },
+
         changeTemplate: function (page, template) {
             var slideData = data.slides[page];
             var tplData = manager.getTplByKey(template);
@@ -105,6 +131,27 @@ define(function () {
                     vm.previewItem(key);
                 }
             });
+        },
+        setValue: function (page, key, value) {
+            var slideData = data.slides[page];
+            var item = slideData.items[key];
+            item.value = value;
+        },
+
+        startStorage: function () {
+            onStorage = true;
+        },
+        stopStorage: function () {
+            onStorage = false;
+        },
+
+        reset: function () {
+            data = JSON.parse(JSON.stringify(defaultData));
+        },
+        save: function () {
+            if (onStorage) {
+                storage.saveData(data);
+            }
         }
     };
 

@@ -59,8 +59,10 @@ define(['data', 'vm'], function (dataManager, vm) {
                     var itemData = dataManager.getItem(page, key);
 
                     if (itemData.value != newValue) {
-                        itemData.value = newValue;
+                        dataManager.setValue(page, key, newValue);
                         vm.previewItem(key);
+
+                        dataManager.save();
                     }
                 });
                 editor.focus();

@@ -1,4 +1,4 @@
-define(function () {
+define(['data'], function (dataManager) {
     return {
         init: function (vm) {
             vm.editTitle = function () {
@@ -12,6 +12,11 @@ define(function () {
                 else {
                     return 'Edit title...';
                 }
+            });
+
+            vm.title.subscribe(function (newValue) {
+                dataManager.setTitle(newValue);
+                dataManager.save();
             });
         }
     };
