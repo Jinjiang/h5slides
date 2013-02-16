@@ -4,8 +4,8 @@
 // add/clone/remove slide *
 // move slide *
 // change template *
-// edit item
-// reset
+// edit item *
+// reset *
 
 define(['storage'], function (storage) {
     var templateList = [
@@ -62,6 +62,12 @@ define(['storage'], function (storage) {
         return JSON.stringify(newObjA) !== JSON.stringify(newObjB);
     }
 
+    function extend(dest, src) {
+        $.each(src, function (k, v) {
+            dest[k] = v;
+        });
+    }
+
     var manager = {
         getTplList: function () {
             return templateList;
@@ -113,19 +119,6 @@ define(['storage'], function (storage) {
                 list.push({sid: slideData.sid, title: slideData.items.title.value});
             });
             return list;
-        },
-        getMediaList: function () {
-            return storage.getMediaList();
-        },
-
-        readMedia: function (mid) {
-            return storage.readMedia(mid);
-        },
-        saveMedia: function (media) {
-            return storage.saveMedia(media);
-        },
-        removeMedia: function (mid) {
-            storage.removeMedia(mid);
         },
 
         getSlideList: function () {
@@ -202,7 +195,12 @@ define(['storage'], function (storage) {
         }
     };
 
-    window.data = data;
+    extend(manager, {
+        readMedia: storage.readMedia,
+        saveMedia: storage.saveMedia,
+        removeMedia: storage.removeMedia,
+        getMediaList: storage.getMediaList
+    });
 
     return manager;
 });

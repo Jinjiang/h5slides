@@ -1,24 +1,34 @@
 title *
 template *
 design *
-page * +
+page * +1d
 stage display *
 data *
 picture *
-text editor * +
-picture editor * +
-    storage * +
-    reset *
+text editor * +0.5d
+picture editor * +0.5d
     remove picture 0.5d
-    resize picture 0.5d
-player 0.5d
+player 1d
+-- milestone1 --
+
 rich text editor 2d
 toolbar 1d
-undo 2d
+-- milestone2 --
+
+youku/youtube 1d
+jsbin/jsfiddle 1d
+transition 0.5d
+notifications 1d
+-- milestone3 --
+
+gist online 2d
+-- milestone4 --
+
+undo 3d
+-- milestone5 --
+
 plugins
     pagenav 1d
     draw sth. 1d
-transition 0.5d
-notifications 0.5d
 
-total: 9d
+total: 3.5d/3d/3.5d/2d/3d/...

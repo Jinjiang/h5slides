@@ -30,6 +30,7 @@
 // previewItem **
 // previewAll **
 // editItem **
+// finishEdit *
 
 // hideEditor **
 // showEditor **
@@ -45,6 +46,5 @@ requirejs(
 
         ko.applyBindings(vm);
         vm.previewAll();
-        window.vm = vm;
     }
 );
