@@ -1,14 +1,14 @@
 title *
 template *
 design *
-page * +1d
+page *
 stage display *
 data *
 picture *
-text editor * +0.5d
-picture editor * +0.5d
-    remove picture 0.5d
+text editor *
+picture editor *
 player 1d
+    bug: change page when editing text 1d
 -- milestone1 --
 
 rich text editor 2d
@@ -27,8 +27,9 @@ gist online 2d
 undo 3d
 -- milestone5 --
 
+page manager 1d
 plugins
     pagenav 1d
     draw sth. 1d
 
-total: 3.5d/3d/3.5d/2d/3d/...
+total: 2d/3d/3.5d/2d/3d/...

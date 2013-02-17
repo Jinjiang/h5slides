@@ -13,3 +13,5 @@ html {height: 100%;}
 #editor-slide {width: 640px; height: 480px; border: 1px silver solid; border-radius: 5px; position: relative;}
 #item-editor-layer {position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 10; display: none;}
 #item-editor-layer textarea {box-sizing: border-box;}
+#img-manager .thumbnail {min-height: 120px;}
+#my-img-list .thumbnail {min-height: 80px; height: 80px; overflow: hidden; margin-bottom: 1em;}

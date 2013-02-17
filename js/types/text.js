@@ -62,6 +62,9 @@ define(['data', 'vm'], function (dataManager, vm) {
             });
             editor.focus();
         },
+        hideEditor: function (key, page, dom) {
+            itemEditorLayer.hide();
+        },
         build: function (data, dom) {
         },
         show: function (data, dom) {

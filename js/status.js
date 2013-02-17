@@ -35,10 +35,10 @@ define(['data'], function (dataManager) {
                 var currentSlide = dataManager.getSlideList()[currentPage];
 
                 vm.title(dataManager.getTitle()),
-                vm.pageList(dataManager.getPageList());
                 vm.currentDesign(dataManager.getDesign());
                 vm.currentPage(currentPage);
                 vm.currentTpl(currentSlide.template);
+                vm.pageList(dataManager.getPageList());
 
                 dataManager.startStorage();
                 dataManager.save();
@@ -46,7 +46,12 @@ define(['data'], function (dataManager) {
 
             vm.currentTpl.subscribe(function (newValue) {
                 var page = vm.currentPage();
-                dataManager.changeTemplate(page, newValue);
+                var changedKeys = dataManager.changeTemplate(page, newValue);
+
+                changedKeys.forEach(function (key) {
+                    vm.previewItem(key);
+                });
+
                 dataManager.save();
             });
             vm.currentPage.subscribe(function (newValue) {

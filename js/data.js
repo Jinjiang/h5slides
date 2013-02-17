@@ -1,4 +1,4 @@
-// set data
+// set data *
 // set title *
 // set design *
 // add/clone/remove slide *
@@ -142,11 +142,18 @@ define(['storage'], function (storage) {
             var itemData = itemMap[key] || {};
             return itemData;
         },
+        getValue: function (page, key) {
+            var slideData = data.slides[page] || {};
+            var itemMap = slideData.items || {};
+            var itemData = itemMap[key] || {};
+            return itemData.value;
+        },
 
         changeTemplate: function (page, template) {
             var slideData = data.slides[page] || {};
             var tplData = manager.getTplByKey(template);
             var hasNewLayout = (slideData.layout != tplData.layout);
+            var changedKeys = [];
 
             slideData.template = template;
 
@@ -163,9 +170,11 @@ define(['storage'], function (storage) {
                 if (!itemData.value) {
                     itemData.type = type;
                     itemData.config = {};
-                    vm.previewItem(key);
+                    changedKeys.push(key);
                 }
             });
+
+            return changedKeys;
         },
         setValue: function (page, key, value) {
             var itemData = manager.getItem(page, key);
@@ -180,7 +189,13 @@ define(['storage'], function (storage) {
         },
 
         checkItemChanged: function (page, key, outerData) {
-            var itemData = manager.getItem(page, key);
+            var itemData;
+
+            if (!key) {
+                return;
+            }
+
+            itemData = manager.getItem(page, key);
 
             return checkChanged(itemData, outerData);
         },

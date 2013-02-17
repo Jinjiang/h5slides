@@ -21,7 +21,7 @@ define(['data'], function (dataManager) {
                 var sid = (new Date).valueOf();
 
                 $index = vm.currentPage();
-                vm.pageList.splice($index + 1, 0, {sid: sid, title: 'new slide'});
+                vm.pageList.splice($index + 1, 0, {sid: sid, title: ''});
 
                 slideList = dataManager.getSlideList();
                 slide = {

@@ -30,8 +30,8 @@
       <li><a href="#theme-manager" data-toggle="modal"><i class="icon-briefcase"></i> Themes</a></li>
       <li><a href="#reset-confirm" data-toggle="modal"><i class="icon-repeat"></i> Reset</a></li>
       <li><a href="#" id="preview-btn"><i class="icon-play"></i> Preview</a></li>
-      <li><a href="#" id="publish-btn"><i class="icon-ok"></i> Publish</a></li>
-      <li><a href="#" id="remove-btn"><i class="icon-remove"></i> Remove</a></li>
+      <!-- <li><a href="#" id="publish-btn"><i class="icon-ok"></i> Publish</a></li> -->
+      <!-- <li><a href="#" id="remove-btn"><i class="icon-remove"></i> Remove</a></li> -->
     </ul>
   </div>
 </div>
@@ -135,7 +135,7 @@
       <div id="page-list-wrapper">
         <ul id="page-list" class="nav nav-tabs nav-stacked" data-bind="foreach: pageList">
           <li data-bind="css: {active: $index() == $root.currentPage()}">
-            <a href="#" data-bind="text: title, click: $parent.clickPage"></a>
+            <a href="#" data-bind="text: title || 'new slide', click: $parent.clickPage"></a>
           </li>
         </ul>
       </div>
@@ -223,15 +223,17 @@
         <ul id="img-manager-tabs" class="nav nav-tabs">
           <li class="active" data-key="list"><a href="#my-img-panel" data-toggle="tab">My Images</a></li>
           <li data-key="local"><a href="#img-local-panel" data-toggle="tab">Local</a></li>
-          <li data-key="url"><a href="#img-url-panel" data-toggle="tab">URL</a></li>
+          <li data-key="url"><a href="#img-url-panel" data-toggle="tab">Internet</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="my-img-panel">
             <ul class="thumbnails" id="my-img-list">
               <!--li class="span2">
-                <a href="#" class="thumbnail">
-                  <img>
-                </a>
+                <a href="#" class="thumbnail"><img></a>
+                <p class="clearfix">
+                  <button class="btn pull-left" data-action="choose">Choose</button>
+                  <button class="btn btn-danger pull-right" data-action="remove"><i class="icon-trash"></i></button>
+                </p>
               </li-->
             </ul>
           </div>
@@ -263,10 +265,10 @@
 <script src="http://knockoutjs.com/downloads/knockout-2.2.1.debug.js"></script>
 
 <script>
-$('#theme-manager-tabs a').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
+// $('#theme-manager-tabs a').click(function (e) {
+//   e.preventDefault();
+//   $(this).tab('show');
+// });
 </script>
 
 <script data-main="js/main.js" src="js/require.js"></script>

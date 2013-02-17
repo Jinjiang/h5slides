@@ -19,6 +19,7 @@ define(['data', 'types'], function (dataManager, typeMap) {
                     vm.previewItem(key);
                 });
             };
+
             vm.editItem = function (key) {
                 var page = vm.currentPage();
                 var itemData = dataManager.getItem(page, key);
@@ -43,7 +44,6 @@ define(['data', 'types'], function (dataManager, typeMap) {
             };
             vm.hideEditor = function (vm, e) {
                 var target = $(e.target);
-                var changed;
 
                 if (itemEditorLayer.has(target).length > 0) {
                     return;
@@ -54,20 +54,31 @@ define(['data', 'types'], function (dataManager, typeMap) {
                 vm.finishEdit();
             };
             vm.finishEdit = function () {
-                changed = dataManager.checkItemChanged(
-                        vm.currentPage(),
-                        vm.currentItem(),
+                var page = vm.currentPage();
+                var key = vm.currentItem();
+                var newPageData;
+
+                var changed = dataManager.checkItemChanged(
+                        page, key,
                         vm.currentItemDataCopy()
                     );
 
                 if (changed) {
+                    if (key == 'title') {
+                        newPageData = JSON.parse(JSON.stringify(vm.pageList.slice(page, page + 1)[0]));
+                        newPageData.title = dataManager.getValue(page, key);
+                        vm.pageList.splice(page, 1, newPageData);
+                    }
                     dataManager.save();
-                    vm.previewItem(vm.currentItem());
+                    vm.previewItem(key);
                 }
 
                 vm.currentItem('');
             };
-            vm.currentSid.subscribe(vm.previewAll);
+
+            vm.currentSid.subscribe(function () {
+                setTimeout(vm.previewAll, 13);
+            });
         }
     };
 });
