@@ -18,13 +18,6 @@
 #item-editor-layer {z-index: 10; display: none;}
 #item-editor-layer textarea {box-sizing: border-box;}
 
-#player {z-index: 2; display: none;}
-#player-stage {width: 100%; height: 100%; box-sizing: border-box; -webkit-box-flex: 1; display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; overflow: auto; padding: 20px;}
-#player-stage .slide {display: none;}
-#player-stage .current {display: block;}
-#player-status {position: absolute; bottom: 0.5em; left: 1em;}
-#player-nav {position: absolute; bottom: 0.5em; right: 1em;}
-
 #img-manager .thumbnail {min-height: 120px;}
 #my-img-list .thumbnail {min-height: 80px; height: 80px; overflow: hidden; margin-bottom: 1em;}
 

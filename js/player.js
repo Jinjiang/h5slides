@@ -5,6 +5,7 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     var editor = $('#editor');
 
     var stageDom = $('#player-stage');
+    var slidesContainer = $('#player-slides-container');
 
     var btnMenu = $('#player-btn-menu');
     var btnNext = $('#player-btn-next');
@@ -53,7 +54,7 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     }
 
     function gotoPage(page) {
-        var newCurrentSlide = $(stageDom.find('.slide')[page]);
+        var newCurrentSlide = $(slidesContainer.find('.slide')[page]);
 
         currentSlide.children().each(function () {
             var itemDom = $(this);
@@ -82,6 +83,20 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         txtPage.text(page - (-1));
     }
 
+    function scaleSlides() {
+        var WIDTH = 640;
+        var HEIGHT = 480;
+
+        var stageWidth = player.width() - 40;
+        var stageHeight = player.height() - 60;
+
+        var scale = Math.min(stageWidth / WIDTH, stageHeight / HEIGHT);
+
+        scale = Math.floor(scale * 100) / 100;
+
+        slidesContainer.css('-webkit-transform', 'scale(' + scale + ')');
+    }
+
     function play() {
         var design = dataManager.getDesign();
         var title = dataManager.getTitle();
@@ -92,10 +107,10 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         stageDom.attr('data-design', design);
 
         // build slide list
-        stageDom.empty();
+        slidesContainer.empty();
         $.each(slideList, function (i, slideData) {
             var slideDom = createSlide(i, slideData);
-            stageDom.append(slideDom);
+            slidesContainer.append(slideDom);
         });
 
         slideLength = slideList.length
@@ -105,10 +120,11 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
 
         gotoPage(0);
 
-        if (document.webkitFullscreenEnabled) {
-            player[0].webkitRequestFullscreen();
-        }
+        $(window).bind('resize', scaleSlides);
 
+        if (document.webkitFullscreenEnabled) {
+            document.body.webkitRequestFullscreen();
+        }
         // init page navigator
         // onkeydown / ontouch / onclick
         // next / prev / end
@@ -157,13 +173,16 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     function clickExit(e) {
         e.preventDefault();
 
+        slidesContainer.css('-webkit-transform', '');
+        $(window).unbind('resize', scaleSlides);
+
         if (document.webkitFullscreenEnabled && document.webkitIsFullScreen) {
             document.webkitExitFullscreen();
         }
 
         currentSlide = $('');
         slideLength = null;
-        stageDom.empty();
+        slidesContainer.empty();
         player.hide();
         editor.show();
     }

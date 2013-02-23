@@ -1,3 +1,7 @@
+.stage {
+    -webkit-transform-origin: 50% 50%;
+}
+
 .slide {
     position: relative;
     font-size: 20px;
