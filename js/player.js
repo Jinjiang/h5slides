@@ -105,6 +105,10 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
 
         gotoPage(0);
 
+        if (document.webkitFullscreenEnabled) {
+            player[0].webkitRequestFullscreen();
+        }
+
         // init page navigator
         // onkeydown / ontouch / onclick
         // next / prev / end
@@ -152,6 +156,10 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     }
     function clickExit(e) {
         e.preventDefault();
+
+        if (document.webkitFullscreenEnabled && document.webkitIsFullScreen) {
+            document.webkitExitFullscreen();
+        }
 
         currentSlide = $('');
         slideLength = null;
