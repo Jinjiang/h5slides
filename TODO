@@ -8,7 +8,6 @@ picture *
 text editor *
 picture editor *
 player *
-    keydown events
 -- milestone1 --
     bug: show url by default when edit a img url and without save if the url hasn't changed
 

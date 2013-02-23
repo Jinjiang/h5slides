@@ -97,6 +97,67 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         slidesContainer.css('-webkit-transform', 'scale(' + scale + ')');
     }
 
+    function goNext() {
+        var currentPage;
+
+        if (currentSlide.length === 0) {
+            return;
+        }
+
+        currentPage = currentSlide.attr('data-page') - 0;
+
+        if (currentPage < slideLength - 1) {
+            gotoPage(currentPage + 1);
+        }
+    }
+    function goPrev() {
+        var currentPage;
+
+        if (currentSlide.length === 0) {
+            return;
+        }
+
+        currentPage = currentSlide.attr('data-page') - 0;
+
+        if (currentPage > 0) {
+            gotoPage(currentPage - 1);
+        }
+    }
+    function doExit() {
+        slidesContainer.css('-webkit-transform', '');
+        $(window).unbind('resize', scaleSlides);
+        $(window).unbind('keydown', keydown);
+
+        if (document.webkitFullscreenEnabled && document.webkitIsFullScreen) {
+            document.webkitExitFullscreen();
+        }
+
+        currentSlide = $('');
+        slideLength = null;
+        slidesContainer.empty();
+        player.hide();
+        editor.show();
+    }
+
+    function keydown(e) {
+        switch (e.keyCode) {
+            case 38:
+            case 37:
+            goPrev();
+            break;
+            case 13:
+            case 39:
+            case 40:
+            goNext();
+            break;
+            case 27:
+            doExit();
+            break;
+            default:
+            ;
+        }
+    }
+
     function play() {
         var design = dataManager.getDesign();
         var title = dataManager.getTitle();
@@ -121,6 +182,7 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         gotoPage(0);
 
         $(window).bind('resize', scaleSlides);
+        $(window).bind('keydown', keydown);
 
         if (document.webkitFullscreenEnabled) {
             document.body.webkitRequestFullscreen();
@@ -132,35 +194,12 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     }
 
     function clickNext(e) {
-        var currentPage;
-
         e.preventDefault();
-
-        if (currentSlide.length === 0) {
-            return;
-        }
-
-        currentPage = currentSlide.attr('data-page') - 0;
-
-        if (currentPage < slideLength - 1) {
-            gotoPage(currentPage + 1);
-        }
+        goNext();
     }
-
     function clickPrev(e) {
-        var currentPage;
-
         e.preventDefault();
-
-        if (currentSlide.length === 0) {
-            return;
-        }
-
-        currentPage = currentSlide.attr('data-page') - 0;
-
-        if (currentPage > 0) {
-            gotoPage(currentPage - 1);
-        }
+        goPrev();
     }
     function clickGoto(e) {
         var currentPage = currentSlide.attr('data-page') - 0;
@@ -172,19 +211,7 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     }
     function clickExit(e) {
         e.preventDefault();
-
-        slidesContainer.css('-webkit-transform', '');
-        $(window).unbind('resize', scaleSlides);
-
-        if (document.webkitFullscreenEnabled && document.webkitIsFullScreen) {
-            document.webkitExitFullscreen();
-        }
-
-        currentSlide = $('');
-        slideLength = null;
-        slidesContainer.empty();
-        player.hide();
-        editor.show();
+        doExit();
     }
 
     btnPreview.click(function (e) {
