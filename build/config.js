@@ -1,7 +1,7 @@
 ({
-    appDir: "./",
+    appDir: "../",
     baseUrl: "./js",
-    dir: "./build",
+    dir: "../output",
 
     //As of RequireJS 2.0.2, the dir above will be deleted before the
     //build starts again. If you have a big build and are not doing
@@ -58,5 +58,5 @@
         }
     ],
 
-    fileExclusionRegExp: /^(test|r\.js|build|TEMP|TODO|\.|[A-Z])/,
+    fileExclusionRegExp: /^(test|r\.js|build|output|TODO|\.|[A-Z])/,
 })
