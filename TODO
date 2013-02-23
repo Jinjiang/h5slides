@@ -8,17 +8,20 @@ picture *
 text editor *
 picture editor *
 player 1d
-    bug: change page when editing text 1d
 -- milestone1 --
-
-rich text editor 2d
-toolbar 1d
--- milestone2 --
+    bug: placeholder when image list is empty 0d
+    bug: change page when editing text 1d
+    bug: storage exceptions 0.5d
+    bug: resize picture when change layout 0.5d
 
 youku/youtube 1d
 jsbin/jsfiddle 1d
 transition 0.5d
 notifications 1d
+-- milestone2 --
+
+rich text editor 2d
+toolbar 1d
 -- milestone3 --
 
 gist online 2d
@@ -27,9 +30,10 @@ gist online 2d
 undo 3d
 -- milestone5 --
 
+guideline 2d
 page manager 1d
 plugins
     pagenav 1d
     draw sth. 1d
 
-total: 2d/3d/3.5d/2d/3d/...
+total: 3d/3.5d/3d/2d/3d/...
