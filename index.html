@@ -167,7 +167,25 @@
   </div>
 </div>
 
-<div id="player" class="window"></div>
+<div id="player" class="window">
+  <div id="player-stage" class="stage">
+    <!--div class="slide next prev current">
+      <div data-key=""></div>
+    </div-->
+  </div>
+  <div id="player-status">
+    <span id="player-page">1</span> / <span id="player-sum">1</span>
+  </div>
+  <div id="player-nav">
+    <!-- <a href="#" id="player-btn-menu">MENU</a> -->
+    <div id="player-menu" class="btn-group">
+      <a href="#" id="player-btn-prev" class="btn">PREV</a>
+      <a href="#" id="player-btn-next" class="btn">NEXT</a>
+      <a href="#" id="player-btn-goto" class="btn">GOTO</a>
+      <a href="#" id="player-btn-exit" class="btn">EXIT</a>
+    </div>
+  </div>
+</div>
 
 <div id="modals" class="layer">
   <div id="theme-manager" class="modal hide fade">
@@ -263,6 +281,23 @@
       <button class="btn" data-dismiss="modal">Cancel</button>
     </div>
   </div>
+
+  <div id="goto-dialog" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Goto ...</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        Page number:
+        <input id="goto-number" type="number">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" data-action="go">OK</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
@@ -273,14 +308,7 @@
 
 <script src="http://knockoutjs.com/downloads/knockout-2.2.1.debug.js"></script>
 
-<script>
-// $('#theme-manager-tabs a').click(function (e) {
-//   e.preventDefault();
-//   $(this).tab('show');
-// });
-</script>
-
-<script data-main="js/main.js" src="js/require.js"></script>
+<script data-main="js/main" src="js/require.js"></script>
 
 </body>
 

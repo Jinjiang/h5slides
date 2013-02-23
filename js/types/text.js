@@ -18,35 +18,40 @@ define(['data', 'vm'], function (dataManager, vm) {
         $(window).unbind('mousedown', blurEditor);
     }
 
+    function render(data, dom, placeHolder) {
+        var textArray;
+        var ul;
+
+        // dom[0].cssText = '';
+        // if (data.position) {
+        //     $.each(data.position, function (key, value) {
+        //         dom.css(key, value);
+        //     });
+        // }
+        // if (data.config) {
+        //     $.each(data.config, function (key, value) {
+        //         dom.css(key, value);
+        //     });
+        // }
+
+        if (data.value) {
+            ul = $('<ul class="unstyled"></ul>');
+            textArray = data.value.split('\n');
+            textArray.forEach(function (text) {
+                var li = $('<li></li>');
+                li.text(text);
+                ul.append(li);
+            });
+            dom.empty().append(ul);
+        }
+        else {
+            dom.text(placeHolder);
+        }
+    }
+
     return {
         preview: function (data, dom) {
-            var textArray;
-            var ul;
-
-            if (data.value) {
-                ul = $('<ul class="unstyled"></ul>');
-                textArray = data.value.split('\n');
-                textArray.forEach(function (text) {
-                    var li = $('<li></li>');
-                    li.text(text);
-                    ul.append(li);
-                });
-                dom.empty().append(ul);
-            }
-            else {
-                dom.text('[empty text]');
-            }
-            dom[0].cssText = '';
-            if (data.position) {
-                $.each(data.position, function (key, value) {
-                    dom.css(key, value);
-                });
-            }
-            if (data.config) {
-                $.each(data.config, function (key, value) {
-                    dom.css(key, value);
-                });
-            }
+            render(data, dom, '[empty text]');
         },
         showEditor: function (key, page, data, dom) {
             var position = dom.position();
@@ -82,6 +87,7 @@ define(['data', 'vm'], function (dataManager, vm) {
             $(window).bind('mousedown', blurEditor);
         },
         build: function (data, dom) {
+            render(data, dom, '');
         },
         show: function (data, dom) {
         },

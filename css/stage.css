@@ -2,6 +2,8 @@
     position: relative;
     font-size: 20px;
     line-height: 1.5;
+    width: 640px;
+    height: 480px;
 }
 
 
@@ -13,13 +15,6 @@
     box-sizing: border-box;
     padding: 0.25em 0.5em;
     z-index: 6;
-}
-#editor-slide [data-key] {
-    border-radius: 5px;
-    background-color: rgba(127, 127, 127, 0.05);
-}
-#editor-slide [data-key]:hover {
-    background-color: rgba(127, 127, 127, 0.1);
 }
 
 

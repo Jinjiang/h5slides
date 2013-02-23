@@ -34,14 +34,8 @@
 
 
 requirejs(
-    ['vm', 'title', 'page', 'status', 'stage'],
-    function (vm, titleManager, pageManager, statusManager, stageManager) {
-        titleManager.init(vm);
-        statusManager.init(vm);
-        pageManager.init(vm);
-        stageManager.init(vm);
-
-        ko.applyBindings(vm);
-        vm.previewAll();
+    ['editor', 'player'],
+    function (editor, player) {
+        editor.init();
     }
 );

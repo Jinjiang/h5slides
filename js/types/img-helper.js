@@ -86,7 +86,7 @@ define(function () {
             }
         );
     }
-    function embed(src, dom) {
+    function embed(src, dom, placeHolder) {
         var dw;
         var dh;
 
@@ -107,7 +107,7 @@ define(function () {
                 dom.empty().append(img);
             },
             function (img) {
-                dom.html('Image loading error!');
+                dom.html(placeHolder);
             }
         );
     }

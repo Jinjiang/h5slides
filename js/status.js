@@ -1,17 +1,7 @@
-define(['data'], function (dataManager) {
-    var cssLinkMap = {};
-
-    function loadCssLink(key) {
-        if (!cssLinkMap[key]) {
-            cssLink = $('<link rel="stylesheet">').attr('href', 'css/design/' + key + '.css');
-            $('head').append(cssLink);
-            cssLinkMap[key] = cssLink;
-        }
-    }
-
+define(['data', 'design'], function (dataManager, designManager) {
     return {
         init: function (vm) {
-            loadCssLink(vm.currentDesign());
+            designManager.loadCssLink(vm.currentDesign());
 
             vm.clickTpl = function (templateData, e) {
                 vm.currentTpl(templateData.key);
@@ -24,7 +14,7 @@ define(['data'], function (dataManager) {
                 var key = designData.key;
                 var cssLink;
 
-                loadCssLink(key);
+                designManager.loadCssLink(key);
                 vm.currentDesign(key);
             };
             vm.resetData = function () {

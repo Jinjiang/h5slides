@@ -122,6 +122,37 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
         vm.finishEdit();
     }
 
+    function render(data, dom, placeHolder) {
+        var src = data.value;
+
+        // dom[0].cssText = '';
+        // if (data.position) {
+        //     $.each(data.position, function (key, value) {
+        //         dom.css(key, value);
+        //     });
+        // }
+
+        if (src) {
+            dom.html('<div class="info"></div>');
+            dom.find('.info').attr('data-src', src);
+        }
+        else {
+            dom.text(placeHolder);
+        }
+    }
+
+    function showImg(dom, placeHolder) {
+        var src = dom.find('.info').attr('data-src');
+
+        if (src) {
+            dom.html('');
+            if (src.match(/^media\:\/\//)) {
+                src = dataManager.readMedia(src.substr(8));
+            }
+            lib.embed(src, dom, placeHolder);
+        }
+    }
+
     return {
         init: function () {
             localInput.on('change', function (e) {
@@ -134,7 +165,7 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
                     if (src.length > 0) {
                         lib.minify(src, function (newSrc, info) {
                             localMedia = newSrc;
-                            lib.embed(newSrc, localThumb);
+                            lib.embed(newSrc, localThumb, 'Image loading error!');
                         });
                     }
                 };
@@ -146,7 +177,7 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
                 var src = e.target.value;
 
                 if (src.length > 0) {
-                    lib.embed(src, urlThumb);
+                    lib.embed(src, urlThumb, 'Image loading error!');
                 }
             });
 
@@ -163,22 +194,8 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
             dialog.find('[data-action="save"]').click(save);
         },
         preview: function (data, dom) {
-            var src = data.value;
-            if (src) {
-                dom.html('');
-                if (src.match(/^media\:\/\//)) {
-                    src = dataManager.readMedia(src.substr(8));
-                }
-                lib.embed(src, dom);
-            }
-            else {
-                dom.text('[empty img]');
-            }
-            if (data.position) {
-                $.each(data.position, function (key, value) {
-                    dom.css(key, value);
-                });
-            }
+            render(data, dom, '[empty img]');
+            showImg(dom, '[empty img]');
         },
         resize: function (data, dom) {
             var src = data.value;
@@ -188,7 +205,7 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
                 if (src.match(/^media\:\/\//)) {
                     src = dataManager.readMedia(src.substr(8));
                 }
-                lib.embed(src, dom);
+                lib.embed(src, dom, '[empty img]');
             }
         },
         showEditor: function (key, page, data, dom) {
@@ -217,6 +234,13 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
             buildMeidaList(mediaList);
 
             dialog.modal('show');
-        }
+        },
+        build: function (data, dom) {
+            render(data, dom, '');
+        },
+        show: function (dom) {
+            showImg(dom, '');
+        },
+        hide: function (dom) {}
     };
 });
