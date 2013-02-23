@@ -9,7 +9,6 @@ text editor *
 picture editor *
 player *
 -- milestone1 --
-    bug: show url by default when edit a img url and without save if the url hasn't changed
 
 youku/youtube 1d
 jsbin/jsfiddle 1d

@@ -13,6 +13,8 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
     var urlInput = urlPanel.find('input');
     var urlThumb = urlPanel.find('.thumbnail');
 
+    var urlBtnRemove = $('#img-url-remove');
+
     var currentLi;
     var oldMid;
     var newMid; // '$' means remove
@@ -122,6 +124,12 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
         vm.finishEdit();
     }
 
+    urlBtnRemove.click(function () {
+        dataManager.setValue(vm.currentPage(), vm.currentItem(), '');
+        dialog.modal('hide');
+        vm.finishEdit();
+    });
+
     function render(data, dom, placeHolder) {
         var src = data.value;
 
@@ -214,13 +222,6 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
             var height = dom.height();
             var mediaList;
 
-            if (data.value.match(/^media\:\/\//)) {
-                oldMid = data.value.substr(8);
-                tabs.find('[data-key="list"] a').tab('show');
-            }
-            else {
-                oldMid = '';
-            }
             newMid = '';
             localMedia = '';
 
@@ -229,11 +230,26 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
 
             urlInput.val('');
             urlThumb.html('');
+            urlBtnRemove.hide();
+
+            dialog.modal('show');
+
+            if (data.value.match(/^media\:\/\//)) {
+                oldMid = data.value.substr(8);
+                tabs.find('[data-key="list"] a').tab('show');
+            }
+            else if (data.value) {
+                tabs.find('[data-key="url"] a').tab('show');
+                urlInput.val(data.value);
+                lib.embed(data.value, urlThumb, 'Image loading error!');
+                urlBtnRemove.show();
+            }
+            else {
+                oldMid = '';
+            }
 
             mediaList = dataManager.getMediaList();
             buildMeidaList(mediaList);
-
-            dialog.modal('show');
         },
         build: function (data, dom) {
             render(data, dom, '');
