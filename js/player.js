@@ -141,19 +141,19 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
 
     function keydown(e) {
         switch (e.keyCode) {
-            case 38:
-            case 37:
+        case 38:
+        case 37:
             goPrev();
             break;
-            case 13:
-            case 39:
-            case 40:
+        case 13:
+        case 39:
+        case 40:
             goNext();
             break;
-            case 27:
+        case 27:
             doExit();
             break;
-            default:
+        default:
             ;
         }
     }
@@ -187,10 +187,6 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         if (document.webkitFullscreenEnabled) {
             document.body.webkitRequestFullscreen();
         }
-        // init page navigator
-        // onkeydown / ontouch / onclick
-        // next / prev / end
-        // ongo: each item: display
     }
 
     function clickNext(e) {

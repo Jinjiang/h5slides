@@ -1,35 +1,26 @@
-title *
-template *
-design *
-page *
-stage display *
-data *
-picture *
-text editor *
-picture editor *
-player *
--- milestone1 --
+-- milestone 0.3.1 --
 
+more templates 0.5d
 youku/youtube 1d
 jsbin/jsfiddle 1d
 transition 0.5d
 notifications 1d
--- milestone2 --
+-- milestone 0.3.2 --
+
+gist online 2d
+page manager 1d
+-- milestone 0.3.3 --
+
+guideline 2d
+plugins 1d
+    pagenav 1d
+    draw sth. 1d
+-- milestone 0.3.4 --
 
 rich text editor 2d
 toolbar 1d
--- milestone3 --
+-- milestone 0.3.5 --
 
-gist online 2d
--- milestone4 --
+undo system 3d
 
-undo 3d
--- milestone5 --
-
-guideline 2d
-page manager 1d
-plugins
-    pagenav 1d
-    draw sth. 1d
-
-total: 3d/3.5d/3d/2d/3d/...
+total: 4d / 3d / 5d / 3d / ...

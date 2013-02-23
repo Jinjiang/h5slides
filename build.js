@@ -58,5 +58,5 @@
         }
     ],
 
-    fileExclusionRegExp: /^(test|r\.js|build|\.|[A-Z])/,
+    fileExclusionRegExp: /^(test|r\.js|build|TEMP|TODO|\.|[A-Z])/,
 })
