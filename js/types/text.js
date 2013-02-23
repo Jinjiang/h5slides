@@ -16,6 +16,7 @@ define(['data', 'vm'], function (dataManager, vm) {
         vm.finishEdit();
 
         $(window).unbind('mousedown', blurEditor);
+        $(window).unbind('touchstart', blurEditor);
     }
 
     function render(data, dom, placeHolder) {
@@ -85,6 +86,7 @@ define(['data', 'vm'], function (dataManager, vm) {
             editor.focus();
 
             $(window).bind('mousedown', blurEditor);
+            $(window).bind('touchstart', blurEditor);
         },
         build: function (data, dom) {
             render(data, dom, '');
