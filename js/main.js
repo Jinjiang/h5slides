@@ -32,9 +32,6 @@
 // editItem **
 // finishEdit *
 
-// hideEditor **
-// showEditor **
-
 
 requirejs(
     ['vm', 'title', 'page', 'status', 'stage'],

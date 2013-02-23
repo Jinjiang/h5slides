@@ -1,6 +1,23 @@
 define(['data', 'vm'], function (dataManager, vm) {
     var itemEditorLayer = $('#item-editor-layer');
 
+    function blurEditor(e) {
+        var target = $(e.target);
+        var key = vm.currentItem();
+
+        if (!vm.currentItem()) {
+            return;
+        }
+        if (itemEditorLayer.has(target).length > 0) {
+            return;
+        }
+
+        itemEditorLayer.empty().hide();
+        vm.finishEdit();
+
+        $(window).unbind('mousedown', blurEditor);
+    }
+
     return {
         preview: function (data, dom) {
             var textArray;
@@ -61,9 +78,8 @@ define(['data', 'vm'], function (dataManager, vm) {
                 }
             });
             editor.focus();
-        },
-        hideEditor: function (key, page, dom) {
-            itemEditorLayer.hide();
+
+            $(window).bind('mousedown', blurEditor);
         },
         build: function (data, dom) {
         },

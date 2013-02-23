@@ -204,8 +204,12 @@ define(['storage'], function (storage) {
             data = JSON.parse(JSON.stringify(defaultData));
         },
         save: function () {
+            var result;
             if (onStorage) {
-                storage.saveData(data);
+                result = storage.saveData(data);
+                if (result === false) {
+                    console.log('storage error! (QuotaExceededError)');
+                }
             }
         }
     };

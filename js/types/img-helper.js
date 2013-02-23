@@ -48,9 +48,13 @@ define(function () {
 
     function loadImg(src, callback, errorCallback) {
         var img = new Image;
+        var timer = setTimeout(function () {
+            errorCallback && errorCallback(img);
+        }, 500);
 
         img.src = src;
         img.onload = function () {
+            clearTimeout(timer);
             callback && callback(img);
         };
         img.onerror = function () {
@@ -78,7 +82,7 @@ define(function () {
                 callback && callback(newSrc, ref);
             },
             function (img) {
-                callback('', {});
+                callback && callback('', {});
             }
         );
     }
@@ -103,7 +107,7 @@ define(function () {
                 dom.empty().append(img);
             },
             function (img) {
-                dom.empty();
+                dom.html('Image loading error!');
             }
         );
     }

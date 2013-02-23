@@ -9,10 +9,6 @@ text editor *
 picture editor *
 player 1d
 -- milestone1 --
-    bug: placeholder when image list is empty 0d
-    bug: change page when editing text 1d
-    bug: storage exceptions 0.5d
-    bug: resize picture when change layout 0.5d
 
 youku/youtube 1d
 jsbin/jsfiddle 1d

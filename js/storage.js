@@ -16,8 +16,15 @@ define(function () {
         return data;
     }
     function saveData(data) {
-        storage.setItem('h5slides-data', JSON.stringify(data));
-        console.log('saved', (new Date).valueOf());
+        try {
+            storage.setItem('h5slides-data', JSON.stringify(data));
+            console.log('saved', (new Date).valueOf());
+            return true;
+        }
+        catch (e) {
+            console.log(e); // QuotaExceededError
+            return false;
+        }
     }
 
     function readMedia(mid) {
@@ -33,14 +40,27 @@ define(function () {
             list.splice(index, 1);
             storage.setItem('h5slides-medialist', JSON.stringify(list));
         }
+        return true;
     }
     function saveMedia(media) {
         var mid = getTimestamp();
         var key = 'h5slides-media-' + mid;
         var list = getMediaList();
+
         list.push(mid);
-        storage.setItem(key, media);
-        storage.setItem('h5slides-medialist', JSON.stringify(list));
+
+        try {
+            storage.setItem('h5slides-medialist', JSON.stringify(list));
+            storage.setItem(key, media);
+        }
+        catch (e) {
+            console.log(e); //  QuotaExceededError
+            list.pop();
+            storage.removeItem(key);
+            storage.setItem('h5slides-medialist', JSON.stringify(list));
+            mid = null;
+        }
+
         return mid;
     }
     function getMediaList() {

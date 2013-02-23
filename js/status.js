@@ -52,6 +52,7 @@ define(['data'], function (dataManager) {
                     vm.previewItem(key);
                 });
 
+                vm.resizeAll();
                 dataManager.save();
             });
             vm.currentPage.subscribe(function (newValue) {
