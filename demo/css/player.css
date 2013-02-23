@@ -1,0 +1,6 @@
+#player {z-index: 2; display: none;}
+#player-stage {width: 100%; height: 100%; -webkit-box-flex: 1; display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; overflow: auto;}
+#player-stage .slide {display: none;}
+#player-stage .current {display: block;}
+#player-status {position: absolute; bottom: 0.5em; left: 1em;}
+#player-nav {position: absolute; bottom: 0.5em; right: 1em;}
