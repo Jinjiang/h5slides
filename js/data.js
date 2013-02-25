@@ -12,7 +12,11 @@ define(['storage'], function (storage) {
             {key: 'normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
             {key: 'title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
             {key: 'subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
-            {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'img'}}
+            {key: 'double', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'text'}},
+            {key: 'double-subtitle', layout: 'double-subtitle', typeMap: {title: 'text', subtitle: 'text', subtitle2: 'text', content: 'text', content2: 'text'}},
+            {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'img'}},
+            {key: 'picture-left', layout: 'double', typeMap: {title: 'text', content: 'img', content2: 'text'}},
+            {key: 'picture-right', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'img'}}
         ];
     var designList = [
             {key: 'default', title: 'Default'},
@@ -164,6 +168,9 @@ define(['storage'], function (storage) {
             $.each(tplData.typeMap, function (key, type) {
                 var itemData = slideData.items[key];
 
+                if (!itemData) {
+                    slideData.items[key] = itemData = {};
+                }
                 if (hasNewLayout) {
                     itemData.position = {};
                 }
