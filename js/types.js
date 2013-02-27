@@ -1,4 +1,4 @@
-define(['types/text', 'types/img'], function (text, img) {
+define(['types/text', 'types/img',  'types/video'], function (text, img, video) {
 
     // for each type
     //   init(): initiation
@@ -12,6 +12,7 @@ define(['types/text', 'types/img'], function (text, img) {
 
     return {
         text: text,
-        img: img
+        img: img,
+        video: video
     };
 });
