@@ -121,12 +121,16 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
             dataManager.setValue(vm.currentPage(), vm.currentItem(), media);
         }
 
-        vm.finishEdit();
+        // vm.finishEdit();
     }
 
     urlBtnRemove.click(function () {
         dataManager.setValue(vm.currentPage(), vm.currentItem(), '');
         dialog.modal('hide');
+        // vm.finishEdit();
+    });
+
+    dialog.on('hidden', function () {
         vm.finishEdit();
     });
 
