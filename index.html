@@ -116,7 +116,7 @@
         <h3>Template</h3>
         <ul id="template-list" class="thumbnails" data-bind="foreach: tplList">
           <li class="span1" data-bind="css: {active: key == $root.currentTpl()}">
-            <a href="#" class="thumbnail" data-bind="click: $parent.clickTpl">
+            <a href="#" class="thumbnail" data-bind="click: $parent.clickTpl, attr: {title: title}">
               <img data-bind="attr: {src: 'images/template/' + key + '.png'}" />
             </a>
           </li>

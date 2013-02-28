@@ -9,15 +9,15 @@
 
 define(['storage'], function (storage) {
     var templateList = [
-            {key: 'normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
-            {key: 'title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
-            {key: 'subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
-            {key: 'double', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'text'}},
-            {key: 'double-subtitle', layout: 'double-subtitle', typeMap: {title: 'text', subtitle: 'text', subtitle2: 'text', content: 'text', content2: 'text'}},
-            {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'img'}},
-            {key: 'picture-left', layout: 'double', typeMap: {title: 'text', content: 'img', content2: 'text'}},
-            {key: 'picture-right', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'img'}},
-            {key: 'video', layout: 'normal', typeMap: {title: 'text', content: 'video'}}
+            {key: 'normal', title: 'Normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
+            {key: 'title', title: 'Title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
+            {key: 'subtitle', title: 'Subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
+            {key: 'double', title: 'Two Columns', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'text'}},
+            {key: 'double-subtitle', title: 'Two Columns with subtitle', layout: 'double-subtitle', typeMap: {title: 'text', subtitle: 'text', subtitle2: 'text', content: 'text', content2: 'text'}},
+            {key: 'picture', title: 'Picture', layout: 'normal', typeMap: {title: 'text', content: 'img'}},
+            {key: 'picture-left', title: 'Picture in Left', layout: 'double', typeMap: {title: 'text', content: 'img', content2: 'text'}},
+            {key: 'picture-right', title: 'Picture in Right', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'img'}},
+            {key: 'video', title: 'Youku Video', layout: 'normal', typeMap: {title: 'text', content: 'video'}}
         ];
     var designList = [
             {key: 'default', title: 'Default'},
