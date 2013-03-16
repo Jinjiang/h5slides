@@ -1,4 +1,4 @@
-define(['data', 'types'], function (dataManager, typeMap) {
+define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
     var itemKeyMap = ['title', 'content', 'content2', 'subtitle', 'subtitle2'];
 
     return {
@@ -7,10 +7,11 @@ define(['data', 'types'], function (dataManager, typeMap) {
                 var page = vm.currentPage();
                 var itemData = dataManager.getItem(page, key);
                 var dom = $('#slide-' + key);
+                var output = dom.find('.output');
                 var typeHelper = typeMap[itemData.type];
 
                 if (typeHelper) {
-                    typeHelper.preview(itemData, dom);
+                    typeHelper.preview(itemData, output);
                 }
             };
             vm.previewAll = function () {
@@ -23,10 +24,11 @@ define(['data', 'types'], function (dataManager, typeMap) {
                 var page = vm.currentPage();
                 var itemData = dataManager.getItem(page, key);
                 var dom = $('#slide-' + key);
+                var output = dom.find('.output');
                 var typeHelper = typeMap[itemData.type];
 
                 if (typeHelper && typeHelper.resize) {
-                    typeHelper.resize(itemData, dom);
+                    typeHelper.resize(itemData, output);
                 }
             };
             vm.resizeAll = function () {
@@ -36,7 +38,8 @@ define(['data', 'types'], function (dataManager, typeMap) {
             };
 
             vm.editItem = function (vm, e) {
-                var dom = $(e.currentTarget);
+                var output = $(e.currentTarget);
+                var dom = output.parent();
                 var key = dom.attr('data-key');
                 var page = vm.currentPage();
                 var itemData = dataManager.getItem(page, key);
@@ -51,7 +54,7 @@ define(['data', 'types'], function (dataManager, typeMap) {
                         typeHelper.init();
                         typeHelper.initialized = true;
                     }
-                    typeHelper.showEditor(key, page, itemData, dom);
+                    typeHelper.showEditor(key, page, itemData, output);
                 }
             };
 
@@ -80,6 +83,8 @@ define(['data', 'types'], function (dataManager, typeMap) {
             vm.currentSid.subscribe(function () {
                 setTimeout(vm.previewAll, 13);
             });
+
+            ctrlManager.init($('#editor-stage'));
         }
     };
 });

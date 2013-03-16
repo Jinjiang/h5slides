@@ -4,6 +4,15 @@ jsbin/jsfiddle 1d
 transition 0.5d
 notifications 1d
 -- milestone 0.3.2 --
+    type list button for each item
+        each button TODO
+        position changing bug: can't minify the height
+        position changing bug: save data and revert when page switched
+    confirm when type forced to change
+    display code by type (add highlight by some open source lib)
+    embed code demo
+    embed baidu/google map
+    more video venders & options (advanced mode for html code)
 
 gist online 2d
 page manager 1d
@@ -19,6 +28,10 @@ rich text editor 2d
 toolbar 1d
 -- milestone 0.3.5 --
 
+create new item
+picture viewer
+fullscreen layout
+text animations when playing
 undo system 3d
 
 total: 4d / 3d / 5d / 3d / ...

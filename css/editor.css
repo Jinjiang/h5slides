@@ -13,8 +13,8 @@
 #content .vr {width: 1px; background-color: silver; margin: 20px; margin-right: 0px;}
 #editor-stage {-webkit-box-flex: 1; display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; overflow: auto; padding: 0 10px;}
 #editor-slide {border: 1px silver solid; border-radius: 5px; position: relative;}
-#editor-slide [data-key] {border-radius: 5px; background-color: rgba(127, 127, 127, 0.05);}
-#editor-slide [data-key]:hover {background-color: rgba(127, 127, 127, 0.1);}
+#editor-slide [data-key] .output {border-radius: 5px; background-color: rgba(127, 127, 127, 0.05);}
+#editor-slide [data-key] .output:hover {background-color: rgba(127, 127, 127, 0.1);}
 #item-editor-layer {z-index: 10; display: none;}
 #item-editor-layer textarea {box-sizing: border-box;}
 

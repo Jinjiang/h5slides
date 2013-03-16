@@ -55,7 +55,7 @@ define(['data', 'vm'], function (dataManager, vm) {
             render(data, dom, '[empty text]');
         },
         showEditor: function (key, page, data, dom) {
-            var position = dom.position();
+            var position = dom.parent().position();
             var width = dom.outerWidth();
             var height = dom.outerHeight();
             var fontSize = dom.css('font-size');

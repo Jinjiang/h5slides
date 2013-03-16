@@ -153,11 +153,21 @@
     <div class="vr"></div>
     <div id="editor-stage" class="stage" data-bind="attr: {'data-design': currentDesign}">
       <div id="editor-slide" class="slide" data-bind="attr: {'data-layout': currentLayout}">
-        <div id="slide-title" data-key="title" data-bind="click: editItem"></div>
-        <div id="slide-subtitle" data-key="subtitle" data-bind="click: editItem"></div>
-        <div id="slide-content" data-key="content" data-bind="click: editItem"></div>
-        <div id="slide-subtitle2" data-key="subtitle2" data-bind="click: editItem"></div>
-        <div id="slide-content2" data-key="content2" data-bind="click: editItem"></div>
+        <div id="slide-title" data-key="title">
+          <div class="output" data-bind="click: editItem"></div>
+        </div>
+        <div id="slide-subtitle" data-key="subtitle">
+          <div class="output" data-bind="click: editItem"></div>
+        </div>
+        <div id="slide-content" data-key="content">
+          <div class="output" data-bind="click: editItem"></div>
+        </div>
+        <div id="slide-subtitle2" data-key="subtitle2">
+          <div class="output" data-bind="click: editItem"></div>
+        </div>
+        <div id="slide-content2" data-key="content2">
+          <div class="output" data-bind="click: editItem"></div>
+        </div>
         <div id="item-editor-layer" class="layer"></div>
       </div>
     </div>
@@ -320,6 +330,33 @@
     </div>
   </div>
 </div>
+
+<script id="ctrl-template" type="text/template">
+<div class="ctrl">
+    <a href="#" class="ctrl-start"></a>
+    <a href="#" class="ctrl-resize"></a>
+    <ul class="ctrl-menu">
+        <li><a href="#" data-action="clear">清空</a></li>
+        <li><a href="#" data-action="edit">编辑</a></li>
+        <li><a href="#">…</a></li>
+        <li><a href="#" data-action="set-text">文字</a></li>
+        <li><a href="#" data-action="set-img">图片</a></li>
+        <li><a href="#" data-action="set-video">视频</a></li>
+    </ul>
+</div>
+</script>
+
+<script id="ctrl-template-title" type="text/template">
+<div class="ctrl">
+    <a href="#" class="ctrl-start"></a>
+    <a href="#" class="ctrl-resize"></a>
+    <ul class="ctrl-menu">
+        <li><a href="#" data-action="">清空</a></li>
+        <li><a href="#" data-action="">编辑</a></li>
+        <li><a href="#" data-action="">无</a></li>
+    </ul>
+</div>
+</script>
 
 <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
