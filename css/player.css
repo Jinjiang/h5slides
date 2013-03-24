@@ -4,3 +4,8 @@
 #player-stage .current {display: block;}
 #player-status {position: absolute; bottom: 0.5em; left: 1em;}
 #player-nav {position: absolute; bottom: 0.5em; right: 1em;}
+
+#player-unscalable-container {position: absolute; top: 0; left: 0;}
+#player-unscalable-container .unscalable-slide {display: none;}
+#player-unscalable-container .current {display: block;}
+#player-unscalable-container .output {position: absolute;}

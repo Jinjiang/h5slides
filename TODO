@@ -5,9 +5,6 @@ transition 0.5d
 notifications 1d
 -- milestone 0.3.2 --
     type list button for each item
-        each button TODO
-        position changing bug: can't minify the height
-        position changing bug: save data and revert when page switched
     confirm when type forced to change
     display code by type (add highlight by some open source lib)
     embed code demo

@@ -1,3 +1,13 @@
+ul.unstyled {
+    margin-bottom: 0;
+}
+ul.unstyled li {
+    line-height: inherit;
+}
+
+
+
+
 .stage {
     -webkit-transform-origin: 50% 50%;
 }
@@ -19,7 +29,7 @@
     box-sizing: border-box;
     z-index: 6;
 }
-.slide [data-key] .output {
+.output {
     width: 100%;
     padding: 0.25em 0.5em;
     box-sizing: border-box;
@@ -44,7 +54,7 @@
 .slide[data-layout="imax"] [data-key="title"] {
     display: -webkit-box;
     left: 20px;
-    top: -10px;
+    top: 0px;
     width: 600px;
     min-height: 2em;
     font-size: 24px;
@@ -164,15 +174,6 @@
     font-size: 24px;
     font-weight: bold;
     z-index: 3;
-}
-
-
-
-.slide .output ul {
-    margin-bottom: 0;
-}
-.slide .output li {
-    line-height: inherit;
 }
 
 

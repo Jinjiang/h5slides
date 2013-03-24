@@ -14,7 +14,7 @@ define(['storage'], function (storage) {
             {key: 'subtitle', title: 'Subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
             {key: 'double', title: 'Two Columns', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'text'}},
             {key: 'double-subtitle', title: 'Two Columns with subtitle', layout: 'double-subtitle', typeMap: {title: 'text', subtitle: 'text', subtitle2: 'text', content: 'text', content2: 'text'}},
-            {key: 'picture', title: 'Picture', layout: 'normal', typeMap: {title: 'text', content: 'img'}},
+            {key: 'picture', title: 'Picture', layout: 'imax', typeMap: {title: 'text', content: 'img'}},
             {key: 'picture-left', title: 'Picture in Left', layout: 'double', typeMap: {title: 'text', content: 'img', content2: 'text'}},
             {key: 'picture-right', title: 'Picture in Right', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'img'}},
             {key: 'video', title: 'Youku Video', layout: 'imax', typeMap: {title: 'text', content: 'video'}}
@@ -31,7 +31,7 @@ define(['storage'], function (storage) {
             {sid: 'A', template: 'title', layout: 'title', items: {title: {type: 'text', value: 'Hello World'}, content: {type: 'text', value: 'test info'}}},
             {sid: 'B', template: 'subtitle', layout: 'subtitle', items: {title: {type: 'text', value: 'Content'}, content: {type: 'text', value: 'this is the menu here.'}}},
             {sid: 'C', template: 'picture', layout: 'normal', items: {title: {type: 'text', value: 'Logo'}, content: {type: 'img', value: 'http://www.maxthon.cn/images/logo_128x128.png'}}},
-            {sid: 'D', template: 'video', layout: 'normal', items: {title: {type: 'text', value: 'Video'}, content: {type: 'video', value: 'XNjUwODE1Mg=='}}}
+            {sid: 'D', template: 'video', layout: 'imax', items: {title: {type: 'text', value: 'Video'}, content: {type: 'video', value: 'XNjUwODE1Mg=='}}}
         ]
     };
 
