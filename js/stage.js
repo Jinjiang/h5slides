@@ -30,6 +30,8 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                 if (typeHelper && typeHelper.resize) {
                     typeHelper.resize(itemData, output);
                 }
+
+                ctrlManager.update(dom, itemData.type, dataManager.getTypeList(itemData.layout, key));
             };
             vm.resizeAll = function () {
                 itemKeyMap.forEach(function (key) {
@@ -37,15 +39,19 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                 });
             };
 
-            vm.editItem = function (vm, e) {
+            vm.clickItem = function (vm, e) {
                 var output = $(e.currentTarget);
+                e.stopPropagation();
+                vm.editItem(output);
+            };
+
+            vm.editItem = function (output) {
                 var dom = output.parent();
                 var key = dom.attr('data-key');
                 var page = vm.currentPage();
                 var itemData = dataManager.getItem(page, key);
                 var typeHelper = typeMap[itemData.type];
 
-                e.stopPropagation();
                 vm.currentItem(key);
 
                 if (typeHelper) {
@@ -56,6 +62,37 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                     }
                     typeHelper.showEditor(key, page, itemData, output);
                 }
+            };
+
+            vm.changeType = function (output, newType) {
+                var dom = output.parent();
+                var key = dom.attr('data-key');
+                var page = vm.currentPage();
+                var itemData = dataManager.getItem(page, key);
+                var type = itemData.type;
+
+                vm.currentItem(key);
+
+                if (type === newType) {
+                    return;
+                }
+
+                dataManager.changeType(page, key, newType);
+                dataManager.save();
+                vm.previewItem(key);
+                ctrlManager.update(dom, newType);
+            }
+
+            vm.clearItem = function (output) {
+                var dom = output.parent();
+                var key = dom.attr('data-key');
+                var page = vm.currentPage();
+
+                vm.currentItem(key);
+
+                dataManager.clearItem(page, key);
+                dataManager.save();
+                vm.previewItem(key);
             };
 
             vm.finishEdit = function () {
@@ -84,7 +121,8 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                 setTimeout(vm.previewAll, 13);
             });
 
-            ctrlManager.init($('#editor-stage'));
+            ctrlManager.init($('#editor-stage'), vm);
+            vm.resizeAll();
         }
     };
 });

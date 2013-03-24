@@ -3,6 +3,7 @@ define(function () {
     var STAGE_HEIGHT = 480;
     var MIN_UNIT = 20;
 
+    var currentVm;
     var currentMenu;
 
     function toggleMenu(menu) {
@@ -192,20 +193,19 @@ define(function () {
         };
     }
 
-    function initCtrl(root) {
+    function initCtrl(root, vm) {
         var btnStart;
         var menu;
         var btnMore;
         var btnResize;
+        var key = root.attr('data-key');
 
-        var verticalAlign = root.attr('data-key') == 'title' ? 'bottom' : 'top';
+        var verticalAlign = (key == 'title') ? 'bottom' : 'top';
 
         var draggingFlag = false;
 
         function appendCtrl(root) {
-            var templateSrc = (root.attr('data-key') == 'title') ?
-                    $('#ctrl-template-title') :
-                    $('#ctrl-template');
+            var templateSrc = $('#ctrl-template');
             var template = $.trim(templateSrc.text());
             var ctrlRoot = $(template);
 
@@ -218,12 +218,40 @@ define(function () {
             menu = root.find('.ctrl-menu');
             btnResize = root.find('.ctrl-resize');
 
-            if (menu.find('li').length > 3) {
-                btnMore = menu.find('li:nth-child(3) a');
-            }
-            else {
-                btnMore = $();
-            }
+            // if (menu.find('li').length > 3) {
+            //     btnMore = menu.find('li:nth-child(3) a');
+            // }
+            // else {
+            //     btnMore = $();
+            // }
+        }
+        function bindActions(menu) {
+            var output = root.find('.output');
+            var btnEdit = menu.find('[data-action="edit"]');
+            var btnClear = menu.find('[data-action="clear"]');
+            var moreMenu = menu.find('.ctrl-menu-more');
+
+            btnEdit.click(function (e) {
+                e.preventDefault();
+                hideMenu(menu);
+                vm.editItem(output);
+            });
+
+            btnClear.click(function (e) {
+                e.preventDefault();
+                hideMenu(menu);
+                vm.clearItem(output);
+            });
+
+            moreMenu.delegate('a', 'click', function (e) {
+                var target;
+                e.preventDefault();
+                target = $(this);
+                console.log('click more menu', target);
+                if (target.attr('data-action') === 'type') {
+                    vm.changeType(output, target.attr('data-type'));
+                }
+            });
         }
 
         function startMove(e) {
@@ -232,7 +260,7 @@ define(function () {
                 top: parseInt(root.css('top')) || 0,
                 bottom: parseInt(root.css('bottom')) || 0,
                 width: parseInt(root.css('width')) || 0,
-                height: parseInt(root.css('min-height')) || 0,
+                height: parseInt(root.css('height')) || 0,
                 outerWidth: root.outerWidth(),
                 outerHeight: root.outerHeight()
             };
@@ -276,7 +304,7 @@ define(function () {
                 top: parseInt(root.css('top')) || 0,
                 bottom: parseInt(root.css('bottom')) || 0,
                 width: parseInt(root.css('width')) || 0,
-                height: parseInt(root.css('min-height')) || 0,
+                height: parseInt(root.css('height')) || 0,
                 outerWidth: root.outerWidth(),
                 outerHeight: root.outerHeight()
             };
@@ -291,7 +319,7 @@ define(function () {
                 result = adjustChanges(status, changes, 'resize', verticalAlign);
 
                 root.css('width', result.width + 'px');
-                root.css('min-height', result.height + 'px');
+                root.css('height', result.height + 'px');
                 if (verticalAlign == 'bottom') {
                     root.css('bottom', STAGE_HEIGHT - result.top - result.height + 'px');
                 }
@@ -308,25 +336,56 @@ define(function () {
             });
         }
 
+        currentVm = vm;
         appendCtrl(root);
+        bindActions(menu);
 
         btnStart.click(function (e) {
             e.preventDefault();
+            currentVm.currentItem(key);
             if (!draggingFlag) {
                 toggleMenu(menu);
             }
         });
-        btnMore.click(function (e) {
-            e.preventDefault();
-            toggleMoreMenu(menu);
-        });
-        btnResize.click(function (e) {
-            e.preventDefault();
-        });
+        // btnMore.click(function (e) {
+        //     e.preventDefault();
+        //     toggleMoreMenu(menu);
+        // });
+        // btnResize.click(function (e) {
+        //     e.preventDefault();
+        // });
         // btnStart.bind('mousedown', startMove);
         // btnStart.bind('touchstart', startMove);
         // btnResize.bind('mousedown', startResize);
         // btnResize.bind('touchstart', startResize);
+    }
+
+    function updateTypeList(root, currentType, typeList) {
+        var output = root.find('.output');
+        var moreMenu = root.find('.ctrl-menu-more');
+
+        if (!typeList) {
+            moreMenu.find('a').removeClass('active');
+            moreMenu.find('[data-type="' + currentType + '"]').addClass('active');
+        }
+        else {
+            moreMenu.empty();
+            if (typeList.length > 0) {
+                $.each(typeList, function (i, typeData) {
+                    var key = typeData.key;
+                    var name = typeData.name;
+                    var btn = $('<a href="#"></a>').text(name).
+                        attr('data-action', 'type').attr('data-type', key);
+                    if (currentType === key) {
+                        btn.addClass('active');
+                    }
+                    moreMenu.append(btn);
+                });
+            }
+            else {
+                moreMenu.html('<a href="#">无</a>');
+            }
+        }
     }
 
     function mousedown(e) {
@@ -342,12 +401,15 @@ define(function () {
     }
 
     return {
-        init: function (stage) {
+        init: function (stage, vm) {
             stage.find('[data-key]').each(function () {
-                initCtrl($(this));
+                initCtrl($(this), vm);
             });
 
             $(window).bind('mousedown', mousedown);
+        },
+        update: function (item, currentIndex, typeList) {
+            updateTypeList(item, currentIndex, typeList);
         }
     };
 });

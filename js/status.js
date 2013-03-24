@@ -1,4 +1,7 @@
 define(['data', 'design'], function (dataManager, designManager) {
+    var activeItem;
+    var ignoreTypeChange;
+
     return {
         init: function (vm) {
             designManager.loadCssLink(vm.currentDesign());
@@ -36,7 +39,7 @@ define(['data', 'design'], function (dataManager, designManager) {
 
             vm.currentTpl.subscribe(function (newValue) {
                 var page = vm.currentPage();
-                var changedKeys = dataManager.changeTemplate(page, newValue);
+                var changedKeys = dataManager.changeTemplate(page, newValue, ignoreTypeChange);
 
                 changedKeys.forEach(function (key) {
                     vm.previewItem(key);
@@ -48,12 +51,22 @@ define(['data', 'design'], function (dataManager, designManager) {
             vm.currentPage.subscribe(function (newValue) {
                 var slideData = dataManager.getSlide(newValue);
                 dataManager.stopStorage();
+                ignoreTypeChange = true;
                 vm.currentTpl(slideData.template);
+                ignoreTypeChange = false;
                 dataManager.startStorage();
             });
             vm.currentDesign.subscribe(function (newValue) {
                 dataManager.setDesign(newValue);
                 dataManager.save();
+            });
+            vm.currentItem.subscribe(function (newValue) {
+                if (activeItem) {
+                    activeItem.removeClass('active');
+                }
+                if (newValue) {
+                    activeItem = $('#slide-' + newValue).addClass('active');
+                }
             });
         }
     };

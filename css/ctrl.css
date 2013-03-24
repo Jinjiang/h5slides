@@ -37,6 +37,7 @@
 .ctrl-start:active::before {
     border-color: gray;
 }
+
 .ctrl-menu {
     position: absolute;
     z-index: 8;
@@ -54,16 +55,10 @@
     display: none;
     -webkit-transition: opacity 0.5s;
 }
-.ctrl-menu[data-show] li:nth-child(-n+3) {
+.ctrl-menu[data-show] li {
     display: block;
 }
-.ctrl-menu[data-shown] li:nth-child(-n+3) {
-    opacity: 1;
-}
-.ctrl-menu[data-extend] li {
-    display: block;
-}
-.ctrl-menu[data-extended] li {
+.ctrl-menu[data-shown] li {
     opacity: 1;
 }
 
@@ -77,13 +72,11 @@
     top: 0px;
     left: -45px;
 }
-.ctrl-menu li:nth-child(3) {
-    position: absolute;
+.ctrl-menu li.ctrl-menu-more {
+    /*position: absolute;
     top: 0px;
-    left: 0px;
-}
-.ctrl-menu li:nth-child(4) {
-    margin-left: 45px;
+    left: 0px;*/
+    white-space: nowrap;
 }
 
 .ctrl-menu li:nth-child(1) a {
@@ -92,75 +85,25 @@
 .ctrl-menu li:nth-child(2) a {
     border-top-left-radius: 40px;
 }
-.ctrl-menu li:nth-child(3) a {
-    border-top-right-radius: 40px;
-}
-.ctrl-menu[data-extended] li:nth-child(3) a {
-    border-top-right-radius: 0;
-}
 
 .ctrl-menu li a {
     display: block;
     margin: 0 5px 0 0;
-    padding: 0 0.5em;
+    width: 40px;
+    padding: 0;
     height: 40px;
     line-height: 40px;
     text-align: center;
     background-color: rgba(127, 127, 127, 0.1);
     -webkit-transition: border-radius 0.5s;
 }
-.ctrl-menu li:nth-child(-n+3) a {
-    width: 40px;
-    padding: 0;
+.ctrl-menu li.ctrl-menu-more a {
+    display: inline-block;
+}
+.ctrl-menu li.ctrl-menu-more a.active {
+    background-color: silver;
 }
 .ctrl-menu li a:active {
     background-color: gray;
 }
-.ctrl-resize {
-    position: absolute;
-    bottom: -8px;
-    right: -8px;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    border-right: 4px silver solid;
-    border-bottom: 4px silver solid;
-    box-sizing: box-sizing;
-    cursor: nw-resize;
-}
-.ctrl-resize:hover {
-    background-color: transparent;
-}
-.ctrl-resize:active {
-    border-color: gray;
-}
-.ctrl-resize::before {
-    position: absolute;
-    content: " ";
-    width: 0px;
-    height: 0px;
-    border: 10px transparent solid;
-    border-width: 5px 10px;
-    border-right-color: silver;
-    bottom: -7px;
-    right: 20px;
-}
-.ctrl-resize::after {
-    position: absolute;
-    content: " ";
-    width: 0px;
-    height: 0px;
-    border: 10px transparent solid;
-    border-width: 10px 5px;
-    border-bottom-color: silver;
-    bottom: 20px;
-    right: -7px;
-}
-.ctrl-resize:active::before {
-    border-right-color: gray;
-}
-.ctrl-resize:active::after {
-    border-bottom-color: gray;
-}
+

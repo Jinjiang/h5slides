@@ -238,18 +238,18 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
 
             dialog.modal('show');
 
-            if (data.value.match(/^media\:\/\//)) {
+            if (!data.value) {
+                oldMid = '';
+            }
+            else if (data.value.match(/^media\:\/\//)) {
                 oldMid = data.value.substr(8);
                 tabs.find('[data-key="list"] a').tab('show');
             }
-            else if (data.value) {
+            else {
                 tabs.find('[data-key="url"] a').tab('show');
                 urlInput.val(data.value);
                 lib.embed(data.value, urlThumb, 'Image loading error!');
                 urlBtnRemove.show();
-            }
-            else {
-                oldMid = '';
             }
 
             mediaList = dataManager.getMediaList();

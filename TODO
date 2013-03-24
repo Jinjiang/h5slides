@@ -1,17 +1,14 @@
 -- milestone 0.3.1 --
 
-jsbin/jsfiddle 1d
 transition 0.5d
 notifications 1d
 -- milestone 0.3.2 --
-    bug: resizing problem when change template from video to double layout
-    type list button for each item
-        confirm when type forced to change
-    display code by type (add highlight by some open source lib)
-    embed code demo
-    embed baidu/google map
-    parse video url through web service
-    more video venders & options (advanced mode for html code)
+    confirm when type forced to change 0.5d
+    parser web service
+    type: code (add highlight by some open source lib) 0.5d
+    type: demo 1d
+    type: map 1d
+    type: video rebuild 1d
 
 gist online 2d
 page manager 1d
@@ -33,4 +30,4 @@ fullscreen layout
 text animations when playing
 undo system 3d
 
-total: 4d / 3d / 5d / 3d / ...
+total: 5.5d / 3d / 5d / 3d / ...

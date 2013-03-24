@@ -154,19 +154,19 @@
     <div id="editor-stage" class="stage" data-bind="attr: {'data-design': currentDesign}">
       <div id="editor-slide" class="slide" data-bind="attr: {'data-layout': currentLayout}">
         <div id="slide-title" data-key="title">
-          <div class="output" data-bind="click: editItem"></div>
+          <div class="output" data-bind="click: clickItem"></div>
         </div>
         <div id="slide-subtitle" data-key="subtitle">
-          <div class="output" data-bind="click: editItem"></div>
+          <div class="output" data-bind="click: clickItem"></div>
         </div>
         <div id="slide-content" data-key="content">
-          <div class="output" data-bind="click: editItem"></div>
+          <div class="output" data-bind="click: clickItem"></div>
         </div>
         <div id="slide-subtitle2" data-key="subtitle2">
-          <div class="output" data-bind="click: editItem"></div>
+          <div class="output" data-bind="click: clickItem"></div>
         </div>
         <div id="slide-content2" data-key="content2">
-          <div class="output" data-bind="click: editItem"></div>
+          <div class="output" data-bind="click: clickItem"></div>
         </div>
         <div id="item-editor-layer" class="layer"></div>
       </div>
@@ -330,42 +330,27 @@
       <button class="btn" data-dismiss="modal">Cancel</button>
     </div>
   </div>
+
+  <div id="confirm-dialog" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3 id="confirm-dialog-title"></h3>
+    </div>
+    <div class="modal-body" id="confirm-dialog-body"></div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" data-action="no">No</button>
+      <button class="btn btn-primary" data-dismiss="modal" data-action="yes">Yes</button>
+    </div>
+  </div>
 </div>
 
 <script id="ctrl-template" type="text/template">
 <div class="ctrl">
     <a href="#" class="ctrl-start"></a>
-    <!--a href="#" class="ctrl-resize"></a-->
     <ul class="ctrl-menu">
         <li><a href="#" data-action="clear">清空</a></li>
         <li><a href="#" data-action="edit">编辑</a></li>
-        <li><a href="#">…</a></li>
-        <li><a href="#" data-action="set-text">文字</a></li>
-        <li><a href="#" data-action="set-img">图片</a></li>
-    </ul>
-</div>
-</script>
-
-<script id="ctrl-template-title" type="text/template">
-<div class="ctrl">
-    <a href="#" class="ctrl-start"></a>
-    <!--a href="#" class="ctrl-resize"></a-->
-    <ul class="ctrl-menu">
-        <li><a href="#" data-action="">清空</a></li>
-        <li><a href="#" data-action="">编辑</a></li>
-        <li><a href="#" data-action="">无</a></li>
-    </ul>
-</div>
-</script>
-
-<script id="ctrl-template-imax" type="text/template">
-<div class="ctrl">
-    <a href="#" class="ctrl-start"></a>
-    <!--a href="#" class="ctrl-resize"></a-->
-    <ul class="ctrl-menu">
-        <li><a href="#" data-action="">清空</a></li>
-        <li><a href="#" data-action="">编辑</a></li>
-        <li><a href="#" data-action="">无</a></li>
+        <li class="ctrl-menu-more"><a href="#">…</a></li>
     </ul>
 </div>
 </script>

@@ -99,6 +99,22 @@ define(['storage'], function (storage) {
             });
             return result;
         },
+        getTypeList: function (layout, key) {
+            if (key === 'title' || key === 'subtitle' || key === 'subtitle2') {
+                return [];
+            }
+            if (layout === 'imax' && key === 'content') {
+                return [
+                    {key: 'text', name: '文字'},
+                    {key: 'img', name: '图片'},
+                    {key: 'video', name: '视频'}
+                ];
+            }
+            return [
+                {key: 'text', name: '文字'},
+                {key: 'img', name: '图片'}
+            ];
+        },
 
         getData: function () {
             return data;
@@ -155,7 +171,7 @@ define(['storage'], function (storage) {
             return itemData.value;
         },
 
-        changeTemplate: function (page, template) {
+        changeTemplate: function (page, template, ignoreTypeChange) {
             var slideData = data.slides[page] || {};
             var tplData = manager.getTplByKey(template);
             var hasNewLayout = (slideData.layout != tplData.layout);
@@ -177,13 +193,28 @@ define(['storage'], function (storage) {
                     itemData.position = {};
                 }
                 if (!itemData.value) {
-                    itemData.type = type;
+                    if (!ignoreTypeChange) {
+                        itemData.type = type;
+                    }
                     itemData.config = {};
                     changedKeys.push(key);
                 }
             });
 
             return changedKeys;
+        },
+        changeType: function (page, key, type) {
+            var slideData = data.slides[page] || {};
+            var itemData = slideData.items[key];
+            itemData.type = type;
+            itemData.value = null;
+            itemData.config = {};
+        },
+
+        clearItem: function (page, key) {
+            var itemData = manager.getItem(page, key);
+            itemData.value = null;
+            itemData.config = {};
         },
         setValue: function (page, key, value) {
             var itemData = manager.getItem(page, key);
