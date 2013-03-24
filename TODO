@@ -3,26 +3,31 @@
 transition 0.5d
 notifications 1d
 -- milestone 0.3.2 --
-    confirm when type forced to change 0.5d
-    parser web service
     type: code (add highlight by some open source lib) 0.5d
     type: demo 1d
+
+h5slides-packages ide 3d
     type: map 1d
+    parser web service
     type: video rebuild 1d
+documantation 1d
+build config 1d
+    types (js helper/css/editor html)
+-- milestone 0.3.3 --
 
 gist online 2d
 page manager 1d
--- milestone 0.3.3 --
+-- milestone 0.3.4 --
 
 guideline 2d
 plugins 1d
     pagenav 1d
     draw sth. 1d
--- milestone 0.3.4 --
+-- milestone 0.3.5 --
 
 rich text editor 2d
 toolbar 1d
--- milestone 0.3.5 --
+-- milestone 0.3.6 --
 
 create new item
 picture viewer
