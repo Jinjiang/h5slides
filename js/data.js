@@ -17,7 +17,7 @@ define(['storage'], function (storage) {
             {key: 'picture', title: 'Picture', layout: 'normal', typeMap: {title: 'text', content: 'img'}},
             {key: 'picture-left', title: 'Picture in Left', layout: 'double', typeMap: {title: 'text', content: 'img', content2: 'text'}},
             {key: 'picture-right', title: 'Picture in Right', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'img'}},
-            {key: 'video', title: 'Youku Video', layout: 'normal', typeMap: {title: 'text', content: 'video'}}
+            {key: 'video', title: 'Youku Video', layout: 'imax', typeMap: {title: 'text', content: 'video'}}
         ];
     var designList = [
             {key: 'default', title: 'Default'},

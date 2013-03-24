@@ -41,6 +41,16 @@
     font-weight: bold;
     z-index: 5;
 }
+.slide[data-layout="imax"] [data-key="title"] {
+    display: -webkit-box;
+    left: 20px;
+    top: -10px;
+    width: 600px;
+    min-height: 2em;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 5;
+}
 .slide[data-layout="title"] [data-key="title"] {
     display: -webkit-box;
     left: 80px;
@@ -70,6 +80,14 @@
     top: 140px;
     width: 520px;
     min-height: 300px;
+    z-index: 2;
+}
+.slide[data-layout="imax"] [data-key="content"] {
+    display: -webkit-box;
+    left: 20px;
+    top: 60px;
+    width: 600px;
+    min-height: 400px;
     z-index: 2;
 }
 .slide[data-layout="double"] [data-key="content"] {
