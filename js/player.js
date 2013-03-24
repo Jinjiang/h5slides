@@ -23,6 +23,8 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     var currentPage;
     var slideLength;
 
+    var fullscreenEnabled = document.webkitFullscreenEnabled;
+
     function createItem(key, itemData, unscalable) {
         var itemDom = $('<div><div class="output"></div></div>');
         var type = itemData.type || 'text';
@@ -113,7 +115,6 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     function resizeUnscalableItems(page) {
         var slideDom = $(slidesContainer.find('.slide')[page]);
         var unscalableDom = $(unscalableContainer.find('.unscalable-slide')[page]);
-        console.log(page, unscalableDom, unscalableDom.children());
         unscalableDom.children().each(function () {
             var itemDom = $(this);
             var output = itemDom.find('.output');
@@ -130,8 +131,8 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
             output.css('width', rect.width + 'px');
             output.css('height', rect.height + 'px');
 
-            if (typeHelper.resize) {
-                typeHelper.resize(output);
+            if (typeHelper.adjust) {
+                typeHelper.adjust(output);
             }
             if (typeHelper.show) {
                 typeHelper.show(output);
@@ -171,20 +172,27 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
             gotoPage(currentPage - 1);
         }
     }
-    function doExit() {
-        slidesContainer.css('-webkit-transform', '');
-        $(window).unbind('resize', scaleSlides);
-        $(window).unbind('keydown', keydown);
-
-        if (document.webkitFullscreenEnabled && document.webkitIsFullScreen) {
+    function exitFullscreen() {
+        if (fullscreenEnabled && document.webkitIsFullScreen) {
             document.webkitExitFullscreen();
         }
+    }
+    function doExit() {
+        slidesContainer.css('-webkit-transform', '');
 
         currentPage = -1;
 
         slideLength = null;
         slidesContainer.empty();
         unscalableContainer.empty();
+
+        $(window).unbind('resize', scaleSlides);
+        $(window).unbind('keydown', keydown);
+
+        if (fullscreenEnabled) {
+            document.onwebkitfullscreenchange = null;
+        }
+
         player.hide();
         editor.show();
     }
@@ -201,6 +209,9 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
             goNext();
             break;
         case 27:
+            if (fullscreenEnabled) {
+                exitFullscreen();
+            }
             doExit();
             break;
         default:
@@ -237,8 +248,13 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         $(window).bind('resize', scaleSlides);
         $(window).bind('keydown', keydown);
 
-        if (document.webkitFullscreenEnabled) {
+        if (fullscreenEnabled) {
             document.body.webkitRequestFullscreen();
+            document.onwebkitfullscreenchange = function (e) {
+                if (!document.webkitIsFullScreen) {
+                    doExit();
+                }
+            };
         }
     }
 
@@ -258,6 +274,9 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     }
     function clickExit(e) {
         e.preventDefault();
+        if (fullscreenEnabled) {
+            exitFullscreen();
+        }
         doExit();
     }
 
