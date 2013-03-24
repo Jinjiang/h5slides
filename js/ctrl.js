@@ -78,7 +78,7 @@ define(function () {
                 dest.y = e.clientY;
             }
             catch (ex) {
-                console.log(e);
+                console.log(ex);
             }
         }
 
@@ -236,6 +236,7 @@ define(function () {
                 outerWidth: root.outerWidth(),
                 outerHeight: root.outerHeight()
             };
+            var result;
 
             startDrag(e, function (offset) {
                 var changes = {
@@ -243,7 +244,7 @@ define(function () {
                     top: offset.y
                 };
 
-                var result = adjustChanges(status, changes, 'move', verticalAlign);
+                result = adjustChanges(status, changes, 'move', verticalAlign);
 
                 root.css('left', result.left + 'px');
                 if (verticalAlign == 'top') {
@@ -253,7 +254,20 @@ define(function () {
                     root.css('bottom', STAGE_HEIGHT - result.top - result.height + 'px');
                 }
             }, function (offset) {
-                ;
+                var diffX;
+                var diffY;
+
+                diffX = result.left - status.left;
+                if (verticalAlign == 'top') {
+                    diffY = result.top - status.top;
+                }
+                else {
+                    diffY = STAGE_HEIGHT - result.top - result.height - status.bottom;
+                }
+
+                if (Math.abs(diffX) + Math.abs(diffY) > 0) {
+                    // TODO changed;
+                }
             });
         }
         function startResize(e) {
@@ -266,6 +280,7 @@ define(function () {
                 outerWidth: root.outerWidth(),
                 outerHeight: root.outerHeight()
             };
+            var result;
 
             startDrag(e, function (offset) {
                 var changes = {
@@ -273,7 +288,7 @@ define(function () {
                     height: offset.y
                 };
 
-                var result = adjustChanges(status, changes, 'resize', verticalAlign);
+                result = adjustChanges(status, changes, 'resize', verticalAlign);
 
                 root.css('width', result.width + 'px');
                 root.css('min-height', result.height + 'px');
@@ -281,7 +296,15 @@ define(function () {
                     root.css('bottom', STAGE_HEIGHT - result.top - result.height + 'px');
                 }
             }, function (offset) {
-                ;
+                var diffX;
+                var diffY;
+
+                diffX = result.width - status.width;
+                diffY = result.height - status.height;
+
+                if (Math.abs(diffX) + Math.abs(diffY) > 0) {
+                    // TODO save new size/position;
+                }
             });
         }
 
@@ -300,10 +323,10 @@ define(function () {
         btnResize.click(function (e) {
             e.preventDefault();
         });
-        btnStart.bind('mousedown', startMove);
-        btnStart.bind('touchstart', startMove);
-        btnResize.bind('mousedown', startResize);
-        btnResize.bind('touchstart', startResize);
+        // btnStart.bind('mousedown', startMove);
+        // btnStart.bind('touchstart', startMove);
+        // btnResize.bind('mousedown', startResize);
+        // btnResize.bind('touchstart', startResize);
     }
 
     function mousedown(e) {
