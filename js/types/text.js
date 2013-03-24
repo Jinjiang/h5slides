@@ -51,9 +51,11 @@ define(['data', 'vm'], function (dataManager, vm) {
     }
 
     return {
+        init: null,
         preview: function (data, dom) {
             render(data, dom, '[empty text]');
         },
+        resize: null,
         showEditor: function (key, page, data, dom) {
             var position = dom.parent().position();
             var width = dom.outerWidth();

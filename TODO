@@ -4,11 +4,13 @@ jsbin/jsfiddle 1d
 transition 0.5d
 notifications 1d
 -- milestone 0.3.2 --
+    bug: resizing problem when change template from video to double layout
     type list button for each item
-    confirm when type forced to change
+        confirm when type forced to change
     display code by type (add highlight by some open source lib)
     embed code demo
     embed baidu/google map
+    parse video url through web service
     more video venders & options (advanced mode for html code)
 
 gist online 2d

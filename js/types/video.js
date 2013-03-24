@@ -84,6 +84,16 @@ define(['data', 'vm'], function (dataManager, vm) {
             }
         },
         resize: function (data, dom) {
+            var playerContainer = dom.children().first();
+            var height;
+            playerContainer.hide();
+            height = dom.height();
+            playerContainer.css('height', height + 'px');
+            playerContainer.css('line-height', height + 'px');
+            playerContainer.show();
+        },
+        adjust: function (dom) {
+            ;
         },
         showEditor: function (key, page, data, dom) {
             dialog.modal('show');
