@@ -247,9 +247,8 @@ define(function () {
                 var target;
                 e.preventDefault();
                 target = $(this);
-                console.log('click more menu', target);
                 if (target.attr('data-action') === 'type') {
-                    vm.changeType(output, target.attr('data-type'));
+                    vm.confirmChangeType(output, target.attr('data-type'));
                 }
             });
         }

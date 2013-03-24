@@ -64,12 +64,14 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                 }
             };
 
-            vm.changeType = function (output, newType) {
+            vm.confirmChangeType = function (output, newType) {
                 var dom = output.parent();
                 var key = dom.attr('data-key');
                 var page = vm.currentPage();
                 var itemData = dataManager.getItem(page, key);
                 var type = itemData.type;
+
+                var dialog = $('#confirm-dialog');
 
                 vm.currentItem(key);
 
@@ -77,10 +79,34 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                     return;
                 }
 
-                dataManager.changeType(page, key, newType);
+                if (itemData.value) {
+                    dialog.find('.modal-header h3').text('Change Type');
+                    dialog.find('.modal-body').text('Are you sure?');
+                    dialog.find('[data-action="yes"]').on('click', function (e) {
+                        vm.changeType(output, newType);
+                    });
+                    dialog.on('hide', function () {
+                        dialog.find('modal-header h3').text('Change Type');
+                        dialog.find('modal-body').text('Are you sure?');
+                        dialog.find('[data-action="yes"]').off('click');
+                    });
+                    dialog.modal('show');
+                }
+                else {
+                    vm.changeType(output, newType);
+                }
+            },
+            vm.changeType = function (output, type) {
+                var dom = output.parent();
+                var key = dom.attr('data-key');
+                var page = vm.currentPage();
+
+                vm.currentItem(key);
+                dataManager.changeType(page, key, type);
                 dataManager.save();
                 vm.previewItem(key);
-                ctrlManager.update(dom, newType);
+
+                ctrlManager.update(dom, type);
             }
 
             vm.clearItem = function (output) {
