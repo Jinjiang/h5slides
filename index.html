@@ -245,14 +245,34 @@
             </ul>
           </div>
           <div class="tab-pane" id="transition-panel">
-            <ul class="thumbnails" id="transition-list">
-            </ul>
+            <div class="clearfix">
+              <ul id="transition-list" class="nav nav-pills nav-stacked pull-left" data-bind="foreach: transitionList">
+                <li data-bind="css: {active: key == $root.currentTransition()}">
+                  <a href="#" data-bind="click: $parent.clickTransition, text: title"></a>
+                </li>
+              </ul>
+              <div id="transition-preview" class="pull-right">
+                <div id="transition-stage" data-bind="attr: {'data-transition': currentTransition}">
+                  <div class="transition-slide">1</div>
+                  <div class="transition-slide">2</div>
+                  <div class="transition-slide">3</div>
+                  <div class="transition-slide">4</div>
+                  <div class="transition-slide">5</div>
+                  <div class="transition-slide">6</div>
+                  <div class="transition-slide">7</div>
+                  <div class="transition-slide">8</div>
+                  <div class="transition-slide">9</div>
+                  <div class="transition-slide">0</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-primary" data-dismiss="modal">Close</button>
+      <button class="btn btn-primary" data-dismiss="modal">OK</button>
+      <button class="btn" data-dismiss="modal">Close</button>
     </div>
   </div>
 

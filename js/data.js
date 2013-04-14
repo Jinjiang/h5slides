@@ -51,9 +51,24 @@ define(['storage'], function (storage) {
             {key: 'default', title: 'Default'},
             {key: 'revert', title: 'Revert'}
         ];
+    var transitionList = [
+            {key: 'horizontal', title: 'Normal'},
+            {key: 'vertical', title: 'Vertical'},
+            {key: 'cubic-horizontal', title: 'Cubic'},
+            {key: 'cubic-horizontal-inner', title: 'Cubic Inset'},
+            {key: 'cubic-vertical', title: 'Cubic Vertical'},
+            {key: 'cubic-vertical-inner', title: 'Cubic Vertical Inset'},
+            {key: 'doors', title: 'Open Doors'},
+            {key: 'zoom-in', title: 'Zoom In'},
+            {key: 'zoom-out', title: 'Zoom Out'},
+            {key: 'sublime', title: 'Sublime'},
+            {key: 'fly', title: 'Fly Away'},
+            {key: 'fall', title: 'Fall Down'}
+        ];
 
     var defaultData = {
         design: 'default',
+        transition: 'horizontal',
         title: '',
         slides: [
             {sid: 'A', layout: 'title', items: {title: {type: 'text', value: 'Hello World'}, content: {type: 'text', value: 'test info'}}},
@@ -112,6 +127,9 @@ define(['storage'], function (storage) {
         getDesignList: function () {
             return designList;
         },
+        getTransitionList: function () {
+            return transitionList;
+        },
         getTplByKey: function (key) {
             var result;
             templateList.forEach(function (tplData) {
@@ -126,6 +144,15 @@ define(['storage'], function (storage) {
             designList.forEach(function (designData) {
                 if (designData.key == key) {
                     result = designData;
+                }
+            });
+            return result;
+        },
+        getTransitionByKey: function (key) {
+            var result;
+            transitionList.forEach(function (transitionData) {
+                if (transitionData.key == key) {
+                    result = transitionData;
                 }
             });
             return result;
@@ -159,6 +186,9 @@ define(['storage'], function (storage) {
         getDesign: function () {
             return data.design;
         },
+        getTransition: function () {
+            return data.transition;
+        },
         getTitle: function () {
             return data.title;
         },
@@ -167,6 +197,9 @@ define(['storage'], function (storage) {
         },
         setDesign: function (newDesign) {
             data.design = newDesign;
+        },
+        setTransition: function (newTransition) {
+            data.transition = newTransition;
         },
         setTitle: function (newTitle) {
             data.title = newTitle;

@@ -1,4 +1,4 @@
-define(['data', 'design'], function (dataManager, designManager) {
+define(['data', 'design', 'transition'], function (dataManager, designManager, transitionManager) {
     var activeItem;
     // var ignoreTypeChange;
 
@@ -22,6 +22,10 @@ define(['data', 'design'], function (dataManager, designManager) {
 
                 designManager.loadCssLink(key);
                 vm.currentDesign(key);
+            };
+            vm.clickTransition = function (transitionData, e) {
+                var key = transitionData.key;
+                vm.currentTransition(key);
             };
             vm.resetData = function () {
                 dataManager.reset();
@@ -69,6 +73,11 @@ define(['data', 'design'], function (dataManager, designManager) {
             });
             vm.currentDesign.subscribe(function (newValue) {
                 dataManager.setDesign(newValue);
+                dataManager.save();
+            });
+            vm.currentTransition.subscribe(function (newValue) {
+                transitionManager.change(newValue);
+                dataManager.setTransition(newValue);
                 dataManager.save();
             });
             vm.currentItem.subscribe(function (newValue) {
