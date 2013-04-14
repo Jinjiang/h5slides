@@ -14,11 +14,16 @@ define(['data'], function (dataManager) {
                 }
             };
 
-            vm.addPage = function () {
+            vm.addPage = function (templateData) {
                 var $index;
                 var slideList;
                 var slide;
                 var sid = (new Date).valueOf();
+
+                templateData = templateData || {
+                    layout: 'normal',
+                    typeMap: {title: 'text', content: 'text'}
+                };
 
                 $index = vm.currentPage();
                 vm.pageList.splice($index + 1, 0, {sid: sid, title: ''});
@@ -26,12 +31,19 @@ define(['data'], function (dataManager) {
                 slideList = dataManager.getSlideList();
                 slide = {
                         sid: sid,
-                        template: 'normal', layout: 'normal',
-                        items: {
-                            title: {type: 'text', value: ''},
-                            content: {type: 'text', value: ''}
-                        }
+                        layout: templateData.layout,
+                        items: {}
+                        // template: 'normal',
+                        // layout: 'normal',
+                        // items: {
+                        //     title: {type: 'text', value: ''},
+                        //     content: {type: 'text', value: ''}
+                        // }
                     };
+                $.each(templateData.typeMap, function (key, type) {
+                    slide.items[key] = {type: type, value: ''};
+                });
+
                 slideList.splice($index + 1, 0, slide);
 
                 vm.currentPage($index + 1);

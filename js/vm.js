@@ -6,11 +6,13 @@ define(['data'], function (dataManager) {
         title: ko.observable(dataManager.getTitle()),
         editingTitle: ko.observable(false),
         designList: dataManager.getDesignList(),
+        layoutList: dataManager.getLayoutList(),
         tplList: dataManager.getTplList(),
         pageList: ko.observableArray(dataManager.getPageList()),
         currentDesign: ko.observable(dataManager.getDesign()),
         currentPage: ko.observable(currentPage),
-        currentTpl: ko.observable(currentSlide.template),
+        currentLayout: ko.observable(currentSlide.layout),
+        // currentTpl: ko.observable(currentSlide.template),
         currentItem: ko.observable(''),
         currentItemDataCopy: ko.observable(null)
     };
@@ -21,16 +23,16 @@ define(['data'], function (dataManager) {
         return pageList[page].sid;
     });
 
-    vm.currentLayout = ko.computed(function () {
-        var layout;
-        var currentTpl = vm.currentTpl();
-        vm.tplList.forEach(function (template) {
-            if (template.key == currentTpl) {
-                layout = template.layout;
-            }
-        });
-        return layout;
-    });
+    // vm.currentLayout = ko.computed(function () {
+    //     var layout;
+    //     var currentTpl = vm.currentTpl();
+    //     vm.tplList.forEach(function (template) {
+    //         if (template.key == currentTpl) {
+    //             layout = template.layout;
+    //         }
+    //     });
+    //     return layout;
+    // });
 
     return vm;
 });

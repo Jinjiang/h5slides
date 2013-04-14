@@ -1,14 +1,17 @@
 define(['data', 'design'], function (dataManager, designManager) {
     var activeItem;
-    var ignoreTypeChange;
+    // var ignoreTypeChange;
 
     return {
         init: function (vm) {
             designManager.loadCssLink(vm.currentDesign());
 
-            vm.clickTpl = function (templateData, e) {
-                vm.currentTpl(templateData.key);
+            vm.clickLayout = function (layoutData, e) {
+                vm.currentLayout(layoutData.key);
             };
+            // vm.clickTpl = function (templateData, e) {
+            //     vm.currentTpl(templateData.key);
+            // };
             vm.clickPage = function (pageData, e) {
                 var $index = vm.pageList().indexOf(pageData);
                 vm.currentPage($index);
@@ -30,30 +33,38 @@ define(['data', 'design'], function (dataManager, designManager) {
                 vm.title(dataManager.getTitle()),
                 vm.currentDesign(dataManager.getDesign());
                 vm.currentPage(currentPage);
-                vm.currentTpl(currentSlide.template);
+                vm.currentLayout(currentSlide.layout);
+                // vm.currentTpl(currentSlide.template);
                 vm.pageList(dataManager.getPageList());
 
                 dataManager.startStorage();
                 dataManager.save();
             };
 
-            vm.currentTpl.subscribe(function (newValue) {
+            vm.currentLayout.subscribe(function (newValue) {
                 var page = vm.currentPage();
-                var changedKeys = dataManager.changeTemplate(page, newValue, ignoreTypeChange);
-
-                changedKeys.forEach(function (key) {
-                    vm.previewItem(key);
-                });
-
+                dataManager.changeLayout(page, newValue);
                 vm.resizeAll();
                 dataManager.save();
             });
+            // vm.currentTpl.subscribe(function (newValue) {
+            //     var page = vm.currentPage();
+            //     var changedKeys = dataManager.changeTemplate(page, newValue, ignoreTypeChange);
+
+            //     changedKeys.forEach(function (key) {
+            //         vm.previewItem(key);
+            //     });
+
+            //     vm.resizeAll();
+            //     dataManager.save();
+            // });
             vm.currentPage.subscribe(function (newValue) {
                 var slideData = dataManager.getSlide(newValue);
                 dataManager.stopStorage();
-                ignoreTypeChange = true;
-                vm.currentTpl(slideData.template);
-                ignoreTypeChange = false;
+                vm.currentLayout(slideData.layout);
+                // ignoreTypeChange = true;
+                // vm.currentTpl(slideData.template);
+                // ignoreTypeChange = false;
                 dataManager.startStorage();
             });
             vm.currentDesign.subscribe(function (newValue) {

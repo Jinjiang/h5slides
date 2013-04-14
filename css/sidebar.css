@@ -1,10 +1,10 @@
-#template-list .active a,
+#layout-list .active a,
 #my-img-list .active a,
 #design-list .active a {
-  border-color: #960;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
-     -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
-          box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    border-color: #960;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
 
 #page-list .active a {
@@ -12,10 +12,12 @@
     background-color: #0088cc;
 }
 
-#design-list li {
+#design-list li,
+#template-list li {
     position: relative;
 }
-#design-list li .title {
+#design-list li .title,
+#template-list li .title {
     position: absolute;
     left: 4px;
     right: 4px;

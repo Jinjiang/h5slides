@@ -13,12 +13,40 @@ define(['storage'], function (storage) {
             {key: 'title', title: 'Title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
             {key: 'subtitle', title: 'Subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
             {key: 'double', title: 'Two Columns', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'text'}},
-            {key: 'double-subtitle', title: 'Two Columns with subtitle', layout: 'double-subtitle', typeMap: {title: 'text', subtitle: 'text', subtitle2: 'text', content: 'text', content2: 'text'}},
+            {key: 'double-subtitle', title: 'Two Columns with Subtitle', layout: 'double-subtitle', typeMap: {title: 'text', subtitle: 'text', subtitle2: 'text', content: 'text', content2: 'text'}},
             {key: 'picture', title: 'Picture', layout: 'imax', typeMap: {title: 'text', content: 'img'}},
             {key: 'picture-left', title: 'Picture in Left', layout: 'double', typeMap: {title: 'text', content: 'img', content2: 'text'}},
-            {key: 'picture-right', title: 'Picture in Right', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'img'}},
-            {key: 'video', title: 'Youku Video', layout: 'imax', typeMap: {title: 'text', content: 'video'}}
+            {key: 'picture-right', title: 'Picture in Right', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'img'}}
+            // {key: 'video', title: 'Youku Video', layout: 'imax', typeMap: {title: 'text', content: 'video'}}
         ];
+    var tmplList = [
+    ];
+    var layoutList = [
+            {key: 'normal', title: 'Normal'},
+            {key: 'title', title: 'Title'},
+            {key: 'subtitle', title: 'Subtitle'},
+            {key: 'double', title: 'Two Columns'},
+            {key: 'double-subtitle', title: 'Two Columns with Subtitle'},
+            {key: 'imax', title: 'iMax Item'}
+        ];
+    var typeName = {
+        text: 'Text',
+        img: 'Image'
+    };
+    var typeMap = {
+        default: {
+            default: ['text', 'img'],
+            title: ['text'],
+            subtitle: ['text'],
+            subtitle2: ['text']
+        },
+        title: {
+            content: ['text']
+        },
+        subtitle: {
+            content: ['text']
+        }
+    };
     var designList = [
             {key: 'default', title: 'Default'},
             {key: 'revert', title: 'Revert'}
@@ -28,10 +56,10 @@ define(['storage'], function (storage) {
         design: 'default',
         title: '',
         slides: [
-            {sid: 'A', template: 'title', layout: 'title', items: {title: {type: 'text', value: 'Hello World'}, content: {type: 'text', value: 'test info'}}},
-            {sid: 'B', template: 'subtitle', layout: 'subtitle', items: {title: {type: 'text', value: 'Content'}, content: {type: 'text', value: 'this is the menu here.'}}},
-            {sid: 'C', template: 'picture', layout: 'normal', items: {title: {type: 'text', value: 'Logo'}, content: {type: 'img', value: 'http://www.maxthon.cn/images/logo_128x128.png'}}},
-            {sid: 'D', template: 'video', layout: 'imax', items: {title: {type: 'text', value: 'Video'}, content: {type: 'video', value: 'XNjUwODE1Mg=='}}}
+            {sid: 'A', layout: 'title', items: {title: {type: 'text', value: 'Hello World'}, content: {type: 'text', value: 'test info'}}},
+            {sid: 'B', layout: 'normal', items: {title: {type: 'text', value: 'Content'}, content: {type: 'text', value: 'this is the menu here.'}}},
+            {sid: 'C', layout: 'imax', items: {title: {type: 'text', value: 'Logo'}, content: {type: 'img', value: 'http://www.maxthon.cn/images/logo_128x128.png'}}}
+            // {sid: 'D', template: 'video', layout: 'imax', items: {title: {type: 'text', value: 'Video'}, content: {type: 'video', value: 'XNjUwODE1Mg=='}}}
         ]
     };
 
@@ -78,6 +106,9 @@ define(['storage'], function (storage) {
         getTplList: function () {
             return templateList;
         },
+        getLayoutList: function () {
+            return layoutList;
+        },
         getDesignList: function () {
             return designList;
         },
@@ -100,20 +131,26 @@ define(['storage'], function (storage) {
             return result;
         },
         getTypeList: function (layout, key) {
-            if (key === 'title' || key === 'subtitle' || key === 'subtitle2') {
-                return [];
+            var layoutInfo;
+            var itemInfo;
+            var result;
+
+            layoutInfo = typeMap[layout];
+
+            if (layoutInfo) {
+                itemInfo = layoutInfo[key] || layoutInfo.default;
             }
-            if (layout === 'imax' && key === 'content') {
-                return [
-                    {key: 'text', name: '文字'},
-                    {key: 'img', name: '图片'},
-                    {key: 'video', name: '视频'}
-                ];
+            if (!itemInfo) {
+                layoutInfo = typeMap.default;
+                itemInfo = layoutInfo[key] || layoutInfo.default;
             }
-            return [
-                {key: 'text', name: '文字'},
-                {key: 'img', name: '图片'}
-            ];
+
+            result = [];
+            itemInfo.forEach(function (key) {
+                result.push({key: key, name: typeName[key]});
+            });
+
+            return result;
         },
 
         getData: function () {
@@ -171,38 +208,42 @@ define(['storage'], function (storage) {
             return itemData.value;
         },
 
-        changeTemplate: function (page, template, ignoreTypeChange) {
+        changeLayout: function (page, layout, ignoreTypeChange) {
             var slideData = data.slides[page] || {};
-            var tplData = manager.getTplByKey(template);
-            var hasNewLayout = (slideData.layout != tplData.layout);
-            var changedKeys = [];
-
-            slideData.template = template;
-
-            if (hasNewLayout) {
-                slideData.layout = tplData.layout;
-            }
-
-            $.each(tplData.typeMap, function (key, type) {
-                var itemData = slideData.items[key];
-
-                if (!itemData) {
-                    slideData.items[key] = itemData = {};
-                }
-                if (hasNewLayout) {
-                    itemData.position = {};
-                }
-                if (!itemData.value) {
-                    if (!ignoreTypeChange) {
-                        itemData.type = type;
-                    }
-                    itemData.config = {};
-                    changedKeys.push(key);
-                }
-            });
-
-            return changedKeys;
+            slideData.layout = layout;
         },
+        // changeTemplate: function (page, template, ignoreTypeChange) {
+        //     var slideData = data.slides[page] || {};
+        //     var tplData = manager.getTplByKey(template);
+        //     var hasNewLayout = (slideData.layout != tplData.layout);
+        //     var changedKeys = [];
+
+        //     slideData.template = template;
+
+        //     if (hasNewLayout) {
+        //         slideData.layout = tplData.layout;
+        //     }
+
+        //     $.each(tplData.typeMap, function (key, type) {
+        //         var itemData = slideData.items[key];
+
+        //         if (!itemData) {
+        //             slideData.items[key] = itemData = {};
+        //         }
+        //         if (hasNewLayout) {
+        //             itemData.position = {};
+        //         }
+        //         if (!itemData.value) {
+        //             if (!ignoreTypeChange) {
+        //                 itemData.type = type;
+        //             }
+        //             itemData.config = {};
+        //             changedKeys.push(key);
+        //         }
+        //     });
+
+        //     return changedKeys;
+        // },
         changeType: function (page, key, type) {
             var slideData = data.slides[page] || {};
             var itemData = slideData.items[key];

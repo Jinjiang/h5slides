@@ -55,7 +55,7 @@ ul.unstyled li {
 .slide[data-layout="imax"] [data-key="title"] {
     display: block;
     left: 20px;
-    top: 0px;
+    top: 10px;
     width: 600px;
     height: 2em;
     font-size: 24px;

@@ -63,7 +63,7 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         slideDom.attr('id', 'slide-' + slideData.sid);
         slideDom.attr('data-page', page);
         slideDom.attr('data-layout', slideData.layout);
-        slideDom.attr('data-template', slideData.template);
+        // slideDom.attr('data-template', slideData.template);
 
         $.each(slideData.items, function (key, itemData) {
             var itemDom = createItem(key, itemData, unscalable);

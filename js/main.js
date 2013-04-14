@@ -3,7 +3,7 @@
 // pageList **
 
 // currentDesign **
-// currentTpl **
+// currentLayout **
 // currentPage **
 // currentLayout **
 // currentItem **

@@ -22,6 +22,7 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
 
             vm.resizeItem = function (key) {
                 var page = vm.currentPage();
+                var layout = dataManager.getSlide(page).layout;
                 var itemData = dataManager.getItem(page, key);
                 var dom = $('#slide-' + key);
                 var output = dom.find('.output');
@@ -31,7 +32,7 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                     typeHelper.resize(itemData, output);
                 }
 
-                ctrlManager.update(dom, itemData.type, dataManager.getTypeList(itemData.layout, key));
+                ctrlManager.update(dom, itemData.type, dataManager.getTypeList(layout, key));
             };
             vm.resizeAll = function () {
                 itemKeyMap.forEach(function (key) {

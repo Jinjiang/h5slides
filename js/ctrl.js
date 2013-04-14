@@ -382,7 +382,7 @@ define(function () {
                 });
             }
             else {
-                moreMenu.html('<a href="#">无</a>');
+                moreMenu.html('<a href="#">Text</a>');
             }
         }
     }
