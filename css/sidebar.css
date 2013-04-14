@@ -56,6 +56,7 @@
     border: 10px rgba(127, 127, 127, 0.2) solid;
     border-radius: 5px;
     position: relative;
+    -webkit-perspective: 200px;
 }
 
 .transition-slide {

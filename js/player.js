@@ -94,11 +94,15 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
                 typeHelper.hide(output);
             }
         });
-        dom.removeClass('current');
+        dom.removeClass('slide-current');
+        dom.prev().removeClass('slide-prev');
+        dom.next().removeClass('slide-next');
     }
 
     function showPage(dom) {
-        dom.addClass('current');
+        dom.addClass('slide-current');
+        dom.prev().addClass('slide-prev');
+        dom.next().addClass('slide-next');
 
         dom.children().each(function () {
             var itemDom = $(this);
@@ -221,12 +225,14 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
 
     function play() {
         var design = dataManager.getDesign();
+        var transition = dataManager.getTransition();
         var title = dataManager.getTitle();
         var slideList = dataManager.getSlideList();
 
         // set design
         designManager.loadCssLink(design);
         stageDom.attr('data-design', design);
+        stageDom.attr('data-transition', transition);
 
         // build slide list
         slidesContainer.empty();
