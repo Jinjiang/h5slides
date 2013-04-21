@@ -368,6 +368,12 @@ define('data',['storage'], function (storage) {
         changeType: function (page, key, type) {
             var slideData = data.slides[page] || {};
             var itemData = slideData.items[key];
+
+            if (!itemData) {
+                itemData = {};
+                slideData.items[key] = itemData;
+            }
+
             itemData.type = type;
             itemData.value = null;
             itemData.config = {};
@@ -765,7 +771,7 @@ define('status',['data', 'design', 'transition'], function (dataManager, designM
             vm.currentLayout.subscribe(function (newValue) {
                 var page = vm.currentPage();
                 dataManager.changeLayout(page, newValue);
-                vm.resizeAll();
+                setTimeout(vm.resizeAll, 13);
                 dataManager.save();
             });
             // vm.currentTpl.subscribe(function (newValue) {
