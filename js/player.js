@@ -6,7 +6,6 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
 
     var stageDom = $('#player-stage');
     var slidesContainer = $('#player-slides-container');
-    var unscalableContainer = $('#player-unscalable-container');
 
     var btnMenu = $('#player-btn-menu');
     var btnNext = $('#player-btn-next');
@@ -19,13 +18,58 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
 
     var gotoDialog = $('#goto-dialog');
     var gotoNumber = $('#goto-number');
+    var btnGo = gotoDialog.find('[data-action="go"]');
 
-    var currentPage;
     var slideLength;
+    var currentPage;
+
+    var currentSlideDom;
+    var nextSlideDom;
+    var prevSlideDom;
 
     var fullscreenEnabled = document.webkitFullscreenEnabled;
+    var isPlaying = false;
 
-    function createItem(key, itemData, unscalable) {
+
+    /**
+        进入全屏模式
+     */
+    function gotoFullscreen() {
+        if (fullscreenEnabled) {
+            document.body.webkitRequestFullscreen();
+        }
+    }
+    /**
+        退出全屏模式
+     */
+    function exitFullscreen() {
+        if (fullscreenEnabled && isFullscreen()) {
+            document.webkitExitFullscreen();
+        }
+    }
+    /**
+        判断是否全屏状态
+     */
+    function isFullscreen() {
+        return document.webkitIsFullScreen;
+    }
+    /**
+        绑定全屏模式事件
+        @param {function} handler(isFullscreen)
+     */
+    function bindFullscreenChange(handler) {
+        if (fullscreenEnabled) {
+            document.onwebkitfullscreenchange = function (e) {
+                handler(isFullscreen());
+            };
+        }
+    }
+
+
+    /**
+        创建一个元素
+     */
+    function createItem(key, itemData) {
         var itemDom = $('<div><div class="output"></div></div>');
         var type = itemData.type || 'text';
         var typeHelper = typeMap[type];
@@ -35,38 +79,25 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         itemDom.attr('data-type', type);
 
         if (typeHelper) {
-            if (typeHelper.unscalable == unscalable) {
-                typeHelper.build(itemData, output);
-            }
-            if (typeHelper.unscalable && unscalable) {
-                itemDom.attr('data-unscalable', true);
-            }
-            if (typeHelper.unscalable && !unscalable) {
-                itemDom.attr('data-placeholder', true);
-            }
-            if (typeHelper.unscalable || !unscalable) {
-                return itemDom;
-            }
+            typeHelper.build(itemData, output);
         }
-    }
 
-    function createSlide(page, slideData, unscalable) {
+        return itemDom;
+    }
+    /**
+        创建一页幻灯片
+     */
+    function createSlide(page, slideData) {
         var slideDom = $('<div></div>');
 
-        if (unscalable) {
-            slideDom.addClass('unscalable-slide');
-        }
-        else {
-            slideDom.addClass('slide');
-        }
+        slideDom.addClass('slide');
 
         slideDom.attr('id', 'slide-' + slideData.sid);
-        slideDom.attr('data-page', page);
         slideDom.attr('data-layout', slideData.layout);
-        // slideDom.attr('data-template', slideData.template);
+        slideDom.attr('data-page', page);
 
         $.each(slideData.items, function (key, itemData) {
-            var itemDom = createItem(key, itemData, unscalable);
+            var itemDom = createItem(key, itemData);
             if (itemDom) {
                 slideDom.append(itemDom);
             }
@@ -75,14 +106,21 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         return slideDom;
     }
 
-    function handleAllPageDom(page, handle) {
-        var slideDom = $(slidesContainer.find('.slide')[page]);
-        var unscalableDom = $(unscalableContainer.find('.unscalable-slide')[page]);
 
-        handle(slideDom);
-        handle(unscalableDom);
+    /**
+        获取某一页幻灯片
+     */
+    function getSlideDom(page) {
+        if (page < 0) {
+            return $();
+        }
+        return $(slidesContainer.find('.slide')[page]);
     }
 
+
+    /**
+        隐藏一页幻灯片
+     */
     function hidePage(dom) {
         dom.children().each(function () {
             var itemDom = $(this);
@@ -90,117 +128,236 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
             var type = itemDom.attr('data-type');
             var typeHelper = typeMap[type];
 
-            if (!itemDom.attr('data-placeholder') && typeHelper && typeHelper.hide) {
+            if (typeHelper && typeHelper.hide) {
                 typeHelper.hide(output);
             }
         });
-        dom.removeClass('slide-current');
-        dom.prev().removeClass('slide-prev');
-        dom.next().removeClass('slide-next');
     }
-
+    /**
+        显示一页幻灯片
+     */
     function showPage(dom) {
-        dom.addClass('slide-current');
-        dom.prev().addClass('slide-prev');
-        dom.next().addClass('slide-next');
-
         dom.children().each(function () {
             var itemDom = $(this);
             var output = itemDom.find('.output');
             var type = itemDom.attr('data-type');
             var typeHelper = typeMap[type];
 
-            if (!itemDom.attr('data-unscalable') && typeHelper && typeHelper.show) {
+            if (typeHelper && typeHelper.show) {
                 typeHelper.show(output);
             }
         });
     }
 
-    function resizeUnscalableItems(page) {
-        var slideDom = $(slidesContainer.find('.slide')[page]);
-        var unscalableDom = $(unscalableContainer.find('.unscalable-slide')[page]);
-        unscalableDom.children().each(function () {
-            var itemDom = $(this);
-            var output = itemDom.find('.output');
-            var key = itemDom.attr('data-key');
-            var oriDom = slideDom.find('[data-key="' + key + '"]');
 
-            var type = itemDom.attr('data-type');
-            var typeHelper = typeMap[type];
+    /**
+        切换两页幻灯片
+     */
+    function switchPage(newPage) {
+        var next = -1;
+        var prev = -1;
 
-            var rect = oriDom[0].getBoundingClientRect();
+        var oldPage = -1;
+        var oldNext = -1;
+        var oldPrev = -1;
 
-            output.css('top', rect.top + 'px');
-            output.css('left', rect.left + 'px');
-            output.css('width', rect.width + 'px');
-            output.css('height', rect.height + 'px');
+        // get old current/next/prev
+        if (currentSlideDom) {
+            oldPage = currentSlideDom.attr('data-page') - 0;
+        }
+        if (nextSlideDom) {
+            oldNext = nextSlideDom.attr('data-page') - 0;
+        }
+        if (prevSlideDom) {
+            oldPrev = prevSlideDom.attr('data-page') - 0;
+        }
 
-            if (typeHelper.adjust) {
-                typeHelper.adjust(output);
+        if (oldPage == newPage) {
+            return;
+        }
+
+        // get new current/next/prev
+        if (newPage > 0) {
+            prev = newPage - 1;
+        }
+        if (newPage < slideLength - 1) {
+            next = newPage + 1;
+        }
+        if (oldPage >= 0) {
+            if (oldPage > newPage) {
+                next = oldPage;
             }
-            if (typeHelper.show) {
-                typeHelper.show(output);
+            else if (oldPage < newPage) {
+                prev = oldPage;
             }
-        });
+        }
+
+        currentSlideDom && currentSlideDom.removeClass('slide-current');
+        nextSlideDom && nextSlideDom.removeClass('slide-next');
+        prevSlideDom && prevSlideDom.removeClass('slide-prev');
+
+        currentSlideDom = null;
+        nextSlideDom = null;
+        prevSlideDom = null;
+
+        if (newPage >= 0) {
+            currentSlideDom = getSlideDom(newPage).addClass('slide-current');
+        }
+        if (next >= 0) {
+            nextSlideDom = getSlideDom(next).addClass('slide-next');
+        }
+        if (prev >= 0) {
+            prevSlideDom = getSlideDom(prev).addClass('slide-prev');
+        }
     }
 
+    /**
+        跳转到某一页
+     */
     function gotoPage(page) {
-        handleAllPageDom(currentPage, hidePage);
-        currentPage = page - 0;
-        txtPage.text(page - (-1));
-        handleAllPageDom(currentPage, showPage);
-        resizeUnscalableItems(currentPage);
+        var oldPage = currentPage;
+        var newPage = page - 0;
+
+        var oldSlideDom = currentSlideDom;
+        var newSlideDom = getSlideDom(page);;
+
+        if (oldPage == newPage) {
+            return;
+        }
+
+        if (oldSlideDom) {
+            hidePage(oldSlideDom);
+        }
+        if (newSlideDom) {
+            showPage(newSlideDom);
+        }
+
+        currentPage = newPage;
+        txtPage.text(newPage + 1);
+
+        switchPage(newPage);
     }
 
-    function scaleSlides() {
-        var WIDTH = 640;
-        var HEIGHT = 480;
 
-        var stageWidth = player.width() - 40;
-        var stageHeight = player.height() - 60;
-
-        var scale = Math.min(stageWidth / WIDTH, stageHeight / HEIGHT);
-
-        scale = Math.floor(scale * 100) / 100;
-
-        slidesContainer.css('-webkit-transform', 'scale(' + scale + ')');
-    }
-
+    /**
+        下一页
+     */
     function goNext() {
         if (currentPage < slideLength - 1) {
             gotoPage(currentPage + 1);
         }
     }
+    /**
+        前一页
+     */
     function goPrev() {
         if (currentPage > 0) {
             gotoPage(currentPage - 1);
         }
     }
-    function exitFullscreen() {
-        if (fullscreenEnabled && document.webkitIsFullScreen) {
-            document.webkitExitFullscreen();
-        }
+
+
+    /**
+        绑定点击下一页按钮的事件
+     */
+    function clickNext(e) {
+        e.preventDefault();
+        goNext();
     }
+    /**
+        绑定点击前一页按钮的事件
+     */
+    function clickPrev(e) {
+        e.preventDefault();
+        goPrev();
+    }
+    /**
+        绑定点击弹出跳转对话框按钮的事件
+     */
+    function clickGoto(e) {
+        e.preventDefault();
+
+        gotoDialog.modal('show');
+        gotoNumber.val(currentPage + 1);
+    }
+    /**
+        绑定点击跳转按钮的事件
+     */
+    function clickGo(e) {
+        var newPage = gotoNumber.val() - 1;
+        gotoPage(newPage);
+    }
+
+
+    /**
+        退出播放器，显示编辑器
+     */
     function doExit() {
         slidesContainer.css('-webkit-transform', '');
+
+        currentSlideDom = null;
+        nextSlideDom = null;
+        prevSlideDom = null;
 
         currentPage = -1;
 
         slideLength = null;
         slidesContainer.empty();
-        unscalableContainer.empty();
 
-        $(window).unbind('resize', scaleSlides);
         $(window).unbind('keydown', keydown);
 
-        if (fullscreenEnabled) {
-            document.onwebkitfullscreenchange = null;
-        }
+        bindFullscreenChange(null);
+        exitFullscreen();
 
         player.hide();
         editor.show();
+
+        isPlaying = false;
     }
 
+    /**
+        启动播放器，初始化幻灯片和屏幕
+     */
+    function doPlay() {
+        var design = dataManager.getDesign();
+        var transition = dataManager.getTransition();
+        var title = dataManager.getTitle();
+        var slideList = dataManager.getSlideList();
+
+        designManager.loadCssLink(design);
+        stageDom.attr('data-design', design);
+        stageDom.attr('data-transition', transition);
+
+        slidesContainer.empty();
+        $.each(slideList, function (i, slideData) {
+            var slideDom = createSlide(i, slideData);
+
+            slidesContainer.append(slideDom);
+        });
+
+        slideLength = slideList.length
+        txtSum.text(slideLength);
+        gotoNumber.attr('min', 1);
+        gotoNumber.attr('max', slideLength);
+
+        gotoPage(0);
+
+        $(window).bind('keydown', keydown);
+
+        gotoFullscreen();
+        bindFullscreenChange(function (isFullscreen) {
+            if (!isFullscreen) {
+                 doExit();
+            }
+        });
+
+        isPlaying = true;
+    }
+
+
+    /**
+        绑定键盘事件
+     */
     function keydown(e) {
         switch (e.keyCode) {
         case 38:
@@ -213,9 +370,6 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
             goNext();
             break;
         case 27:
-            if (fullscreenEnabled) {
-                exitFullscreen();
-            }
             doExit();
             break;
         default:
@@ -223,84 +377,32 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         }
     }
 
-    function play() {
-        var design = dataManager.getDesign();
-        var transition = dataManager.getTransition();
-        var title = dataManager.getTitle();
-        var slideList = dataManager.getSlideList();
-
-        // set design
-        designManager.loadCssLink(design);
-        stageDom.attr('data-design', design);
-        stageDom.attr('data-transition', transition);
-
-        // build slide list
-        slidesContainer.empty();
-        $.each(slideList, function (i, slideData) {
-            var slideDom = createSlide(i, slideData);
-            var unscalableDom = createSlide(i, slideData, true);
-
-            slidesContainer.append(slideDom);
-            unscalableContainer.append(unscalableDom);
-        });
-
-        slideLength = slideList.length
-        txtSum.text(slideLength);
-        gotoNumber.attr('min', 1);
-        gotoNumber.attr('max', slideLength);
-
-        gotoPage(0);
-
-        $(window).bind('resize', scaleSlides);
-        $(window).bind('keydown', keydown);
-
-        if (fullscreenEnabled) {
-            document.body.webkitRequestFullscreen();
-            document.onwebkitfullscreenchange = function (e) {
-                if (!document.webkitIsFullScreen) {
-                    doExit();
-                }
-            };
-        }
-    }
-
-    function clickNext(e) {
-        e.preventDefault();
-        goNext();
-    }
-    function clickPrev(e) {
-        e.preventDefault();
-        goPrev();
-    }
-    function clickGoto(e) {
-        e.preventDefault();
-
-        gotoDialog.modal('show');
-        gotoNumber.val(currentPage + 1);
-    }
+    /**
+        绑定点击退出按钮的事件
+     */
     function clickExit(e) {
         e.preventDefault();
-        if (fullscreenEnabled) {
-            exitFullscreen();
-        }
         doExit();
     }
 
-    btnPreview.click(function (e) {
+    /**
+        绑定点击播放按钮的事件
+     */
+    function clickPreview(e) {
         e.preventDefault();
         editor.hide();
         player.show();
-        play();
-    });
+        doPlay();
+    }
+
+
+    btnPreview.click(clickPreview);
     btnNext.click(clickNext);
     btnPrev.click(clickPrev);
     btnGoto.click(clickGoto);
     btnExit.click(clickExit);
+    btnGo.click(clickGo);
 
-    gotoDialog.find('[data-action="go"]').click(function (e) {
-        var newPage = gotoNumber.val() - 1;
-        gotoPage(newPage);
-    });
 
     return {};
 });

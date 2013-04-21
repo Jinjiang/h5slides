@@ -4,3 +4,6 @@
 @import url(sidebar.css);
 @import url(transitions.css);
 @import url(player.css);
+
+@import url(responsive-editor.css);
+@import url(responsive-player.css);

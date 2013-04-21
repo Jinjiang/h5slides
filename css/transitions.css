@@ -1,3 +1,14 @@
+[data-transition="cubic-horizontal"],
+[data-transition="cubic-horizontal-inner"],
+[data-transition="cubic-vertical"],
+[data-transition="cubic-vertical-inner"],
+[data-transition="doors"],
+[data-transition="sublime"],
+[data-transition="rotate-y"],
+[data-transition="fly"] {
+    -webkit-perspective: 600px;
+}
+
 [data-transition="horizontal"] .slide-next {
     left: 120%;
 }

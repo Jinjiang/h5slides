@@ -1,6 +1,5 @@
 -- milestone 0.3.1 --
 
-transition 0.5d
 -- milestone 0.3.2 --
     type: code (add highlight by some open source lib) 0.5d
     type: demo 1d
