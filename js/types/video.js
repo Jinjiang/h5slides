@@ -94,7 +94,7 @@ define(['data', 'vm'], function (dataManager, vm) {
         adjust: function (dom) {
             ;
         },
-        showEditor: function (key, page, data, dom) {
+        edit: function (key, page, data, dom) {
             dialog.modal('show');
         },
         build: function (data, dom) {

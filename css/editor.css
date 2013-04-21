@@ -21,4 +21,7 @@
 #img-manager .thumbnail {min-height: 120px;}
 #my-img-list .thumbnail {min-height: 80px; height: 80px; overflow: hidden; margin-bottom: 1em;}
 
+#code-dialog .code {font-family: Monaco, Menlo, Consolas, "Courier New", monospace;}
+#code-dialog a[target="_blank"] {padding-right: 1em; background-repeat: no-repeat; background-position: right center; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVklEQVR4Xn3PgQkAMQhDUXfqTu7kTtkpd5RA8AInfArtQ2iRXFWT2QedAfttj2FsPIOE1eCOlEuoWWjgzYaB/IkeGOrxXhqB+uA9Bfcm0lAZuh+YIeAD+cAqSz4kCMUAAAAASUVORK5CYII=);}
+
 #modals {}

@@ -124,16 +124,6 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
         // vm.finishEdit();
     }
 
-    urlBtnRemove.click(function () {
-        dataManager.setValue(vm.currentPage(), vm.currentItem(), '');
-        dialog.modal('hide');
-        // vm.finishEdit();
-    });
-
-    dialog.on('hidden', function () {
-        vm.finishEdit();
-    });
-
     function render(data, dom, placeHolder) {
         var src = data.value;
 
@@ -167,6 +157,16 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
 
     return {
         init: function () {
+            imgListHolder.find('a').click(function (e) {
+                var item = $(this);
+                var key = item.attr('data-key');
+
+                if (key) {
+                    e.preventDefault();
+                    tabs.find('[data-key="' + key + '"] a').tab('show');
+                }
+            });
+
             localInput.on('change', function (e) {
                 var file = e.target.files[0];
                 var reader = new FileReader();
@@ -193,14 +193,13 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
                 }
             });
 
-            imgListHolder.find('a').click(function (e) {
-                var item = $(this);
-                var key = item.attr('data-key');
+            urlBtnRemove.click(function () {
+                dataManager.setValue(vm.currentPage(), vm.currentItem(), '');
+                dialog.modal('hide');
+            });
 
-                if (key) {
-                    e.preventDefault();
-                    tabs.find('[data-key="' + key + '"] a').tab('show');
-                }
+            dialog.on('hidden', function () {
+                vm.finishEdit();
             });
 
             dialog.find('[data-action="save"]').click(save);
@@ -220,7 +219,7 @@ define(['data', 'vm', 'types/img-helper'], function (dataManager, vm, lib) {
                 lib.embed(src, dom, '[empty img]');
             }
         },
-        showEditor: function (key, page, data, dom) {
+        edit: function (key, page, data, dom) {
             var position = dom.position();
             var width = dom.width();
             var height = dom.height();

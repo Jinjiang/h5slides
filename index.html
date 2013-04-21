@@ -356,6 +356,42 @@
     </div>
   </div>
 
+  <div id="code-dialog" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Code Editor</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        <ul id="code-manager-tabs" class="nav nav-tabs">
+          <li class="active"><a href="#code-panel" data-toggle="tab" data-key="code">Source Code</a></li>
+          <li><a href="#demo-panel" data-toggle="tab" data-key="demo">Code Demo</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="code-panel">
+            <textarea id="code-input" class="code" rows="8" style="width: 100%; box-sizing: border-box;"></textarea>
+          </div>
+          <div class="tab-pane" id="demo-panel">
+            <p class="form-inline"><input type="text" id="demo-url-input" placeholder="Input DEMO URL here.">
+              <button class="btn btn-danger" id="demo-url-remove"><i class="icon-trash"></i></button></p>
+            <p>You can copy a demo URL from:</p>
+            <ul>
+              <li><a href="http://jsfiddle.net/" target="_blank">jsFiddle</a></li>
+              <li><a href="http://codepen.io/" target="_blank">CodePen</a></li>
+              <li><a href="http://jsbin.com/" target="_blank">JSBin</a></li>
+              <li><a href="http://dabblet.com/" target="_blank">Dabblet</a></li>
+              <li>or Any other URL you want to embed!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" data-action="save">OK</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+
   <div id="goto-dialog" class="modal hide fade">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">×</button>

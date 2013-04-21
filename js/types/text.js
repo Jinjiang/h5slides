@@ -56,7 +56,7 @@ define(['data', 'vm'], function (dataManager, vm) {
             render(data, dom, '[empty text]');
         },
         resize: null,
-        showEditor: function (key, page, data, dom) {
+        edit: function (key, page, data, dom) {
             var position = dom.parent().position();
             var width = dom.outerWidth();
             var height = dom.outerHeight();
@@ -93,9 +93,9 @@ define(['data', 'vm'], function (dataManager, vm) {
         build: function (data, dom) {
             render(data, dom, '');
         },
-        show: function (data, dom) {
+        show: function (dom) {
         },
-        hide: function (data, dom) {
+        hide: function (dom) {
         }
     };
 });

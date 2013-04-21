@@ -31,11 +31,12 @@ define(['storage'], function (storage) {
         ];
     var typeName = {
         text: 'Text',
-        img: 'Image'
+        img: 'Image',
+        code: 'Code'
     };
     var typeMap = {
         default: {
-            default: ['text', 'img'],
+            default: ['text', 'img', 'code'],
             title: ['text'],
             subtitle: ['text'],
             subtitle2: ['text']

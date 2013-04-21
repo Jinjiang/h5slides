@@ -63,7 +63,7 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                         typeHelper.init();
                         typeHelper.initialized = true;
                     }
-                    typeHelper.showEditor(key, page, itemData, output);
+                    typeHelper.edit(key, page, itemData, output);
                 }
             };
 

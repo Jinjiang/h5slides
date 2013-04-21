@@ -1,9 +1,20 @@
-ul.unstyled {
+.slide ul.unstyled {
     padding: 0.25em 0.5em;
     margin-bottom: 0;
 }
-ul.unstyled li {
+.slide ul.unstyled li {
     line-height: inherit;
+}
+.slide pre {
+    font-size: 16px;
+    line-height: 1.5;
+    overflow: auto;
+    box-sizing: border-box;
+}
+.slide iframe {
+    border: 1px silver solid;
+    padding: 2px;
+    box-sizing: border-box;
 }
 
 
