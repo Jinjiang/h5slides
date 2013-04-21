@@ -281,6 +281,12 @@ define(['storage'], function (storage) {
         changeType: function (page, key, type) {
             var slideData = data.slides[page] || {};
             var itemData = slideData.items[key];
+
+            if (!itemData) {
+                itemData = {};
+                slideData.items[key] = itemData;
+            }
+
             itemData.type = type;
             itemData.value = null;
             itemData.config = {};

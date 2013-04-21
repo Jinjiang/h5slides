@@ -48,7 +48,7 @@ define(['data', 'design', 'transition'], function (dataManager, designManager, t
             vm.currentLayout.subscribe(function (newValue) {
                 var page = vm.currentPage();
                 dataManager.changeLayout(page, newValue);
-                vm.resizeAll();
+                setTimeout(vm.resizeAll, 13);
                 dataManager.save();
             });
             // vm.currentTpl.subscribe(function (newValue) {
