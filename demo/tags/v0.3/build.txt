@@ -1,8 +1,4 @@
 
-css/ctrl.css
-----------------
-css/ctrl.css
-
 css/design/default.css
 ----------------
 css/design/default.css
@@ -19,26 +15,14 @@ css/main.css
 ----------------
 css/stage.css
 css/editor.css
-css/ctrl.css
 css/sidebar.css
-css/transitions.css
 css/player.css
-css/responsive-editor.css
-css/responsive-player.css
 css/main.css
 
 css/player.css
 ----------------
 css/player.css
 
-css/responsive-editor.css
-----------------
-css/responsive-editor.css
-
-css/responsive-player.css
-----------------
-css/responsive-player.css
-
 css/sidebar.css
 ----------------
 css/sidebar.css
@@ -46,10 +30,6 @@ css/sidebar.css
 css/stage.css
 ----------------
 css/stage.css
-
-css/transitions.css
-----------------
-css/transitions.css
 
 js/main.js
 ----------------
@@ -59,15 +39,11 @@ js/vm.js
 js/title.js
 js/page.js
 js/design.js
-js/transition.js
 js/status.js
 js/types/text.js
 js/types/img-helper.js
 js/types/img.js
-js/types/video.js
-js/types/code.js
 js/types.js
-js/ctrl.js
 js/stage.js
 js/editor.js
 js/player.js

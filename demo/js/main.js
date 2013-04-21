@@ -96,23 +96,73 @@ define('storage',[],function () {
 
 define('data',['storage'], function (storage) {
     var templateList = [
-            {key: 'normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
-            {key: 'title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
-            {key: 'subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
-            {key: 'picture', layout: 'normal', typeMap: {title: 'text', content: 'img'}}
+            {key: 'normal', title: 'Normal', layout: 'normal', typeMap: {title: 'text', content: 'text'}},
+            {key: 'title', title: 'Title', layout: 'title', typeMap: {title: 'text', content: 'text'}},
+            {key: 'subtitle', title: 'Subtitle', layout: 'subtitle', typeMap: {title: 'text', content: 'text'}},
+            {key: 'double', title: 'Two Columns', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'text'}},
+            {key: 'double-subtitle', title: 'Two Columns with Subtitle', layout: 'double-subtitle', typeMap: {title: 'text', subtitle: 'text', subtitle2: 'text', content: 'text', content2: 'text'}},
+            {key: 'picture', title: 'Picture', layout: 'imax', typeMap: {title: 'text', content: 'img'}},
+            {key: 'picture-left', title: 'Picture in Left', layout: 'double', typeMap: {title: 'text', content: 'img', content2: 'text'}},
+            {key: 'picture-right', title: 'Picture in Right', layout: 'double', typeMap: {title: 'text', content: 'text', content2: 'img'}}
+            // {key: 'video', title: 'Youku Video', layout: 'imax', typeMap: {title: 'text', content: 'video'}}
         ];
+    var tmplList = [
+    ];
+    var layoutList = [
+            {key: 'normal', title: 'Normal'},
+            {key: 'title', title: 'Title'},
+            {key: 'subtitle', title: 'Subtitle'},
+            {key: 'double', title: 'Two Columns'},
+            {key: 'double-subtitle', title: 'Two Columns with Subtitle'},
+            {key: 'imax', title: 'iMax Item'}
+        ];
+    var typeName = {
+        text: 'Text',
+        img: 'Image',
+        code: 'Code'
+    };
+    var typeMap = {
+        default: {
+            default: ['text', 'img', 'code'],
+            title: ['text'],
+            subtitle: ['text'],
+            subtitle2: ['text']
+        },
+        title: {
+            content: ['text']
+        },
+        subtitle: {
+            content: ['text']
+        }
+    };
     var designList = [
             {key: 'default', title: 'Default'},
             {key: 'revert', title: 'Revert'}
         ];
+    var transitionList = [
+            {key: 'horizontal', title: 'Normal'},
+            {key: 'vertical', title: 'Vertical'},
+            {key: 'cubic-horizontal', title: 'Cubic'},
+            {key: 'cubic-horizontal-inner', title: 'Cubic Inset'},
+            {key: 'cubic-vertical', title: 'Cubic Vertical'},
+            {key: 'cubic-vertical-inner', title: 'Cubic Vertical Inset'},
+            {key: 'doors', title: 'Open Doors'},
+            {key: 'zoom-in', title: 'Zoom In'},
+            {key: 'zoom-out', title: 'Zoom Out'},
+            {key: 'sublime', title: 'Sublime'},
+            {key: 'fly', title: 'Fly Away'},
+            {key: 'fall', title: 'Fall Down'}
+        ];
 
     var defaultData = {
         design: 'default',
+        transition: 'horizontal',
         title: '',
         slides: [
-            {sid: 'A', template: 'title', layout: 'title', items: {title: {type: 'text', value: 'Hello World'}, content: {type: 'text', value: 'test info'}}},
-            {sid: 'B', template: 'subtitle', layout: 'subtitle', items: {title: {type: 'text', value: 'Content'}, content: {type: 'text', value: 'this is the menu here.'}}},
-            {sid: 'C', template: 'picture', layout: 'normal', items: {title: {type: 'text', value: 'Favicon'}, content: {type: 'img', value: 'http://www.baidu.com/favicon.ico'}}}
+            {sid: 'A', layout: 'title', items: {title: {type: 'text', value: 'Hello World'}, content: {type: 'text', value: 'test info'}}},
+            {sid: 'B', layout: 'normal', items: {title: {type: 'text', value: 'Content'}, content: {type: 'text', value: 'this is the menu here.'}}},
+            {sid: 'C', layout: 'imax', items: {title: {type: 'text', value: 'Logo'}, content: {type: 'img', value: 'http://www.maxthon.cn/images/logo_128x128.png'}}}
+            // {sid: 'D', template: 'video', layout: 'imax', items: {title: {type: 'text', value: 'Video'}, content: {type: 'video', value: 'XNjUwODE1Mg=='}}}
         ]
     };
 
@@ -159,8 +209,14 @@ define('data',['storage'], function (storage) {
         getTplList: function () {
             return templateList;
         },
+        getLayoutList: function () {
+            return layoutList;
+        },
         getDesignList: function () {
             return designList;
+        },
+        getTransitionList: function () {
+            return transitionList;
         },
         getTplByKey: function (key) {
             var result;
@@ -180,12 +236,46 @@ define('data',['storage'], function (storage) {
             });
             return result;
         },
+        getTransitionByKey: function (key) {
+            var result;
+            transitionList.forEach(function (transitionData) {
+                if (transitionData.key == key) {
+                    result = transitionData;
+                }
+            });
+            return result;
+        },
+        getTypeList: function (layout, key) {
+            var layoutInfo;
+            var itemInfo;
+            var result;
+
+            layoutInfo = typeMap[layout];
+
+            if (layoutInfo) {
+                itemInfo = layoutInfo[key] || layoutInfo.default;
+            }
+            if (!itemInfo) {
+                layoutInfo = typeMap.default;
+                itemInfo = layoutInfo[key] || layoutInfo.default;
+            }
+
+            result = [];
+            itemInfo.forEach(function (key) {
+                result.push({key: key, name: typeName[key]});
+            });
+
+            return result;
+        },
 
         getData: function () {
             return data;
         },
         getDesign: function () {
             return data.design;
+        },
+        getTransition: function () {
+            return data.transition;
         },
         getTitle: function () {
             return data.title;
@@ -195,6 +285,9 @@ define('data',['storage'], function (storage) {
         },
         setDesign: function (newDesign) {
             data.design = newDesign;
+        },
+        setTransition: function (newTransition) {
+            data.transition = newTransition;
         },
         setTitle: function (newTitle) {
             data.title = newTitle;
@@ -236,32 +329,54 @@ define('data',['storage'], function (storage) {
             return itemData.value;
         },
 
-        changeTemplate: function (page, template) {
+        changeLayout: function (page, layout, ignoreTypeChange) {
             var slideData = data.slides[page] || {};
-            var tplData = manager.getTplByKey(template);
-            var hasNewLayout = (slideData.layout != tplData.layout);
-            var changedKeys = [];
+            slideData.layout = layout;
+        },
+        // changeTemplate: function (page, template, ignoreTypeChange) {
+        //     var slideData = data.slides[page] || {};
+        //     var tplData = manager.getTplByKey(template);
+        //     var hasNewLayout = (slideData.layout != tplData.layout);
+        //     var changedKeys = [];
 
-            slideData.template = template;
+        //     slideData.template = template;
 
-            if (hasNewLayout) {
-                slideData.layout = tplData.layout;
-            }
+        //     if (hasNewLayout) {
+        //         slideData.layout = tplData.layout;
+        //     }
 
-            $.each(tplData.typeMap, function (key, type) {
-                var itemData = slideData.items[key];
+        //     $.each(tplData.typeMap, function (key, type) {
+        //         var itemData = slideData.items[key];
 
-                if (hasNewLayout) {
-                    itemData.position = {};
-                }
-                if (!itemData.value) {
-                    itemData.type = type;
-                    itemData.config = {};
-                    changedKeys.push(key);
-                }
-            });
+        //         if (!itemData) {
+        //             slideData.items[key] = itemData = {};
+        //         }
+        //         if (hasNewLayout) {
+        //             itemData.position = {};
+        //         }
+        //         if (!itemData.value) {
+        //             if (!ignoreTypeChange) {
+        //                 itemData.type = type;
+        //             }
+        //             itemData.config = {};
+        //             changedKeys.push(key);
+        //         }
+        //     });
 
-            return changedKeys;
+        //     return changedKeys;
+        // },
+        changeType: function (page, key, type) {
+            var slideData = data.slides[page] || {};
+            var itemData = slideData.items[key];
+            itemData.type = type;
+            itemData.value = null;
+            itemData.config = {};
+        },
+
+        clearItem: function (page, key) {
+            var itemData = manager.getItem(page, key);
+            itemData.value = null;
+            itemData.config = {};
         },
         setValue: function (page, key, value) {
             var itemData = manager.getItem(page, key);
@@ -318,11 +433,15 @@ define('vm',['data'], function (dataManager) {
         title: ko.observable(dataManager.getTitle()),
         editingTitle: ko.observable(false),
         designList: dataManager.getDesignList(),
+        transitionList: dataManager.getTransitionList(),
+        layoutList: dataManager.getLayoutList(),
         tplList: dataManager.getTplList(),
         pageList: ko.observableArray(dataManager.getPageList()),
         currentDesign: ko.observable(dataManager.getDesign()),
+        currentTransition: ko.observable(dataManager.getTransition()),
         currentPage: ko.observable(currentPage),
-        currentTpl: ko.observable(currentSlide.template),
+        currentLayout: ko.observable(currentSlide.layout),
+        // currentTpl: ko.observable(currentSlide.template),
         currentItem: ko.observable(''),
         currentItemDataCopy: ko.observable(null)
     };
@@ -333,16 +452,16 @@ define('vm',['data'], function (dataManager) {
         return pageList[page].sid;
     });
 
-    vm.currentLayout = ko.computed(function () {
-        var layout;
-        var currentTpl = vm.currentTpl();
-        vm.tplList.forEach(function (template) {
-            if (template.key == currentTpl) {
-                layout = template.layout;
-            }
-        });
-        return layout;
-    });
+    // vm.currentLayout = ko.computed(function () {
+    //     var layout;
+    //     var currentTpl = vm.currentTpl();
+    //     vm.tplList.forEach(function (template) {
+    //         if (template.key == currentTpl) {
+    //             layout = template.layout;
+    //         }
+    //     });
+    //     return layout;
+    // });
 
     return vm;
 });
@@ -385,11 +504,16 @@ define('page',['data'], function (dataManager) {
                 }
             };
 
-            vm.addPage = function () {
+            vm.addPage = function (templateData) {
                 var $index;
                 var slideList;
                 var slide;
                 var sid = (new Date).valueOf();
+
+                templateData = templateData || {
+                    layout: 'normal',
+                    typeMap: {title: 'text', content: 'text'}
+                };
 
                 $index = vm.currentPage();
                 vm.pageList.splice($index + 1, 0, {sid: sid, title: ''});
@@ -397,12 +521,19 @@ define('page',['data'], function (dataManager) {
                 slideList = dataManager.getSlideList();
                 slide = {
                         sid: sid,
-                        template: 'normal', layout: 'normal',
-                        items: {
-                            title: {type: 'text', value: ''},
-                            content: {type: 'text', value: ''}
-                        }
+                        layout: templateData.layout,
+                        items: {}
+                        // template: 'normal',
+                        // layout: 'normal',
+                        // items: {
+                        //     title: {type: 'text', value: ''},
+                        //     content: {type: 'text', value: ''}
+                        // }
                     };
+                $.each(templateData.typeMap, function (key, type) {
+                    slide.items[key] = {type: type, value: ''};
+                });
+
                 slideList.splice($index + 1, 0, slide);
 
                 vm.currentPage($index + 1);
@@ -509,14 +640,95 @@ define('design',[],function () {
         loadCssLink: loadCssLink
     };
 });
-define('status',['data', 'design'], function (dataManager, designManager) {
+define('transition',[],function () {
+    var dialog = $('#theme-manager');
+    var tabs = $('#theme-manager-tabs');
+    var root = $('#transition-stage');
+    var slides = root.find('.transition-slide');
+
+    var length = slides.length;
+
+    var currentPage;
+    var currentSlide;
+    var nextSlide;
+    var prevSlide;
+
+    var isActiveTab = false;
+    var isActiveDialog = false;
+    var loopTimer;
+
+    function loseSlide() {
+        currentSlide.removeClass('slide-current');
+        nextSlide.removeClass('slide-next');
+        prevSlide.removeClass('slide-prev');
+    }
+    function findSlide(page) {
+        currentSlide = $(slides[page]).addClass('slide-current');
+        nextSlide = $(slides[(page + 1) % length]).addClass('slide-next');
+        prevSlide = $(slides[(page + length - 1) % length]).addClass('slide-prev');
+    }
+
+    function next() {
+        currentPage = (currentPage + 1) % length;
+        loseSlide();
+        findSlide(currentPage);
+    }
+    function prev() {
+        currentPage = (currentPage + length - 1) % length;
+        loseSlide();
+        findSlide(currentPage);
+    }
+
+    function change(key) {
+        root.attr('data-transition', key);
+    }
+
+    function init() {
+        currentPage = 0;
+        findSlide(currentPage);
+    }
+
+    function checkLoop() {
+        clearInterval(loopTimer);
+        if (isActiveDialog && isActiveTab) {
+            loopTimer = setInterval(next, 1500);
+        }
+    }
+
+    tabs.find('a').on('shown', function (e) {
+        var target = $(e.target);
+        isActiveTab = target.attr('href') === '#transition-panel';
+        checkLoop();
+    });
+    dialog.on('shown', function () {
+        isActiveDialog = true;
+        checkLoop();
+    });
+    dialog.on('hide', function () {
+        isActiveDialog = true;
+        checkLoop();
+    });
+
+    init();
+
+    return {
+        change: change
+    };
+});
+define('status',['data', 'design', 'transition'], function (dataManager, designManager, transitionManager) {
+    var activeItem;
+    // var ignoreTypeChange;
+
     return {
         init: function (vm) {
             designManager.loadCssLink(vm.currentDesign());
 
-            vm.clickTpl = function (templateData, e) {
-                vm.currentTpl(templateData.key);
+            vm.clickLayout = function (layoutData, e) {
+                vm.currentLayout(layoutData.key);
             };
+            // vm.clickTpl = function (templateData, e) {
+            //     vm.currentTpl(templateData.key);
+            // };
             vm.clickPage = function (pageData, e) {
                 var $index = vm.pageList().indexOf(pageData);
                 vm.currentPage($index);
@@ -528,6 +740,10 @@ define('status',['data', 'design'], function (dataManager, designManager) {
                 designManager.loadCssLink(key);
                 vm.currentDesign(key);
             };
+            vm.clickTransition = function (transitionData, e) {
+                var key = transitionData.key;
+                vm.currentTransition(key);
+            };
             vm.resetData = function () {
                 dataManager.reset();
                 dataManager.stopStorage();
@@ -538,33 +754,56 @@ define('status',['data', 'design'], function (dataManager, designManager) {
                 vm.title(dataManager.getTitle()),
                 vm.currentDesign(dataManager.getDesign());
                 vm.currentPage(currentPage);
-                vm.currentTpl(currentSlide.template);
+                vm.currentLayout(currentSlide.layout);
+                // vm.currentTpl(currentSlide.template);
                 vm.pageList(dataManager.getPageList());
 
                 dataManager.startStorage();
                 dataManager.save();
             };
 
-            vm.currentTpl.subscribe(function (newValue) {
+            vm.currentLayout.subscribe(function (newValue) {
                 var page = vm.currentPage();
-                var changedKeys = dataManager.changeTemplate(page, newValue);
-
-                changedKeys.forEach(function (key) {
-                    vm.previewItem(key);
-                });
-
+                dataManager.changeLayout(page, newValue);
                 vm.resizeAll();
                 dataManager.save();
             });
+            // vm.currentTpl.subscribe(function (newValue) {
+            //     var page = vm.currentPage();
+            //     var changedKeys = dataManager.changeTemplate(page, newValue, ignoreTypeChange);
+
+            //     changedKeys.forEach(function (key) {
+            //         vm.previewItem(key);
+            //     });
+
+            //     vm.resizeAll();
+            //     dataManager.save();
+            // });
             vm.currentPage.subscribe(function (newValue) {
                 var slideData = dataManager.getSlide(newValue);
                 dataManager.stopStorage();
-                vm.currentTpl(slideData.template);
+                vm.currentLayout(slideData.layout);
+                // ignoreTypeChange = true;
+                // vm.currentTpl(slideData.template);
+                // ignoreTypeChange = false;
                 dataManager.startStorage();
             });
             vm.currentDesign.subscribe(function (newValue) {
                 dataManager.setDesign(newValue);
                 dataManager.save();
+            });
+            vm.currentTransition.subscribe(function (newValue) {
+                transitionManager.change(newValue);
+                dataManager.setTransition(newValue);
+                dataManager.save();
+            });
+            vm.currentItem.subscribe(function (newValue) {
+                if (activeItem) {
+                    activeItem.removeClass('active');
+                }
+                if (newValue) {
+                    activeItem = $('#slide-' + newValue).addClass('active');
+                }
             });
         }
     };
@@ -622,11 +861,13 @@ define('types/text',['data', 'vm'], function (dataManager, vm) {
     }
 
     return {
+        init: null,
         preview: function (data, dom) {
             render(data, dom, '[empty text]');
         },
-        showEditor: function (key, page, data, dom) {
-            var position = dom.position();
+        resize: null,
+        edit: function (key, page, data, dom) {
+            var position = dom.parent().position();
             var width = dom.outerWidth();
             var height = dom.outerHeight();
             var fontSize = dom.css('font-size');
@@ -662,9 +903,9 @@ define('types/text',['data', 'vm'], function (dataManager, vm) {
         build: function (data, dom) {
             render(data, dom, '');
         },
-        show: function (data, dom) {
+        show: function (dom) {
         },
-        hide: function (data, dom) {
+        hide: function (dom) {
         }
     };
 });
@@ -909,14 +1150,8 @@ define('types/img',['data', 'vm', 'types/img-helper'], function (dataManager, vm
             dataManager.setValue(vm.currentPage(), vm.currentItem(), media);
         }
 
-        vm.finishEdit();
+        // vm.finishEdit();
     }
-
-    urlBtnRemove.click(function () {
-        dataManager.setValue(vm.currentPage(), vm.currentItem(), '');
-        dialog.modal('hide');
-        vm.finishEdit();
-    });
 
     function render(data, dom, placeHolder) {
         var src = data.value;
@@ -951,6 +1186,16 @@ define('types/img',['data', 'vm', 'types/img-helper'], function (dataManager, vm
 
     return {
         init: function () {
+            imgListHolder.find('a').click(function (e) {
+                var item = $(this);
+                var key = item.attr('data-key');
+
+                if (key) {
+                    e.preventDefault();
+                    tabs.find('[data-key="' + key + '"] a').tab('show');
+                }
+            });
+
             localInput.on('change', function (e) {
                 var file = e.target.files[0];
                 var reader = new FileReader();
@@ -977,14 +1222,13 @@ define('types/img',['data', 'vm', 'types/img-helper'], function (dataManager, vm
                 }
             });
 
-            imgListHolder.find('a').click(function (e) {
-                var item = $(this);
-                var key = item.attr('data-key');
+            urlBtnRemove.click(function () {
+                dataManager.setValue(vm.currentPage(), vm.currentItem(), '');
+                dialog.modal('hide');
+            });
 
-                if (key) {
-                    e.preventDefault();
-                    tabs.find('[data-key="' + key + '"] a').tab('show');
-                }
+            dialog.on('hidden', function () {
+                vm.finishEdit();
             });
 
             dialog.find('[data-action="save"]').click(save);
@@ -1004,7 +1248,7 @@ define('types/img',['data', 'vm', 'types/img-helper'], function (dataManager, vm
                 lib.embed(src, dom, '[empty img]');
             }
         },
-        showEditor: function (key, page, data, dom) {
+        edit: function (key, page, data, dom) {
             var position = dom.position();
             var width = dom.width();
             var height = dom.height();
@@ -1022,18 +1266,18 @@ define('types/img',['data', 'vm', 'types/img-helper'], function (dataManager, vm
 
             dialog.modal('show');
 
-            if (data.value.match(/^media\:\/\//)) {
+            if (!data.value) {
+                oldMid = '';
+            }
+            else if (data.value.match(/^media\:\/\//)) {
                 oldMid = data.value.substr(8);
                 tabs.find('[data-key="list"] a').tab('show');
             }
-            else if (data.value) {
+            else {
                 tabs.find('[data-key="url"] a').tab('show');
                 urlInput.val(data.value);
                 lib.embed(data.value, urlThumb, 'Image loading error!');
                 urlBtnRemove.show();
-            }
-            else {
-                oldMid = '';
             }
 
             mediaList = dataManager.getMediaList();
@@ -1048,24 +1292,701 @@ define('types/img',['data', 'vm', 'types/img-helper'], function (dataManager, vm
         hide: function (dom) {}
     };
 });
-define('types',['types/text', 'types/img'], function (text, img) {
+define('types/video',['data', 'vm'], function (dataManager, vm) {
+    var dialog = $('#video-dialog');
+    var input = $('#video-url');
+
+    var helperLoaded;
+
+    function loadHelperScript(callback) {
+        var node = document.createElement('script');
+
+        node.addEventListener('load', function () {
+            helperLoaded = true;
+            callback && callback();
+        }, false);
+
+        node.type = 'text/javascript';
+        node.src = 'http://player.youku.com/jsapi';
+
+        document.head.appendChild(node);
+    }
+
+    function checkHelperLoaded(callback) {
+        if (helperLoaded) {
+            callback && callback();
+        }
+        else {
+            loadHelperScript(callback);
+        }
+    }
+
+    function getVid(value) {
+        // http://v.youku.com/v_show/id_XNjUwODE1Mg==.html
+        var matchResult;
+
+        if (value) {
+            matchResult = value.match(/\/id_(.+?)\.html/);
+            if (matchResult && matchResult.length >= 2) {
+                return matchResult[1];
+            }
+        }
+
+        return '';
+    }
+
+    dialog.find('[data-action="save"]').click(function (e) {
+        var val = input.val();
+        var vid = getVid(val);
+
+        e.preventDefault();
+
+        dataManager.setValue(vm.currentPage(), vm.currentItem(), vid);
+    });
+
+    dialog.on('hidden', function () {
+        vm.finishEdit();
+    });
+
+    return {
+        init: function () {
+            checkHelperLoaded();
+        },
+        preview: function (data, dom) {
+            var timeStamp = (new Date).valueOf();
+            var value = data ? data.value : '';
+            var playerId = 'video-' + timeStamp;
+            var playerContainer;
+            var img;
+            var height;
+
+            if (value) {
+                dom.empty();
+                height = dom.height();
+                playerContainer = $('<div></div>');
+                playerContainer.css('height', height + 'px');
+                playerContainer.css('line-height', height + 'px');
+                playerContainer.css('text-align', 'center');
+                dom.append(playerContainer);
+                img = $('<img>');
+                img.attr('src', 'images/widget/video/youkulogo.png');
+                playerContainer.append(img);
+            }
+            else {
+                dom.text('[empty video]');
+            }
+        },
+        resize: function (data, dom) {
+            var playerContainer = dom.children().first();
+            var height;
+            playerContainer.hide();
+            height = dom.height();
+            playerContainer.css('height', height + 'px');
+            playerContainer.css('line-height', height + 'px');
+            playerContainer.show();
+        },
+        adjust: function (dom) {
+            ;
+        },
+        edit: function (key, page, data, dom) {
+            dialog.modal('show');
+        },
+        build: function (data, dom) {
+            var timeStamp = (new Date).valueOf();
+            var value = data ? data.value : '';
+            var playerId = 'video-' + timeStamp;
+            var playerContainer;
+
+            dom.empty();
+
+            if (value) {
+                playerContainer = $('<div id="' + playerId + '"></div>');
+                playerContainer.attr('data-vid', value);
+                dom.append(playerContainer);
+            }
+        },
+        show: function (dom) {
+            var playerContainer = dom.find('div');
+            var playerId = playerContainer.attr('id');
+            var vid = playerContainer.attr('data-vid');
+
+            if (vid) {
+                playerContainer.css('height', dom.height() + 'px');
+                checkHelperLoaded(function () {
+                    var player = new YKU.Player(playerId, {
+                            client_id: 'c22ac066adde91fe',
+                            vid: vid
+                        });
+                });
+            }
+        },
+        hide: function (dom) {
+            dom.find('div').empty();
+        }
+    };
+});
+define('types/code',['data', 'vm'], function (dataManager, vm) {
+    var dialog = $('#code-dialog');
+    var tabs = $('#code-manager-tabs');
+    var codePanel = $('#code-panel');
+    var demoPanel = $('#demo-panel');
+
+    var codeInput = $('#code-input');
+    var urlInput = $('#demo-url-input');
+    var urlBtnRemove = $('#demo-url-remove');
+
+    var contentDom;
+    var currentData;
+
+    function getCurrentKey() {
+        return tabs.find('.active a').attr('data-key') || 'code';
+    }
+
+    function showData(data) {
+        var key;
+
+        if (data.config && data.config.type === 'demo') {
+            key = 'demo';
+            urlInput.val(data.value).focus();
+        }
+        else {
+            key = 'code';
+            codeInput.val(data.value).focus();
+        }
+
+        tabs.find('[data-key="' + key + '"]').tab('show');
+    }
+
+    function render(data, dom, placeHolder) {
+        if (!data.value) {
+            dom.text(placeHolder);
+            return;
+        }
+
+        if (data.config && data.config.type == 'demo') {
+            contentDom = $('<iframe></iframe>');
+            contentDom.attr('frameborder', '0');
+            contentDom.attr('src', data.value);
+        }
+        else {
+            contentDom = $('<pre class="code"></pre>');
+            contentDom.text(data.value);
+        }
+
+        contentDom.hide();
+        dom.append(contentDom);
+    }
+
+    function resize(dom) {
+        var width;
+        var height;
+
+        if (!contentDom || !dom) {
+            return;
+        }
+
+        width = dom.width();
+        height = dom.height();
+        contentDom.css('width', width + 'px');
+        contentDom.css('height', height + 'px');
+
+        contentDom.show();
+    }
+
+    function save() {
+        var currentKey = getCurrentKey();
+        var newValue;
+
+        if (currentKey === 'code') {
+            newValue = codeInput.val();
+        }
+        else {
+            newValue = urlInput.val();
+        }
+
+        if (!currentData.config) {
+            currentData.config = {};
+        }
+        currentData.config.type = currentKey;
+
+        dataManager.setValue(vm.currentPage(), vm.currentItem(), newValue);
+    }
+
+    return {
+        init: function () {
+            urlBtnRemove.click(function () {
+                if (!currentData.config) {
+                    currentData.config = {};
+                }
+                currentData.config.type = 'code';
+
+                dataManager.setValue(vm.currentPage(), vm.currentItem(), '');
+                dialog.modal('hide');
+            });
+
+            dialog.on('hidden', function () {
+                vm.finishEdit();
+            });
+
+            dialog.find('[data-action="save"]').click(save);
+        },
+        preview: function (data, dom) {
+            render(data, dom, 'NO ANY ODE & DEMO HERE :-(');
+            resize(dom);
+        },
+        resize: function (data, dom) {
+            resize(dom);
+        },
+        edit: function (key, page, data, dom) {
+            currentData = data;
+            dialog.modal('show');
+            showData(data);
+        },
+        build: function (data, dom) {
+            render(data, dom, '');
+        },
+        show: function (dom) {
+            resize(dom);
+        },
+        hide: function (dom) {
+        }
+    };
+});
+define('types',['types/text', 'types/img',  'types/video', 'types/code'], function (textManager, imgManager, videoManager, codeManager) {
 
     // for each type
+    //   unscalable
     //   init(): initiation
     //   preview(data, dom): preview in editor
     //   resize(data, dom): resize in editor when layout changed
-    //   showEditor(key, page, data, dom): handler when click item in editor
-    //   hideEditor(key, page, dom): hide the editor from external ctrl ?
+    //   adjust(dom): resize in player when a unscalable item set current
+    //   edit(key, page, data, dom): handler when click item in editor
     //   build(data, dom): prepare to display in player
-    //   show(data, dom): handler when show the current page in player
-    //   hide(data, dom): handler when show another page in player
+    //   show(dom): handler when show the current page in player
+    //   hide(dom): handler when show another page in player
 
     return {
-        text: text,
-        img: img
+        text: textManager,
+        img: imgManager,
+        video: videoManager,
+        code: codeManager
     };
 });
-define('stage',['data', 'types'], function (dataManager, typeMap) {
+define('ctrl',[],function () {
+    var STAGE_WIDTH = 640;
+    var STAGE_HEIGHT = 480;
+    var MIN_UNIT = 20;
+
+    var currentVm;
+    var currentMenu;
+
+    function toggleMenu(menu) {
+        if (menu.attr('data-shown')) {
+            hideMenu(menu);
+        }
+        else {
+            showMenu(menu);
+        }
+    }
+
+    function showMenu(menu) {
+        menu.attr('data-show', 'true');
+
+        setTimeout(function () {
+            menu.attr('data-shown', 'true');
+            currentMenu = menu;
+        }, 13);
+    }
+
+    function hideMenu(menu) {
+        currentMenu = null;
+
+        menu.removeAttr('data-shown');
+        menu.removeAttr('data-extended');
+
+        setTimeout(function () {
+            menu.removeAttr('data-extend');
+        }, 513);
+        setTimeout(function () {
+            menu.removeAttr('data-show');
+        }, 513);
+    }
+
+    function toggleMoreMenu(menu) {
+        if (menu.attr('data-extended')) {
+            hideMoreMenu(menu);
+        }
+        else {
+            showMoreMenu(menu);
+        }
+    }
+
+    function showMoreMenu(menu) {
+        menu.attr('data-extend', 'true');
+
+        setTimeout(function () {
+            menu.attr('data-extended', 'true');
+        }, 13);
+    }
+
+    function hideMoreMenu(menu) {
+        menu.removeAttr('data-extended');
+
+        setTimeout(function () {
+            menu.removeAttr('data-extend');
+        }, 513);
+    }
+
+    function startDrag(e, dragTo, finish) {
+        var ori = {};
+        var win = $(window);
+        var target = $(e.target);
+        var type = e.type;
+        var offset = {};
+
+        function readXY(e, dest) {
+            try {
+                if (type == 'touchstart') {
+                    e = e.originalEvent.touches[0];
+                }
+                dest.x = e.clientX;
+                dest.y = e.clientY;
+            }
+            catch (ex) {
+                console.log(ex);
+            }
+        }
+
+        function move(e) {
+            var cur = {};
+
+            e.preventDefault();
+
+            readXY(e, cur);
+            offset.x = cur.x - ori.x;
+            offset.y = cur.y - ori.y;
+
+            if (!draggingFlag) {
+                if (Math.abs(offset.x) + Math.abs(offset.y) > 5) {
+                    draggingFlag = true;
+                }
+            }
+            else {
+                dragTo(offset);
+            }
+        }
+
+        function end(e) {
+            var cur = {};
+            var offset = {};
+
+            if (draggingFlag) {
+                e.preventDefault();
+                finish(offset);
+                setTimeout(function () {
+                    draggingFlag = false;
+                }, 13);
+            }
+
+            target.css('cursor', '');
+
+            if (type == 'touchstart') {
+                win.unbind('touchmove', move);
+                win.unbind('touchend', end);
+            }
+            else {
+                win.unbind('mousemove', move);
+                win.unbind('mouseup', end);
+            }
+        }
+
+        draggingFlag = false;
+
+        readXY(e, ori);
+
+        target.css('cursor', 'move');
+
+        if (type == 'touchstart') {
+            win.bind('touchmove', move);
+            win.bind('touchend', end);
+        }
+        else {
+            e.preventDefault();
+            win.bind('mousemove', move);
+            win.bind('mouseup', end);
+        }
+    }
+
+    function adjustChanges(status, changes, mode, verticalAlign) {
+        var left = status.left + (changes.left || 0);
+        var top = status.top + (changes.top || 0);
+        var width = status.outerWidth + (changes.width || 0);
+        var height = status.outerHeight + (changes.height || 0);
+
+        var widthExtra = status.outerWidth - status.width;
+        var heightExtra = status.outerHeight - status.height;
+
+        if (verticalAlign == 'bottom') {
+            top = STAGE_HEIGHT - status.bottom - status.outerHeight + (changes.top || 0);
+        }
+
+        if (left < 0) {
+            left = 0;
+        }
+        if (top < 0) {
+            top = 0;
+        }
+        if (width < MIN_UNIT) {
+            width = MIN_UNIT;
+        }
+        if (height < MIN_UNIT) {
+            height = MIN_UNIT;
+        }
+        if (left + width > STAGE_WIDTH) {
+            if (mode == 'move') {
+                left = STAGE_WIDTH - width;
+            }
+            else {
+                width = STAGE_WIDTH - left;
+            }
+        }
+        if (top + height > STAGE_HEIGHT) {
+            if (mode == 'move') {
+                top = STAGE_HEIGHT - height;
+            }
+            else {
+                height = STAGE_HEIGHT - top;
+            }
+        }
+
+        return {
+            left: left,
+            top: top,
+            width: width,
+            height: height
+        };
+    }
+
+    function initCtrl(root, vm) {
+        var btnStart;
+        var menu;
+        var btnMore;
+        var btnResize;
+        var key = root.attr('data-key');
+
+        var verticalAlign = (key == 'title') ? 'bottom' : 'top';
+
+        var draggingFlag = false;
+
+        function appendCtrl(root) {
+            var templateSrc = $('#ctrl-template');
+            var template = $.trim(templateSrc.text());
+            var ctrlRoot = $(template);
+
+            root.append(ctrlRoot);
+            ctrlRoot.find('a').click(function (e) {
+                e.preventDefault();
+            });
+
+            btnStart = root.find('.ctrl-start');
+            menu = root.find('.ctrl-menu');
+            btnResize = root.find('.ctrl-resize');
+
+            // if (menu.find('li').length > 3) {
+            //     btnMore = menu.find('li:nth-child(3) a');
+            // }
+            // else {
+            //     btnMore = $();
+            // }
+        }
+        function bindActions(menu) {
+            var output = root.find('.output');
+            var btnEdit = menu.find('[data-action="edit"]');
+            var btnClear = menu.find('[data-action="clear"]');
+            var moreMenu = menu.find('.ctrl-menu-more');
+
+            btnEdit.click(function (e) {
+                e.preventDefault();
+                hideMenu(menu);
+                vm.editItem(output);
+            });
+
+            btnClear.click(function (e) {
+                e.preventDefault();
+                hideMenu(menu);
+                vm.clearItem(output);
+            });
+
+            moreMenu.delegate('a', 'click', function (e) {
+                var target;
+                e.preventDefault();
+                target = $(this);
+                if (target.attr('data-action') === 'type') {
+                    vm.confirmChangeType(output, target.attr('data-type'));
+                }
+            });
+        }
+
+        function startMove(e) {
+            var status = {
+                left: parseInt(root.css('left')) || 0,
+                top: parseInt(root.css('top')) || 0,
+                bottom: parseInt(root.css('bottom')) || 0,
+                width: parseInt(root.css('width')) || 0,
+                height: parseInt(root.css('height')) || 0,
+                outerWidth: root.outerWidth(),
+                outerHeight: root.outerHeight()
+            };
+            var result;
+
+            startDrag(e, function (offset) {
+                var changes = {
+                    left: offset.x,
+                    top: offset.y
+                };
+
+                result = adjustChanges(status, changes, 'move', verticalAlign);
+
+                root.css('left', result.left + 'px');
+                if (verticalAlign == 'top') {
+                    root.css('top', result.top + 'px');
+                }
+                else {
+                    root.css('bottom', STAGE_HEIGHT - result.top - result.height + 'px');
+                }
+            }, function (offset) {
+                var diffX;
+                var diffY;
+
+                diffX = result.left - status.left;
+                if (verticalAlign == 'top') {
+                    diffY = result.top - status.top;
+                }
+                else {
+                    diffY = STAGE_HEIGHT - result.top - result.height - status.bottom;
+                }
+
+                if (Math.abs(diffX) + Math.abs(diffY) > 0) {
+                    // TODO changed;
+                }
+            });
+        }
+        function startResize(e) {
+            var status = {
+                left: parseInt(root.css('left')) || 0,
+                top: parseInt(root.css('top')) || 0,
+                bottom: parseInt(root.css('bottom')) || 0,
+                width: parseInt(root.css('width')) || 0,
+                height: parseInt(root.css('height')) || 0,
+                outerWidth: root.outerWidth(),
+                outerHeight: root.outerHeight()
+            };
+            var result;
+
+            startDrag(e, function (offset) {
+                var changes = {
+                    width: offset.x,
+                    height: offset.y
+                };
+
+                result = adjustChanges(status, changes, 'resize', verticalAlign);
+
+                root.css('width', result.width + 'px');
+                root.css('height', result.height + 'px');
+                if (verticalAlign == 'bottom') {
+                    root.css('bottom', STAGE_HEIGHT - result.top - result.height + 'px');
+                }
+            }, function (offset) {
+                var diffX;
+                var diffY;
+
+                diffX = result.width - status.width;
+                diffY = result.height - status.height;
+
+                if (Math.abs(diffX) + Math.abs(diffY) > 0) {
+                    // TODO save new size/position;
+                }
+            });
+        }
+
+        currentVm = vm;
+        appendCtrl(root);
+        bindActions(menu);
+
+        btnStart.click(function (e) {
+            e.preventDefault();
+            currentVm.currentItem(key);
+            if (!draggingFlag) {
+                toggleMenu(menu);
+            }
+        });
+        // btnMore.click(function (e) {
+        //     e.preventDefault();
+        //     toggleMoreMenu(menu);
+        // });
+        // btnResize.click(function (e) {
+        //     e.preventDefault();
+        // });
+        // btnStart.bind('mousedown', startMove);
+        // btnStart.bind('touchstart', startMove);
+        // btnResize.bind('mousedown', startResize);
+        // btnResize.bind('touchstart', startResize);
+    }
+
+    function updateTypeList(root, currentType, typeList) {
+        var output = root.find('.output');
+        var moreMenu = root.find('.ctrl-menu-more');
+
+        if (!typeList) {
+            moreMenu.find('a').removeClass('active');
+            moreMenu.find('[data-type="' + currentType + '"]').addClass('active');
+        }
+        else {
+            moreMenu.empty();
+            if (typeList.length > 0) {
+                $.each(typeList, function (i, typeData) {
+                    var key = typeData.key;
+                    var name = typeData.name;
+                    var btn = $('<a href="#"></a>').text(name).
+                        attr('data-action', 'type').attr('data-type', key);
+                    if (currentType === key) {
+                        btn.addClass('active');
+                    }
+                    moreMenu.append(btn);
+                });
+            }
+            else {
+                moreMenu.html('<a href="#">Text</a>');
+            }
+        }
+    }
+
+    function mousedown(e) {
+        var target = $(e.target);
+        var menu = target.closest('.ctrl-menu');
+
+        if (currentMenu && (!menu || !currentMenu.is(menu))) {
+            hideMenu(currentMenu);
+        }
+        if (menu && menu.length) {
+            currentMenu = menu;
+        }
+    }
+
+    return {
+        init: function (stage, vm) {
+            stage.find('[data-key]').each(function () {
+                initCtrl($(this), vm);
+            });
+
+            $(window).bind('mousedown', mousedown);
+        },
+        update: function (item, currentIndex, typeList) {
+            updateTypeList(item, currentIndex, typeList);
+        }
+    };
+});
+define('stage',['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
     var itemKeyMap = ['title', 'content', 'content2', 'subtitle', 'subtitle2'];
 
     return {
@@ -1074,10 +1995,13 @@ define('stage',['data', 'types'], function (dataManager, typeMap) {
                 var page = vm.currentPage();
                 var itemData = dataManager.getItem(page, key);
                 var dom = $('#slide-' + key);
+                var output = dom.find('.output');
                 var typeHelper = typeMap[itemData.type];
 
+                output.empty();
+
                 if (typeHelper) {
-                    typeHelper.preview(itemData, dom);
+                    typeHelper.preview(itemData, output);
                 }
             };
             vm.previewAll = function () {
@@ -1088,13 +2012,17 @@ define('stage',['data', 'types'], function (dataManager, typeMap) {
 
             vm.resizeItem = function (key) {
                 var page = vm.currentPage();
+                var layout = dataManager.getSlide(page).layout;
                 var itemData = dataManager.getItem(page, key);
                 var dom = $('#slide-' + key);
+                var output = dom.find('.output');
                 var typeHelper = typeMap[itemData.type];
 
                 if (typeHelper && typeHelper.resize) {
-                    typeHelper.resize(itemData, dom);
+                    typeHelper.resize(itemData, output);
                 }
+
+                ctrlManager.update(dom, itemData.type, dataManager.getTypeList(layout, key));
             };
             vm.resizeAll = function () {
                 itemKeyMap.forEach(function (key) {
@@ -1102,14 +2030,19 @@ define('stage',['data', 'types'], function (dataManager, typeMap) {
                 });
             };
 
-            vm.editItem = function (vm, e) {
-                var dom = $(e.currentTarget);
+            vm.clickItem = function (vm, e) {
+                var output = $(e.currentTarget);
+                e.stopPropagation();
+                vm.editItem(output);
+            };
+
+            vm.editItem = function (output) {
+                var dom = output.parent();
                 var key = dom.attr('data-key');
                 var page = vm.currentPage();
                 var itemData = dataManager.getItem(page, key);
                 var typeHelper = typeMap[itemData.type];
 
-                e.stopPropagation();
                 vm.currentItem(key);
 
                 if (typeHelper) {
@@ -1118,8 +2051,65 @@ define('stage',['data', 'types'], function (dataManager, typeMap) {
                         typeHelper.init();
                         typeHelper.initialized = true;
                     }
-                    typeHelper.showEditor(key, page, itemData, dom);
+                    typeHelper.edit(key, page, itemData, output);
                 }
+            };
+
+            vm.confirmChangeType = function (output, newType) {
+                var dom = output.parent();
+                var key = dom.attr('data-key');
+                var page = vm.currentPage();
+                var itemData = dataManager.getItem(page, key);
+                var type = itemData.type;
+
+                var dialog = $('#confirm-dialog');
+
+                vm.currentItem(key);
+
+                if (type === newType) {
+                    return;
+                }
+
+                if (itemData.value) {
+                    dialog.find('.modal-header h3').text('Change Type');
+                    dialog.find('.modal-body').text('Are you sure?');
+                    dialog.find('[data-action="yes"]').on('click', function (e) {
+                        vm.changeType(output, newType);
+                    });
+                    dialog.on('hide', function () {
+                        dialog.find('modal-header h3').text('Change Type');
+                        dialog.find('modal-body').text('Are you sure?');
+                        dialog.find('[data-action="yes"]').off('click');
+                    });
+                    dialog.modal('show');
+                }
+                else {
+                    vm.changeType(output, newType);
+                }
+            },
+            vm.changeType = function (output, type) {
+                var dom = output.parent();
+                var key = dom.attr('data-key');
+                var page = vm.currentPage();
+
+                vm.currentItem(key);
+                dataManager.changeType(page, key, type);
+                dataManager.save();
+                vm.previewItem(key);
+
+                ctrlManager.update(dom, type);
+            }
+
+            vm.clearItem = function (output) {
+                var dom = output.parent();
+                var key = dom.attr('data-key');
+                var page = vm.currentPage();
+
+                vm.currentItem(key);
+
+                dataManager.clearItem(page, key);
+                dataManager.save();
+                vm.previewItem(key);
             };
 
             vm.finishEdit = function () {
@@ -1147,6 +2137,9 @@ define('stage',['data', 'types'], function (dataManager, typeMap) {
             vm.currentSid.subscribe(function () {
                 setTimeout(vm.previewAll, 13);
             });
+
+            ctrlManager.init($('#editor-stage'), vm);
+            vm.resizeAll();
         }
     };
 });
@@ -1186,127 +2179,346 @@ define('player',['data', 'design', 'types'], function (dataManager, designManage
 
     var gotoDialog = $('#goto-dialog');
     var gotoNumber = $('#goto-number');
+    var btnGo = gotoDialog.find('[data-action="go"]');
 
-    var currentSlide = $('');
     var slideLength;
+    var currentPage;
 
+    var currentSlideDom;
+    var nextSlideDom;
+    var prevSlideDom;
+
+    var fullscreenEnabled = document.webkitFullscreenEnabled;
+    var isPlaying = false;
+
+
+    /**
+        进入全屏模式
+     */
+    function gotoFullscreen() {
+        if (fullscreenEnabled) {
+            document.body.webkitRequestFullscreen();
+        }
+    }
+    /**
+        退出全屏模式
+     */
+    function exitFullscreen() {
+        if (fullscreenEnabled && isFullscreen()) {
+            document.webkitExitFullscreen();
+        }
+    }
+    /**
+        判断是否全屏状态
+     */
+    function isFullscreen() {
+        return document.webkitIsFullScreen;
+    }
+    /**
+        绑定全屏模式事件
+        @param {function} handler(isFullscreen)
+     */
+    function bindFullscreenChange(handler) {
+        if (fullscreenEnabled) {
+            document.onwebkitfullscreenchange = function (e) {
+                handler(isFullscreen());
+            };
+        }
+    }
+
+
+    /**
+        创建一个元素
+     */
     function createItem(key, itemData) {
-        var itemDom = $('<div></div>');
+        var itemDom = $('<div><div class="output"></div></div>');
         var type = itemData.type || 'text';
         var typeHelper = typeMap[type];
+        var output = itemDom.find('.output');
 
         itemDom.attr('data-key', key);
         itemDom.attr('data-type', type);
 
         if (typeHelper) {
-            typeHelper.build(itemData, itemDom);
+            typeHelper.build(itemData, output);
         }
 
         return itemDom;
     }
-
+    /**
+        创建一页幻灯片
+     */
     function createSlide(page, slideData) {
-        var slideDom = $('<div class="slide"></div>');
+        var slideDom = $('<div></div>');
+
+        slideDom.addClass('slide');
 
         slideDom.attr('id', 'slide-' + slideData.sid);
-        slideDom.attr('data-page', page);
         slideDom.attr('data-layout', slideData.layout);
-        slideDom.attr('data-template', slideData.template);
+        slideDom.attr('data-page', page);
 
         $.each(slideData.items, function (key, itemData) {
             var itemDom = createItem(key, itemData);
-            slideDom.append(itemDom);
+            if (itemDom) {
+                slideDom.append(itemDom);
+            }
         });
 
         return slideDom;
     }
 
-    function gotoPage(page) {
-        var newCurrentSlide = $(slidesContainer.find('.slide')[page]);
 
-        currentSlide.children().each(function () {
+    /**
+        获取某一页幻灯片
+     */
+    function getSlideDom(page) {
+        if (page < 0) {
+            return $();
+        }
+        return $(slidesContainer.find('.slide')[page]);
+    }
+
+
+    /**
+        隐藏一页幻灯片
+     */
+    function hidePage(dom) {
+        dom.children().each(function () {
             var itemDom = $(this);
+            var output = itemDom.find('.output');
             var type = itemDom.attr('data-type');
             var typeHelper = typeMap[type];
 
             if (typeHelper && typeHelper.hide) {
-                typeHelper.hide(itemDom);
+                typeHelper.hide(output);
             }
         });
-
-        currentSlide.removeClass('current');
-        currentSlide = newCurrentSlide;
-        currentSlide.addClass('current');
-
-        currentSlide.children().each(function () {
+    }
+    /**
+        显示一页幻灯片
+     */
+    function showPage(dom) {
+        dom.children().each(function () {
             var itemDom = $(this);
+            var output = itemDom.find('.output');
             var type = itemDom.attr('data-type');
             var typeHelper = typeMap[type];
 
             if (typeHelper && typeHelper.show) {
-                typeHelper.show(itemDom);
+                typeHelper.show(output);
             }
         });
-
-        txtPage.text(page - (-1));
     }
 
-    function scaleSlides() {
-        var WIDTH = 640;
-        var HEIGHT = 480;
 
-        var stageWidth = player.width() - 40;
-        var stageHeight = player.height() - 60;
+    /**
+        切换两页幻灯片
+     */
+    function switchPage(newPage) {
+        var next = -1;
+        var prev = -1;
 
-        var scale = Math.min(stageWidth / WIDTH, stageHeight / HEIGHT);
+        var oldPage = -1;
+        var oldNext = -1;
+        var oldPrev = -1;
 
-        scale = Math.floor(scale * 100) / 100;
+        // get old current/next/prev
+        if (currentSlideDom) {
+            oldPage = currentSlideDom.attr('data-page') - 0;
+        }
+        if (nextSlideDom) {
+            oldNext = nextSlideDom.attr('data-page') - 0;
+        }
+        if (prevSlideDom) {
+            oldPrev = prevSlideDom.attr('data-page') - 0;
+        }
 
-        slidesContainer.css('-webkit-transform', 'scale(' + scale + ')');
-    }
-
-    function goNext() {
-        var currentPage;
-
-        if (currentSlide.length === 0) {
+        if (oldPage == newPage) {
             return;
         }
 
-        currentPage = currentSlide.attr('data-page') - 0;
+        // get new current/next/prev
+        if (newPage > 0) {
+            prev = newPage - 1;
+        }
+        if (newPage < slideLength - 1) {
+            next = newPage + 1;
+        }
+        if (oldPage >= 0) {
+            if (oldPage > newPage) {
+                next = oldPage;
+            }
+            else if (oldPage < newPage) {
+                prev = oldPage;
+            }
+        }
 
+        currentSlideDom && currentSlideDom.removeClass('slide-current');
+        nextSlideDom && nextSlideDom.removeClass('slide-next');
+        prevSlideDom && prevSlideDom.removeClass('slide-prev');
+
+        currentSlideDom = null;
+        nextSlideDom = null;
+        prevSlideDom = null;
+
+        if (newPage >= 0) {
+            currentSlideDom = getSlideDom(newPage).addClass('slide-current');
+        }
+        if (next >= 0) {
+            nextSlideDom = getSlideDom(next).addClass('slide-next');
+        }
+        if (prev >= 0) {
+            prevSlideDom = getSlideDom(prev).addClass('slide-prev');
+        }
+    }
+
+    /**
+        跳转到某一页
+     */
+    function gotoPage(page) {
+        var oldPage = currentPage;
+        var newPage = page - 0;
+
+        var oldSlideDom = currentSlideDom;
+        var newSlideDom = getSlideDom(page);;
+
+        if (oldPage == newPage) {
+            return;
+        }
+
+        if (oldSlideDom) {
+            hidePage(oldSlideDom);
+        }
+        if (newSlideDom) {
+            showPage(newSlideDom);
+        }
+
+        currentPage = newPage;
+        txtPage.text(newPage + 1);
+
+        switchPage(newPage);
+    }
+
+
+    /**
+        下一页
+     */
+    function goNext() {
         if (currentPage < slideLength - 1) {
             gotoPage(currentPage + 1);
         }
     }
+    /**
+        前一页
+     */
     function goPrev() {
-        var currentPage;
-
-        if (currentSlide.length === 0) {
-            return;
-        }
-
-        currentPage = currentSlide.attr('data-page') - 0;
-
         if (currentPage > 0) {
             gotoPage(currentPage - 1);
         }
     }
-    function doExit() {
-        slidesContainer.css('-webkit-transform', '');
-        $(window).unbind('resize', scaleSlides);
-        $(window).unbind('keydown', keydown);
 
-        if (document.webkitFullscreenEnabled && document.webkitIsFullScreen) {
-            document.webkitExitFullscreen();
-        }
 
-        currentSlide = $('');
-        slideLength = null;
-        slidesContainer.empty();
-        player.hide();
-        editor.show();
+    /**
+        绑定点击下一页按钮的事件
+     */
+    function clickNext(e) {
+        e.preventDefault();
+        goNext();
+    }
+    /**
+        绑定点击前一页按钮的事件
+     */
+    function clickPrev(e) {
+        e.preventDefault();
+        goPrev();
+    }
+    /**
+        绑定点击弹出跳转对话框按钮的事件
+     */
+    function clickGoto(e) {
+        e.preventDefault();
+
+        gotoDialog.modal('show');
+        gotoNumber.val(currentPage + 1);
+    }
+    /**
+        绑定点击跳转按钮的事件
+     */
+    function clickGo(e) {
+        var newPage = gotoNumber.val() - 1;
+        gotoPage(newPage);
     }
 
+
+    /**
+        退出播放器，显示编辑器
+     */
+    function doExit() {
+        slidesContainer.css('-webkit-transform', '');
+
+        currentSlideDom = null;
+        nextSlideDom = null;
+        prevSlideDom = null;
+
+        currentPage = -1;
+
+        slideLength = null;
+        slidesContainer.empty();
+
+        $(window).unbind('keydown', keydown);
+
+        bindFullscreenChange(null);
+        exitFullscreen();
+
+        player.hide();
+        editor.show();
+
+        isPlaying = false;
+    }
+
+    /**
+        启动播放器，初始化幻灯片和屏幕
+     */
+    function doPlay() {
+        var design = dataManager.getDesign();
+        var transition = dataManager.getTransition();
+        var title = dataManager.getTitle();
+        var slideList = dataManager.getSlideList();
+
+        designManager.loadCssLink(design);
+        stageDom.attr('data-design', design);
+        stageDom.attr('data-transition', transition);
+
+        slidesContainer.empty();
+        $.each(slideList, function (i, slideData) {
+            var slideDom = createSlide(i, slideData);
+
+            slidesContainer.append(slideDom);
+        });
+
+        slideLength = slideList.length
+        txtSum.text(slideLength);
+        gotoNumber.attr('min', 1);
+        gotoNumber.attr('max', slideLength);
+
+        gotoPage(0);
+
+        $(window).bind('keydown', keydown);
+
+        gotoFullscreen();
+        bindFullscreenChange(function (isFullscreen) {
+            if (!isFullscreen) {
+                 doExit();
+            }
+        });
+
+        isPlaying = true;
+    }
+
+
+    /**
+        绑定键盘事件
+     */
     function keydown(e) {
         switch (e.keyCode) {
         case 38:
@@ -1326,82 +2538,42 @@ define('player',['data', 'design', 'types'], function (dataManager, designManage
         }
     }
 
-    function play() {
-        var design = dataManager.getDesign();
-        var title = dataManager.getTitle();
-        var slideList = dataManager.getSlideList();
-
-        // set design
-        designManager.loadCssLink(design);
-        stageDom.attr('data-design', design);
-
-        // build slide list
-        slidesContainer.empty();
-        $.each(slideList, function (i, slideData) {
-            var slideDom = createSlide(i, slideData);
-            slidesContainer.append(slideDom);
-        });
-
-        slideLength = slideList.length
-        txtSum.text(slideLength);
-        gotoNumber.attr('min', 1);
-        gotoNumber.attr('max', slideLength);
-
-        gotoPage(0);
-
-        $(window).bind('resize', scaleSlides);
-        $(window).bind('keydown', keydown);
-
-        if (document.webkitFullscreenEnabled) {
-            document.body.webkitRequestFullscreen();
-        }
-    }
-
-    function clickNext(e) {
-        e.preventDefault();
-        goNext();
-    }
-    function clickPrev(e) {
-        e.preventDefault();
-        goPrev();
-    }
-    function clickGoto(e) {
-        var currentPage = currentSlide.attr('data-page') - 0;
-
-        e.preventDefault();
-
-        gotoDialog.modal('show');
-        gotoNumber.val(currentPage + 1);
-    }
+    /**
+        绑定点击退出按钮的事件
+     */
     function clickExit(e) {
         e.preventDefault();
         doExit();
     }
 
-    btnPreview.click(function (e) {
+    /**
+        绑定点击播放按钮的事件
+     */
+    function clickPreview(e) {
         e.preventDefault();
         editor.hide();
         player.show();
-        play();
-    });
+        doPlay();
+    }
+
+
+    btnPreview.click(clickPreview);
     btnNext.click(clickNext);
     btnPrev.click(clickPrev);
     btnGoto.click(clickGoto);
     btnExit.click(clickExit);
+    btnGo.click(clickGo);
 
-    gotoDialog.find('[data-action="go"]').click(function (e) {
-        var newPage = gotoNumber.val() - 1;
-        gotoPage(newPage);
-    });
 
     return {};
 });
 // designList **
+// transitionList **
 // tplList **
 // pageList **
 
 // currentDesign **
-// currentTpl **
+// currentLayout **
 // currentPage **
 // currentLayout **
 // currentItem **

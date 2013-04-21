@@ -1,0 +1,7 @@
+[data-design="revert"] {
+    background-color: silver;
+}
+[data-design="revert"] .slide {
+    background-color: gray;
+    color: white;
+}
