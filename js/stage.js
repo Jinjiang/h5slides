@@ -10,6 +10,8 @@ define(['data', 'types', 'ctrl'], function (dataManager, typeMap, ctrlManager) {
                 var output = dom.find('.output');
                 var typeHelper = typeMap[itemData.type];
 
+                output.empty();
+
                 if (typeHelper) {
                     typeHelper.preview(itemData, output);
                 }

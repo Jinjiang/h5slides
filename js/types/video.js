@@ -55,7 +55,6 @@ define(['data', 'vm'], function (dataManager, vm) {
     });
 
     return {
-        unscalable: true,
         init: function () {
             checkHelperLoaded();
         },
