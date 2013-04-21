@@ -1,9 +1,7 @@
 -- milestone 0.3.1 --
-
 -- milestone 0.3.2 --
-    type: code (add highlight by some open source lib) 0.5d
-    type: demo 1d
 
+added code highlight 0.5d
 gist online 3d
     gist service
     save data online
@@ -35,4 +33,4 @@ create new item
 text animations when playing
 undo system 3d
 
-total: 5.5d / 3d / 5d / 3d / ...
+total: 4.5d / 9d / ...
