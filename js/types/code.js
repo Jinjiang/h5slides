@@ -8,7 +8,6 @@ define(['data', 'vm'], function (dataManager, vm) {
     var urlInput = $('#demo-url-input');
     var urlBtnRemove = $('#demo-url-remove');
 
-    var contentDom;
     var currentData;
 
     function getCurrentKey() {
@@ -31,18 +30,20 @@ define(['data', 'vm'], function (dataManager, vm) {
     }
 
     function render(data, dom, placeHolder) {
+        var contentDom;
+
         if (!data.value) {
             dom.text(placeHolder);
             return;
         }
 
         if (data.config && data.config.type == 'demo') {
-            contentDom = $('<iframe></iframe>');
+            contentDom = $('<iframe class="code-item demo"></iframe>');
             contentDom.attr('frameborder', '0');
             contentDom.attr('src', data.value);
         }
         else {
-            contentDom = $('<pre class="code"></pre>');
+            contentDom = $('<pre class="code-item code"></pre>');
             contentDom.text(data.value);
         }
 
@@ -53,6 +54,9 @@ define(['data', 'vm'], function (dataManager, vm) {
     function resize(dom) {
         var width;
         var height;
+
+        var contentDom = dom.find('.code-item');
+
 
         if (!contentDom || !dom) {
             return;
