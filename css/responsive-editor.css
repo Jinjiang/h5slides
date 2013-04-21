@@ -35,9 +35,10 @@
     .slide[data-layout="subtitle"] [data-key="title"] {
         left: 120px;
     }
-    .slide[data-layout="title"] [data-key="content"],
-    .slide[data-layout="subtitle"] [data-key="content"] {
+    .slide[data-layout="title"] [data-key="content"] {
         left: 180px;
+    }
+    .slide[data-layout="subtitle"] [data-key="content"] {
         left: 150px;
     }
     .slide[data-layout="double"] [data-key="content2"],
@@ -54,7 +55,7 @@
     .slide[data-layout="double"] [data-key="content"],
     .slide[data-layout="double"] [data-key="content2"],
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         top: 210px;
     }
     .slide[data-layout="title"] [data-key="content"],
@@ -105,7 +106,7 @@
     .slide[data-layout="double-subtitle"] [data-key="content"],
     .slide[data-layout="double-subtitle"] [data-key="content2"],
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         width: 375px;
     }
     .slide[data-layout="imax"] [data-key="title"],
@@ -119,7 +120,7 @@
         height: 450px;
     }
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         height: 75px;
     }
     .slide[data-layout="double-subtitle"] [data-key="content"],
@@ -165,9 +166,10 @@
     .slide[data-layout="subtitle"] [data-key="title"] {
         left: 160px;
     }
-    .slide[data-layout="title"] [data-key="content"],
-    .slide[data-layout="subtitle"] [data-key="content"] {
+    .slide[data-layout="title"] [data-key="content"] {
         left: 240px;
+    }
+    .slide[data-layout="subtitle"] [data-key="content"] {
         left: 200px;
     }
     .slide[data-layout="double"] [data-key="content2"],
@@ -184,7 +186,7 @@
     .slide[data-layout="double"] [data-key="content"],
     .slide[data-layout="double"] [data-key="content2"],
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         top: 280px;
     }
     .slide[data-layout="title"] [data-key="content"],
@@ -235,7 +237,7 @@
     .slide[data-layout="double-subtitle"] [data-key="content"],
     .slide[data-layout="double-subtitle"] [data-key="content2"],
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         width: 500px;
     }
     .slide[data-layout="imax"] [data-key="title"],
@@ -249,7 +251,7 @@
         height: 600px;
     }
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         height: 100px;
     }
     .slide[data-layout="double-subtitle"] [data-key="content"],
@@ -295,9 +297,10 @@
     .slide[data-layout="subtitle"] [data-key="title"] {
         left: 200px;
     }
-    .slide[data-layout="title"] [data-key="content"],
-    .slide[data-layout="subtitle"] [data-key="content"] {
+    .slide[data-layout="title"] [data-key="content"] {
         left: 300px;
+    }
+    .slide[data-layout="subtitle"] [data-key="content"] {
         left: 250px;
     }
     .slide[data-layout="double"] [data-key="content2"],
@@ -314,7 +317,7 @@
     .slide[data-layout="double"] [data-key="content"],
     .slide[data-layout="double"] [data-key="content2"],
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         top: 350px;
     }
     .slide[data-layout="title"] [data-key="content"],
@@ -365,7 +368,7 @@
     .slide[data-layout="double-subtitle"] [data-key="content"],
     .slide[data-layout="double-subtitle"] [data-key="content2"],
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         width: 625px;
     }
     .slide[data-layout="imax"] [data-key="title"],
@@ -379,7 +382,7 @@
         height: 750px;
     }
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         height: 125px;
     }
     .slide[data-layout="double-subtitle"] [data-key="content"],
@@ -425,9 +428,10 @@
     .slide[data-layout="subtitle"] [data-key="title"] {
         left: 240px;
     }
-    .slide[data-layout="title"] [data-key="content"],
-    .slide[data-layout="subtitle"] [data-key="content"] {
+    .slide[data-layout="title"] [data-key="content"] {
         left: 360px;
+    }
+    .slide[data-layout="subtitle"] [data-key="content"] {
         left: 300px;
     }
     .slide[data-layout="double"] [data-key="content2"],
@@ -444,7 +448,7 @@
     .slide[data-layout="double"] [data-key="content"],
     .slide[data-layout="double"] [data-key="content2"],
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         top: 420px;
     }
     .slide[data-layout="title"] [data-key="content"],
@@ -495,7 +499,7 @@
     .slide[data-layout="double-subtitle"] [data-key="content"],
     .slide[data-layout="double-subtitle"] [data-key="content2"],
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         width: 750px;
     }
     .slide[data-layout="imax"] [data-key="title"],
@@ -509,7 +513,7 @@
         height: 900px;
     }
     .slide[data-layout="double-subtitle"] [data-key="subtitle"],
-    .slide[data-layout="double-subtitle"] [data-key="subtitle"] {
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
         height: 150px;
     }
     .slide[data-layout="double-subtitle"] [data-key="content"],
