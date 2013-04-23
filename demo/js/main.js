@@ -455,7 +455,7 @@ define('vm',['data'], function (dataManager) {
     vm.currentSid = ko.computed(function () {
         var page = vm.currentPage();
         var pageList = vm.pageList();
-        return pageList[page].sid;
+        return pageList[page] ? pageList[page].sid : '';
     });
 
     // vm.currentLayout = ko.computed(function () {
