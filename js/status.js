@@ -27,8 +27,8 @@ define(['data', 'design', 'transition'], function (dataManager, designManager, t
                 var key = transitionData.key;
                 vm.currentTransition(key);
             };
-            vm.resetData = function () {
-                dataManager.reset();
+            vm.resetData = function (newData) {
+                dataManager.reset(newData);
                 dataManager.stopStorage();
 
                 var currentPage = 0;

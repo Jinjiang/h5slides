@@ -321,7 +321,8 @@ define(['storage'], function (storage) {
             return checkChanged(itemData, outerData);
         },
 
-        reset: function () {
+        reset: function (newData) {
+            newData = newData || defaultData;
             data = JSON.parse(JSON.stringify(defaultData));
         },
         save: function () {
