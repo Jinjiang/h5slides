@@ -410,7 +410,7 @@ define('data',['storage'], function (storage) {
 
         reset: function (newData) {
             newData = newData || defaultData;
-            data = JSON.parse(JSON.stringify(defaultData));
+            data = JSON.parse(JSON.stringify(newData));
         },
         save: function () {
             var result;
