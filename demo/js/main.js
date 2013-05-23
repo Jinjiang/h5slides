@@ -752,6 +752,9 @@ define('status',['data', 'design', 'transition'], function (dataManager, designM
                 vm.currentTransition(key);
             };
             vm.resetData = function (newData) {
+                if (newData === vm) {
+                    newData = null;
+                }
                 dataManager.reset(newData);
                 dataManager.stopStorage();
 
