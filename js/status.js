@@ -28,6 +28,9 @@ define(['data', 'design', 'transition'], function (dataManager, designManager, t
                 vm.currentTransition(key);
             };
             vm.resetData = function (newData) {
+                if (newData === vm) {
+                    newData = null;
+                }
                 dataManager.reset(newData);
                 dataManager.stopStorage();
 

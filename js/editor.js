@@ -1,19 +1,18 @@
 define(['vm', 'title', 'page', 'status', 'stage'],
     function (vm, titleManager, pageManager, statusManager, stageManager) {
-        function getGistUrl() {
+        function getExtUrl() {
             var url = '';
-            var gist = location.search.match(/[\&\?]gist=([^\&]*)_([^\&]*)_([^\&]*)/);
+            var extResult = location.search.match(/[\&\?]ext=([^\&]*)/);
 
-            if (gist) {
-                url = 'https://gist.github.com/' + gist[1] +
-                        '/' + gist[2] + '/raw/' + gist[3] + '/data.js';
+            if (extResult) {
+                url = decodeURIComponent(extResult[1]);
             }
 
             return url;
         }
 
-        function checkGist() {
-            var url = getGistUrl();
+        function checkExt() {
+            var url = getExtUrl();
             var script;
 
             if (url) {
@@ -34,7 +33,7 @@ define(['vm', 'title', 'page', 'status', 'stage'],
             ko.applyBindings(vm);
             vm.previewAll();
 
-            checkGist();
+            checkExt();
         }
 
         return {
