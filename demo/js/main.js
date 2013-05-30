@@ -1482,7 +1482,7 @@ define('types/code',['data', 'vm'], function (dataManager, vm) {
         }
         else {
             contentDom = $('<pre class="code-item code"></pre>');
-            contentDom.text(data.value);
+            contentDom.html(hljs.highlightAuto(data.value).value);
         }
 
         contentDom.hide();
