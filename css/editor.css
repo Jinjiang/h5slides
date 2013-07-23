@@ -9,7 +9,7 @@
 #content {display: -webkit-box; -webkit-box-flex: 1; min-height: 500px;}
 #sidebar {padding: 10px 0 20px; float: none; display: -webkit-box; -webkit-box-orient: vertical;}
 #page-nav {display: -webkit-box; -webkit-box-orient: vertical; -webkit-box-flex: 1;}
-#page-list-wrapper {-webkit-box-flex: 1; overflow: auto; margin-bottom: 10px;}
+#page-list-wrapper {-webkit-box-flex: 1; overflow: auto; margin-bottom: 10px; word-break: break-all;}
 #content .vr {width: 1px; background-color: silver; margin: 20px; margin-right: 0px;}
 #editor-stage {-webkit-box-flex: 1; display: -webkit-box; -webkit-box-align: center; -webkit-box-pack: center; overflow: auto; padding: 0 10px;}
 #editor-slide {border: 1px silver solid; border-radius: 5px; position: relative;}
