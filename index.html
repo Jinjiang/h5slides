@@ -28,7 +28,15 @@
       <ul class="nav pull-right">
         <li><a href="#theme-manager" data-toggle="modal"><i class="icon-briefcase"></i> Themes</a></li>
         <li><a href="#reset-confirm" data-toggle="modal"><i class="icon-repeat"></i> Reset</a></li>
-        <li><a href="#" id="preview-btn"><i class="icon-play"></i> Preview</a></li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-play"></i> Preview <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="#" id="preview-btn">From start</a></li>
+            <li><a href="#" id="preview-current-btn">From current page</a></li>
+          </ul>
+        </li>
         <!-- <li><a href="#" id="publish-btn"><i class="icon-ok"></i> Publish</a></li> -->
         <!-- <li><a href="#" id="remove-btn"><i class="icon-remove"></i> Remove</a></li> -->
       </ul>
