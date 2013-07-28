@@ -2201,8 +2201,9 @@ define('editor',['vm', 'title', 'page', 'status', 'stage'],
         }
     }
 );
-define('player',['data', 'design', 'types'], function (dataManager, designManager, typeMap) {
+define('player',['data', 'design', 'types', 'vm'], function (dataManager, designManager, typeMap, vm) {
     var btnPreview = $('#preview-btn');
+    var btnPreviewCurrent = $('#preview-current-btn');
 
     var player = $('#player');
     var editor = $('#editor');
@@ -2263,7 +2264,7 @@ define('player',['data', 'design', 'types'], function (dataManager, designManage
     function bindFullscreenChange(handler) {
         if (fullscreenEnabled) {
             document.onwebkitfullscreenchange = function (e) {
-                handler(isFullscreen());
+                handler && handler(isFullscreen());
             };
         }
     }
@@ -2521,7 +2522,7 @@ define('player',['data', 'design', 'types'], function (dataManager, designManage
     /**
         启动播放器，初始化幻灯片和屏幕
      */
-    function doPlay() {
+    function doPlay(page) {
         var design = dataManager.getDesign();
         var transition = dataManager.getTransition();
         var title = dataManager.getTitle();
@@ -2542,8 +2543,8 @@ define('player',['data', 'design', 'types'], function (dataManager, designManage
         txtSum.text(slideLength);
         gotoNumber.attr('min', 1);
         gotoNumber.attr('max', slideLength);
-
-        gotoPage(0);
+            
+        gotoPage(parseInt(page) || 0);
 
         $(window).bind('keydown', keydown);
 
@@ -2598,8 +2599,19 @@ define('player',['data', 'design', 'types'], function (dataManager, designManage
         doPlay();
     }
 
+    /**
+        绑定点击播放按钮的事件
+     */
+    function clickPreviewCurrent(e) {
+        e.preventDefault();
+        editor.hide();
+        player.show();
+        doPlay(vm.currentPage());
+    }
+
 
     btnPreview.click(clickPreview);
+    btnPreviewCurrent.click(clickPreviewCurrent);
     btnNext.click(clickNext);
     btnPrev.click(clickPrev);
     btnGoto.click(clickGoto);
