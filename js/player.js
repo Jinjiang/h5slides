@@ -1,5 +1,6 @@
-define(['data', 'design', 'types'], function (dataManager, designManager, typeMap) {
+define(['data', 'design', 'types', 'vm'], function (dataManager, designManager, typeMap, vm) {
     var btnPreview = $('#preview-btn');
+    var btnPreviewCurrent = $('#preview-current-btn');
 
     var player = $('#player');
     var editor = $('#editor');
@@ -60,7 +61,7 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     function bindFullscreenChange(handler) {
         if (fullscreenEnabled) {
             document.onwebkitfullscreenchange = function (e) {
-                handler(isFullscreen());
+                handler && handler(isFullscreen());
             };
         }
     }
@@ -318,7 +319,7 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
     /**
         启动播放器，初始化幻灯片和屏幕
      */
-    function doPlay() {
+    function doPlay(page) {
         var design = dataManager.getDesign();
         var transition = dataManager.getTransition();
         var title = dataManager.getTitle();
@@ -339,8 +340,8 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         txtSum.text(slideLength);
         gotoNumber.attr('min', 1);
         gotoNumber.attr('max', slideLength);
-
-        gotoPage(0);
+            
+        gotoPage(parseInt(page) || 0);
 
         $(window).bind('keydown', keydown);
 
@@ -395,8 +396,19 @@ define(['data', 'design', 'types'], function (dataManager, designManager, typeMa
         doPlay();
     }
 
+    /**
+        绑定点击播放按钮的事件
+     */
+    function clickPreviewCurrent(e) {
+        e.preventDefault();
+        editor.hide();
+        player.show();
+        doPlay(vm.currentPage());
+    }
+
 
     btnPreview.click(clickPreview);
+    btnPreviewCurrent.click(clickPreviewCurrent);
     btnNext.click(clickNext);
     btnPrev.click(clickPrev);
     btnGoto.click(clickGoto);

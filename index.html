@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html manifest="appcache.manifest">
 
 <head>
 
@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 <title>H5Slides</title>
-<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+<link rel="stylesheet" href="http://twitter.github.io/bootstrap/2.3.2/assets/css/bootstrap.css">
 <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
 <link rel="stylesheet" href="css/main.css">
 
@@ -28,7 +28,15 @@
       <ul class="nav pull-right">
         <li><a href="#theme-manager" data-toggle="modal"><i class="icon-briefcase"></i> Themes</a></li>
         <li><a href="#reset-confirm" data-toggle="modal"><i class="icon-repeat"></i> Reset</a></li>
-        <li><a href="#" id="preview-btn"><i class="icon-play"></i> Preview</a></li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-play"></i> Preview <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="#" id="preview-btn">From start</a></li>
+            <li><a href="#" id="preview-current-btn">From current page</a></li>
+          </ul>
+        </li>
         <!-- <li><a href="#" id="publish-btn"><i class="icon-ok"></i> Publish</a></li> -->
         <!-- <li><a href="#" id="remove-btn"><i class="icon-remove"></i> Remove</a></li> -->
       </ul>
@@ -434,11 +442,11 @@
 </div>
 </script>
 
-<script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+<script src="http://twitter.github.io/bootstrap/2.3.2/assets/js/jquery.js"></script>
+<script src="http://twitter.github.io/bootstrap/2.3.2/assets/js/bootstrap-dropdown.js"></script>
+<script src="http://twitter.github.io/bootstrap/2.3.2/assets/js/bootstrap-button.js"></script>
+<script src="http://twitter.github.io/bootstrap/2.3.2/assets/js/bootstrap-modal.js"></script>
+<script src="http://twitter.github.io/bootstrap/2.3.2/assets/js/bootstrap-tab.js"></script>
 
 <script src="http://knockoutjs.com/downloads/knockout-2.2.1.debug.js"></script>
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
