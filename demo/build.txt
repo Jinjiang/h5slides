@@ -51,6 +51,14 @@ css/transitions.css
 ----------------
 css/transitions.css
 
+lib/css/bootstrap.css
+----------------
+lib/css/bootstrap.css
+
+lib/css/default.min.css
+----------------
+lib/css/default.min.css
+
 js/main.js
 ----------------
 js/storage.js

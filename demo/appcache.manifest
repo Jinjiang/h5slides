@@ -1,12 +1,23 @@
 CACHE MANIFEST
-#version 201307286
+#version 20130809
 
 CACHE:
+lib/css/bootstrap.css
+lib/css/default.min.css
+lib/js/bootstrap.js
+lib/js/bootstrap.min.js
+lib/js/highlight.min.js
+lib/js/jquery.js
+lib/js/jquery.min.js
+lib/js/jquery.min.map
+lib/js/knockout-2.2.1.js
+lib/img/glyphicons-halflings.png
+lib/img/glyphicons-halflings-white.png
 css/main.css
-js/main.js
-js/require.js
 css/design/default.css
 css/design/revert.css
+js/main.js
+js/require.js
 images/design/default.png
 images/design/revert.png
 images/layout/normal.png
@@ -25,15 +36,6 @@ images/template/picture-left.png
 images/template/picture-right.png
 images/template/video.png
 images/widget/video/youkulogo.png
-http://twitter.github.io/bootstrap/2.3.2/assets/css/bootstrap.css
-http://twitter.github.io/bootstrap/2.3.2/assets/js/jquery.js
-http://twitter.github.io/bootstrap/2.3.2/assets/js/bootstrap-dropdown.js
-http://twitter.github.io/bootstrap/2.3.2/assets/js/bootstrap-button.js
-http://twitter.github.io/bootstrap/2.3.2/assets/js/bootstrap-modal.js
-http://twitter.github.io/bootstrap/2.3.2/assets/js/bootstrap-tab.js
-http://knockoutjs.com/downloads/knockout-2.2.1.debug.js
-http://yandex.st/highlightjs/7.3/styles/default.min.css
-http://yandex.st/highlightjs/7.3/highlight.min.js
 
 NETWORK:
 *
