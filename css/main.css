@@ -7,3 +7,5 @@
 
 @import url(responsive-editor.css);
 @import url(responsive-player.css);
+
+@import url(fix4mozilla.css);

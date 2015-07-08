@@ -1,0 +1,27 @@
+/*
+    fix for mozilla browser, make the editor layout normal
+    just add this file in main.css
+    tested for firefox 39
+*/
+h3{
+    font-size:24px;
+}
+#content{
+    -moz-box-orient:horizontal;
+    display:-moz-box;
+    width:100%;
+}
+#editor-stage {
+    -moz-box-flex: 1;
+    display: -moz-box;
+    -moz-box-align: center;
+    -moz-box-pack: center;
+    overflow: inherit;
+}
+#sidebar {
+    display: -moz-box;
+    -moz-box-orient: vertical;
+}
+.stage {
+    -moz-transform-origin: 50% 50%;
+}
