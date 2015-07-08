@@ -3,9 +3,22 @@
     just add this file in main.css
     tested for firefox 39
 */
-h3{
-    font-size:24px;
+.ctrl-start {
+    -moz-transition: background-color 0.5s;
 }
+.ctrl-start::before {
+    -moz-transition: border-color 1s;
+}
+.ctrl-menu {
+    display: -moz-box;
+}
+.ctrl-menu li {
+    -moz-transition: opacity 0.5s;
+}
+.ctrl-menu li a {
+    -moz-transition: border-radius 0.5s;
+}
+
 #content{
     -moz-box-orient:horizontal;
     display:-moz-box;
@@ -22,6 +35,115 @@ h3{
     display: -moz-box;
     -moz-box-orient: vertical;
 }
+
+#player-stage {
+    -moz-box-flex: 1;
+    display: -moz-box;
+    -moz-box-align: center;
+    -moz-box-pack: center;
+}
+
+#player-stage .slide {
+    -moz-transition: all 0.5s;
+}
+
+h3{
+    font-size:24px;
+}
+#transition-stage {
+    -moz-perspective: 200px;
+}
+
+.transition-slide {
+    -moz-transition: all 0.5s;
+}
+
 .stage {
     -moz-transform-origin: 50% 50%;
+}
+
+[data-transition="cubic-horizontal"],
+[data-transition="cubic-horizontal-inner"],
+[data-transition="cubic-vertical"],
+[data-transition="cubic-vertical-inner"],
+[data-transition="doors"],
+[data-transition="sublime"],
+[data-transition="rotate-y"],
+[data-transition="fly"] {
+    -moz-perspective: 600px;
+}
+[data-transition="cubic-horizontal"] .slide-next {
+    -moz-transform: translateX(50%) rotateY(90deg) translateX(50%);
+}
+[data-transition="cubic-horizontal"] .slide-prev {
+    -moz-transform: translateX(-50%) rotateY(-90deg) translateX(-50%);
+}
+
+[data-transition="cubic-horizontal-inner"] .slide-next {
+    -moz-transform: translateX(50%) rotateY(-90deg) translateX(50%);
+}
+[data-transition="cubic-horizontal-inner"] .slide-prev {
+    -moz-transform: translateX(-50%) rotateY(90deg) translateX(-50%);
+}
+
+[data-transition="cubic-vertical"] .slide-next {
+    -moz-transform: translateY(-50%) rotateX(90deg) translateY(-50%);
+}
+[data-transition="cubic-vertical"] .slide-prev {
+    -moz-transform: translateY(50%) rotateX(-90deg) translateY(50%);
+}
+
+[data-transition="cubic-vertical-inner"] .slide-next {
+    -moz-transform: translateY(-50%) rotateX(-90deg) translateY(-50%);
+}
+[data-transition="cubic-vertical-inner"] .slide-prev {
+    -moz-transform: translateY(50%) rotateX(90deg) translateY(50%);
+}
+
+[data-transition="doors"] .slide-next {
+    -moz-transform: translateX(-50%) rotateY(-90deg) translateX(50%);
+}
+[data-transition="doors"] .slide-prev {
+    -moz-transform: translateX(-50%) rotateY(90deg) translateX(50%);
+}
+
+[data-transition="zoom-in"] .slide-next {
+    -moz-transform: scale(0.9);
+}
+[data-transition="zoom-in"] .slide-prev {
+    -moz-transform: scale(1.2);
+}
+
+[data-transition="zoom-out"] .slide-next {
+    -moz-transform: scale(1.2);
+}
+[data-transition="zoom-out"] .slide-prev {
+    -moz-transform: scale(0.9);
+}
+
+[data-transition="sublime"] .slide-prev {
+    -moz-transform: skewY(30deg) scale(0.1, 3);
+}
+
+[data-transition="rotate-y"] .slide-next {
+    -moz-transform: rotateY(180deg);
+}
+
+[data-transition="rotate-z"] .slide-next {
+    -moz-transform: rotateZ(180deg);
+}
+
+[data-transition="fly"] .slide-next {
+    -moz-transform: translate(100%, -80%) scale(0.1) rotateX(720deg) rotateY(-720deg);
+}
+
+[data-transition="fall"] .transition-slide {
+    -moz-transition-duration: 0.3s;
+    -moz-transition-timing-function: cubic-bezier(0.57, 1.16, 0.735, 1.22);
+}
+[data-transition="fall"] .slide-next {
+    -moz-transform: translateY(-120%);
+}
+[data-transition="fall"] .slide-prev {
+    -moz-transition-delay: 0.3s;
 }
