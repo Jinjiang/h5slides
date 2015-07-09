@@ -1,4 +1,4 @@
-define(['data', 'design', 'types', 'vm'], function (dataManager, designManager, typeMap, vm) {
+define(['data', 'design', 'types', 'vm', 'fullscreen'], function (dataManager, designManager, typeMap, vm, fullscreen) {
     var btnPreview = $('#preview-btn');
     var btnPreviewCurrent = $('#preview-current-btn');
 
@@ -28,44 +28,7 @@ define(['data', 'design', 'types', 'vm'], function (dataManager, designManager, 
     var nextSlideDom;
     var prevSlideDom;
 
-    var fullscreenEnabled = document.webkitFullscreenEnabled;
     var isPlaying = false;
-
-
-    /**
-        进入全屏模式
-     */
-    function gotoFullscreen() {
-        if (fullscreenEnabled) {
-            document.body.webkitRequestFullscreen();
-        }
-    }
-    /**
-        退出全屏模式
-     */
-    function exitFullscreen() {
-        if (fullscreenEnabled && isFullscreen()) {
-            document.webkitExitFullscreen();
-        }
-    }
-    /**
-        判断是否全屏状态
-     */
-    function isFullscreen() {
-        return document.webkitIsFullScreen;
-    }
-    /**
-        绑定全屏模式事件
-        @param {function} handler(isFullscreen)
-     */
-    function bindFullscreenChange(handler) {
-        if (fullscreenEnabled) {
-            document.onwebkitfullscreenchange = function (e) {
-                handler && handler(isFullscreen());
-            };
-        }
-    }
-
 
     /**
         创建一个元素
@@ -289,12 +252,58 @@ define(['data', 'design', 'types', 'vm'], function (dataManager, designManager, 
         gotoPage(newPage);
     }
 
+    /**
+        修改属性元素的前缀以兼容当前浏览器
+     */
+    function compatCssPropPrefix(prop) {
+        var style = document.createElement('dummy').style,
+            prefixes = 'Webkit Moz O ms Khtml'.split(' '),
+            memory = {};
+
+        if (typeof memory[ prop ] === "undefined") {
+
+            var ucProp = prop.charAt(0).toUpperCase() + prop.substr(1),
+                props = (prop + ' ' + prefixes.join(ucProp + ' ') + ucProp).split(' ');
+
+            memory[ prop ] = null;
+            for (var i in props) {
+                if (style[ props[i] ] !== undefined) {
+                    memory[ prop ] = props[i];
+                    break;
+                }
+            }
+
+        }
+
+        return memory[ prop ];
+    }
+
+    /**
+        修改元素的css属性元素以兼容当前浏览器
+        @param el
+        @param props
+        @returns {*}
+     */
+    function compatCssProp ( el, props ) {
+        var key, pkey;
+
+        for ( key in props ) {
+            if ( props.hasOwnProperty(key) ) {
+                pkey = compatCssPropPrefix(key);
+                if ( pkey !== null ) {
+                    el.style[pkey] = props[key];
+                }
+            }
+        }
+        return el;
+    }
 
     /**
         退出播放器，显示编辑器
      */
     function doExit() {
-        slidesContainer.css('-webkit-transform', '');
+        //使transform属性兼容当前浏览器
+        compatCssProp(slidesContainer[0], {'transform':''});
 
         currentSlideDom = null;
         nextSlideDom = null;
@@ -307,8 +316,8 @@ define(['data', 'design', 'types', 'vm'], function (dataManager, designManager, 
 
         $(window).unbind('keydown', keydown);
 
-        bindFullscreenChange(null);
-        exitFullscreen();
+        fullscreen.bindFullScreenChange(null);
+        fullscreen.exitFullScreen();
 
         player.hide();
         editor.show();
@@ -345,8 +354,8 @@ define(['data', 'design', 'types', 'vm'], function (dataManager, designManager, 
 
         $(window).bind('keydown', keydown);
 
-        gotoFullscreen();
-        bindFullscreenChange(function (isFullscreen) {
+        fullscreen.requestFullScreen(document.body);
+        fullscreen.bindFullScreenChange(function (isFullscreen) {
             if (!isFullscreen) {
                  doExit();
             }

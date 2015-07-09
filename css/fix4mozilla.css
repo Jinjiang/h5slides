@@ -41,6 +41,7 @@
     display: -moz-box;
     -moz-box-align: center;
     -moz-box-pack: center;
+    overflow: inherit;
 }
 
 #player-stage .slide {
