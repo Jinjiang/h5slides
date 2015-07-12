@@ -49,13 +49,13 @@
     z-index: 8;
     top: -45px;
     left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-box;
     display: box;
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 .ctrl-menu li {
     margin: 0;
