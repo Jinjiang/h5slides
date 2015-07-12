@@ -4,6 +4,7 @@
     border-color: #960;
     -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
     -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    -ms-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
     box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
 
@@ -57,18 +58,27 @@
     border-radius: 5px;
     position: relative;
     -webkit-perspective: 200px;
+    -moz-perspective: 200px;
+    -ms-perspective: 200px;
+    perspective: 200px;
 }
 
 .transition-slide {
     position: absolute;
     width: 100px;
     height: 100px;
+    -webkit-box-shadow: 0 0 2px 1px blue, 0 0 1px 2px blue inset;
+    -moz-box-shadow: 0 0 2px 1px blue, 0 0 1px 2px blue inset;
+    -ms-box-shadow: 0 0 2px 1px blue, 0 0 1px 2px blue inset;
     box-shadow: 0 0 2px 1px blue, 0 0 1px 2px blue inset;
     background-color: white;
     display: none;
     left: 0px;
     right: 0px;
     -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    transition: all 0.5s;
     line-height: 100px;
     font-size: 60px;
     text-align: center;

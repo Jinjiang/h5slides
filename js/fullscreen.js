@@ -9,6 +9,7 @@ define([], function(){
 
             return	( 'requestFullscreen' in doc ) ||
                     ( 'webkitRequestFullScreen' in doc ) ||
+                    ( 'msRequestFullscreen' in doc && document.msFullscreenEnabled) ||
                     ( 'mozRequestFullScreen' in doc && document.mozFullScreenEnabled ) ||
                     false;
         } )(),
@@ -39,6 +40,8 @@ define([], function(){
                 elem.webkitRequestFullScreen();
             }else if (elem.mozRequestFullScreen) {
                 elem.mozRequestFullScreen();
+            }else if (elem.msRequestFullscreen){
+                elem.msRequestFullscreen();
             }
         },
         /**
@@ -51,6 +54,8 @@ define([], function(){
                 document.webkitCancelFullScreen();
             }else if (document.mozCancelFullScreen) {
                 document.mozCancelFullScreen();
+            }else if (document.msExitFullscreen){
+                document.msExitFullscreen();
             }
         },
         /**
@@ -64,6 +69,10 @@ define([], function(){
                     };
                 }else if(document.onmozfullscreenchange){
                     document.onmozfullscreenchange = function (e) {
+                        handler && handler(isFullscreen());
+                    };
+                }else if(document.onmsfullscreenchange){
+                    document.onmsfullscreenchange = function (e) {
                         handler && handler(isFullscreen());
                     };
                 }

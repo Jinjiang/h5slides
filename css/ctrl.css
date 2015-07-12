@@ -19,6 +19,9 @@
     border-radius: 15px;
     background: rgba(127, 127, 255, 0.5);
     -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+    transition: background-color 0.5s;
 }
 .ctrl-start::before {
     position: absolute;
@@ -33,6 +36,9 @@
     box-sizing: border-box;
     content: " ";
     -webkit-transition: border-color 1s;
+    -moz-transition: border-color 1s;
+    -ms-transition: border-color 1s;
+    transition: border-color 1s;
 }
 .ctrl-start:active::before {
     border-color: gray;
@@ -44,6 +50,9 @@
     top: -45px;
     left: 0;
     display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -54,6 +63,9 @@
     opacity: 0;
     display: none;
     -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    transition: opacity 0.5s;
 }
 .ctrl-menu[data-show] li {
     display: block;
@@ -96,6 +108,9 @@
     text-align: center;
     background-color: rgba(127, 127, 127, 0.1);
     -webkit-transition: border-radius 0.5s;
+    -moz-transition: border-radius 0.5s;
+    -ms-transition: border-radius 0.5s;
+    transition: border-radius 0.5s;
 }
 .ctrl-menu li.ctrl-menu-more a {
     display: inline-block;
