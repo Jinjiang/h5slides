@@ -1,0 +1,455 @@
+<!doctype html>
+<html manifest="appcache.manifest">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<title>H5Slides</title>
+<link rel="stylesheet" href="lib/css/bootstrap.css">
+<link rel="stylesheet" href="lib/css/default.min.css">
+<link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+
+<div id="editor" class="window">
+  <div id="topbar" class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <a class="brand" href="#">H5Slides</a>
+      <ul class="nav" id="title-label-wrapper" data-bind="visible: !editingTitle()">
+          <li><a href="#" id="label-title" data-bind="text: titleDisplay, click: editTitle"></a></li>
+      </ul>
+      <form class="navbar-form pull-left" id="title-editor-wrapper" data-bind="visible: editingTitle" onsubmit="return false;">
+          <input type="text" class="span2" id="input-title" placeholder="Input Title here..." data-bind="value: title, hasfocus: editingTitle">
+      </form>
+      <ul class="nav pull-right">
+        <li><a href="#theme-manager" data-toggle="modal"><i class="icon-briefcase"></i> Themes</a></li>
+        <li><a href="#reset-confirm" data-toggle="modal"><i class="icon-repeat"></i> Reset</a></li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-play"></i> Preview <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="#" id="preview-btn">From start</a></li>
+            <li><a href="#" id="preview-current-btn">From current page</a></li>
+          </ul>
+        </li>
+        <!-- <li><a href="#" id="publish-btn"><i class="icon-ok"></i> Publish</a></li> -->
+        <!-- <li><a href="#" id="remove-btn"><i class="icon-remove"></i> Remove</a></li> -->
+      </ul>
+    </div>
+  </div>
+
+  <!--div id="toolbar" class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-family" href="#">
+          Font Family
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" style="font-family: Arial;">Arial</a></li>
+          <li><a href="#" style="font-family: Verdana;">Verdana</a></li>
+          <li><a href="#" style="font-family: Tahoma;">Tahoma</a></li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-size" href="#">
+          Size
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" style="font-size: 20px; line-height: 1.2;">20</a></li>
+          <li><a href="#" style="font-size: 24px; line-height: 1.2;">24</a></li>
+          <li><a href="#" style="font-size: 32px; line-height: 1.2;">32</a></li>
+          <li><a href="#" style="font-size: 48px; line-height: 1.2;">48</a></li>
+          <li><a href="#" style="font-size: 64px; line-height: 1.2;">64</a></li>
+          <li><a href="#" style="font-size: 96px; line-height: 1.2;">96</a></li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="font-color" href="#">
+          Color
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" style="color: Red;">Red</a></li>
+          <li><a href="#" style="color: Blue;">Blue</a></li>
+          <li><a href="#" style="color: Green;">Green</a></li>
+          <li><a href="#" style="color: Yellow;">Yellow</a></li>
+          <li><a href="#" style="color: Black;">Black</a></li>
+          <li><a href="#" style="color: Gray;">Gray</a></li>
+          <li><a href="#" style="color: White;"><span style="background: gray;">White</span></a></li>
+        </ul>
+      </div>
+      <div class="btn-group" data-toggle="buttons-checkbox">
+        <button class="btn" data-key="font-bold"><i class="icon-bold"></i></button>
+        <button class="btn" data-key="font-italic"><i class="icon-italic"></i></button>
+      </div>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" data-key="link" href="#">
+          <i class="icon-share"></i>
+          Link
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" data-key="link-url">URL</a></li>
+          <li><a href="#" data-key="link-slide">Slide</a></li>
+          <li class="disabled"><a href="#" data-key="link-remove">Remove</a></li>
+        </ul>
+      </div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button class="btn" data-key="format-plain"><i class="icon-align-justify"></i></button>
+        <button class="btn" data-key="format-list"><i class="icon-list"></i></button>
+      </div>
+      <div class="btn-group">
+        <button class="btn" data-key="indent-right"><i class="icon-indent-right"></i></button>
+        <button class="btn" data-key="indent-left"><i class="icon-indent-left"></i></button>
+      </div>
+      <div class="btn-group">
+        <button class="btn" data-key="picture"><i class="icon-picture"></i> <span class="caret"></span></button>
+      </div>
+      <div class="btn-group pull-right">
+        <button class="btn" data-key="history-undo"><i class="icon-step-backward"></i></button>
+        <button class="btn" data-key="history-revert"><i class="icon-step-forward"></i></button>
+      </div>
+    </div>
+  </div-->
+
+  <div id="content">
+    <div id="sidebar" class="span3">
+      <div id="layout-panel">
+        <h3>Layout</h3>
+        <ul id="layout-list" class="thumbnails" data-bind="foreach: layoutList">
+          <li class="span1" data-bind="css: {active: key == $root.currentLayout()}">
+            <a href="#" class="thumbnail" data-bind="click: $parent.clickLayout, attr: {title: title}">
+              <img data-bind="attr: {src: 'images/layout/' + key + '.png'}" />
+            </a>
+          </li>
+        </ul>
+        <!-- <button class="btn">More...</button> -->
+      </div>
+      <div id="page-nav">
+        <h3>Pagination
+          <!-- <div class="btn-group pull-right">
+            <button class="btn" data-bind="click: prevPage"><i class="icon-chevron-up"></i></button>
+            <button class="btn" data-bind="click: nextPage"><i class="icon-chevron-down"></i></button>
+          </div> -->
+        </h3>
+        <div id="page-list-wrapper">
+          <ul id="page-list" class="nav nav-tabs nav-stacked" data-bind="foreach: pageList">
+            <li data-bind="css: {active: $index() == $root.currentPage()}">
+              <a href="#" data-bind="text: title || 'new slide', click: $parent.clickPage"></a>
+            </li>
+          </ul>
+        </div>
+        <div class="clearfix">
+          <div class="btn-group pull-left">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#template-dialog"><i class="icon-plus icon-white"></i> add</button>
+            <!-- <button class="btn" data-bind="click: addPage"><i class="icon-plus"></i></button> -->
+          </div>
+          <div class="btn-group pull-right">
+            <!-- <button class="btn" data-bind="click: clonePage"><i class="icon-file"></i></button> -->
+            <button class="btn" data-bind="click: moveUpPage"><i class="icon-arrow-up"></i></button>
+            <button class="btn" data-bind="click: moveDownPage"><i class="icon-arrow-down"></i></button>
+            <button class="btn" data-bind="click: removePage"><i class="icon-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vr"></div>
+    <div id="editor-stage" class="stage" data-bind="attr: {'data-design': currentDesign}">
+      <div id="editor-slide" class="slide" data-bind="attr: {'data-layout': currentLayout}">
+        <div id="slide-title" data-key="title">
+          <div class="output" data-bind="click: clickItem"></div>
+        </div>
+        <div id="slide-subtitle" data-key="subtitle">
+          <div class="output" data-bind="click: clickItem"></div>
+        </div>
+        <div id="slide-content" data-key="content">
+          <div class="output" data-bind="click: clickItem"></div>
+        </div>
+        <div id="slide-subtitle2" data-key="subtitle2">
+          <div class="output" data-bind="click: clickItem"></div>
+        </div>
+        <div id="slide-content2" data-key="content2">
+          <div class="output" data-bind="click: clickItem"></div>
+        </div>
+        <div id="item-editor-layer" class="layer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="player" class="window">
+  <div id="player-stage" class="stage">
+    <div id="player-slides-container">
+      <!--div class="slide next prev current">
+        <div data-key=""></div>
+      </div-->
+    </div>
+  </div>
+  <div id="player-status">
+    <span id="player-page">1</span> / <span id="player-sum">1</span>
+  </div>
+  <div id="player-nav">
+    <div id="player-menu" class="btn-group">
+      <a href="#" id="player-btn-prev" class="btn">PREV</a>
+      <a href="#" id="player-btn-next" class="btn">NEXT</a>
+      <a href="#" id="player-btn-goto" class="btn">GOTO</a>
+      <a href="#" id="player-btn-exit" class="btn">EXIT</a>
+    </div>
+  </div>
+</div>
+
+<div id="modals" class="layer">
+  <div id="template-dialog" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Add Page with a Template</h3>
+    </div>
+    <div class="modal-body">
+      <div id="template-panel" class="span6">
+        <p>Please select a template below to create a new page:</p>
+        <ul id="template-list" class="thumbnails" data-bind="foreach: tplList">
+          <li class="span2">
+            <a href="#" class="thumbnail" data-bind="click: $parent.addPage, attr: {title: title}" data-dismiss="modal">
+              <img data-bind="attr: {src: 'images/template/' + key + '.png'}" />
+              <span class="title" data-bind="text: title"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+
+  <div id="theme-manager" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Theme Manager</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        <ul id="theme-manager-tabs" class="nav nav-tabs">
+          <li class="active"><a href="#design-panel" data-toggle="tab">Designs</a></li>
+          <li><a href="#transition-panel" data-toggle="tab">Transitions</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="design-panel">
+            <ul class="thumbnails" id="design-list" data-bind="foreach: designList">
+              <li class="span2" data-bind="css: {active: key == $root.currentDesign()}">
+                <a href="#" class="thumbnail" data-bind="click: $parent.clickDesign">
+                  <img data-bind="attr: {src: 'images/design/' + key + '.png'}">
+                  <span class="title" data-bind="text: title"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-pane" id="transition-panel">
+            <div class="clearfix">
+              <ul id="transition-list" class="nav nav-pills nav-stacked pull-left" data-bind="foreach: transitionList">
+                <li data-bind="css: {active: key == $root.currentTransition()}">
+                  <a href="#" data-bind="click: $parent.clickTransition, text: title"></a>
+                </li>
+              </ul>
+              <div id="transition-preview" class="pull-right">
+                <div id="transition-stage" data-bind="attr: {'data-transition': currentTransition}">
+                  <div class="transition-slide">1</div>
+                  <div class="transition-slide">2</div>
+                  <div class="transition-slide">3</div>
+                  <div class="transition-slide">4</div>
+                  <div class="transition-slide">5</div>
+                  <div class="transition-slide">6</div>
+                  <div class="transition-slide">7</div>
+                  <div class="transition-slide">8</div>
+                  <div class="transition-slide">9</div>
+                  <div class="transition-slide">0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal">OK</button>
+      <button class="btn" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+
+  <div id="reset-confirm" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Reset Data</h3>
+    </div>
+    <div class="modal-body">
+      Are you sure to RESET the all data?
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal">No</button>
+      <button class="btn btn-primary" data-dismiss="modal" data-bind="click: resetData">Reset</button>
+    </div>
+  </div>
+
+  <div id="img-manager" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Image Manager</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        <ul id="img-manager-tabs" class="nav nav-tabs">
+          <li class="active" data-key="list"><a href="#my-img-panel" data-toggle="tab">My Images</a></li>
+          <li data-key="local"><a href="#img-local-panel" data-toggle="tab">Local</a></li>
+          <li data-key="url"><a href="#img-url-panel" data-toggle="tab">Internet</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="my-img-panel">
+            <ul class="thumbnails" id="my-img-list">
+              <!--li class="span2">
+                <a href="#" class="thumbnail"><img></a>
+                <p class="clearfix">
+                  <button class="btn pull-left" data-action="choose">Choose</button>
+                  <button class="btn btn-danger pull-right" data-action="remove"><i class="icon-trash"></i></button>
+                </p>
+              </li-->
+            </ul>
+            <div id="my-img-list-holder">
+              <h4>No Saved Pictures Here</h4>
+              <p>You can <a href="#" data-key="local">upload</a>
+                or input a <a href="#" data-key="url">url</a> to set a picture.</p>
+            </div>
+          </div>
+          <div class="tab-pane" id="img-local-panel">
+            <p><input type="file"></p>
+            <div class="thumbnail"></div>
+          </div>
+          <div class="tab-pane" id="img-url-panel">
+            <p class="form-inline"><input type="text" placeholder="Input picture URL here.">
+              <button class="btn btn-danger" id="img-url-remove"><i class="icon-trash"></i></button></p>
+            <div class="thumbnail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" data-action="save">OK</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+
+  <div id="video-dialog" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Video Editor</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        <h4>Youku Video URL:</h4>
+        <input id="video-url" type="text"><br>
+        <span class="label">Just like:</span> http://v.youku.com/v_show/id_xxxxxxxxxx.html<br><br>
+        <div class="alert alert-info">
+          You can go to visit <a href="http://www.youku.com/" target="_blank">http://www.youku.com/</a> to find more Videos and paste one url here.<br>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" data-action="save">OK</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+
+  <div id="code-dialog" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Code Editor</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        <ul id="code-manager-tabs" class="nav nav-tabs">
+          <li class="active"><a href="#code-panel" data-toggle="tab" data-key="code">Source Code</a></li>
+          <li><a href="#demo-panel" data-toggle="tab" data-key="demo">Code Demo</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="code-panel">
+            <textarea id="code-input" class="code" rows="8" style="width: 100%; box-sizing: border-box;"></textarea>
+          </div>
+          <div class="tab-pane" id="demo-panel">
+            <p class="form-inline"><input type="text" id="demo-url-input" placeholder="Input DEMO URL here.">
+              <button class="btn btn-danger" id="demo-url-remove"><i class="icon-trash"></i></button></p>
+            <p>You can copy a demo URL from:</p>
+            <ul>
+              <li><a href="http://jsfiddle.net/" target="_blank">jsFiddle</a></li>
+              <li><a href="http://codepen.io/" target="_blank">CodePen</a></li>
+              <li><a href="http://jsbin.com/" target="_blank">JSBin</a></li>
+              <li><a href="http://dabblet.com/" target="_blank">Dabblet</a></li>
+              <li>or Any other URL you want to embed!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" data-action="save">OK</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+
+  <div id="goto-dialog" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Goto ...</h3>
+    </div>
+    <div class="modal-body">
+      <div class="span6">
+        Page number:
+        <input id="goto-number" type="number">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" data-action="go">OK</button>
+      <button class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+
+  <div id="confirm-dialog" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3 id="confirm-dialog-title"></h3>
+    </div>
+    <div class="modal-body" id="confirm-dialog-body"></div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" data-action="no">No</button>
+      <button class="btn btn-primary" data-dismiss="modal" data-action="yes">Yes</button>
+    </div>
+  </div>
+</div>
+
+<script id="ctrl-template" type="text/template">
+<div class="ctrl">
+    <a href="#" class="ctrl-start"></a>
+    <ul class="ctrl-menu">
+        <li><a href="#" data-action="clear">Clear</a></li>
+        <li><a href="#" data-action="edit">Edit</a></li>
+        <li class="ctrl-menu-more"><a href="#">...</a></li>
+    </ul>
+</div>
+</script>
+
+<script src="lib/js/jquery.min.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+
+<script src="lib/js/knockout-2.2.1.js"></script>
+<script src="lib/js/highlight.min.js"></script>
+
+<script data-main="js/main" src="js/require.js"></script>
+
+</body>
+
+</html>

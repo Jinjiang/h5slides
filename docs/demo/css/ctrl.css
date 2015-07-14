@@ -1,0 +1,115 @@
+.slide [data-key].active {
+    z-index: 7;
+}
+.ctrl {
+    font-size: 14px;
+    font-weight: normal;
+}
+.ctrl-start {
+    position: absolute;
+    z-index: 9;
+    top: -2px;
+    left: -2px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: -15px;
+    border-radius: 15px;
+    background: rgba(127, 127, 255, 0.5);
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+    transition: background-color 0.5s;
+}
+.ctrl-start::before {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    margin: -20px;
+    background: transparent;
+    border: 2px rgba(127, 127, 255, 0.5) solid;
+    border-radius: 20px;
+    box-sizing: border-box;
+    content: " ";
+    -webkit-transition: border-color 1s;
+    -moz-transition: border-color 1s;
+    -ms-transition: border-color 1s;
+    transition: border-color 1s;
+}
+.ctrl-start:active::before {
+    border-color: gray;
+}
+.ctrl-menu {
+    position: absolute;
+    z-index: 8;
+    top: -45px;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+}
+.ctrl-menu li {
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    display: none;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+.ctrl-menu[data-show] li {
+    display: block;
+}
+.ctrl-menu[data-shown] li {
+    opacity: 1;
+}
+.ctrl-menu li:nth-child(1) {
+    position: absolute;
+    top: 45px;
+    left: -45px;
+}
+.ctrl-menu li:nth-child(2) {
+    position: absolute;
+    top: 0px;
+    left: -45px;
+}
+.ctrl-menu li.ctrl-menu-more {
+    
+    white-space: nowrap;
+}
+.ctrl-menu li:nth-child(1) a {
+    border-bottom-left-radius: 40px;
+}
+.ctrl-menu li:nth-child(2) a {
+    border-top-left-radius: 40px;
+}
+.ctrl-menu li a {
+    display: block;
+    margin: 0 5px 0 0;
+    width: 40px;
+    padding: 0;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: rgba(127, 127, 127, 0.1);
+    -webkit-transition: border-radius 0.5s;
+    -moz-transition: border-radius 0.5s;
+    -ms-transition: border-radius 0.5s;
+    transition: border-radius 0.5s;
+}
+.ctrl-menu li.ctrl-menu-more a {
+    display: inline-block;
+}
+.ctrl-menu li.ctrl-menu-more a.active {
+    background-color: silver;
+}
+.ctrl-menu li a:active {
+    background-color: gray;
+}

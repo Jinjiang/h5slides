@@ -1,0 +1,25 @@
+
+@media all and (min-width: 1240px) and (min-height: 780px) {
+    #player-slides-container {
+        width: 960px;
+        height: 720px;
+    }
+}
+@media all and (min-width: 1560px) and (min-height: 1020px) {
+    #player-slides-container {
+        width: 1280px;
+        height: 960px;
+    }
+}
+@media all and (min-width: 1880px) and (min-height: 1260px) {
+    #player-slides-container {
+        width: 1600px;
+        height: 1200px;
+    }
+}
+@media all and (min-width: 2200px) and (min-height: 1500px) {
+    #player-slides-container {
+        width: 1920px;
+        height: 1440px;
+    }
+}
