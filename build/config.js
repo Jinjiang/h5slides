@@ -1,7 +1,7 @@
 ({
     appDir: "../",
     baseUrl: "./js",
-    dir: "../output",
+    dir: "../docs/demo",
 
     //As of RequireJS 2.0.2, the dir above will be deleted before the
     //build starts again. If you have a big build and are not doing
