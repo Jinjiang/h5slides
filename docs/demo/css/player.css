@@ -1,0 +1,62 @@
+#player {
+    z-index: 2;
+    display: none;
+    background-color: gray;
+}
+#player-stage {
+    width: 100%;
+    height: 100%;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    box-flex: 1;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    box-align: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-box-pack: center;
+    box-pack: center;
+    overflow: inherit;
+}
+#player-status {
+    position: absolute;
+    bottom: 0.5em;
+    left: 1em;
+}
+#player-nav {
+    position: absolute;
+    bottom: 0.5em;
+    right: 1em;
+}
+#player-slides-container {
+    position: relative;
+    width: 640px;
+    height: 480px;
+}
+#player-stage .slide {
+    position: absolute;
+    display: none;
+    opacity: 0;
+    z-index: 1;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    transition: all 0.5s;
+}
+#player-stage .slide-next,
+#player-stage .slide-prev {
+    display: block;
+    opacity: 0;
+    z-index: 2;
+}
+#player-stage .slide-current {
+    display: block;
+    opacity: 1;
+    z-index: 3;
+}

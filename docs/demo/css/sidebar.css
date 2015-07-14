@@ -1,0 +1,96 @@
+#layout-list .active a,
+#my-img-list .active a,
+#design-list .active a {
+    border-color: #960;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    -ms-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+#page-list .active a {
+    color: #ffffff;
+    background-color: #0088cc;
+}
+#design-list li,
+#template-list li {
+    position: relative;
+}
+#design-list li .title,
+#template-list li .title {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background-color: rgba(127, 127, 127, 0.5);
+    color: white;
+    line-height: 2;
+    text-align: center;
+}
+#theme-manager .modal-body {
+    min-height: 160px;
+    max-height: 360px;
+    overflow: auto;
+}
+#transition-list {
+    width: 140px;
+    height: 280px;
+    overflow: auto;
+    padding: 5px 10px;
+    border: 1px silver solid;
+    border-radius: 3px;
+    margin-bottom: 0;
+}
+#transition-preview {
+    width: 280px;
+    height: 280px;
+    overflow: hidden;
+}
+#transition-stage {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(127, 127, 127, 0.2);
+    margin: 80px auto;
+    border: 10px rgba(127, 127, 127, 0.2) solid;
+    border-radius: 5px;
+    position: relative;
+    -webkit-perspective: 200px;
+    -moz-perspective: 200px;
+    -ms-perspective: 200px;
+    perspective: 200px;
+}
+.transition-slide {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    -webkit-box-shadow: 0 0 2px 1px blue, 0 0 1px 2px blue inset;
+    -moz-box-shadow: 0 0 2px 1px blue, 0 0 1px 2px blue inset;
+    -ms-box-shadow: 0 0 2px 1px blue, 0 0 1px 2px blue inset;
+    box-shadow: 0 0 2px 1px blue, 0 0 1px 2px blue inset;
+    background-color: white;
+    display: none;
+    left: 0px;
+    right: 0px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    transition: all 0.5s;
+    line-height: 100px;
+    font-size: 60px;
+    text-align: center;
+    opacity: 0;
+}
+.slide-current,
+.slide-next,
+.slide-prev {
+    display: block;
+}
+.slide-next {
+    z-index: 3;
+}
+.slide-prev {
+    z-index: 1;
+}
+.slide-current {
+    opacity: 1;
+    z-index: 2;
+}

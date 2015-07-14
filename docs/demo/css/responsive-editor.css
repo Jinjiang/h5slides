@@ -1,0 +1,493 @@
+
+@media all and (min-width: 1240px) and (min-height: 780px) {
+    .slide {
+        font-size: 30px;
+        width: 960px;
+        height: 720px;
+    }
+    .slide[data-layout="title"] [data-key="title"] {
+        font-size: 72px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        font-size: 60px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"],
+    .slide[data-layout="imax"] [data-key="title"] {
+        font-size: 36px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="content"] {
+        left: 90px;
+    }
+    .slide[data-layout="title"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"] {
+        left: 120px;
+    }
+    .slide[data-layout="title"] [data-key="content"] {
+        left: 180px;
+    }
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        left: 150px;
+    }
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        left: 495px;
+    }
+    .slide[data-layout="imax"] [data-key="title"],
+    .slide[data-layout="imax"] [data-key="content"] {
+        left: 30px;
+    }
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        top: 210px;
+    }
+    .slide[data-layout="title"] [data-key="content"],
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        top: 390px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"] {
+        top: 315px;
+    }
+    .slide[data-layout="imax"] [data-key="title"] {
+        top: 15px;
+    }
+    .slide[data-layout="imax"] [data-key="content"] {
+        top: 90px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        bottom: 540px;
+    }
+    .slide[data-layout="title"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"] {
+        bottom: 360px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        width: 780px;
+    }
+    .slide[data-layout="title"] [data-key="title"] {
+        width: 720px;
+    }
+    .slide[data-layout="title"] [data-key="content"] {
+        width: 600px;
+    }
+    .slide[data-layout="subtitle"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        width: 630px;
+    }
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        width: 375px;
+    }
+    .slide[data-layout="imax"] [data-key="title"],
+    .slide[data-layout="imax"] [data-key="content"] {
+        width: 900px;
+    }
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"] {
+        height: 450px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        height: 75px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"] {
+        height: 345px;
+    }
+    .slide[data-layout="imax"] [data-key="content"] {
+        height: 600px;
+    }
+}
+@media all and (min-width: 1560px) and (min-height: 1020px) {
+    .slide {
+        font-size: 40px;
+        width: 1280px;
+        height: 960px;
+    }
+    .slide[data-layout="title"] [data-key="title"] {
+        font-size: 96px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        font-size: 80px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"],
+    .slide[data-layout="imax"] [data-key="title"] {
+        font-size: 48px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="content"] {
+        left: 120px;
+    }
+    .slide[data-layout="title"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"] {
+        left: 160px;
+    }
+    .slide[data-layout="title"] [data-key="content"] {
+        left: 240px;
+    }
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        left: 200px;
+    }
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        left: 660px;
+    }
+    .slide[data-layout="imax"] [data-key="title"],
+    .slide[data-layout="imax"] [data-key="content"] {
+        left: 40px;
+    }
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        top: 280px;
+    }
+    .slide[data-layout="title"] [data-key="content"],
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        top: 520px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"] {
+        top: 420px;
+    }
+    .slide[data-layout="imax"] [data-key="title"] {
+        top: 20px;
+    }
+    .slide[data-layout="imax"] [data-key="content"] {
+        top: 120px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        bottom: 720px;
+    }
+    .slide[data-layout="title"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"] {
+        bottom: 480px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        width: 1040px;
+    }
+    .slide[data-layout="title"] [data-key="title"] {
+        width: 960px;
+    }
+    .slide[data-layout="title"] [data-key="content"] {
+        width: 800px;
+    }
+    .slide[data-layout="subtitle"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        width: 840px;
+    }
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        width: 500px;
+    }
+    .slide[data-layout="imax"] [data-key="title"],
+    .slide[data-layout="imax"] [data-key="content"] {
+        width: 1200px;
+    }
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"] {
+        height: 600px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        height: 100px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"] {
+        height: 460px;
+    }
+    .slide[data-layout="imax"] [data-key="content"] {
+        height: 800px;
+    }
+}
+@media all and (min-width: 1880px) and (min-height: 1260px) {
+    .slide {
+        font-size: 50px;
+        width: 1600px;
+        height: 1200px;
+    }
+    .slide[data-layout="title"] [data-key="title"] {
+        font-size: 120px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        font-size: 100px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"],
+    .slide[data-layout="imax"] [data-key="title"] {
+        font-size: 60px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="content"] {
+        left: 150px;
+    }
+    .slide[data-layout="title"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"] {
+        left: 200px;
+    }
+    .slide[data-layout="title"] [data-key="content"] {
+        left: 300px;
+    }
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        left: 250px;
+    }
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        left: 825px;
+    }
+    .slide[data-layout="imax"] [data-key="title"],
+    .slide[data-layout="imax"] [data-key="content"] {
+        left: 50px;
+    }
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        top: 350px;
+    }
+    .slide[data-layout="title"] [data-key="content"],
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        top: 650px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"] {
+        top: 525px;
+    }
+    .slide[data-layout="imax"] [data-key="title"] {
+        top: 25px;
+    }
+    .slide[data-layout="imax"] [data-key="content"] {
+        top: 150px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        bottom: 900px;
+    }
+    .slide[data-layout="title"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"] {
+        bottom: 600px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        width: 1300px;
+    }
+    .slide[data-layout="title"] [data-key="title"] {
+        width: 1200px;
+    }
+    .slide[data-layout="title"] [data-key="content"] {
+        width: 1000px;
+    }
+    .slide[data-layout="subtitle"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        width: 1050px;
+    }
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        width: 625px;
+    }
+    .slide[data-layout="imax"] [data-key="title"],
+    .slide[data-layout="imax"] [data-key="content"] {
+        width: 1500px;
+    }
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"] {
+        height: 750px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        height: 125px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"] {
+        height: 575px;
+    }
+    .slide[data-layout="imax"] [data-key="content"] {
+        height: 1000px;
+    }
+}
+@media all and (min-width: 2200px) and (min-height: 1500px) {
+    .slide {
+        font-size: 60px;
+        width: 1920px;
+        height: 1440px;
+    }
+    .slide[data-layout="title"] [data-key="title"] {
+        font-size: 144px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        font-size: 120px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"],
+    .slide[data-layout="imax"] [data-key="title"] {
+        font-size: 72px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="content"] {
+        left: 180px;
+    }
+    .slide[data-layout="title"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"] {
+        left: 240px;
+    }
+    .slide[data-layout="title"] [data-key="content"] {
+        left: 360px;
+    }
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        left: 300px;
+    }
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        left: 990px;
+    }
+    .slide[data-layout="imax"] [data-key="title"],
+    .slide[data-layout="imax"] [data-key="content"] {
+        left: 60px;
+    }
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        top: 420px;
+    }
+    .slide[data-layout="title"] [data-key="content"],
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        top: 780px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"] {
+        top: 630px;
+    }
+    .slide[data-layout="imax"] [data-key="title"] {
+        top: 30px;
+    }
+    .slide[data-layout="imax"] [data-key="content"] {
+        top: 180px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        bottom: 1080px;
+    }
+    .slide[data-layout="title"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="title"] {
+        bottom: 720px;
+    }
+    .slide[data-layout="normal"] [data-key="title"],
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="title"],
+    .slide[data-layout="double-subtitle"] [data-key="title"] {
+        width: 1560px;
+    }
+    .slide[data-layout="title"] [data-key="title"] {
+        width: 1440px;
+    }
+    .slide[data-layout="title"] [data-key="content"] {
+        width: 1200px;
+    }
+    .slide[data-layout="subtitle"] [data-key="title"],
+    .slide[data-layout="subtitle"] [data-key="content"] {
+        width: 1260px;
+    }
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        width: 750px;
+    }
+    .slide[data-layout="imax"] [data-key="title"],
+    .slide[data-layout="imax"] [data-key="content"] {
+        width: 1800px;
+    }
+    .slide[data-layout="normal"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content"],
+    .slide[data-layout="double"] [data-key="content2"] {
+        height: 900px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="subtitle"],
+    .slide[data-layout="double-subtitle"] [data-key="subtitle2"] {
+        height: 150px;
+    }
+    .slide[data-layout="double-subtitle"] [data-key="content"],
+    .slide[data-layout="double-subtitle"] [data-key="content2"] {
+        height: 690px;
+    }
+    .slide[data-layout="imax"] [data-key="content"] {
+        height: 1200px;
+    }
+}
