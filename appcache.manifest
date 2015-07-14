@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version 20130809
+#version 20150714
 
 CACHE:
 lib/css/bootstrap.css
@@ -15,6 +15,7 @@ lib/img/glyphicons-halflings.png
 lib/img/glyphicons-halflings-white.png
 css/design/default.css
 css/design/revert.css
+css/main.css
 js/main.js
 js/require.js
 images/design/default.png
