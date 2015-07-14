@@ -13,7 +13,6 @@ lib/js/jquery.min.map
 lib/js/knockout-2.2.1.js
 lib/img/glyphicons-halflings.png
 lib/img/glyphicons-halflings-white.png
-css/main.css
 css/design/default.css
 css/design/revert.css
 js/main.js
