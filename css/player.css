@@ -14,14 +14,17 @@
     display: -webkit-box;
     display: -moz-box;
     display: -ms-box;
+    display: -ms-flexbox;
     display: box;
     -webkit-box-align: center;
     -moz-box-align: center;
     -ms-box-align: center;
+    -ms-flex-align: center;
     box-align: center;
     -webkit-box-pack: center;
     -moz-box-pack: center;
     -ms-box-pack: center;
+    -ms-flex-pack: center;
     box-pack: center;
     overflow: inherit;
 }
