@@ -1,5 +1,9 @@
 # H5Slides
 
+注意：该项目以不再维护，同时欢迎继续关注 [v-mark-display](https://github.com/Jinjiang/v-mark-display) —— 一个新的可以利用 Markdown 文本展示幻灯片的 Vue 组件。
+
+----
+
 `H5Slides`希望通过HTML5的技术，成为用户编辑、播放、控制幻灯片这一系列行为的全套方案的提供者。幻灯演示将会变得更自如，更轻便，更开放，更易于分享。
 
 ## 特点
